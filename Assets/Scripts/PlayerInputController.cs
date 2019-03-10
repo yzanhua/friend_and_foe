@@ -10,8 +10,6 @@ public class PlayerInputController : MonoBehaviour
     [Range(0f, 10f)]
     public float speed = 2f;
 
-    private bool _vertical_movement;
-
     // Update is called once per frame
     void Update()
     {
@@ -19,24 +17,7 @@ public class PlayerInputController : MonoBehaviour
 
         if (inputDevice != null)
         {
-            float vertical = _vertical_movement ? inputDevice.DPadY : 0f;
-            transform.position += new Vector3(inputDevice.DPadX, vertical, 0) * Time.deltaTime * speed;
-        }
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.tag.Contains("ladder"))
-        {
-            _vertical_movement = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.tag.Contains("ladder"))
-        {
-            _vertical_movement = false;
+            transform.position += new Vector3(inputDevice.DPadX, inputDevice.DPadY, 0) * Time.deltaTime * speed;   
         }
     }
 }
