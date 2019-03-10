@@ -28,5 +28,13 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.collider.gameObject;
+        if (other.CompareTag("Submarine"))
+        {
+            Destroy(gameObject);
+        }
+    }
 
 }
