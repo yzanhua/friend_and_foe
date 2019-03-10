@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class MyInputManager : MonoBehaviour
 {
     // Public field of the InputManager
-    public static InputManager instance;
+    public static MyInputManager instance;
 
     public enum Mode {PS4, XBOX};
 
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
         else if (instance != this)
             Destroy(this);
         // Initialize the controller mode
-        InputMode = InputManager.Mode.PS4;
+        InputMode = MyInputManager.Mode.PS4;
         // Read in the KeyMap file
         StreamReader reader = new StreamReader(_jsonFilePath);
         string jsonString = reader.ReadToEnd();
