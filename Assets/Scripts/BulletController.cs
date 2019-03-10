@@ -8,12 +8,12 @@ public class BulletController : MonoBehaviour
     public float Speed = 3.0f;
     public float LongestDistance = 9.0f;
     public Vector3 direction; 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private Vector3 originPos;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         originPos = transform.position;
         //print(direction.normalized);
         rb.velocity = direction.normalized * Speed;
@@ -28,9 +28,11 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
+
         if (other.CompareTag("Submarine"))
         {
             Destroy(gameObject);
