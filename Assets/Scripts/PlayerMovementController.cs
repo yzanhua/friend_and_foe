@@ -75,7 +75,6 @@ public class PlayerMovementController : MonoBehaviour
             {
                 transform.position = new Vector3(hit_down.collider.transform.position.x, transform.position.y, 0);
             }
-            Debug.Log("here");
             _rb2d.velocity = speed * new Vector2(horizontalInput, verticalInput);
         }
         else 

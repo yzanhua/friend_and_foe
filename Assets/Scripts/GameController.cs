@@ -44,15 +44,13 @@ public class GameController : MonoBehaviour
     {
         if (_is_end)
             return;
+        UpdateHealthBar(left_bar, small_sub);
+        UpdateHealthBar(right_bar, big_sub);
         if (health_big.health <= 0 || health_small.health <= 0)
         {
             GameEnd();
         }
-        else
-        {
-            UpdateHealthBar(left_bar, small_sub);
-            UpdateHealthBar(right_bar, big_sub);
-        }
+
     }
 
     void UpdateHealthBar(GameObject bar, GameObject sub)
@@ -86,7 +84,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
-        WinText.enabled = true;
+        //WinText.enabled = true;
         yield return new WaitForSeconds(3);
         //int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene("Main");

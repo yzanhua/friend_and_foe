@@ -13,10 +13,16 @@ public class WeaponGearController : MonoBehaviour
     float _initGravityScale;
     float _lastFireDelta;
 
+    public bool initialTowardRight = false;
+
     void Start()
     {
         _weapon = transform.parent.Find("Weapon").gameObject;
         _submarine = transform.parent.gameObject;
+        if (initialTowardRight)
+            _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, 180f);
+
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

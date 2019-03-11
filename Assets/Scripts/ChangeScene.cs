@@ -24,7 +24,6 @@ public class ChangeScene : MonoBehaviour
 
     public void changeGearsPositions()
     {
-        Debug.Log("123123123");
         Vector3 temp_pos = gear1.position;
         gear1.position = gear2.position;
         gear2.position = gear3.position;
