@@ -1,1 +1,1 @@
-Create asymmetric battle mode where 1 player fight against 3 players. Add weapon, shield, and movement control for the submarine. Add terrain change inside the large submarine.
+Create a asymmetric battle mode where a small submarine fights against a large submarine. Add weapon, shield, and movement control for the submarine. Add terrain change inside the large submarine.
