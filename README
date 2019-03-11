@@ -1,1 +1,7 @@
 EECS494 p3.
+
+Left Stick: Character movement
+Right Stick: When sitting on a gear, adjust direction the corresponding object controlled by gear
+Red Gear: Weapon Gear (Right stick to adjust direction, Press X to attack)
+Blue Gear: Submarine Movement Gear (Right stick to move)
+Green Gear: Shield Control Gear (Press X to open a bubble shield)

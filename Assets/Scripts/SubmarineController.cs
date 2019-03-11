@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
 {
-    [Range(0f, 1f)]
-    public float speed;
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
