@@ -42,7 +42,7 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-
+        print(other.name);
         if (other.CompareTag("Shield"))
         {
             Destroy(gameObject);

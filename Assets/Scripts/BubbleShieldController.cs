@@ -9,7 +9,7 @@ public class BubbleShieldController : MonoBehaviour
     public float waitTime = 5.0f;
 
 
-    private float _current_health;
+   public float _current_health;
     private SpriteRenderer _sr;
     private Animator _an;
     private Time startTime;
@@ -19,6 +19,7 @@ public class BubbleShieldController : MonoBehaviour
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
         {
             _an.SetBool("GenerateShield", true);
+            _current_health = MAX_HEALTH;
             GetComponent<CircleCollider2D>().enabled = true;
             StartCoroutine(WaitTillBreak());
             return true;
@@ -32,6 +33,7 @@ public class BubbleShieldController : MonoBehaviour
         {
             _an.SetBool("ShieldBreak", true);
             GetComponent<CircleCollider2D>().enabled = false;
+            print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
             return true;
         }
         else return false;
@@ -49,7 +51,7 @@ public class BubbleShieldController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             GenerateShield();
         } 
@@ -57,6 +59,7 @@ public class BubbleShieldController : MonoBehaviour
         if (_current_health <= 0.0f)
         {
             BreakShield();
+            print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
         }
     }
 
@@ -66,9 +69,9 @@ public class BubbleShieldController : MonoBehaviour
         BreakShield();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject other = collision.collider.gameObject;
+        GameObject other = collision.gameObject;
         print(other.name);
         if (other.CompareTag("Bullet"))
         {

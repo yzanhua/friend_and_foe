@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
-  LongestDistance: 5
+  LongestDistance: 10
   direction: {x: 0, y: 0, z: 0}
 --- !u!50 &1705751574064031597
 Rigidbody2D:
