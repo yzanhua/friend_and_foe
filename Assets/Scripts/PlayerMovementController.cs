@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     int _ladderLayer;
     float _initGravityScale;
     Vector2 _target;
+    private Animator _an;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class PlayerMovementController : MonoBehaviour
         _ladderLayer = LayerMask.NameToLayer("Ladder");
         _initGravityScale = _rb2d.gravityScale;
         _inputController = GetComponent<PlayerInputController>();
+        _an = GetComponent<Animator>();
     }
 
     void Update()
@@ -31,6 +33,9 @@ public class PlayerMovementController : MonoBehaviour
         bool canClimb = Physics2D.Raycast(transform.position, Vector2.up, 1.0f, 1 << _ladderLayer);
         bool canDown = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, 1 << _ladderLayer);
 
+        _an.speed = 1f;
+        _an.SetFloat("vertical", verticalInput);
+        _an.SetFloat("horizontal", horizontalInput);
         if (verticalInput > 0 && canClimb)
         {
             _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
@@ -39,10 +44,13 @@ public class PlayerMovementController : MonoBehaviour
         {
             _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
         }
-        else
+        else 
         {
             _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, 0);
-
+            if (_rb2d.velocity == Vector2.zero)
+            {
+                _an.speed = 0f;
+            }
         }
     }
 
