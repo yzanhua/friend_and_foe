@@ -14,6 +14,11 @@ public class GameController : MonoBehaviour
     public GameObject small_sub;
     public Text WinText;
 
+
+    private HealthCounter health_big;
+    private HealthCounter health_small;
+    private bool _is_end ;
+
     void Awake()
     {
         if (instance == null)
@@ -29,14 +34,25 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.GetActiveScene();
+        health_big = big_sub.GetComponent<HealthCounter>();
+        health_small = small_sub.GetComponent<HealthCounter>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateHealthBar(left_bar, small_sub);
-        UpdateHealthBar(right_bar, big_sub);
+        if (_is_end)
+            return;
+        if (health_big.health <= 0 || health_small.health <= 0)
+        {
+            GameEnd();
+        }
+        else
+        {
+            UpdateHealthBar(left_bar, small_sub);
+            UpdateHealthBar(right_bar, big_sub);
+        }
     }
 
     void UpdateHealthBar(GameObject bar, GameObject sub)
@@ -50,18 +66,19 @@ public class GameController : MonoBehaviour
 
     public void GameEnd()
     {
-        HealthCounter health_big = big_sub.GetComponent<HealthCounter>();
-        HealthCounter health_small = small_sub.GetComponent<HealthCounter>();
+        _is_end = true;
+        health_big = big_sub.GetComponent<HealthCounter>();
+        health_small = small_sub.GetComponent<HealthCounter>();
 
         if (health_big.health < health_small.health)
         {
             WinText.text = "Red Team Win!";
-            WinText.enabled = true;
+           
         }
         else
         {
             WinText.text = "Blue Team Win!";
-            WinText.enabled = true;
+
         }
         StartCoroutine(ReloadScene());
         
@@ -69,9 +86,10 @@ public class GameController : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
-        yield return new WaitForSeconds(1);
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        WinText.enabled = true;
+        yield return new WaitForSeconds(3);
+        //int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene("Main");
     }
 
 }

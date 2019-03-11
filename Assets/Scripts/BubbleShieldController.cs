@@ -31,7 +31,7 @@ public class BubbleShieldController : MonoBehaviour
         {
             _an.SetBool("ShieldBreak", true);
             GetComponent<CircleCollider2D>().enabled = false;
-            print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
+            // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
             return true;
         }
         else return false;
@@ -52,7 +52,6 @@ public class BubbleShieldController : MonoBehaviour
         if (_current_health <= 0.0f)
         {
             BreakShield();
-            print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
         }
     }
 
@@ -66,7 +65,6 @@ public class BubbleShieldController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        print(other.name);
         if (other.CompareTag("Bullet"))
         {
             _current_health -= 1;
