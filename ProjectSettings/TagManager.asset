@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
+  - Submarine
+  - Bullet
+  - MovementGeer
+  - Shield
   layers:
   - Default
   - TransparentFX
