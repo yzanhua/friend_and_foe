@@ -8,6 +8,7 @@ public class PlayerMovementController : MonoBehaviour
 
     [Range(0f, 10f)]
     public float speed = 2f;
+    public bool movementEnable = true;
 
     private int _ladderLayer;
 
@@ -32,9 +33,10 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        if (_inputController.inputDevice == null)
+        if (_inputController.inputDevice == null || !movementEnable || !Global.instance.AllPlayersMovementEnable)
         {
             _an.speed = 0f;
+            _rb2d.velocity = Vector2.zero;
             return;
         }
 

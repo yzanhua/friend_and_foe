@@ -8,17 +8,17 @@ public class MovementGearController : MonoBehaviour
     public float speed;
 
     GameObject _currPlayer;
-    SubmarineController _submarineController;
+    Transform submarine;
     float _initGravityScale;
 
     void Start()
     {
-        _submarineController = transform.parent.GetComponent<SubmarineController>();
+        submarine = transform.parent.parent;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_currPlayer == null && collision.gameObject.CompareTag("Player"))
+        if (_currPlayer == null && collision.gameObject.tag.Contains("Player"))
         {
             _currPlayer = collision.gameObject;
             _currPlayer.transform.position = transform.position;
@@ -40,7 +40,6 @@ public class MovementGearController : MonoBehaviour
     {
         if (_currPlayer != null)
         {
-            Transform submarine = transform.parent;
             PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
             submarine.position += speed * new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
         }
