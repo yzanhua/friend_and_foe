@@ -9,7 +9,7 @@ public class BubbleShieldController : MonoBehaviour
     public float waitTime = 5.0f;
 
 
-   public float _current_health;
+    public float _current_health;
     private SpriteRenderer _sr;
     private Animator _an;
     private Time startTime;
@@ -72,7 +72,6 @@ public class BubbleShieldController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        print(other.name);
         if (other.CompareTag("Bullet"))
         {
             _current_health -= 1;

@@ -45,15 +45,26 @@ public class WeaponGearController : MonoBehaviour
         {
             //adjust wapon angle
             PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-            float direction = 0;
-            if (inputController.inputDevice.RightStickY > 0.2 || inputController.inputDevice.RightStickY < -0.2)
-            {
-                direction = Mathf.Sign(inputController.inputDevice.RightStickY);
-            }
-            _weapon.transform.RotateAround(_submarine.transform.position, Vector3.back, direction * rotationSpeed);
 
+            float inputX = inputController.inputDevice.RightStickX;
+            float inputY = inputController.inputDevice.RightStickY;
+
+            if (inputX != 0f || inputY != 0f)
+            {
+                float angle = Vector2.SignedAngle(Vector2.right, new Vector2(inputX, inputY));
+                float curr_angle = _weapon.transform.eulerAngles.z - 180f;
+                angle = angle - curr_angle;
+
+                if (angle < -180f)
+                    angle += 360f;
+                if (angle > 180f)
+                    angle -= 360f;
+                angle = angle * Mathf.Deg2Rad;
+                _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
+            }
+  
             //fire bullet
-            if (inputController.inputDevice.Action1 && _lastFireDelta > fireTimeDiff)
+            if (inputController.inputDevice.Action2 && _lastFireDelta > fireTimeDiff)
             {
                 _weapon.GetComponent<WeaponController>().Fire();
                 _lastFireDelta = 0;
