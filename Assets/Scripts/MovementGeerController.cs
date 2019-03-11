@@ -5,7 +5,13 @@ using UnityEngine;
 public class MovementGeerController : MonoBehaviour
 {
     GameObject _currPlayer;
+    SubmarineController _submarineController;
     float _initGravityScale;
+
+    void Start()
+    {
+        _submarineController = transform.parent.GetComponent<SubmarineController>();
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,6 +30,16 @@ public class MovementGeerController : MonoBehaviour
         {
             _currPlayer.GetComponent<Rigidbody2D>().gravityScale = _initGravityScale;
             _currPlayer = null;
+        }
+    }
+
+    void Update()
+    {
+        if (_currPlayer != null)
+        {
+            Transform submarine = transform.parent;
+            PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
+            submarine.position += _submarineController.speed * new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
         }
     }
 }
