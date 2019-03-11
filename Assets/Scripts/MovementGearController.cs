@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementGeerController : MonoBehaviour
+public class MovementGearController : MonoBehaviour
 {
+    [Range(0f, 1f)]
+    public float speed;
+
     GameObject _currPlayer;
     SubmarineController _submarineController;
     float _initGravityScale;
@@ -39,7 +42,7 @@ public class MovementGeerController : MonoBehaviour
         {
             Transform submarine = transform.parent;
             PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-            submarine.position += _submarineController.speed * new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
+            submarine.position += speed * new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
         }
     }
 }

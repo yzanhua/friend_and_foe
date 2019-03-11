@@ -1,1 +1,6 @@
 EECS494 p3.
+
+Left Stick: Character movement
+Right Stick: When sitting on a gear, adjust direction the corresponding object controlled by gear
+Red Gear: Weapon Gear
+Blue Gear: Submarine Movement Gear

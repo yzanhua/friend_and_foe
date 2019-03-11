@@ -5,23 +5,18 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public GameObject submarine;
 
-    // Start is called before the first frame update
+    GameObject submarine;
+
     void Start()
     {
-        
+        submarine = transform.parent.gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
-            bullet.transform.parent = gameObject.transform;
-            bullet.GetComponent<BulletController>().direction = - submarine.transform.position + transform.position;
-        }
+        GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
+        bullet.transform.parent = gameObject.transform;
+        bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
     }
-
 }
