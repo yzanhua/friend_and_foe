@@ -54,3 +54,4 @@ crashlytics-build.properties
 # OS generated file
 .DS_Store?
 .DS_Store
+Version_Info.cs
