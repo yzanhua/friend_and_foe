@@ -6,10 +6,8 @@ public class BubbleShieldController : MonoBehaviour
 {
     public float MAX_HEALTH = 5f;
     public Sprite full_shield_sprite;
-    public float waitTime = 5.0f;
 
-
-   public float _current_health;
+    public float _current_health;
     private SpriteRenderer _sr;
     private Animator _an;
     private Time startTime;
@@ -21,7 +19,7 @@ public class BubbleShieldController : MonoBehaviour
             _an.SetBool("GenerateShield", true);
             _current_health = MAX_HEALTH;
             GetComponent<CircleCollider2D>().enabled = true;
-            StartCoroutine(WaitTillBreak());
+            //StartCoroutine(WaitTillBreak());
             return true;
         }
         else return false;
@@ -58,16 +56,12 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
-    public void Defense()
+    public bool Defense()
     {
-        GenerateShield();
+        return GenerateShield();
     }
 
-    IEnumerator WaitTillBreak()
-    {
-        yield return new WaitForSeconds(waitTime);
-        BreakShield();
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
