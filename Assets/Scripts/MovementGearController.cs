@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementGearController : MonoBehaviour
 {
-    [Range(0f, 1f)]
+    [Range(0f, 2f)]
     public float speed;
 
     GameObject _currPlayer;
@@ -41,7 +41,9 @@ public class MovementGearController : MonoBehaviour
         if (_currPlayer != null)
         {
             PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-            submarine.position += speed * new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
+            Vector3 temp = new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
+            temp = temp.normalized;
+            submarine.position += speed * temp * Time.deltaTime;
         }
     }
 }

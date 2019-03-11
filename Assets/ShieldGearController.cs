@@ -10,10 +10,10 @@ public class ShieldGearController : MonoBehaviour
     GameObject _submarine;
     float _initGravityScale;
     float _lastFireDelta;
-    bool shieldOn = false;
     bool hasPlayer = false;
 
-    public float ShieldCD = 3.0f;
+    public float ShieldTime = 6f;
+    public float PlayerCD = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class ShieldGearController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name=="Player_Shield")
+        if (collision.gameObject.CompareTag("Player"))
         {
             _currPlayer = collision.gameObject;
             _currPlayer.transform.position = transform.position;
@@ -36,7 +36,7 @@ public class ShieldGearController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player_Shield")
+        if (collision.gameObject.CompareTag("Player"))
         {
             _currPlayer.GetComponent<Rigidbody2D>().gravityScale = _initGravityScale;
             hasPlayer = false;
@@ -45,28 +45,31 @@ public class ShieldGearController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shieldOn || !hasPlayer)
+        if (!hasPlayer)
             return;
 
         PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
         if (inputController.inputDevice.Action2)
         {
-            _currPlayer.GetComponent<PlayerMovementController>().movementEnable = false;
             bool success = _shield.GetComponent<BubbleShieldController>().Defense();
             if (success)
             {
+                _currPlayer.GetComponent<PlayerMovementController>().movementEnable = false;
                 StartCoroutine(WaitTillBreak());
-                shieldOn = true;
+                StartCoroutine(WaitPlayerCD());
             }
         }
     }
 
     IEnumerator WaitTillBreak()
     {
-        yield return new WaitForSeconds(ShieldCD);
+        yield return new WaitForSeconds(ShieldTime);
         _shield.GetComponent<BubbleShieldController>().BreakShield();
-        yield return new WaitForSeconds(1.5f);
+    }
+
+    IEnumerator WaitPlayerCD()
+    {
+        yield return new WaitForSeconds(PlayerCD);
         _currPlayer.GetComponent<PlayerMovementController>().movementEnable = true;
-        shieldOn = false;
     }
 }

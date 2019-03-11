@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class BubbleShieldController : MonoBehaviour
 {
+    public float ShieldCD = 5f;
     public float MAX_HEALTH = 5f;
     public Sprite full_shield_sprite;
-
     public float _current_health;
+
     private SpriteRenderer _sr;
     private Animator _an;
     private Time startTime;
+    private bool _shield_ready = true;
+
 
     public bool GenerateShield()
     {
+        if (!_shield_ready)
+            return false;
+        _shield_ready = false;
+
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
         {
             _an.SetBool("GenerateShield", true);
@@ -32,11 +39,17 @@ public class BubbleShieldController : MonoBehaviour
             _an.SetBool("ShieldBreak", true);
             GetComponent<CircleCollider2D>().enabled = false;
             // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
+            StartCoroutine(WaitShieldCD());
             return true;
         }
         else return false;
     }
 
+    IEnumerator WaitShieldCD()
+    {
+        yield return new WaitForSeconds(ShieldCD);
+        _shield_ready = true;
+    }
     // Start is called before the first frame update
     void Start()
     {
