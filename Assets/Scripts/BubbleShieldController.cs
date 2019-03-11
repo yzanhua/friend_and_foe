@@ -6,17 +6,21 @@ public class BubbleShieldController : MonoBehaviour
 {
     public float MAX_HEALTH = 5f;
     public Sprite full_shield_sprite;
+    public float waitTime = 5.0f;
 
 
     private float _current_health;
     private SpriteRenderer _sr;
     private Animator _an;
+    private Time startTime;
 
     public bool GenerateShield()
     {
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
         {
             _an.SetBool("GenerateShield", true);
+            GetComponent<CircleCollider2D>().enabled = true;
+            StartCoroutine(WaitTillBreak());
             return true;
         }
         else return false;
@@ -27,6 +31,7 @@ public class BubbleShieldController : MonoBehaviour
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
         {
             _an.SetBool("ShieldBreak", true);
+            GetComponent<CircleCollider2D>().enabled = false;
             return true;
         }
         else return false;
@@ -47,11 +52,27 @@ public class BubbleShieldController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GenerateShield();
-        } else if (Input.GetKeyDown(KeyCode.Alpha2))
+        } 
+        // TODO: should be able to break after some time
+        if (_current_health <= 0.0f)
         {
             BreakShield();
         }
     }
 
+    IEnumerator WaitTillBreak()
+    {
+        yield return new WaitForSeconds(waitTime);
+        BreakShield();
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject other = collision.collider.gameObject;
+        print(other.name);
+        if (other.CompareTag("Bullet"))
+        {
+            _current_health -= 1;
+        }
+    }
 }

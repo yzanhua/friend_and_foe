@@ -39,4 +39,14 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject other = collision.gameObject;
+
+        if (other.CompareTag("Shield"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
