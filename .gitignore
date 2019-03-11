@@ -54,4 +54,4 @@ crashlytics-build.properties
 # OS generated file
 .DS_Store?
 .DS_Store
-VersionInfo.*
+Assets/InControl/Source/VersionInfo.*

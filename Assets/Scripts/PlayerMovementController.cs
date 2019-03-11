@@ -1,20 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using InControl;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    Rigidbody2D _rb2d;
-    PlayerInputController _inputController;
-    int _ladderLayer;
-    float _initGravityScale;
-    Vector2 _target;
+
+    [Range(0f, 10f)]
+    public float speed = 2f;
+
+    private int _ladderLayer;
+
+    private PlayerInputController _inputController;
+
+    private Rigidbody2D _rb2d;
+ 
+    private float _initGravityScale;
+
+    private Vector2 _target;
+
+    private Animator _an;
 
     void Start()
     {
         _rb2d = GetComponent<Rigidbody2D>();
         _ladderLayer = LayerMask.NameToLayer("Ladder");
         _initGravityScale = _rb2d.gravityScale;
+        _an = GetComponent<Animator>();
         _inputController = GetComponent<PlayerInputController>();
     }
 
@@ -22,6 +34,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (_inputController.inputDevice == null)
         {
+            _an.speed = 0f;
             return;
         }
 
@@ -31,18 +44,33 @@ public class PlayerMovementController : MonoBehaviour
         bool canClimb = Physics2D.Raycast(transform.position, Vector2.up, 1.0f, 1 << _ladderLayer);
         bool canDown = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, 1 << _ladderLayer);
 
-        if (verticalInput > 0 && canClimb)
+        if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
         {
-            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
-        }
-        else if (verticalInput < 0 && canDown)
-        {
-            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
+            horizontalInput = 0f;
         }
         else
         {
-            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, 0);
+            verticalInput = 0f;
+        }
+        _an.speed = 1f;
+        _an.SetFloat("vertical", verticalInput);
+        _an.SetFloat("horizontal", horizontalInput);
 
+        if (verticalInput > 0 && canClimb)
+        {
+            _rb2d.velocity = speed * new Vector2(horizontalInput, verticalInput);
+        }
+        else if (verticalInput < 0 && canDown)
+        {
+            _rb2d.velocity = speed * new Vector2(horizontalInput, verticalInput);
+        }
+        else 
+        {
+            _rb2d.velocity = speed * new Vector2(horizontalInput, 0);
+            if (_rb2d.velocity == Vector2.zero)
+            {
+                _an.speed = 0f;
+            }
         }
     }
 
