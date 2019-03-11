@@ -51,16 +51,16 @@ public class BubbleShieldController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GenerateShield();
-        } 
-        // TODO: should be able to break after some time
         if (_current_health <= 0.0f)
         {
             BreakShield();
             print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
         }
+    }
+
+    public void Defense()
+    {
+        GenerateShield();
     }
 
     IEnumerator WaitTillBreak()
