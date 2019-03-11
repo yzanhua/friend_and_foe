@@ -33,15 +33,15 @@ public class PlayerMovementController : MonoBehaviour
 
         if (verticalInput > 0 && canClimb)
         {
-            _rb2d.velocity = new Vector2(horizontalInput, verticalInput);
+            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
         }
         else if (verticalInput < 0 && canDown)
         {
-            _rb2d.velocity = new Vector2(horizontalInput, verticalInput);
+            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, verticalInput);
         }
         else
         {
-            _rb2d.velocity = new Vector2(horizontalInput, 0);
+            _rb2d.velocity = _inputController.speed * new Vector2(horizontalInput, 0);
 
         }
     }
