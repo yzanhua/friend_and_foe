@@ -1,1 +1,14 @@
+EECS494 p3.
+
+This game need 3 players with (3) controllers.
+We tested our game (only) using 3 PS4 controllers and did not test on Xbox controller.
+Contact us if any issue related with input occurs.
+
+Left Stick: Character movement
+Right Stick: When sitting on a gear, adjust direction the corresponding object controlled by gear
+Red Gear: Weapon Gear (Right stick to adjust direction, Press B (xbox) or O (ps4) to attack)
+Blue Gear: Submarine Movement Gear (Right stick to move)
+Green Gear: Shield Control Gear (Press B (in xbox) or O (in ps4) to open a bubble shield)
+
+==============================
 Create a asymmetric battle mode where a small submarine fights against a large submarine. Add weapon, shield, and movement control for the submarine. Add terrain change inside the large submarine.
