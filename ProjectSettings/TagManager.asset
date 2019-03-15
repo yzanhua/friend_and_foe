@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - MovementGeer
   - Shield
+  - Edge
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - Ladder
-  - 
+  - Bullet
   - 
   - 
   - 

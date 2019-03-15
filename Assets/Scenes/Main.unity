@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 327113219}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 397386164}
   m_Layer: 0
   m_Name: Up
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -632,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397386162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 838890577}
@@ -911,7 +911,7 @@ GameObject:
   - component: {fileID: 838890577}
   m_Layer: 0
   m_Name: Edge
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1061,7 +1061,7 @@ GameObject:
   - component: {fileID: 945063958}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1350,6 +1350,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147877417}
     m_Modifications:
+    - target: {fileID: 9193086073514308411, guid: 783139c1122ff4894a879fd3160650d5,
+        type: 3}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 9193086073514308415, guid: 783139c1122ff4894a879fd3160650d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1414,11 +1419,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.027095683
-      objectReference: {fileID: 0}
-    - target: {fileID: 9193086073514308411, guid: 783139c1122ff4894a879fd3160650d5,
-        type: 3}
-      propertyPath: m_Name
-      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 9193086073514308409, guid: 783139c1122ff4894a879fd3160650d5,
         type: 3}
@@ -2092,6 +2092,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3486594542978867797, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: ID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3486594542978867794, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_SortingOrder
@@ -2126,11 +2131,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 2.234925
-      objectReference: {fileID: 0}
-    - target: {fileID: 3486594542978867797, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: ID
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 105066173184954420, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
@@ -2415,7 +2415,7 @@ GameObject:
   - component: {fileID: 2078171935}
   m_Layer: 0
   m_Name: Down
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2428,7 +2428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078171933}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -11.03, z: 0}
+  m_LocalPosition: {x: 0, y: -11.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 838890577}
