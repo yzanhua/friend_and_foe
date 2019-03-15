@@ -11,6 +11,7 @@ public class SubmarineController : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             GetComponent<HealthCounter>().AlterHealth(-5);
+            SoundManager.instance.PlaySound("hit");
         }
     }
 

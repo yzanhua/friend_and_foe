@@ -18,5 +18,6 @@ public class WeaponController : MonoBehaviour
         GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
         //bullet.transform.parent = gameObject.transform;
         bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
+        SoundManager.instance.PlaySound("shoot");
     }
 }

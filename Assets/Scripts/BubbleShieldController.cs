@@ -24,6 +24,7 @@ public class BubbleShieldController : MonoBehaviour
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
         {
             _an.SetBool("GenerateShield", true);
+            SoundManager.instance.PlaySound("bubble_generate");
             _current_health = MAX_HEALTH;
             GetComponent<CircleCollider2D>().enabled = true;
             //StartCoroutine(WaitTillBreak());
@@ -38,6 +39,7 @@ public class BubbleShieldController : MonoBehaviour
         {
             _an.SetBool("ShieldBreak", true);
             GetComponent<CircleCollider2D>().enabled = false;
+            SoundManager.instance.PlaySound("bubble_break");
             // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
             StartCoroutine(WaitShieldCD());
             return true;
