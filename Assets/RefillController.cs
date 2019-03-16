@@ -7,11 +7,11 @@ public class RefillController : MonoBehaviour
     public float refillTime = 2.0f;
     public GameObject weapon;
 
-
     float curFilledTime = 0;
-
     // whether key was pressed in this collision period
     bool keyDown = false;
+    bool playerTrigger = false;
+    PlayerInputController playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,16 @@ public class RefillController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerTrigger)
+        {
+            if (!keyDown && playerInput.inputDevice.Action2)
+                keyDown = true;
+            if (keyDown)
+            {
+                curFilledTime += Time.deltaTime;
+                print(curFilledTime);
+            }
+        }
         //finished filling
         if (curFilledTime >= refillTime)
         {
@@ -31,29 +41,28 @@ public class RefillController : MonoBehaviour
 
         }
     }
+    
 
-
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject other = collision.collider.gameObject;
+        GameObject other = collision.gameObject;
         if (other.CompareTag("Player")){
-            PlayerInputController inputController = other.GetComponent<PlayerInputController>();
-            if (!keyDown && inputController.inputDevice.Action2)
+            playerInput = other.GetComponent<PlayerInputController>();
+            playerTrigger = true;
+            if (!keyDown && playerInput.inputDevice.Action2)
                 keyDown = true;
-            if (keyDown)
-            {
-                curFilledTime += Time.deltaTime;
-            }
         }
 
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        GameObject other = collision.collider.gameObject;
+        GameObject other = collision.gameObject;
         if (other.CompareTag("Player"))
         {
+            playerTrigger = false;
             keyDown = false;
         }
+      
     }
 }
