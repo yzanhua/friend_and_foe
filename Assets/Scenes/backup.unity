@@ -482,6 +482,11 @@ PrefabInstance:
       propertyPath: ID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3486594542978867807, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: playerID
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
 --- !u!1 &269276667
@@ -495,6 +500,7 @@ GameObject:
   - component: {fileID: 269276668}
   - component: {fileID: 269276669}
   - component: {fileID: 269276670}
+  - component: {fileID: 269276671}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -531,8 +537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eebfb06453cf4582815edd07f9445b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 692701937}
-  start_time: 5
 --- !u!114 &269276670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +554,19 @@ MonoBehaviour:
   big_sub: {fileID: 147877410}
   small_sub: {fileID: 4669322525553404254}
   WinText: {fileID: 1242471435}
+--- !u!114 &269276671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269276667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1ac97d0b8264d7f8d6485e47e78814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadZoneValue: 0.1
 --- !u!1 &327113217
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +840,11 @@ PrefabInstance:
     - target: {fileID: 9193086073514308409, guid: 783139c1122ff4894a879fd3160650d5,
         type: 3}
       propertyPath: ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193086073514308403, guid: 783139c1122ff4894a879fd3160650d5,
+        type: 3}
+      propertyPath: playerID
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1515,6 +1537,11 @@ PrefabInstance:
       propertyPath: ID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9193086073514308403, guid: 783139c1122ff4894a879fd3160650d5,
+        type: 3}
+      propertyPath: playerID
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783139c1122ff4894a879fd3160650d5, type: 3}
 --- !u!1 &1242471433
@@ -2134,8 +2161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a598ccfb8c9f9c4198bb6da49a03d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredWidth: 16
-  desiredHeight: 9
 --- !u!114 &1786331357
 MonoBehaviour:
   m_ObjectHideFlags: 0
