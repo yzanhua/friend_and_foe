@@ -13,8 +13,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private int _ladderLayer;
 
-    private PlayerInputController _inputController;
-
     private Rigidbody2D _rb2d;
  
     private float _initGravityScale;
@@ -29,7 +27,6 @@ public class PlayerMovementController : MonoBehaviour
         _ladderLayer = LayerMask.NameToLayer("Ladder");
         _initGravityScale = _rb2d.gravityScale;
         _an = GetComponent<Animator>();
-        _inputController = GetComponent<PlayerInputController>();
     }
 
     void Update()
