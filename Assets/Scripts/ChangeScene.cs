@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public float targetTime = 20f;
+    public float targetTime = 60f;
     private float currTime;
     // Start is called before the first frame update
 
