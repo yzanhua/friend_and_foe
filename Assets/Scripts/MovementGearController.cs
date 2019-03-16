@@ -11,6 +11,8 @@ public class MovementGearController : MonoBehaviour
     Transform submarine;
     float _initGravityScale;
 
+    bool inPlaySoundRoutine = false;
+
     void Start()
     {
         submarine = transform.parent.parent;
@@ -43,7 +45,20 @@ public class MovementGearController : MonoBehaviour
             PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
             Vector3 temp = new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
             temp = temp.normalized;
+            if (temp != Vector3.zero && !inPlaySoundRoutine)
+            {
+                StartCoroutine(playMoveSound());
+            }
             submarine.position += speed * temp * Time.deltaTime;
+
         }
+    }
+
+    IEnumerator playMoveSound()
+    {
+        inPlaySoundRoutine = true;
+        SoundManager.instance.PlaySound("move");
+        yield return new WaitForSeconds(7.8f);
+        inPlaySoundRoutine = false;
     }
 }

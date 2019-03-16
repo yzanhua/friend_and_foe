@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour
         _is_end = true;
         health_big = big_sub.GetComponent<HealthCounter>();
         health_small = small_sub.GetComponent<HealthCounter>();
+        SoundManager.instance.PlaySound("win");
 
         if (health_big.health < health_small.health)
         {
@@ -85,7 +86,7 @@ public class GameController : MonoBehaviour
     IEnumerator ReloadScene()
     {
         //WinText.enabled = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(8f);
         //int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene("Main");
     }

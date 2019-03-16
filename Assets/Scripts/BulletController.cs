@@ -10,12 +10,12 @@ public class BulletController : MonoBehaviour
     public Vector3 direction; 
     private Rigidbody2D rb;
     private Vector3 originPos;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         originPos = transform.position;
-        //print(direction.normalized);
         rb.velocity = direction.normalized * Speed;
     }
 
@@ -33,7 +33,7 @@ public class BulletController : MonoBehaviour
     {
         GameObject other = collision.collider.gameObject;
 
-        if (other.CompareTag("Submarine"))
+        if (other.CompareTag("Submarine") || other.CompareTag("Edge"))
         {
             Destroy(gameObject);
         }
