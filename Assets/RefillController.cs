@@ -14,7 +14,7 @@ public class RefillController : MonoBehaviour
     bool playerTrigger = false;
     bool bulletEmpty = true;
 
-    PlayerInputController playerInput;
+    int  playerID;
 
     public void BulletNeedRefill()
     {
@@ -31,9 +31,10 @@ public class RefillController : MonoBehaviour
     {
         if (!bulletEmpty)
             return;
+
         if (playerTrigger)
         {
-            if (!keyDown && playerInput.inputDevice.Action2)
+            if (!keyDown && InputSystemManager.GetAction2(playerID))
                 keyDown = true;
             if (keyDown)
             {
@@ -63,9 +64,9 @@ public class RefillController : MonoBehaviour
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Player")){
-            playerInput = other.GetComponent<PlayerInputController>();
+            playerID = other.GetComponent<PlayerMovementController>().playerID;
             playerTrigger = true;
-            if (!keyDown && playerInput.inputDevice.Action2)
+            if (!keyDown && InputSystemManager.GetAction2(playerID))
                 keyDown = true;
         }
 

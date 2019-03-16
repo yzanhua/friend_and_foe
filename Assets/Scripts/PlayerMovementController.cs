@@ -8,6 +8,7 @@ public class PlayerMovementController : MonoBehaviour
 
     [Range(0f, 10f)]
     public float speed = 2f;
+    public int playerID;
     public bool movementEnable = true;
 
     private int _ladderLayer;
@@ -33,7 +34,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        if (_inputController.inputDevice == null || !movementEnable || !Global.instance.AllPlayersMovementEnable)
+        if ( !movementEnable || !Global.instance.AllPlayersMovementEnable)
         {
             _an.speed = 0f;
             _rb2d.velocity = Vector2.zero;
@@ -41,8 +42,10 @@ public class PlayerMovementController : MonoBehaviour
         }
         
         //movement for character and for climbing ladder
-        float verticalInput = _inputController.inputDevice.LeftStickY;
-        float horizontalInput = _inputController.inputDevice.LeftStickX;
+        float verticalInput = InputSystemManager.GetLeftSVertical(playerID);
+        float horizontalInput = InputSystemManager.GetLeftSHorizontal(playerID);
+        Debug.Log(verticalInput);
+        Debug.Log(horizontalInput);
         RaycastHit2D hit_climb;
         RaycastHit2D hit_down;
         hit_climb = Physics2D.Raycast(transform.position, Vector2.up, 1.0f, 1 << _ladderLayer);

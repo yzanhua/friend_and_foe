@@ -29,6 +29,7 @@ public class WeaponController : MonoBehaviour
         else
         {
             SoundManager.instance.PlaySound("warning");
+
         }
 
     }

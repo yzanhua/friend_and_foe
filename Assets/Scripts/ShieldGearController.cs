@@ -48,8 +48,8 @@ public class ShieldGearController : MonoBehaviour
         if (!hasPlayer)
             return;
 
-        PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-        if (inputController.inputDevice.Action2)
+        int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
+        if (InputSystemManager.GetAction2(playerID))
         {
             bool success = _shield.GetComponent<BubbleShieldController>().Defense();
             if (success)

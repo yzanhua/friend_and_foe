@@ -49,11 +49,9 @@ public class WeaponGearController : MonoBehaviour
     {
         if (_currPlayer != null)
         {
-            //adjust wapon angle
-            PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-
-            float inputX = inputController.inputDevice.RightStickX;
-            float inputY = inputController.inputDevice.RightStickY;
+            int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
+            float inputX = InputSystemManager.GetRightSHorizontal(playerID);
+            float inputY = InputSystemManager.GetRightSVertical(playerID);
 
             if (inputX != 0f || inputY != 0f)
             {
@@ -70,7 +68,7 @@ public class WeaponGearController : MonoBehaviour
             }
   
             //fire bullet
-            if (inputController.inputDevice.Action2 && _lastFireDelta > fireTimeDiff)
+            if (InputSystemManager.GetAction2(playerID) && _lastFireDelta > fireTimeDiff)
             {
                 _weapon.GetComponent<WeaponController>().Fire();
                 _lastFireDelta = 0;

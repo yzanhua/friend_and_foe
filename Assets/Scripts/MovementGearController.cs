@@ -42,8 +42,8 @@ public class MovementGearController : MonoBehaviour
     {
         if (_currPlayer != null)
         {
-            PlayerInputController inputController = _currPlayer.GetComponent<PlayerInputController>();
-            Vector3 temp = new Vector3(inputController.inputDevice.RightStickX, inputController.inputDevice.RightStickY);
+            int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
+            Vector3 temp = new Vector3(InputSystemManager.GetRightSHorizontal(playerID), InputSystemManager.GetRightSVertical(playerID));
             temp = temp.normalized;
             if (temp != Vector3.zero && !inPlaySoundRoutine)
             {
