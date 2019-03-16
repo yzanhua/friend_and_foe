@@ -501,7 +501,8 @@ PrefabInstance:
       propertyPath: ShieldTime
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5614598086914244486, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
 --- !u!1 &269276667
 GameObject:
@@ -512,9 +513,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 269276668}
-  - component: {fileID: 269276669}
   - component: {fileID: 269276670}
   - component: {fileID: 269276671}
+  - component: {fileID: 269276669}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -548,9 +549,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 269276667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eebfb06453cf4582815edd07f9445b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 48cbcac7e56a74472bacbcdcb10ef816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 692701937}
+  start_time: 5
 --- !u!114 &269276670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1479,7 +1482,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1346924066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c205e1770245c4b5f8602cdc8b137bff, type: 3}
+  m_Script: {fileID: 11500000, guid: d8dec24389e484614aaf9595fe0909c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shoot_clip: {fileID: 8300000, guid: 70ae1ffc5b59c41f092cd24b96abbb24, type: 3}
@@ -1489,7 +1492,7 @@ MonoBehaviour:
   bubble_break_clip: {fileID: 8300000, guid: fdb806d1eff484a2793feb214de2b6df, type: 3}
   hit_clip: {fileID: 8300000, guid: 74aff0652c6384ade8c3da3d8c874bab, type: 3}
   win_clip: {fileID: 8300000, guid: 167ce7e5684e54a52a739b3d7bc9cc48, type: 3}
-  warning_clip: {fileID: 8300000, guid: 4f6aa24db0291431480b04717ea1f8ae, type: 3}
+  warning_clip: {fileID: 8300000, guid: 1504a3657898d40ae9409a590ef5b654, type: 3}
 --- !u!4 &1346924068
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,8 +1834,8 @@ GameObject:
   - component: {fileID: 1786331355}
   - component: {fileID: 1786331354}
   - component: {fileID: 1786331353}
-  - component: {fileID: 1786331356}
   - component: {fileID: 1786331357}
+  - component: {fileID: 1786331356}
   - component: {fileID: 1786331358}
   m_Layer: 0
   m_Name: Main Camera
@@ -1914,9 +1917,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1786331352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a598ccfb8c9f9c4198bb6da49a03d16, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f66a9a716fd405ba6c96c7f96352f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  desiredWidth: 16
+  desiredHeight: 9
 --- !u!114 &1786331357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,7 +2166,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5614598086914244486, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
 --- !u!1001 &1975914582
 PrefabInstance:

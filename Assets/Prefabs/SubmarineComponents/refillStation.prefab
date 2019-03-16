@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3334737192368051020}
   - component: {fileID: 3334737192368051019}
-  - component: {fileID: 3334737192368051018}
   - component: {fileID: 3334737192368051017}
+  - component: {fileID: 2722773642779414891}
   m_Layer: 0
   m_Name: refillStation
   m_TagString: Untagged
@@ -82,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3334737192368051018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3334737192368051016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1c0e670688544d0a4052ecd7d9a699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  refillTime: 2
-  weapon: {fileID: 0}
-  progress_bar: {fileID: 8303571215556081906}
 --- !u!61 &3334737192368051017
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,6 +108,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1452845, y: 0.11131924}
   m_EdgeRadius: 0
+--- !u!114 &2722773642779414891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3334737192368051016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c360991c2af4054aa0a685c5221850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refillTime: 2
+  weapon: {fileID: 0}
+  progress_bar: {fileID: 0}
 --- !u!1001 &270195130280839123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,12 +202,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ef80b30de614d20b15714ee4ed7729, type: 3}
---- !u!1 &8303571215556081906 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8107564601569115937, guid: 62ef80b30de614d20b15714ee4ed7729,
-    type: 3}
-  m_PrefabInstance: {fileID: 270195130280839123}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8303571215556081904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8107564601569115939, guid: 62ef80b30de614d20b15714ee4ed7729,
