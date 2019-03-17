@@ -14,8 +14,32 @@ public class BubbleShieldController : MonoBehaviour
     private Time startTime;
     private bool _shield_ready = true;
 
+    void Start()
+    {
+        _current_health = MAX_HEALTH;
+        _sr = GetComponent<SpriteRenderer>();
+        _an = GetComponent<Animator>();
+        _sr.sprite = null;
+    }
 
-    public bool GenerateShield()
+    void Update()
+    {
+        if (_current_health <= 0.0f)
+        {
+            BreakShield();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Bullet"))
+        {
+            _current_health -= 1;
+        }
+    }
+
+    bool GenerateShield()
     {
         if (!_shield_ready)
             return false;
@@ -27,10 +51,9 @@ public class BubbleShieldController : MonoBehaviour
             SoundManager.instance.PlaySound("bubble_generate");
             _current_health = MAX_HEALTH;
             GetComponent<CircleCollider2D>().enabled = true;
-            //StartCoroutine(WaitTillBreak());
             return true;
         }
-        else return false;
+        return false;
     }
 
     public bool BreakShield()
@@ -44,7 +67,7 @@ public class BubbleShieldController : MonoBehaviour
             StartCoroutine(WaitShieldCD());
             return true;
         }
-        else return false;
+        return false;
     }
 
     IEnumerator WaitShieldCD()
@@ -52,37 +75,9 @@ public class BubbleShieldController : MonoBehaviour
         yield return new WaitForSeconds(ShieldCD);
         _shield_ready = true;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        _current_health = MAX_HEALTH;
-        _sr = GetComponent<SpriteRenderer>();
-        _an = GetComponent<Animator>();
-        _sr.sprite = null;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_current_health <= 0.0f)
-        {
-            BreakShield();
-        }
-    }
 
     public bool Defense()
     {
         return GenerateShield();
-    }
-
-    
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        GameObject other = collision.gameObject;
-        if (other.CompareTag("Bullet"))
-        {
-            _current_health -= 1;
-        }
     }
 }

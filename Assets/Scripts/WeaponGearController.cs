@@ -53,6 +53,7 @@ public class WeaponGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
+            print(angle.ToString());
             _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }

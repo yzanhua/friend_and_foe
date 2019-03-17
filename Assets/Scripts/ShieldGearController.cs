@@ -2,63 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SeatOnGear))]
 public class ShieldGearController : MonoBehaviour
 {
+    public float ShieldTime = 6f;
+    public float PlayerCD = 2f;
+    public float rotationSpeed;
 
-    GameObject _currPlayer;
     GameObject _shield;
     GameObject _submarine;
     float _initGravityScale;
     float _lastFireDelta;
-    bool hasPlayer = false;
-
-    public float ShieldTime = 6f;
-    public float PlayerCD = 2f;
+    SeatOnGear _status;
 
     // Start is called before the first frame update
     void Start()
     {
         _shield = transform.parent.Find("BubbleShield").gameObject;
         _submarine = transform.parent.parent.gameObject;
+        _status = GetComponent<SeatOnGear>();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _currPlayer = collision.gameObject;
-            _currPlayer.transform.position = transform.position;
-            _initGravityScale = _currPlayer.GetComponent<Rigidbody2D>().gravityScale;
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = 0;
-            hasPlayer = true;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = _initGravityScale;
-            hasPlayer = false;
-        }
-    }
-    // Update is called once per frame
     void Update()
     {
-        if (!hasPlayer)
+        if (!_status.isPlayerOnSeat())
             return;
-
-        int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
+        int playerID = _status.playerID();
         if (InputSystemManager.GetAction2(playerID))
         {
             bool success = _shield.GetComponent<BubbleShieldController>().Defense();
             if (success)
             {
-                _currPlayer.GetComponent<PlayerMovementController>().movementEnable = false;
                 StartCoroutine(WaitTillBreak());
-                StartCoroutine(WaitPlayerCD());
             }
         }
+        RotateShield();
     }
 
     IEnumerator WaitTillBreak()
@@ -67,9 +45,23 @@ public class ShieldGearController : MonoBehaviour
         _shield.GetComponent<BubbleShieldController>().BreakShield();
     }
 
-    IEnumerator WaitPlayerCD()
+    void RotateShield()
     {
-        yield return new WaitForSeconds(PlayerCD);
-        _currPlayer.GetComponent<PlayerMovementController>().movementEnable = true;
+        float inputX = InputSystemManager.GetLeftSHorizontal(_status.playerID());
+        float inputY = InputSystemManager.GetLeftSVertical(_status.playerID());
+
+        if (inputX != 0f || inputY != 0f)
+        {
+            float angle = Vector2.SignedAngle(Vector2.left, new Vector2(inputX, inputY));
+            float curr_angle = _shield.transform.eulerAngles.z - 180f;
+            angle = angle - curr_angle;
+
+            if (angle < -180f)
+                angle += 360f;
+            if (angle > 180f)
+                angle -= 360f;
+            angle = angle * Mathf.Deg2Rad;
+            _shield.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
+        }
     }
 }
