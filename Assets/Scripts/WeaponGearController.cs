@@ -2,81 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SeatOnGear))]
 public class WeaponGearController : MonoBehaviour
 {
+    private GameObject _weapon;
+    private GameObject _submarine;
+    private SeatOnGear status;
+
     public float rotationSpeed;
     public float fireTimeDiff;
-
-    GameObject _currPlayer;
-    GameObject _weapon;
-    GameObject _submarine;
-    float _initGravityScale;
-    float _lastFireDelta;
-
     public bool initialTowardRight = false;
 
     void Start()
     {
+        status = GetComponent<SeatOnGear>();
         _weapon = transform.parent.Find("Weapon").gameObject;
         _submarine = transform.parent.gameObject;
         if (initialTowardRight)
             _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, 180f);
-
-
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (_currPlayer == null && collision.gameObject.CompareTag("Player"))
-        {
-            _currPlayer = collision.gameObject;
-            _currPlayer.transform.position = transform.position;
-            _initGravityScale = _currPlayer.GetComponent<Rigidbody2D>().gravityScale;
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = 0;
-        }
+        if (!status.isPlayerOnSeat())
+            return;
+
+        if (InputSystemManager.GetAction2(status.playerID()))
+            fireBullet();
+        RotateTheWeapon();
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    private void fireBullet()
     {
-        if (collision.gameObject == _currPlayer)
-        {
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = _initGravityScale;
-            _currPlayer = null;
-        }
+        _weapon.GetComponent<WeaponController>().Fire();
     }
 
-    void Update()
+    private void RotateTheWeapon()
     {
-        if (_currPlayer != null)
+        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
+        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
+
+        if (inputX != 0f || inputY != 0f)
         {
-            int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
-            float inputX = InputSystemManager.GetRightSHorizontal(playerID);
-            float inputY = InputSystemManager.GetRightSVertical(playerID);
+            float angle = Vector2.SignedAngle(Vector2.right, new Vector2(inputX, inputY));
+            float curr_angle = _weapon.transform.eulerAngles.z - 180f;
+            angle = angle - curr_angle;
 
-            if (inputX != 0f || inputY != 0f)
-            {
-                float angle = Vector2.SignedAngle(Vector2.right, new Vector2(inputX, inputY));
-                float curr_angle = _weapon.transform.eulerAngles.z - 180f;
-                angle = angle - curr_angle;
-
-                if (angle < -180f)
-                    angle += 360f;
-                if (angle > 180f)
-                    angle -= 360f;
-                angle = angle * Mathf.Deg2Rad;
-                _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
-            }
-  
-            //fire bullet
-            if (InputSystemManager.GetAction2(playerID) && _lastFireDelta > fireTimeDiff)
-            {
-                _weapon.GetComponent<WeaponController>().Fire();
-                _lastFireDelta = 0;
-            }
-            else
-            {
-                _lastFireDelta += Time.deltaTime;
-            }
+            if (angle < -180f)
+                angle += 360f;
+            if (angle > 180f)
+                angle -= 360f;
+            angle = angle * Mathf.Deg2Rad;
+            _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
 }
