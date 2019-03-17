@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5083829017752797759}
   - component: {fileID: 5083829017752797757}
   - component: {fileID: 5083829017752797756}
-  - component: {fileID: 1759816523643761581}
+  - component: {fileID: 981091237538488037}
   m_Layer: 0
   m_Name: BubbleShield
   m_TagString: Shield
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.37254903}
   m_FlipX: 0
@@ -117,8 +117,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1759816523643761581
-CircleCollider2D:
+--- !u!60 &981091237538488037
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -127,9 +127,38 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 26
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 54.375, y: 55.312496}
+    newSize: {x: 54.375, y: 55.312496}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 5.4754496, y: 20.192154}
+      - {x: 7.4366903, y: 13.680983}
+      - {x: 8.197126, y: 6.2210817}
+      - {x: 5.857973, y: -2.2447615}
+      - {x: 4.0104485, y: -8.709206}
+      - {x: -0.4602337, y: -16.335224}
+      - {x: -5.5726695, y: -21.879642}
+      - {x: -7.946737, y: -23.29121}
+      - {x: -8.466919, y: -24.789646}
+      - {x: -3.614993, y: -25.305632}
+      - {x: 7.0917892, y: -24.872969}
+      - {x: 15.058422, y: -22.43119}
+      - {x: 20.160503, y: -15.397606}
+      - {x: 22.030636, y: -13.914328}
+      - {x: 26.100931, y: -5.5715556}
+      - {x: 27.009878, y: 1.7408627}
+      - {x: 25.63818, y: 8.169291}
+      - {x: 20.376244, y: 17.91378}
+      - {x: 14.579034, y: 23.974245}
+      - {x: 0.24460316, y: 28.017492}

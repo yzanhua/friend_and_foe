@@ -20,6 +20,7 @@ public class BubbleShieldController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _an = GetComponent<Animator>();
         _sr.sprite = null;
+        GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     void Update()
@@ -30,7 +31,7 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Bullet"))
@@ -50,7 +51,7 @@ public class BubbleShieldController : MonoBehaviour
             _an.SetBool("GenerateShield", true);
             SoundManager.instance.PlaySound("bubble_generate");
             _current_health = MAX_HEALTH;
-            GetComponent<CircleCollider2D>().enabled = true;
+            GetComponent<PolygonCollider2D>().enabled = true;
             return true;
         }
         return false;
@@ -61,7 +62,7 @@ public class BubbleShieldController : MonoBehaviour
         if (_an.GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
         {
             _an.SetBool("ShieldBreak", true);
-            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
             SoundManager.instance.PlaySound("bubble_break");
             // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
             StartCoroutine(WaitShieldCD());
