@@ -1416,7 +1416,12 @@ PrefabInstance:
     - target: {fileID: 6453424791338175805, guid: dddb762f936a9d84ca6f781561a0c388,
         type: 3}
       propertyPath: targetTime
-      value: 9999999
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453424791338175805, guid: dddb762f936a9d84ca6f781561a0c388,
+        type: 3}
+      propertyPath: flashCount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6911253330230115234, guid: dddb762f936a9d84ca6f781561a0c388,
         type: 3}
