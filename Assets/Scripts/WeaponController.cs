@@ -5,15 +5,19 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject refillStation;
     public int MaxBullets = 15;
 
     GameObject submarine;
     int remainBullets;
+    RefillController rc;
 
     void Start()
     {
         submarine = transform.parent.gameObject;
         remainBullets = MaxBullets;
+        rc = refillStation.GetComponent<RefillController>();
+        rc.SetBulletStatus(true);
     }
 
     public void Fire()
@@ -29,7 +33,9 @@ public class WeaponController : MonoBehaviour
         else
         {
             SoundManager.instance.PlaySound("warning");
-
+            // Debug.Log("Refill the station");
+            rc = refillStation.GetComponent<RefillController>();
+            rc.SetBulletStatus(false);
         }
 
     }

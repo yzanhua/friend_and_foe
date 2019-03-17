@@ -10,16 +10,17 @@ public class RefillController : MonoBehaviour
 
     float curFilledTime = 0;
     // whether key was pressed in this collision period
-    bool keyDown = false;
-    bool playerTrigger = false;
-    bool bulletEmpty = true;
+    public bool keyDown = false;
+    public bool playerTrigger = false;
+    public bool bulletEmpty = true;
 
     int  playerID;
 
-    public void BulletNeedRefill()
+    public void SetBulletStatus(bool status)
     {
-        bulletEmpty = true;
+        bulletEmpty = !status;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +45,7 @@ public class RefillController : MonoBehaviour
                 }
                 curFilledTime += Time.deltaTime;
                 progress_bar.GetComponent<HealthBar>().SetSize((float)curFilledTime / (float)refillTime);
-                print(curFilledTime);
+                //print(curFilledTime);
             }
         }
         //finished filling
