@@ -22,7 +22,6 @@ public class SeatOnGear : MonoBehaviour
             {
                 playerOnSeat = true;
                 player.movementEnable = false;
-                //offset = playerGameObject.transform.position - transform.position;
             }
         }
         else // playerOnSeat = true
@@ -33,7 +32,6 @@ public class SeatOnGear : MonoBehaviour
                 player.movementEnable = true;
                 playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
             }
-            //playerGameObject.transform.position = transform.position + offset;
         }
         
     }
