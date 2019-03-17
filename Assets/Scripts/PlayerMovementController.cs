@@ -21,12 +21,15 @@ public class PlayerMovementController : MonoBehaviour
 
     private Animator _an;
 
+    private Rigidbody2D submarine_rb;
+
     void Start()
     {
         _rb2d = GetComponent<Rigidbody2D>();
         _ladderLayer = LayerMask.NameToLayer("Ladder");
         _initGravityScale = _rb2d.gravityScale;
         _an = GetComponent<Animator>();
+        submarine_rb = transform.parent.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -34,7 +37,7 @@ public class PlayerMovementController : MonoBehaviour
         if ( !movementEnable || !Global.instance.AllPlayersMovementEnable)
         {
             _an.speed = 0f;
-            _rb2d.velocity = Vector2.zero;
+            _rb2d.velocity = submarine_rb.velocity;
             return;
         }
         
@@ -83,6 +86,7 @@ public class PlayerMovementController : MonoBehaviour
                 _an.speed = 0f;
             }
         }
+        _rb2d.velocity += submarine_rb.velocity;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

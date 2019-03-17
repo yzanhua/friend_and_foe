@@ -9,6 +9,7 @@ public class SeatOnGear : MonoBehaviour
     private GameObject playerGameObject;
     private bool triggerStay = false;
     private float initGravityScale;
+    private Vector3 offset;
 
     private void Update()
     {
@@ -21,6 +22,7 @@ public class SeatOnGear : MonoBehaviour
             {
                 playerOnSeat = true;
                 player.movementEnable = false;
+                //offset = playerGameObject.transform.position - transform.position;
             }
         }
         else // playerOnSeat = true
@@ -31,11 +33,16 @@ public class SeatOnGear : MonoBehaviour
                 player.movementEnable = true;
                 playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
             }
+            //playerGameObject.transform.position = transform.position + offset;
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (triggerStay)
+            return;
+ 
         if (!collision.gameObject.CompareTag("Player"))
             return;
 

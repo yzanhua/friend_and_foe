@@ -8,15 +8,17 @@ public class MovementGearController : MonoBehaviour
     [Range(0f, 2f)]
     public float speed;
 
-    Transform submarine;
+    GameObject submarine;
     private SeatOnGear status;
+    Rigidbody2D submarine_rb;
 
     bool inPlaySoundRoutine = false;
 
     void Start()
     {
-        submarine = transform.parent.parent;
+        submarine = transform.parent.parent.gameObject;
         status = GetComponent<SeatOnGear>();
+        submarine_rb = submarine.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class MovementGearController : MonoBehaviour
         int playerID = status.playerID();
         Vector3 temp = new Vector3(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
-        submarine.position += speed * temp * Time.deltaTime;
+        submarine_rb.velocity = speed * temp;
         if (temp != Vector3.zero && !inPlaySoundRoutine)
         {
             StartCoroutine(playMoveSound());
@@ -36,7 +38,7 @@ public class MovementGearController : MonoBehaviour
     IEnumerator playMoveSound()
     {
         inPlaySoundRoutine = true;
-        SoundManager.instance.PlaySound("move");
+        //SoundManager.instance.PlaySound("move");
         yield return new WaitForSeconds(7.8f);
         inPlaySoundRoutine = false;
     }
