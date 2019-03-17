@@ -41,8 +41,6 @@ public class PlayerMovementController : MonoBehaviour
         //movement for character and for climbing ladder
         float verticalInput = InputSystemManager.GetLeftSVertical(playerID);
         float horizontalInput = InputSystemManager.GetLeftSHorizontal(playerID);
-        Debug.Log(verticalInput);
-        Debug.Log(horizontalInput);
         RaycastHit2D hit_climb;
         RaycastHit2D hit_down;
         hit_climb = Physics2D.Raycast(transform.position, Vector2.up, 1.0f, 1 << _ladderLayer);
