@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1766765807130690463}
   - component: {fileID: 510013593091614907}
   - component: {fileID: 461231859592170272}
+  - component: {fileID: 6691095137637501743}
   m_Layer: 0
-  m_Name: MovementGeer
+  m_Name: MovementGear
   m_TagString: MovementGeer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,5 +128,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 186bdb63b0b01403c8a0eda743cebdae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+--- !u!114 &6691095137637501743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784085707925066925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc1dc26df8f05e4690bb6bdf9e33370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

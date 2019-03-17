@@ -2,55 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SeatOnGear))]
 public class MovementGearController : MonoBehaviour
 {
     [Range(0f, 2f)]
     public float speed;
 
-    GameObject _currPlayer;
     Transform submarine;
-    float _initGravityScale;
+    private SeatOnGear status;
 
     bool inPlaySoundRoutine = false;
 
     void Start()
     {
         submarine = transform.parent.parent;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_currPlayer == null && collision.gameObject.tag.Contains("Player"))
-        {
-            _currPlayer = collision.gameObject;
-            _currPlayer.transform.position = transform.position;
-            _initGravityScale = _currPlayer.GetComponent<Rigidbody2D>().gravityScale;
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = 0;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject == _currPlayer)
-        {
-            _currPlayer.GetComponent<Rigidbody2D>().gravityScale = _initGravityScale;
-            _currPlayer = null;
-        }
+        status = GetComponent<SeatOnGear>();
     }
 
     void Update()
     {
-        if (_currPlayer != null)
+        if (!status.isPlayerOnSeat())
+            return;
+        int playerID = status.playerID();
+        Vector3 temp = new Vector3(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
+        temp = temp.normalized;
+        submarine.position += speed * temp * Time.deltaTime;
+        if (temp != Vector3.zero && !inPlaySoundRoutine)
         {
-            int playerID = _currPlayer.GetComponent<PlayerMovementController>().playerID;
-            Vector3 temp = new Vector3(InputSystemManager.GetRightSHorizontal(playerID), InputSystemManager.GetRightSVertical(playerID));
-            temp = temp.normalized;
-            if (temp != Vector3.zero && !inPlaySoundRoutine)
-            {
-                StartCoroutine(playMoveSound());
-            }
-            submarine.position += speed * temp * Time.deltaTime;
-
+            StartCoroutine(playMoveSound());
         }
     }
 
