@@ -7,6 +7,7 @@ public class WeaponController : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject refillStation;
     public int MaxBullets = 15;
+    public float bulletoffset;
 
     GameObject submarine;
     int remainBullets;
@@ -24,8 +25,8 @@ public class WeaponController : MonoBehaviour
     {
         if (remainBullets > 0)
         {
-            GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
-            //bullet.transform.parent = gameObject.transform;
+            Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
+            GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
             SoundManager.instance.PlaySound("shoot");
             remainBullets--;
