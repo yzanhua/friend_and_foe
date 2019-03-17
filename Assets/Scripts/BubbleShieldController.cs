@@ -9,17 +9,24 @@ public class BubbleShieldController : MonoBehaviour
     public Sprite full_shield_sprite;
     public float _current_health;
 
-    private SpriteRenderer _sr;
-    private Animator _an;
+    private SpriteRenderer[] _sr;
+    private Animator[] _an;
     private Time startTime;
     private bool _shield_ready = true;
+    private int _childNum;
 
     void Start()
     {
         _current_health = MAX_HEALTH;
-        _sr = GetComponent<SpriteRenderer>();
-        _an = GetComponent<Animator>();
-        _sr.sprite = null;
+        _childNum = transform.childCount;
+        _sr = new SpriteRenderer[_childNum];
+        _an = new Animator[_childNum];
+        for (int i = 0; i < _childNum; ++i)
+        {
+            _sr[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
+            _sr[i].sprite = null;
+            _an[i] = transform.GetChild(i).GetComponent<Animator>();
+        }
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
@@ -46,9 +53,12 @@ public class BubbleShieldController : MonoBehaviour
             return false;
         _shield_ready = false;
 
-        if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
+        if (_an[0].GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
         {
-            _an.SetBool("GenerateShield", true);
+            for (int i = 0; i < _childNum; ++i)
+            {
+                _an[i].SetBool("GenerateShield", true);
+            }
             SoundManager.instance.PlaySound("bubble_generate");
             _current_health = MAX_HEALTH;
             GetComponent<PolygonCollider2D>().enabled = true;
@@ -59,12 +69,14 @@ public class BubbleShieldController : MonoBehaviour
 
     public bool BreakShield()
     {
-        if (_an.GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
+        if (_an[_childNum - 1].GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
         {
-            _an.SetBool("ShieldBreak", true);
+            for (int i = 0; i < _childNum; ++i)
+            {
+                _an[i].SetBool("ShieldBreak", true);
+            }
             GetComponent<PolygonCollider2D>().enabled = false;
             SoundManager.instance.PlaySound("bubble_break");
-            // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
             StartCoroutine(WaitShieldCD());
             return true;
         }
