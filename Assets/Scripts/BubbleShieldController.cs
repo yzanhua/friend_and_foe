@@ -9,59 +9,27 @@ public class BubbleShieldController : MonoBehaviour
     public Sprite full_shield_sprite;
     public float _current_health;
 
-    private SpriteRenderer _sr;
-    private Animator _an;
+    private SpriteRenderer[] _sr;
+    private Animator[] _an;
     private Time startTime;
     private bool _shield_ready = true;
+    private int _childNum;
 
-
-    public bool GenerateShield()
-    {
-        if (!_shield_ready)
-            return false;
-        _shield_ready = false;
-
-        if (_an.GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
-        {
-            _an.SetBool("GenerateShield", true);
-            SoundManager.instance.PlaySound("bubble_generate");
-            _current_health = MAX_HEALTH;
-            GetComponent<CircleCollider2D>().enabled = true;
-            //StartCoroutine(WaitTillBreak());
-            return true;
-        }
-        else return false;
-    }
-
-    public bool BreakShield()
-    {
-        if (_an.GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
-        {
-            _an.SetBool("ShieldBreak", true);
-            GetComponent<CircleCollider2D>().enabled = false;
-            SoundManager.instance.PlaySound("bubble_break");
-            // print("Collider.enabled = " + GetComponent<CircleCollider2D>().enabled);
-            StartCoroutine(WaitShieldCD());
-            return true;
-        }
-        else return false;
-    }
-
-    IEnumerator WaitShieldCD()
-    {
-        yield return new WaitForSeconds(ShieldCD);
-        _shield_ready = true;
-    }
-    // Start is called before the first frame update
     void Start()
     {
         _current_health = MAX_HEALTH;
-        _sr = GetComponent<SpriteRenderer>();
-        _an = GetComponent<Animator>();
-        _sr.sprite = null;
+        _childNum = transform.childCount;
+        _sr = new SpriteRenderer[_childNum];
+        _an = new Animator[_childNum];
+        for (int i = 0; i < _childNum; ++i)
+        {
+            _sr[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
+            _sr[i].sprite = null;
+            _an[i] = transform.GetChild(i).GetComponent<Animator>();
+        }
+        GetComponent<PolygonCollider2D>().enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_current_health <= 0.0f)
@@ -70,19 +38,59 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
-    public bool Defense()
-    {
-        return GenerateShield();
-    }
-
-    
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Bullet"))
         {
             _current_health -= 1;
         }
+    }
+
+    bool GenerateShield()
+    {
+        if (!_shield_ready)
+            return false;
+        _shield_ready = false;
+
+        if (_an[0].GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
+        {
+            for (int i = 0; i < _childNum; ++i)
+            {
+                _an[i].SetBool("GenerateShield", true);
+            }
+            SoundManager.instance.PlaySound("bubble_generate");
+            _current_health = MAX_HEALTH;
+            GetComponent<PolygonCollider2D>().enabled = true;
+            return true;
+        }
+        return false;
+    }
+
+    public bool BreakShield()
+    {
+        if (_an[_childNum - 1].GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
+        {
+            for (int i = 0; i < _childNum; ++i)
+            {
+                _an[i].SetBool("ShieldBreak", true);
+            }
+            GetComponent<PolygonCollider2D>().enabled = false;
+            SoundManager.instance.PlaySound("bubble_break");
+            StartCoroutine(WaitShieldCD());
+            return true;
+        }
+        return false;
+    }
+
+    IEnumerator WaitShieldCD()
+    {
+        yield return new WaitForSeconds(ShieldCD);
+        _shield_ready = true;
+    }
+
+    public bool Defense()
+    {
+        return GenerateShield();
     }
 }

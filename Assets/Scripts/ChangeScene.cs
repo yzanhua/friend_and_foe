@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public float targetTime = 60f;
+    public float targetTime = 100000000f;
     private float currTime;
     // Start is called before the first frame update
 
@@ -36,7 +36,7 @@ public class ChangeScene : MonoBehaviour
         {
             changeGearsPositions();
             currTime = 0f;
-        } 
+        }
     }
 
     IEnumerator CountTime()
