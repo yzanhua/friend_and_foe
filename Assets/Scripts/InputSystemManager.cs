@@ -3,27 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Experimental.Input;
 
-public class InputSystemManager : MonoBehaviour
+public class InputSystemManager : ScriptableObject
 {
-    static public InputSystemManager instance;
-    public float deadZoneValue = 0.03f;
+    private static InputSystemManager _instance = null;
+    public float deadZoneValue = 0.2f;
 
 
     private List<Gamepad> _gamepad_list;
 
-    public void Awake()
+    public static InputSystemManager instance
     {
-        if (instance == null)
+        get
         {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
+            if (_instance == null)
+            {
+                _instance = ScriptableObject.CreateInstance(typeof(InputSystemManager)) as InputSystemManager;
+            }
+            return _instance;
         }
     }
 
-    void Start()
+    void Awake()
     {
         _gamepad_list = new List<Gamepad>(Gamepad.all);
 
