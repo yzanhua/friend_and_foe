@@ -49,12 +49,12 @@ public class ChangeScene : MonoBehaviour
             {
                 gears[i].GetComponent<SpriteRenderer>().enabled = false;
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             for (int i = 0; i < gearNum; ++i)
             {
                 gears[i].GetComponent<SpriteRenderer>().enabled = true;
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
         }
 
 
