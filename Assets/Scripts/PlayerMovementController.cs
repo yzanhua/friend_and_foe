@@ -47,7 +47,7 @@ public class PlayerMovementController : MonoBehaviour
         if (climbingLadder)
             horizontalInput = 0f;
 
-        if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0)
+        if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0f)
             an.speed = 1f;
 
         an.SetFloat("vertical", verticalInput);
@@ -64,7 +64,7 @@ public class PlayerMovementController : MonoBehaviour
             rb2d.gravityScale = 0;
             onLadder = true;
         }
-        if (collision.gameObject.name == "TestCollider")
+        if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {
             climbingLadder = true;
         }
@@ -78,9 +78,14 @@ public class PlayerMovementController : MonoBehaviour
             rb2d.gravityScale = initGravityScale;
             onLadder = false;
         }
-        if (collision.gameObject.name == "TestCollider")
+        if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {
             climbingLadder = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
