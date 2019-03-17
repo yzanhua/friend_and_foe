@@ -14,20 +14,18 @@ public class RefillController : MonoBehaviour
     public bool playerTrigger = false;
     public bool bulletEmpty = true;
 
-    int  playerID;
+    int playerID;
 
     public void SetBulletStatus(bool status)
     {
         bulletEmpty = !status;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         progress_bar.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!bulletEmpty)
@@ -39,13 +37,12 @@ public class RefillController : MonoBehaviour
                 keyDown = true;
             if (keyDown)
             {
-                if (curFilledTime == 0)
+                if (curFilledTime <= 0)
                 {
                     progress_bar.SetActive(true);
                 }
                 curFilledTime += Time.deltaTime;
                 progress_bar.GetComponent<HealthBar>().SetSize((float)curFilledTime / (float)refillTime);
-                //print(curFilledTime);
             }
         }
         //finished filling
@@ -56,15 +53,15 @@ public class RefillController : MonoBehaviour
             weapon.GetComponent<WeaponController>().fillBullets();
             progress_bar.SetActive(false);
             bulletEmpty = false;
-
         }
     }
-    
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        if (other.CompareTag("Player")){
+        if (other.CompareTag("Player"))
+        {
             playerID = other.GetComponent<PlayerMovementController>().playerID;
             playerTrigger = true;
             if (!keyDown && InputSystemManager.GetAction2(playerID))
@@ -81,6 +78,6 @@ public class RefillController : MonoBehaviour
             playerTrigger = false;
             keyDown = false;
         }
-      
+
     }
 }

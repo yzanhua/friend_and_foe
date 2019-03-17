@@ -45,4 +45,10 @@ public class WeaponController : MonoBehaviour
     {
         remainBullets = MaxBullets;
     }
+
+    public float health()
+    {
+        return (float)remainBullets / MaxBullets;
+    }
+
 }
