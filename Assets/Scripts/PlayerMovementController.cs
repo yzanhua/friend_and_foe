@@ -32,9 +32,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update()
     {
+        an.speed = 0f;
         if (!movementEnable || !Global.instance.AllPlayersMovementEnable)
         {
-            an.speed = 0f;
             rb2d.velocity = submarine_rb.velocity;
             return;
         }
@@ -47,7 +47,9 @@ public class PlayerMovementController : MonoBehaviour
         if (climbingLadder)
             horizontalInput = 0f;
 
-        an.speed = 1f;
+        if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0)
+            an.speed = 1f;
+
         an.SetFloat("vertical", verticalInput);
         an.SetFloat("horizontal", horizontalInput);
 
