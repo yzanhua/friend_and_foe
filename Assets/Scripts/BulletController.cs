@@ -33,7 +33,7 @@ public class BulletController : MonoBehaviour
     {
         GameObject other = collision.collider.gameObject;
 
-        if (other.CompareTag("Submarine") || other.CompareTag("Edge"))
+        if (other.CompareTag("Submarine") || other.CompareTag("Edge") || other.CompareTag("Fish"))
         {
             Destroy(gameObject);
         }
