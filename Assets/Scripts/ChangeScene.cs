@@ -4,37 +4,29 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public float targetTime = 100000000f;
+    public float targetTime = 10f;
+    public int flashCount = 3;
+    public int gearNum = 3;
+
     private float currTime;
-    // Start is called before the first frame update
-
-    private Transform gear1;
-    private Transform gear2;
-    private Transform gear3;
-
+    private Transform[] gears;
 
     void Start()
     {
-        gear1 = transform.GetChild(0);
-        gear2 = transform.GetChild(1);
-        gear3 = transform.GetChild(2);
+        gears = new Transform[3];
+        for (int i = 0; i < gearNum; ++i)
+        {
+            gears[i] = transform.GetChild(i);
+        }
         currTime = 0f;
         StartCoroutine(CountTime());
-    }
-
-    public void changeGearsPositions()
-    {
-        Vector3 temp_pos = gear1.position;
-        gear1.position = gear2.position;
-        gear2.position = gear3.position;
-        gear3.position = temp_pos;
     }
 
     void check()
     {
         if (currTime >= targetTime)
         {
-            changeGearsPositions();
+            StartCoroutine(changeGearsPositions());
             currTime = 0f;
         }
     }
@@ -49,5 +41,26 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
+    IEnumerator changeGearsPositions()
+    {
+        for (int t = 0; t < flashCount; t += 1)
+        {
+            for (int i = 0; i < gearNum; ++i)
+            {
+                gears[i].GetComponent<SpriteRenderer>().enabled = false;
+            }
+            yield return new WaitForSeconds(0.2f);
+            for (int i = 0; i < gearNum; ++i)
+            {
+                gears[i].GetComponent<SpriteRenderer>().enabled = true;
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
 
+
+        Vector3 temp_pos = gears[0].position;
+        gears[0].position = gears[1].position;
+        gears[1].position = gears[2].position;
+        gears[2].position = temp_pos;
+    }
 }
