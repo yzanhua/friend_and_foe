@@ -98,6 +98,8 @@ MonoBehaviour:
   Speed: 3
   LongestDistance: 10
   direction: {x: 0, y: 0, z: 0}
+  bounceMaterial: {fileID: 6200000, guid: f3c029cba401141899e9c7ed8f659e8d, type: 2}
+  noBounceMaterial: {fileID: 6200000, guid: 5ebf283eb3306478ca26dfd02245ad47, type: 2}
 --- !u!50 &1705751574064031597
 Rigidbody2D:
   serializedVersion: 4
@@ -132,7 +134,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.096435, y: 0}
+  m_Offset: {x: -0.7574518, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -143,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32713002, y: 1.08}
+  m_Size: {x: 1.0050964, y: 1.08}
   m_EdgeRadius: 0
 --- !u!95 &2562336946935349226
 Animator:
