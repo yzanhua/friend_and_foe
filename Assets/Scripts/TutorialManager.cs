@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class TutorialManager : MonoBehaviour
     private List<int> task_map;
     private float original_target_time_left;
     private float original_target_time_right;
+    private bool isStartingGame = false;
 
     static public bool TaskComplete(int task_num, bool isRight)
     {
@@ -38,7 +40,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (task_num == 1)
             {
-                instance.rightTaskBox.text = "Leave the blue console";
+                instance.rightTaskBox.text = "Leave the blue gear";
             }
             else if (task_num == 4)
             {
@@ -58,7 +60,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (task_num == 1)
             {
-                instance.leftTaskBox.text = "Leave the blue operator";
+                instance.leftTaskBox.text = "Leave the blue gear";
             }
             else if (task_num == 4)
             {
@@ -104,9 +106,9 @@ public class TutorialManager : MonoBehaviour
 
 
             leftTextBox.text = "Left sticker to control the character";
-            rightTextBox.text = "Use action button 2 to seat on the operator";
-            leftTaskBox.text = "Seat on the blue operator";
-            rightTaskBox.text = "Seat on the blue operator";
+            rightTextBox.text = "Use action button 2 to seat on the gear";
+            leftTaskBox.text = "Seat on the blue gear";
+            rightTaskBox.text = "Seat on the blue gear";
             leftIndicator.transform.localPosition = new Vector3(1.76f, 0.19f, 0f);
             rightIndicator.transform.localPosition = new Vector3(1.76f, 0.19f, 0f);
             task_map = new List<int>();
@@ -143,7 +145,7 @@ public class TutorialManager : MonoBehaviour
             leftTutorialState++;
             rightTutorialState++;
             leftTextBox.text = "Left sticker to control the submarine";
-            rightTextBox.text = "Use action button 1 to leave the operator";
+            rightTextBox.text = "Use action button 1 to leave the gear";
             leftTaskBox.text = "Drive to the yellow area";
             rightTaskBox.text = "Drive to the yellow area";
         } else if (leftTutorialState == 4 && rightTutorialState == 4)
@@ -166,8 +168,8 @@ public class TutorialManager : MonoBehaviour
             rightIndicator.transform.localPosition = new Vector3(1.17f, 1.59f, 0f);
             leftTextBox.text = "Left sticker to control the weapon";
             rightTextBox.text = "Use action button 2 to trigger the attack";
-            leftTaskBox.text = "Seat on the red console";
-            rightTaskBox.text = "Seat on the red console";
+            leftTaskBox.text = "Seat on the red gear";
+            rightTaskBox.text = "Seat on the red grea";
         }
         else if (leftTutorialState == 9 && rightTutorialState == 9)
         {
@@ -175,7 +177,7 @@ public class TutorialManager : MonoBehaviour
             rightTutorialState++;
             leftIndicator.transform.localPosition = new Vector3(-0.5f, -1.12f, 0f);
             rightIndicator.transform.localPosition = new Vector3(-0.5f, -1.12f, 0f);
-            leftTextBox.text = "Left sticker to control the player";
+            leftTextBox.text = "Left sticker to rotate the shield";
             rightTextBox.text = "Use action button 2 to trigger the shield";
             leftMovingBox.SetActive(false);
             rightMovingBox.SetActive(false);
@@ -183,29 +185,36 @@ public class TutorialManager : MonoBehaviour
             rightTaskBox.text = "Trigger the shield";
         } else if (leftTutorialState == 11 && rightTutorialState == 11)
         {
+            leftTutorialState ++;
+            rightTutorialState ++;
             leftTaskBox.text = "Tutorial complete";
             rightTaskBox.text = "Tutorial complete";
-            StartCoroutine(instance.StartTheGame());
+            instance.StartCoroutine(StartTheGame());
+            //StartCoroutine(instance.StartTheGame());
+        } else if ( !isStartingGame && leftTutorialState == 12 && rightTutorialState == 12)
+        {
+            tutorialMode = false;
+            GameUI.SetActive(true);
+            gameController.SetActive(true);
+            edge.SetActive(false);
+            TutorialUI.SetActive(false);
+            leftIndicator.SetActive(false);
+            rightIndicator.SetActive(false);
+            leftTrigger.SetActive(false);
+            rightTrigger.SetActive(false);
+            leftGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_left;
+            rightGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_right;
+            //SceneManager.LoadScene("Main");
+            TransitionEffect.TriggerDarkTransition();
         }
 
     }
 
     IEnumerator StartTheGame()
     {
-
-        tutorialMode = false;
-
-        GameUI.SetActive(true);
-        gameController.SetActive(true);
-        edge.SetActive(false);
-        TutorialUI.SetActive(false);
-        leftIndicator.SetActive(false);
-        rightIndicator.SetActive(false);
-        leftGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_left;
-        rightGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_right;
-
-        TransitionEffect.TriggerDarkTransition();
-        yield return null;
+        isStartingGame = true;
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Main");
     }
 
 

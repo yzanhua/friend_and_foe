@@ -8,9 +8,11 @@ public class WeaponController : MonoBehaviour
     public GameObject refillStation;
     public int MaxBullets = 15;
     public float bulletoffset;
+    public float fireCD = 1f;
 
     GameObject submarine;
     int remainBullets;
+    bool isAbleToFire = true;
     RefillController rc;
 
     void Start()
@@ -23,6 +25,10 @@ public class WeaponController : MonoBehaviour
 
     public void Fire()
     {
+        if (!isAbleToFire)
+            return;
+        isAbleToFire = false;
+        StartCoroutine(CD());
         if (remainBullets > 0)
         {
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
@@ -42,6 +48,11 @@ public class WeaponController : MonoBehaviour
 
     }
 
+    IEnumerator CD()
+    {
+        yield return new WaitForSeconds(fireCD);
+        isAbleToFire = true;
+    }
     public void FillBullets()
     {
         remainBullets = MaxBullets;

@@ -86,9 +86,9 @@ public class GameController : MonoBehaviour
     IEnumerator ReloadScene()
     {
         //WinText.enabled = true;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(2f);
         //int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("backup");
+        SceneManager.LoadScene("Main");
     }
 
 }
