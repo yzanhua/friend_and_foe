@@ -1,0 +1,3 @@
+The biggest problem is balance. To solve the problem, we make the game 2vs2 and make both submarines identical. This change also helps us avoid having single player to have too much things to do.
+To make all three operations (attack, defense, move) interesting, we add a bullet refill mechanism for the weapon, make the shield portable and enable bouncing back the bullets, and add schools in the environment to push the submarines to make players want to move their submarine.
+Other iterations: adjust control keys to making the control more intuitive; add music and sound effects.
