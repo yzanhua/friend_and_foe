@@ -16,9 +16,9 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         submarine = transform.parent.gameObject;
-        remainBullets = MaxBullets;
+        remainBullets = 0;
         rc = refillStation.GetComponent<RefillController>();
-        rc.SetBulletStatus(true);
+        rc.SetBulletStatus(false);
     }
 
     public void Fire()

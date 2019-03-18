@@ -31,6 +31,10 @@ public class WeaponGearController : MonoBehaviour
 
         if (!_status.isPlayerOnSeat())
             return;
+        if (TutorialManager.tutorialMode)
+        {
+            TutorialManager.TaskComplete(4, transform.position.x > 0f);
+        }
 
         if (InputSystemManager.GetAction2(_status.playerID()))
             fireBullet();
