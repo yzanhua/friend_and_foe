@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip hit_clip;
     public AudioClip win_clip;
     public AudioClip warning_clip;
+    public AudioClip collide_clip;
 
     void Awake()
     {
@@ -55,6 +56,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "warning":
                 AudioSource.PlayClipAtPoint(warning_clip, Camera.main.transform.position);
+                break;
+            case "collide":
+                AudioSource.PlayClipAtPoint(collide_clip, Camera.main.transform.position);
                 break;
             default:
                 Debug.LogWarning("WARNING: no such kind of audio clip");
