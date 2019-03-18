@@ -6,10 +6,16 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
 
+    public int playerID;
     [Range(0f, 10f)]
     public float speed = 2f;
-    public int playerID;
+
+    public float KnockBackTime = 0.2f;
+    public float DizzyTime = 1.5f;
+    
     public bool movementEnable = true;
+    //public bool SeatedOnGear = false;
+    
 
     private int ladderLayer;
 
@@ -20,6 +26,9 @@ public class PlayerMovementController : MonoBehaviour
     private Vector2 target;
     private Animator an;
     private Rigidbody2D submarine_rb;
+
+    private bool dizzy = false;
+    private Vector2 self_speed;
 
     void Start()
     {
@@ -33,11 +42,16 @@ public class PlayerMovementController : MonoBehaviour
     private void Update()
     {
         an.speed = 0f;
-        if (!movementEnable || !Global.instance.AllPlayersMovementEnable)
+        rb2d.velocity = submarine_rb.velocity;
+
+        if (dizzy)
         {
-            rb2d.velocity = submarine_rb.velocity;
+            rb2d.velocity += self_speed;
             return;
         }
+
+        if (!movementEnable || !Global.instance.AllPlayersMovementEnable)
+            return;
 
         float verticalInput = InputSystemManager.GetLeftSVertical(playerID);
         float horizontalInput = InputSystemManager.GetLeftSHorizontal(playerID);
@@ -53,8 +67,7 @@ public class PlayerMovementController : MonoBehaviour
         an.SetFloat("vertical", verticalInput);
         an.SetFloat("horizontal", horizontalInput);
 
-        rb2d.velocity = speed * new Vector2(horizontalInput, verticalInput);
-        rb2d.velocity += submarine_rb.velocity;
+        rb2d.velocity += speed * new Vector2(horizontalInput, verticalInput);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -86,6 +99,25 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        GameObject other = collision.gameObject;
+        if (!other.CompareTag("Player"))
+            return;
+
+        Vector3 forceDirection = (transform.position - other.transform.position).normalized;
+        if (climbingLadder)
+            forceDirection.x = 0f;
+        else
+            forceDirection.y = 0f;
+        dizzy = true;
+        self_speed = forceDirection * 3;
+        StartCoroutine(KnockBackEffect());
+    }
+
+    IEnumerator KnockBackEffect()
+    {
+        yield return new WaitForSeconds(KnockBackTime);
+        self_speed = Vector2.zero;
+        yield return new WaitForSeconds(DizzyTime);
+        dizzy = false;
     }
 }

@@ -22,18 +22,19 @@ public class SeatOnGear : MonoBehaviour
             {
                 playerOnSeat = true;
                 player.movementEnable = false;
+                //player.SeatedOnGear = true;
             }
         }
-        else // playerOnSeat = true
-        {
-            if (InputSystemManager.GetAction1(player.playerID))
-            {
-                playerOnSeat = false;
-                player.movementEnable = true;
-                playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
-            }
-        }
-        
+        else if (InputSystemManager.GetAction1(player.playerID))
+            exit();
+
+    }
+    private void exit()
+    {
+        playerOnSeat = false;
+        player.movementEnable = true;
+        playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
+        //player.SeatedOnGear = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,11 +60,7 @@ public class SeatOnGear : MonoBehaviour
 
         triggerStay = false;
         if (playerOnSeat)
-        {
-            playerOnSeat = false;
-            player.movementEnable = true;
-            playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
-        }
+            exit();
     }
 
     public bool isPlayerOnSeat()
