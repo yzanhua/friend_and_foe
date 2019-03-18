@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour
     public float Speed = 3.0f;
     public float LongestDistance = 9.0f;
     public Vector3 direction;
+    public PhysicsMaterial2D bounceMaterial;
+    public PhysicsMaterial2D noBounceMaterial;
 
     private Rigidbody2D rb;
     private Vector3 originPos;
@@ -23,6 +25,7 @@ public class BulletController : MonoBehaviour
         originPos = transform.position;
         rb.velocity = direction.normalized * Speed;
         hitCount = 0;
+        GetComponent<BoxCollider2D>().sharedMaterial = bounceMaterial;
     }
 
     // Update is called once per frame
@@ -32,38 +35,31 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) <= 0.1)
+        {
+            StartCoroutine(Explode());
+        }
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
-
-        if (other.CompareTag("Submarine") || other.CompareTag("Edge") || other.CompareTag("Fish"))
+        if (other.CompareTag("Shield") && hitCount == 0)
+        {
+            GetComponent<BoxCollider2D>().sharedMaterial = bounceMaterial;
+            hitCount += 1;
+        }
+        else
         {
             StartCoroutine(Explode());
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        GameObject other = collision.gameObject;
-        if (other.CompareTag("Shield"))
-        {
-            if (hitCount == 0)
-            {
-                hitCount += 1;
-            }
-            else
-            {
-                StartCoroutine(Explode());
-            }
-        }
-    }
-
     IEnumerator Explode()
     {
-        GetComponent<BoxCollider2D>().sharedMaterial.bounciness = 0;
+        GetComponent<BoxCollider2D>().sharedMaterial = noBounceMaterial;
+        rb.velocity = Vector2.zero;
         animator.SetTrigger("Explode");
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);

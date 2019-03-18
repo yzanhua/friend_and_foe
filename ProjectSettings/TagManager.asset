@@ -12,6 +12,7 @@ TagManager:
   - Edge
   - Fish
   - LadderForbidHorizontal
+  - Weapon
   layers:
   - Default
   - TransparentFX

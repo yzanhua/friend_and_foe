@@ -106,9 +106,20 @@ public class BubbleShieldController : MonoBehaviour
         return GenerateShield();
     }
 
-    public float health()
+    public float Health()
     {
-        return _current_health / MAX_HEALTH;
-    }
+        if (ShieldInUse())
+        {
+            return _current_health / MAX_HEALTH;
+        }
+        if (_shield_ready)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
 
+    }
 }

@@ -27,17 +27,17 @@ public class WeaponGearController : MonoBehaviour
     private void Update()
     {
         // update health bar of weapon
-        _healthBar.SetSize(_weapon.GetComponent<WeaponController>().health());
+        _healthBar.SetSize(_weapon.GetComponent<WeaponController>().Health());
 
         if (!_status.isPlayerOnSeat())
             return;
 
         if (InputSystemManager.GetAction2(_status.playerID()))
-            fireBullet();
+            FireBullet();
         RotateTheWeapon();
     }
 
-    private void fireBullet()
+    private void FireBullet()
     {
         _weapon.GetComponent<WeaponController>().Fire();
     }

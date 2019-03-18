@@ -28,19 +28,20 @@ public class ShieldGearController : MonoBehaviour
     void Update()
     {
         // update cd bar
-        _healthBar.SetSize(_shield.GetComponent<BubbleShieldController>().health());
+        _healthBar.SetSize(_shield.GetComponent<BubbleShieldController>().Health());
 
         if (!_status.isPlayerOnSeat())
             return;
         int playerID = _status.playerID();
-        if (InputSystemManager.GetAction2(playerID))
-        {
-            bool success = _shield.GetComponent<BubbleShieldController>().Defense();
-            if (success)
-            {
-                StartCoroutine(WaitTillBreak());
-            }
-        }
+        //if (InputSystemManager.GetAction2(playerID))
+        //{
+        //    bool success = _shield.GetComponent<BubbleShieldController>().Defense();
+        //    if (success)
+        //    {
+        //        StartCoroutine(WaitTillBreak());
+        //    }
+        //}
+        GenerateShield();
         RotateShield();
     }
 
@@ -48,6 +49,15 @@ public class ShieldGearController : MonoBehaviour
     {
         yield return new WaitForSeconds(ShieldTime);
         _shield.GetComponent<BubbleShieldController>().BreakShield();
+    }
+
+    void GenerateShield()
+    {
+        bool success = _shield.GetComponent<BubbleShieldController>().Defense();
+        if (success)
+        {
+            StartCoroutine(WaitTillBreak());
+        }
     }
 
     void RotateShield()

@@ -50,7 +50,7 @@ public class RefillController : MonoBehaviour
         {
             curFilledTime = 0;
             keyDown = false;
-            weapon.GetComponent<WeaponController>().fillBullets();
+            weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
             bulletEmpty = false;
         }

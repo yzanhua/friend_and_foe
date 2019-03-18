@@ -41,12 +41,12 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void fillBullets()
+    public void FillBullets()
     {
         remainBullets = MaxBullets;
     }
 
-    public float health()
+    public float Health()
     {
         return (float)remainBullets / MaxBullets;
     }
