@@ -24,35 +24,35 @@ public class MovementGearController : MonoBehaviour
 
     void Update()
     {
-        if (!status.isPlayerOnSeat())
-        {
-            bool isRight = transform.position.x > 0f;
-            if (TutorialManager.tutorialMode)
-            {
-                TutorialManager.TaskComplete(2, isRight);
-            }
-            return;
-        }
-        else if(TutorialManager.tutorialMode)
-        {
-            bool isRight = transform.position.x > 0f;
-            TutorialManager.TaskComplete(0, isRight);
+        //if (!status.isPlayerOnSeat())
+        //{
+        //    bool isRight = transform.position.x > 0f;
+        //    if (TutorialManager.tutorialMode)
+        //    {
+        //        TutorialManager.TaskComplete(2, isRight);
+        //    }
+        //    return;
+        //}
+        //else if(TutorialManager.tutorialMode)
+        //{
+        //    bool isRight = transform.position.x > 0f;
+        //    TutorialManager.TaskComplete(0, isRight);
 
-            if (isRight)
-            {
-                if (TutorialManager.rightTutorialState <= 1)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (TutorialManager.leftTutorialState <= 1)
-                {
-                    return;
-                }
-            }
-        }
+        //    if (isRight)
+        //    {
+        //        if (TutorialManager.rightTutorialState <= 1)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (TutorialManager.leftTutorialState <= 1)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //}
 
         // check status (current + previous)
         bool current_status_onseat = status.isPlayerOnSeat();
