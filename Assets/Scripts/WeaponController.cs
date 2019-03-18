@@ -30,6 +30,7 @@ public class WeaponController : MonoBehaviour
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
             SoundManager.instance.PlaySound("shoot");
             remainBullets--;
+            Debug.Log(remainBullets);
         }
         else
         {

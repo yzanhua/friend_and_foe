@@ -10,8 +10,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameObject left_bar;
     public GameObject right_bar;
-    public GameObject big_sub;
-    public GameObject small_sub;
+    public GameObject right_sub;
+    public GameObject left_sub;
     public Text WinText;
 
 
@@ -34,8 +34,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health_big = big_sub.GetComponent<HealthCounter>();
-        health_small = small_sub.GetComponent<HealthCounter>();
+        health_big = right_sub.GetComponent<HealthCounter>();
+        health_small = left_sub.GetComponent<HealthCounter>();
 
     }
 
@@ -44,8 +44,8 @@ public class GameController : MonoBehaviour
     {
         if (_is_end)
             return;
-        UpdateHealthBar(left_bar, small_sub);
-        UpdateHealthBar(right_bar, big_sub);
+        UpdateHealthBar(left_bar, left_sub);
+        UpdateHealthBar(right_bar, right_sub);
         if (health_big.health <= 0 || health_small.health <= 0)
         {
             GameEnd();
@@ -65,8 +65,8 @@ public class GameController : MonoBehaviour
     public void GameEnd()
     {
         _is_end = true;
-        health_big = big_sub.GetComponent<HealthCounter>();
-        health_small = small_sub.GetComponent<HealthCounter>();
+        health_big = right_sub.GetComponent<HealthCounter>();
+        health_small = left_sub.GetComponent<HealthCounter>();
         SoundManager.instance.PlaySound("win");
 
         if (health_big.health < health_small.health)
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
         //WinText.enabled = true;
         yield return new WaitForSeconds(8f);
         //int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("backup");
     }
 
 }

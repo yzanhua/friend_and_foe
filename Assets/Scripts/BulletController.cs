@@ -50,8 +50,12 @@ public class BulletController : MonoBehaviour
             GetComponent<BoxCollider2D>().sharedMaterial = bounceMaterial;
             hitCount += 1;
         }
-        else
+        else 
         {
+            if (other.CompareTag("Submarine"))
+            {
+                collision.collider.GetComponent<HealthCounter>().AlterHealth(-2);
+            }
             StartCoroutine(Explode());
         }
     }

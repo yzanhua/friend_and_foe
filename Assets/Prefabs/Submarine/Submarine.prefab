@@ -1354,7 +1354,7 @@ PrefabInstance:
     - target: {fileID: 9193086073514308403, guid: 783139c1122ff4894a879fd3160650d5,
         type: 3}
       propertyPath: speed
-      value: 3.55
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783139c1122ff4894a879fd3160650d5, type: 3}
@@ -1471,6 +1471,11 @@ PrefabInstance:
       propertyPath: flashCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8789783455633118960, guid: dddb762f936a9d84ca6f781561a0c388,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 6911253330230115234, guid: dddb762f936a9d84ca6f781561a0c388,
         type: 3}
       propertyPath: speed
@@ -1510,11 +1515,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789783455633118960, guid: dddb762f936a9d84ca6f781561a0c388,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dddb762f936a9d84ca6f781561a0c388, type: 3}

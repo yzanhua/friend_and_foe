@@ -53,9 +53,15 @@ public class ShieldGearController : MonoBehaviour
 
     void GenerateShield()
     {
+        if (TutorialManager.instance.tutorialMode)
+        {
+            if (!TutorialManager.TaskComplete(6, transform.position.x > 0f))
+                return;
+        }
         bool success = _shield.GetComponent<BubbleShieldController>().Defense();
         if (success)
         {
+
             StartCoroutine(WaitTillBreak());
         }
     }

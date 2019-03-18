@@ -31,7 +31,7 @@ public class WeaponGearController : MonoBehaviour
 
         if (!_status.isPlayerOnSeat())
             return;
-        if (TutorialManager.tutorialMode)
+        if (TutorialManager.instance.tutorialMode)
         {
             TutorialManager.TaskComplete(4, transform.position.x > 0f);
         }
