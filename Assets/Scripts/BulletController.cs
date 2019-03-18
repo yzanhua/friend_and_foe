@@ -8,15 +8,18 @@ public class BulletController : MonoBehaviour
     public float Speed = 3.0f;
     public float LongestDistance = 9.0f;
     public Vector3 direction;
+
     private Rigidbody2D rb;
     private Vector3 originPos;
     private int hitCount;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
         originPos = transform.position;
         rb.velocity = direction.normalized * Speed;
         hitCount = 0;
@@ -38,7 +41,7 @@ public class BulletController : MonoBehaviour
 
         if (other.CompareTag("Submarine") || other.CompareTag("Edge") || other.CompareTag("Fish"))
         {
-            Destroy(gameObject);
+            StartCoroutine(Explode());
         }
     }
 
@@ -53,9 +56,16 @@ public class BulletController : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                StartCoroutine(Explode());
             }
         }
     }
 
+    IEnumerator Explode()
+    {
+        GetComponent<BoxCollider2D>().sharedMaterial.bounciness = 0;
+        animator.SetTrigger("Explode");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
 }
