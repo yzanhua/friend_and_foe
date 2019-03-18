@@ -13,6 +13,7 @@ public class MovementGearController : MonoBehaviour
     Rigidbody2D submarine_rb;
 
     bool inPlaySoundRoutine = false;
+    bool previous_status_onseat = false;
 
     void Start()
     {
@@ -53,6 +54,15 @@ public class MovementGearController : MonoBehaviour
             }
         }
 
+        // check status (current + previous)
+        bool current_status_onseat = status.isPlayerOnSeat();
+        if (previous_status_onseat && !current_status_onseat)
+            submarine_rb.velocity = Vector2.zero;
+        previous_status_onseat = current_status_onseat;
+        if (!current_status_onseat)
+            return;
+
+        // move if on seat
         int playerID = status.playerID();
         Vector3 temp = new Vector3(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
@@ -66,7 +76,8 @@ public class MovementGearController : MonoBehaviour
     IEnumerator playMoveSound()
     {
         inPlaySoundRoutine = true;
-        //SoundManager.instance.PlaySound("move");
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("move");
         yield return new WaitForSeconds(7.8f);
         inPlaySoundRoutine = false;
     }

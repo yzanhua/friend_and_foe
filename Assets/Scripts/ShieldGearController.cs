@@ -14,6 +14,7 @@ public class ShieldGearController : MonoBehaviour
     float _initGravityScale;
     float _lastFireDelta;
     SeatOnGear _status;
+    HealthBar _healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,14 @@ public class ShieldGearController : MonoBehaviour
         _shield = transform.parent.Find("BubbleShield").gameObject;
         _submarine = transform.parent.parent.gameObject;
         _status = GetComponent<SeatOnGear>();
+        _healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     void Update()
     {
+        // update cd bar
+        _healthBar.SetSize(_shield.GetComponent<BubbleShieldController>().health());
+
         if (!_status.isPlayerOnSeat())
             return;
         int playerID = _status.playerID();

@@ -11,6 +11,7 @@ TagManager:
   - Shield
   - Edge
   - Fish
+  - LadderForbidHorizontal
   layers:
   - Default
   - TransparentFX
