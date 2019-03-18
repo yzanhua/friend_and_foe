@@ -47,6 +47,18 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
+    bool ShieldInUse()
+    {
+        for (int i = 0; i < _childNum; ++i)
+        {
+            if (!_an[i].GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool GenerateShield()
     {
         if (!_shield_ready)
@@ -60,7 +72,6 @@ public class BubbleShieldController : MonoBehaviour
                 _an[i].SetBool("GenerateShield", true);
             }
             SoundManager.instance.PlaySound("bubble_generate");
-            _current_health = MAX_HEALTH;
             GetComponent<PolygonCollider2D>().enabled = true;
             return true;
         }
@@ -87,10 +98,17 @@ public class BubbleShieldController : MonoBehaviour
     {
         yield return new WaitForSeconds(ShieldCD);
         _shield_ready = true;
+        _current_health = MAX_HEALTH;
     }
 
     public bool Defense()
     {
         return GenerateShield();
     }
+
+    public float health()
+    {
+        return _current_health / MAX_HEALTH;
+    }
+
 }

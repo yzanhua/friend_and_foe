@@ -7,7 +7,8 @@ public class WeaponGearController : MonoBehaviour
 {
     private GameObject _weapon;
     private GameObject _submarine;
-    private SeatOnGear status;
+    private SeatOnGear _status;
+    private HealthBar _healthBar;
 
     public float rotationSpeed;
     public float fireTimeDiff;
@@ -15,19 +16,23 @@ public class WeaponGearController : MonoBehaviour
 
     void Start()
     {
-        status = GetComponent<SeatOnGear>();
+        _status = GetComponent<SeatOnGear>();
         _weapon = transform.parent.Find("Weapon").gameObject;
         _submarine = transform.parent.gameObject;
+        _healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
         if (initialTowardRight)
             _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, 180f);
     }
 
     private void Update()
     {
-        if (!status.isPlayerOnSeat())
+        // update health bar of weapon
+        _healthBar.SetSize(_weapon.GetComponent<WeaponController>().health());
+
+        if (!_status.isPlayerOnSeat())
             return;
 
-        if (InputSystemManager.GetAction2(status.playerID()))
+        if (InputSystemManager.GetAction2(_status.playerID()))
             fireBullet();
         RotateTheWeapon();
     }
@@ -39,8 +44,8 @@ public class WeaponGearController : MonoBehaviour
 
     private void RotateTheWeapon()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
-        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
+        float inputX = InputSystemManager.GetLeftSHorizontal(_status.playerID());
+        float inputY = InputSystemManager.GetLeftSVertical(_status.playerID());
 
         if (inputX != 0f || inputY != 0f)
         {
@@ -53,7 +58,6 @@ public class WeaponGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
-            print(angle.ToString());
             _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
