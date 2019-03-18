@@ -30,9 +30,9 @@ Sprites:
 	- Bullet explosion
 		[purple fire sprite - Google Search](https://www.google.com/search?sa=G&hl=en&q=purple+fire+sprite&tbm=isch&tbs=simg:CAQSlgEJGtioJ2wlLpoaigELEKjU2AQaBAgVCAcMCxCwjKcIGmEKXwgDEif4A78JpAr_1CWT7Ca8UlxSWFMMDwieOKcMnjSnHN48pwCeLKYwpyDcaMJOgApB2Q9ORU7D1M5S920UgTCuWO7AE1dvb85NLPB3DFxs_1kSZZNADn23X3sAfKgCAEDAsQjq7-CBoKCggIARIEd5J8agw&ved=0ahUKEwiez-aK9IrhAhUJ8YMKHaMJDxoQwg4IKSgA&biw=1280&bih=579#imgrc=sui7vgWrt2G6nM:)
 	- Bubble shield
-		https://www.dreamstime.com/stock-illustration-cartoon-soap-bubble-burst-sprites-frames-animation-image61557457
+		[Bubble burst vector | dreamstime](https://www.dreamstime.com/stock-illustration-cartoon-soap-bubble-burst-sprites-frames-animation-image61557457)
 	- Character
-		https://www.pinterest.com/pin/592927107168523283/
+		[Character template by isaiah658](https://www.pinterest.com/pin/592927107168523283/)
 	- Background & Fish
-		https://opengameart.org/content/underwater-diving-pack
+		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
 	
