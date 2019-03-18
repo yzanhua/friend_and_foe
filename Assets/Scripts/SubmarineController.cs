@@ -10,7 +10,7 @@ public class SubmarineController : MonoBehaviour
         GameObject other = collision.collider.gameObject;
         if (other.CompareTag("Bullet"))
         {
-            GetComponent<HealthCounter>().AlterHealth(-5);
+            GetComponent<HealthCounter>().AlterHealth(-2);
             SoundManager.instance.PlaySound("hit");
         }
         if (other.CompareTag("Submarine"))

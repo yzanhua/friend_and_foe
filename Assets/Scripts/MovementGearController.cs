@@ -24,6 +24,7 @@ public class MovementGearController : MonoBehaviour
 
     void Update()
     {
+        /*
         if (!status.isPlayerOnSeat())
         {
             bool isRight = transform.position.x > 0f;
@@ -52,7 +53,7 @@ public class MovementGearController : MonoBehaviour
                     return;
                 }
             }
-        }
+        }*/
 
         // check status (current + previous)
         bool current_status_onseat = status.isPlayerOnSeat();
