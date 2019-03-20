@@ -48,7 +48,7 @@ public class PlayerMovementController : MonoBehaviour
         else if (climbingLadder)
         {
             if (InputSystemManager.GetAction1(playerID))
-            { // jump
+            {   // jump
                 rb2d.gravityScale = initGravityScale * 2f;
                 rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -66,17 +66,19 @@ public class PlayerMovementController : MonoBehaviour
             }
             horizontalInput = 0f;
         }
-        if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput)) // horizontalInput = 0f;
+        if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput)) // horizontalInput = 0f; moves vertically
         {
             Vector3 temp = new Vector3(0f, verticalInput, 0f);
             temp = temp.normalized * Time.deltaTime * 2.5f;
             temp += transform.position;
             transform.position = new Vector3(ladder.transform.position.x, temp.y, temp.z);
         }
-        else // verticalInput = 0f
+        else // verticalInput = 0f, moves horizontally
         {
             Vector2 temp = new Vector2(horizontalInput, 0f);
             temp = temp.normalized * speed;
+            if (InputSystemManager.GetAction1(playerID)) // dash
+                temp = temp * 15f;
             rb2d.AddForce(speed * temp * rb2d.mass);
         }
 
