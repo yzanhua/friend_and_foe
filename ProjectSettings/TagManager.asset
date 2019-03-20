@@ -13,6 +13,7 @@ TagManager:
   - Fish
   - LadderForbidHorizontal
   - Weapon
+  - Ladder_DownStair
   layers:
   - Default
   - TransparentFX
@@ -27,9 +28,9 @@ TagManager:
   - Submarine
   - Edge
   - School
-  - 
-  - 
-  - 
+  - Floor
+  - Player
+  - Jump
   - 
   - 
   - 
