@@ -34,14 +34,14 @@ public class WeaponController : MonoBehaviour
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
-            SoundManager.instance.PlaySound("shoot");
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySound("shoot");
             remainBullets--;
-            Debug.Log(remainBullets);
         }
         else
         {
-            SoundManager.instance.PlaySound("warning");
-            // Debug.Log("Refill the station");
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySound("warning");
             rc = refillStation.GetComponent<RefillController>();
             rc.SetBulletStatus(false);
         }

@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(SeatOnGear))]
 public class MovementGearController : MonoBehaviour
 {
-    [Range(0f, 2f)]
+    [Range(0f, 10f)]
     public float speed;
 
-    GameObject submarine;
+    public GameObject submarine;
     private SeatOnGear status;
     Rigidbody2D submarine_rb;
 
@@ -17,7 +17,6 @@ public class MovementGearController : MonoBehaviour
 
     void Start()
     {
-        submarine = transform.parent.parent.gameObject;
         status = GetComponent<SeatOnGear>();
         submarine_rb = submarine.GetComponent<Rigidbody2D>();
     }
@@ -32,43 +31,29 @@ public class MovementGearController : MonoBehaviour
         previous_status_onseat = current_status_onseat;
         if (!current_status_onseat)
         {
-            TutorialManager.TaskComplete(2, transform.position.x > 0f);
+            if (TutorialManager.instance != null)
+                TutorialManager.TaskComplete(2, transform.position.x > 0f);
             return;
         }
 
-
-        if (TutorialManager.instance.tutorialMode)
+        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
         {
-
             bool isRight = transform.position.x > 0f;
             TutorialManager.TaskComplete(0, isRight);
 
-            if (isRight)
-            {
-                if (TutorialManager.rightTutorialState != 2)
-                {
+            if (isRight && TutorialManager.rightTutorialState != 2)
                     return;
-                }
-            }
-            else
-            {
-                if (TutorialManager.leftTutorialState != 2)
-                {
-                    return;
-                }
-            }
+            else if (TutorialManager.leftTutorialState != 2)
+                return;
         }
-
 
         // move if on seat
         int playerID = status.playerID();
-        Vector3 temp = new Vector3(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
+        Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
-        submarine_rb.velocity = speed * temp;
-        if (temp != Vector3.zero && !inPlaySoundRoutine)
-        {
+        submarine_rb.AddForce(speed * temp * submarine_rb.mass * 2f);
+        if (temp != Vector2.zero && !inPlaySoundRoutine)
             StartCoroutine(playMoveSound());
-        }
     }
 
     IEnumerator playMoveSound()

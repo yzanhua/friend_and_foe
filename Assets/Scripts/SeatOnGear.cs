@@ -47,7 +47,7 @@ public class SeatOnGear : MonoBehaviour
 
         playerGameObject = collision.gameObject;
         initGravityScale = playerGameObject.GetComponent<Rigidbody2D>().gravityScale;
-        playerGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        //playerGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 
         player = playerGameObject.GetComponent<PlayerMovementController>();
         triggerStay = true;

@@ -53,7 +53,7 @@ public class RefillController : MonoBehaviour
             weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
             bulletEmpty = false;
-            if (TutorialManager.instance.tutorialMode)
+            if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
             {
                 if (!TutorialManager.TaskComplete(3, transform.position.x > 0f))
                 {

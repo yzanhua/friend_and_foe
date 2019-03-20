@@ -9,26 +9,28 @@ public class ShieldGearController : MonoBehaviour
     public float PlayerCD = 2f;
     public float rotationSpeed;
 
-    GameObject _shield;
-    GameObject _submarine;
+    public GameObject shield;
+    public GameObject submarine;
+    public HealthBar healthBar;
+
     float _initGravityScale;
     float _lastFireDelta;
     SeatOnGear _status;
-    HealthBar _healthBar;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        _shield = transform.parent.Find("BubbleShield").gameObject;
-        _submarine = transform.parent.parent.gameObject;
+        //_shield = transform.parent.Find("BubbleShield").gameObject;
+        //_submarine = transform.parent.parent.gameObject;
         _status = GetComponent<SeatOnGear>();
-        _healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        //_healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     void Update()
     {
         // update cd bar
-        _healthBar.SetSize(_shield.GetComponent<BubbleShieldController>().Health());
+        healthBar.SetSize(shield.GetComponent<BubbleShieldController>().Health());
 
         if (!_status.isPlayerOnSeat())
             return;
@@ -48,17 +50,17 @@ public class ShieldGearController : MonoBehaviour
     IEnumerator WaitTillBreak()
     {
         yield return new WaitForSeconds(ShieldTime);
-        _shield.GetComponent<BubbleShieldController>().BreakShield();
+        shield.GetComponent<BubbleShieldController>().BreakShield();
     }
 
     void GenerateShield()
     {
-        if (TutorialManager.instance.tutorialMode)
+        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
         {
             if (!TutorialManager.TaskComplete(6, transform.position.x > 0f))
                 return;
         }
-        bool success = _shield.GetComponent<BubbleShieldController>().Defense();
+        bool success = shield.GetComponent<BubbleShieldController>().Defense();
         if (success)
         {
 
@@ -74,7 +76,7 @@ public class ShieldGearController : MonoBehaviour
         if (inputX != 0f || inputY != 0f)
         {
             float angle = Vector2.SignedAngle(Vector2.left, new Vector2(inputX, inputY));
-            float curr_angle = _shield.transform.eulerAngles.z - 180f;
+            float curr_angle = shield.transform.eulerAngles.z - 180f;
             angle = angle - curr_angle;
 
             if (angle < -180f)
@@ -82,7 +84,7 @@ public class ShieldGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
-            _shield.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
+            shield.transform.RotateAround(submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
 }

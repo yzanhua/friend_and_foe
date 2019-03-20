@@ -54,6 +54,9 @@ public class BulletController : MonoBehaviour
         {
             if (other.CompareTag("Submarine"))
             {
+                Debug.Log(other.name);
+                Debug.Log(other.transform.position);
+                Debug.Log(transform.position);
                 collision.collider.GetComponent<HealthCounter>().AlterHealth(-2);
             }
             StartCoroutine(Explode());

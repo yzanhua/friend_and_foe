@@ -7,7 +7,7 @@ public class PlayerMovementController : MonoBehaviour
 {
 
     public int playerID;
-    [Range(0f, 10f)]
+    //[Range(0f, 100f)]
     public float speed = 2f;
 
     public float KnockBackTime = 0.2f;
@@ -15,7 +15,9 @@ public class PlayerMovementController : MonoBehaviour
     
     public bool movementEnable = true;
     //public bool SeatedOnGear = false;
-    
+
+    public Animator an;
+    //public Rigidbody2D submarine_rb;
 
     private int ladderLayer;
 
@@ -24,8 +26,7 @@ public class PlayerMovementController : MonoBehaviour
     private float initGravityScale;
     private Rigidbody2D rb2d;
     private Vector2 target;
-    private Animator an;
-    private Rigidbody2D submarine_rb;
+    
 
     private bool dizzy = false;
     private Vector2 self_speed;
@@ -35,14 +36,11 @@ public class PlayerMovementController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         ladderLayer = LayerMask.NameToLayer("Ladder");
         initGravityScale = rb2d.gravityScale;
-        an = GetComponent<Animator>();
-        submarine_rb = transform.parent.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         an.speed = 0f;
-        rb2d.velocity = submarine_rb.velocity;
 
         if (dizzy)
         {
@@ -61,13 +59,20 @@ public class PlayerMovementController : MonoBehaviour
         if (climbingLadder)
             horizontalInput = 0f;
 
+        if (Mathf.Abs(verticalInput) < Mathf.Abs(horizontalInput))
+            verticalInput = 0f;
+        else
+            horizontalInput = 0f;
+
         if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0f)
             an.speed = 1f;
 
         an.SetFloat("vertical", verticalInput);
         an.SetFloat("horizontal", horizontalInput);
 
-        rb2d.velocity += speed * new Vector2(horizontalInput, verticalInput);
+        Vector2 temp = new Vector2(horizontalInput, verticalInput);
+        temp = temp.normalized * Time.deltaTime * speed;
+        rb2d.AddForce(speed * temp * rb2d.mass);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -76,7 +81,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             rb2d.gravityScale = 0;
             onLadder = true;
-            print("encounter ladder");
         }
         if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {

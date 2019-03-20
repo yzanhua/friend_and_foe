@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(SeatOnGear))]
 public class WeaponGearController : MonoBehaviour
 {
-    private GameObject _weapon;
-    private GameObject _submarine;
-    private SeatOnGear _status;
-    private HealthBar _healthBar;
+    public GameObject weapon;
+    public  GameObject submarine;
+    private  SeatOnGear status;
+    public HealthBar healthBar;
 
     public float rotationSpeed;
     public float fireTimeDiff;
@@ -16,45 +16,41 @@ public class WeaponGearController : MonoBehaviour
 
     void Start()
     {
-        _status = GetComponent<SeatOnGear>();
-        _weapon = transform.parent.Find("Weapon").gameObject;
-        _submarine = transform.parent.gameObject;
-        _healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        status = GetComponent<SeatOnGear>();
         if (initialTowardRight)
-            _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, 180f);
+            weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, 180f);
     }
 
     private void Update()
     {
         // update health bar of weapon
-        _healthBar.SetSize(_weapon.GetComponent<WeaponController>().Health());
+        healthBar.SetSize(weapon.GetComponent<WeaponController>().Health());
 
-        if (!_status.isPlayerOnSeat())
+        if (!status.isPlayerOnSeat())
             return;
-        if (TutorialManager.instance.tutorialMode)
-        {
-            TutorialManager.TaskComplete(4, transform.position.x > 0f);
-        }
 
-        if (InputSystemManager.GetAction2(_status.playerID()))
+        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
+            TutorialManager.TaskComplete(4, transform.position.x > 0f);
+
+        if (InputSystemManager.GetAction2(status.playerID()))
             FireBullet();
         RotateTheWeapon();
     }
 
     private void FireBullet()
     {
-        _weapon.GetComponent<WeaponController>().Fire();
+        weapon.GetComponent<WeaponController>().Fire();
     }
 
     private void RotateTheWeapon()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(_status.playerID());
-        float inputY = InputSystemManager.GetLeftSVertical(_status.playerID());
+        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
+        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
 
         if (inputX != 0f || inputY != 0f)
         {
             float angle = Vector2.SignedAngle(Vector2.right, new Vector2(inputX, inputY));
-            float curr_angle = _weapon.transform.eulerAngles.z - 180f;
+            float curr_angle = weapon.transform.eulerAngles.z - 180f;
             angle = angle - curr_angle;
 
             if (angle < -180f)
@@ -62,7 +58,7 @@ public class WeaponGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
-            _weapon.transform.RotateAround(_submarine.transform.position, Vector3.forward, angle * rotationSpeed);
+            weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
 }

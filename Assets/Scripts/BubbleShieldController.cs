@@ -71,7 +71,8 @@ public class BubbleShieldController : MonoBehaviour
             {
                 _an[i].SetBool("GenerateShield", true);
             }
-            SoundManager.instance.PlaySound("bubble_generate");
+            if(SoundManager.instance != null)
+                SoundManager.instance.PlaySound("bubble_generate");
             GetComponent<PolygonCollider2D>().enabled = true;
             return true;
         }
@@ -87,7 +88,8 @@ public class BubbleShieldController : MonoBehaviour
                 _an[i].SetBool("ShieldBreak", true);
             }
             GetComponent<PolygonCollider2D>().enabled = false;
-            SoundManager.instance.PlaySound("bubble_break");
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySound("bubble_break");
             StartCoroutine(WaitShieldCD());
             return true;
         }
