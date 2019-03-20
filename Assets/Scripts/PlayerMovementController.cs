@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-
     public int playerID;
     //[Range(0f, 100f)]
     public float speed = 2f;
@@ -48,33 +47,21 @@ public class PlayerMovementController : MonoBehaviour
         else if (climbingLadder)
         {
             if (InputSystemManager.GetAction1(playerID))
-            {   // jump
-                rb2d.gravityScale = initGravityScale * 2f;
-                rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-                Vector2 horizontalForce = (new Vector2(horizontalInput, 0f)).normalized;
-                rb2d.AddForce(horizontalForce * 8f + Vector2.up * 10f, ForceMode2D.Impulse);
-                gameObject.layer = 15; // 15=jump
-                onLadder = false;
-                movementEnable = false;
-
-                if (Mathf.Abs(horizontalInput) > 0f)
-                    an.SetFloat("horizontal", horizontalInput);
-                else
-                    an.SetFloat("vertical", -1f);
+            {   
+                Jump(horizontalInput, verticalInput);
                 return;
             }
             horizontalInput = 0f;
         }
-        if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput)) // horizontalInput = 0f; moves vertically
-        {
+        if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
+        {// horizontalInput = 0f; moves vertically
             Vector3 temp = new Vector3(0f, verticalInput, 0f);
             temp = temp.normalized * Time.deltaTime * 2.5f;
             temp += transform.position;
             transform.position = new Vector3(ladder.transform.position.x, temp.y, temp.z);
         }
-        else // verticalInput = 0f, moves horizontally
-        {
+        else
+        {// verticalInput = 0f, moves horizontally
             Vector2 temp = new Vector2(horizontalInput, 0f);
             temp = temp.normalized * speed;
             if (InputSystemManager.GetAction1(playerID)) // dash
@@ -87,8 +74,23 @@ public class PlayerMovementController : MonoBehaviour
             an.speed = 1f;
         an.SetFloat("vertical", verticalInput);
         an.SetFloat("horizontal", horizontalInput);
+    }
 
-       
+    void Jump(float horizontalInput, float verticalInput)
+    {
+        rb2d.gravityScale = initGravityScale * 2f;
+        rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        Vector2 horizontalForce = (new Vector2(horizontalInput, 0f)).normalized;
+        rb2d.AddForce(horizontalForce * 8f + Vector2.up * 10f, ForceMode2D.Impulse);
+        gameObject.layer = 15; // 15=jump
+        onLadder = false;
+        movementEnable = false;
+
+        if (Mathf.Abs(horizontalInput) > 0f)
+            an.SetFloat("horizontal", horizontalInput);
+        else
+            an.SetFloat("vertical", -1f);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -143,8 +145,6 @@ public class PlayerMovementController : MonoBehaviour
             gameObject.layer = 14; // 14 = Player
             movementEnable = true;
         }
-
-
     }
 
     IEnumerator KnockBackEffect()
