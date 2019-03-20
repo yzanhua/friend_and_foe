@@ -36,6 +36,8 @@ public class TutorialManager : MonoBehaviour
 
     static public bool TaskComplete(int task_num, bool isRight)
     {
+        if (!instance.tutorialMode)
+            return false;
         if (rightTutorialState == instance.task_map[task_num] && isRight)
         {
             if (task_num == 1)
