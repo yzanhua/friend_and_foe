@@ -76,6 +76,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             rb2d.gravityScale = 0;
             onLadder = true;
+            print("encounter ladder");
         }
         if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {
