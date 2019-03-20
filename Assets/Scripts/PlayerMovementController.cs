@@ -25,7 +25,6 @@ public class PlayerMovementController : MonoBehaviour
     private float initGravityScale;
     private Rigidbody2D rb2d;
     private Vector2 target;
-    private bool dizzy = false;
 
     void Start()
     {
@@ -44,11 +43,27 @@ public class PlayerMovementController : MonoBehaviour
 
         if (!onLadder)
         {
-            verticalInput = 0f;
-            
+            verticalInput = 0f; 
         }
         else if (climbingLadder)
         {
+            if (InputSystemManager.GetAction1(playerID))
+            { // jump
+                rb2d.gravityScale = initGravityScale * 2f;
+                rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                Vector2 horizontalForce = (new Vector2(horizontalInput, 0f)).normalized;
+                rb2d.AddForce(horizontalForce * 8f + Vector2.up * 10f, ForceMode2D.Impulse);
+                gameObject.layer = 15; // 15=jump
+                onLadder = false;
+                movementEnable = false;
+
+                if (Mathf.Abs(horizontalInput) > 0f)
+                    an.SetFloat("horizontal", horizontalInput);
+                else
+                    an.SetFloat("vertical", -1f);
+                return;
+            }
             horizontalInput = 0f;
         }
         if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput)) // horizontalInput = 0f;
@@ -64,12 +79,6 @@ public class PlayerMovementController : MonoBehaviour
             temp = temp.normalized * speed;
             rb2d.AddForce(speed * temp * rb2d.mass);
         }
-
-        
-
-        
-
-
 
         // set animation
         if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0f)
@@ -92,6 +101,7 @@ public class PlayerMovementController : MonoBehaviour
         if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {
             climbingLadder = true;
+            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -106,25 +116,33 @@ public class PlayerMovementController : MonoBehaviour
         if (collision.gameObject.CompareTag("LadderForbidHorizontal"))
         {
             climbingLadder = false;
+            rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
-        if (!other.CompareTag("Player"))
-            return;
+        if (other.CompareTag("Player"))
+        {
+            Vector3 forceDirection = (other.transform.position - transform.position);
+            if (climbingLadder)
+                forceDirection.x = 0f;
+            else
+                forceDirection.y = 0f;
 
-        Vector3 forceDirection = (other.transform.position - transform.position);
-        if (climbingLadder)
-            forceDirection.x = 0f;
-        else
-            forceDirection.y = 0f;
+            forceDirection = forceDirection.normalized;
+            movementEnable = false;
+            rb2d.AddForce(-forceDirection * knockBackDistance);
+            StartCoroutine(KnockBackEffect());
+        }
+        else if (other.layer == 13 && gameObject.layer == 15)
+        {   // 13 = floor, 15 == Jump
+            gameObject.layer = 14; // 14 = Player
+            movementEnable = true;
+        }
 
-        forceDirection = forceDirection.normalized;
-        movementEnable = false;
-        rb2d.AddForce(-forceDirection* knockBackDistance);
-        StartCoroutine(KnockBackEffect());
+
     }
 
     IEnumerator KnockBackEffect()
