@@ -28,8 +28,8 @@ public class RefillController : MonoBehaviour
 
     void Update()
     {
-        if (!bulletEmpty)
-            return;
+        //if (!bulletEmpty)
+            //return;
 
         if (playerTrigger)
         {

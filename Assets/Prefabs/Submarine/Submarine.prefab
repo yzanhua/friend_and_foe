@@ -1539,7 +1539,7 @@ PrefabInstance:
     - target: {fileID: 9168414269022407262, guid: dddb762f936a9d84ca6f781561a0c388,
         type: 3}
       propertyPath: bulletoffset
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9168414269022407257, guid: dddb762f936a9d84ca6f781561a0c388,
         type: 3}
