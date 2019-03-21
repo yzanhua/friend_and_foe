@@ -55,3 +55,8 @@ crashlytics-build.properties
 .DS_Store?
 .DS_Store
 Assets/InControl/Source/VersionInfo.*
+
+# build file
+p3_milestone_mengqiu_amberlyo_kaiweitu_zanhua/*
+milestone_windowsBuild/*
+
