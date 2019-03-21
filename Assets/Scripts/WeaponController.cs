@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
         submarine = transform.parent.gameObject;
         remainBullets = 0;
         rc = refillStation.GetComponent<RefillController>();
-        rc.SetBulletStatus(false);
+        rc.SetBulletStatus(remainBullets == MaxBullets);
     }
 
     public void Fire()
@@ -38,7 +38,10 @@ public class WeaponController : MonoBehaviour
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("shoot");
             remainBullets--;
+            rc = refillStation.GetComponent<RefillController>();
+            rc.SetBulletStatus(false);
         }
+        // bullets empty
         else
         {
             if (SoundManager.instance != null)

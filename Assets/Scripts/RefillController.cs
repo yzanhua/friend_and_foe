@@ -12,13 +12,13 @@ public class RefillController : MonoBehaviour
     // whether key was pressed in this collision period
     public bool keyDown = false;
     public bool playerTrigger = false;
-    public bool bulletEmpty = true;
+    public bool bulletFull = false;
 
     int playerID;
 
     public void SetBulletStatus(bool status)
     {
-        bulletEmpty = !status;
+        bulletFull = status;
     }
 
     void Start()
@@ -28,8 +28,8 @@ public class RefillController : MonoBehaviour
 
     void Update()
     {
-        //if (!bulletEmpty)
-            //return;
+        if (bulletFull)
+            return;
 
         if (playerTrigger)
         {
@@ -52,7 +52,7 @@ public class RefillController : MonoBehaviour
             keyDown = false;
             weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
-            bulletEmpty = false;
+            bulletFull = true;
             if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
             {
                 if (!TutorialManager.TaskComplete(3, transform.position.x > 0f))
