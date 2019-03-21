@@ -257,7 +257,7 @@ Transform:
   - {fileID: 554620663703320125}
   - {fileID: 5207516721149692962}
   m_Father: {fileID: 6625917982602987341}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135600980498755181
 GameObject:
@@ -1799,7 +1799,7 @@ MonoBehaviour:
   progress_bar: {fileID: 4862634664953182082}
   keyDown: 0
   playerTrigger: 0
-  bulletEmpty: 1
+  bulletFull: 0
 --- !u!1 &3486594542978867799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,53 +3186,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &5602519986763201560
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3221691835138258906}
-  - component: {fileID: 7984560111695927418}
-  m_Layer: 10
-  m_Name: CircleCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3221691835138258906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602519986763201560}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6625917982602987341}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &7984560111695927418
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602519986763201560}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0313528, y: 0.00811816}
-  serializedVersion: 2
-  m_Radius: 2.2008934
 --- !u!1 &5675577625392023480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3823,6 +3776,7 @@ GameObject:
   - component: {fileID: 987313956605680209}
   - component: {fileID: 8582862346553507121}
   - component: {fileID: 8582862346553507086}
+  - component: {fileID: 3347693639692125302}
   m_Layer: 0
   m_Name: Submarine_proxy
   m_TagString: Submarine
@@ -3846,7 +3800,6 @@ Transform:
   - {fileID: 3582081632004624729}
   - {fileID: 15333791889803707}
   - {fileID: 1844199872733155556}
-  - {fileID: 3221691835138258906}
   - {fileID: 135600980428429898}
   m_Father: {fileID: 7792153698877969187}
   m_RootOrder: 1
@@ -3998,6 +3951,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6b9d8c0e99b48e1bbc73c19b143c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3347693639692125302
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582862346553507120}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.17
 --- !u!1 &8654085895997258236
 GameObject:
   m_ObjectHideFlags: 0
@@ -4452,6 +4421,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ef80b30de614d20b15714ee4ed7729, type: 3}
+--- !u!4 &8107564601707161829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8107564601569115939, guid: 62ef80b30de614d20b15714ee4ed7729,
+    type: 3}
+  m_PrefabInstance: {fileID: 138909638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8107564601707161828 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8107564601569115938, guid: 62ef80b30de614d20b15714ee4ed7729,
@@ -4464,12 +4439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3549fa3af7f9c64f9b2098bb6d7d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8107564601707161829 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8107564601569115939, guid: 62ef80b30de614d20b15714ee4ed7729,
-    type: 3}
-  m_PrefabInstance: {fileID: 138909638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3744839272780662947
 PrefabInstance:
   m_ObjectHideFlags: 0

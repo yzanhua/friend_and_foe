@@ -1,0 +1,29 @@
+{
+	"Items" :
+	[
+		{
+			"Type" : "PS4",
+			"Platform" : "MacOS",
+			"RUpButton" : 3,
+			"RDownButton" : 1,
+			"RLeftButton" : 0,
+			"RRightButton" : 2,
+			"RHorizontal" : "3",
+			"RVertical" : "4",
+			"LHorizontal" :  "X",
+			"LVertical" : "Y"
+		},
+		{
+			"Type" : "XBox",
+			"Platform" : "Windows",
+			"RUpButton" : 2,
+			"RDownButton" : 0,
+			"RLeftButton" : 3,
+			"RRightButton" : 1,
+			"RHorizontal" : "4",
+			"RVertical" : "5",
+			"LHorizontal" :  "X",
+			"LVertical" : "Y"
+		}
+	]
+}

@@ -1,0 +1,38 @@
+Music & Sound Effects:
+	- Background music
+		[Underwater battle | OpenGameArt.org](https://opengameart.org/content/underwater-battle)
+	- Bubble shield break
+		[Freesound - “Pop (made by DuffyBro)” by DuffyBro](https://freesound.org/people/DuffyBro/sounds/319107/)
+	- Bubble shield generate 
+		[Freesound - “water_bubbles_02” by audiolarx](https://freesound.org/people/audiolarx/sounds/263946/)
+	- Movement 
+		[Freesound - “Bubbling” by Infernus2](https://freesound.org/people/Infernus2/sounds/423959/)
+	- Shoot 
+		[Freesound - “Scifi Shoot or Bass” by Quonux](https://freesound.org/people/Quonux/sounds/166418/)
+	- Submarine getting hit by bullets
+		[Freesound - “Sci-Fi Force Field Impact 15.wav" by StormwaveAudio](https://freesound.org/people/StormwaveAudio/sounds/330629/)
+	- Win 
+		[Freesound - “Success Resolution Video Game Fanfare Sound Effect.mp3” by FunWithSound](https://freesound.org/people/FunWithSound/sounds/456968/)
+	- Warning 
+		[Freesound - “Warning beep.wav” by Nkone_M](https://freesound.org/people/Nkone_M/sounds/408722/)
+	- Submarine collide with each other
+		[Freesound - “Bomb - Small” by Zangrutz](https://freesound.org/people/Zangrutz/sounds/155235/)
+
+Sprites:
+	- Bullet 
+		[Pixilart - magic bullet by flojelly](https://www.pixilart.com/art/magic-bullet-720a68da1dde545)
+	- Ladder
+		[LADDER | OMORI Wiki | FANDOM powered by Wikia](https://omori.fandom.com/wiki/LADDER)
+	- Gears & Refill station
+		[Game Boy Advance - Castlevania: Harmony of Dissonance - Bolt Magic - The Spriters Resource](https://www.spriters-resource.com/game_boy_advance/cvhod/sheet/52078/)
+	- Weapon
+		[Jetshift Weapon Sprite Compilation by Four-Cubed on DeviantArt](https://www.deviantart.com/four-cubed/art/Jetshift-Weapon-Sprite-Compilation-751002269)
+	- Bullet explosion
+		[purple fire sprite - Google Search](https://www.google.com/search?sa=G&hl=en&q=purple+fire+sprite&tbm=isch&tbs=simg:CAQSlgEJGtioJ2wlLpoaigELEKjU2AQaBAgVCAcMCxCwjKcIGmEKXwgDEif4A78JpAr_1CWT7Ca8UlxSWFMMDwieOKcMnjSnHN48pwCeLKYwpyDcaMJOgApB2Q9ORU7D1M5S920UgTCuWO7AE1dvb85NLPB3DFxs_1kSZZNADn23X3sAfKgCAEDAsQjq7-CBoKCggIARIEd5J8agw&ved=0ahUKEwiez-aK9IrhAhUJ8YMKHaMJDxoQwg4IKSgA&biw=1280&bih=579#imgrc=sui7vgWrt2G6nM:)
+	- Bubble shield
+		[Bubble burst vector | dreamstime](https://www.dreamstime.com/stock-illustration-cartoon-soap-bubble-burst-sprites-frames-animation-image61557457)
+	- Character
+		[Character template by isaiah658](https://www.pinterest.com/pin/592927107168523283/)
+	- Background & Fish
+		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
+	
