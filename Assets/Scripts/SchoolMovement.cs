@@ -50,6 +50,7 @@ public class SchoolMovement : MonoBehaviour
         }
         else if (!inWaitRoutine)
         {
+            //rb.AddForce((PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed);
             rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
         }
 
@@ -62,6 +63,7 @@ public class SchoolMovement : MonoBehaviour
             fishAnimators[i].speed = 1;
             fishAnimators[i].SetBool("moving", true);
         }
+        //rb.AddForce((PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed);
         rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
     }
 
