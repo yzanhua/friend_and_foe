@@ -10,8 +10,10 @@ public class SchoolMovement : MonoBehaviour
     public int DestPos;
     public float Speed = 2.0f;
     public float WaitTime;
+    public GameObject[] fishes;
 
-    Animator[] fishAnimators = new Animator[11];
+    int fishCount = 7;
+    Animator[] fishAnimators;
     Rigidbody2D rb;
     bool traveling;
     bool inTravelRountine;
@@ -20,6 +22,7 @@ public class SchoolMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fishAnimators = new Animator[fishes.Length];
         for (int i = 0; i < transform.childCount; ++i)
         {
             fishAnimators[i] = transform.GetChild(i).GetComponent<Animator>();
@@ -37,8 +40,7 @@ public class SchoolMovement : MonoBehaviour
         // Stop when reach destination
         if (Mathf.Abs(transform.position.x - PresetPosition[DestPos].x) < 0.1f && !inWaitRoutine)
         {
-            print("reach dest");
-            for (int i = 0; i < transform.childCount; ++i)
+            for (int i = 0; i < fishCount; ++i)
             {
                 fishAnimators[i].speed = 0;
                 fishAnimators[i].SetBool("moving", false);
@@ -51,29 +53,39 @@ public class SchoolMovement : MonoBehaviour
             rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
         }
 
-        // Debug.Log(rb.velocity);
-
     }
 
     void travel() {
         traveling = true;
-        for (int i = 0; i < transform.childCount; ++i)
+        for (int i = 0; i < fishCount; ++i)
         {
             fishAnimators[i].speed = 1;
             fishAnimators[i].SetBool("moving", true);
         }
         rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
-        //Debug.Log(rb.velocity);
+    }
+
+    // Adjust fish count and deactive the killed fish
+    public void KillFish()
+    {
+        fishCount--;
+        fishes[fishCount].SetActive(false);
+        if (fishCount == 0)
+            StartCoroutine(wait());
     }
 
 
-
+    // Wait for a period of time and reset school
     IEnumerator wait()
     {
         inWaitRoutine = true;
         yield return new WaitForSeconds(WaitTime);
         StartPos = new System.Random().Next(0, 4);
-        print(StartPos);
+        fishCount = fishes.Length;
+        for (int i = 0; i < fishes.Length; ++i)
+        {
+            fishes[i].SetActive(true);
+        }
         // rotate the school to the correct direction
         if ((StartPos == 1 || StartPos == 3) && transform.localScale.x != -1.0f)
         {
