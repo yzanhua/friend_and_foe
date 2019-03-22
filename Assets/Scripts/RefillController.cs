@@ -18,6 +18,7 @@ public class RefillController : MonoBehaviour
     float curFilledTime = 0;
     SpriteRenderer refillRend;
 
+
     void Start()
     {
         progress_bar.SetActive(false);
