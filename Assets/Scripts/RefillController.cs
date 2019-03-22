@@ -7,6 +7,7 @@ public class RefillController : MonoBehaviour
     public float refillTime = 2.0f;
     public GameObject weapon;
     public GameObject progress_bar;
+    public GameObject refillStation;
 
     float curFilledTime = 0;
     // whether key was pressed in this collision period
@@ -15,21 +16,27 @@ public class RefillController : MonoBehaviour
     public bool bulletFull = false;
 
     int playerID;
+    SpriteRenderer refillRend;
 
     public void SetBulletStatus(bool status)
     {
         bulletFull = status;
+        refillRend = refillStation.GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
         progress_bar.SetActive(false);
+
     }
 
     void Update()
     {
         if (bulletFull)
+        {
+            refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 0.3f);
             return;
+        }
 
         if (playerTrigger)
         {
@@ -43,8 +50,18 @@ public class RefillController : MonoBehaviour
                 }
                 curFilledTime += Time.deltaTime;
                 progress_bar.GetComponent<HealthBar>().SetSize((float)curFilledTime / (float)refillTime);
+                refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 1.0f);
+            }
+            else
+            {
+                refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 0.3f);
             }
         }
+        else
+        {
+            refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 0.3f);
+        }
+
         //finished filling
         if (curFilledTime >= refillTime)
         {

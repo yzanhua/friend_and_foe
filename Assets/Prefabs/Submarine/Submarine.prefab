@@ -808,7 +808,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: f1bd24e1aded8401493a2ed2700cd8d1, type: 3}
-  m_Color: {r: 0.9811321, g: 0.9593533, b: 0.9579922, a: 1}
+  m_Color: {r: 0.26415092, g: 0.26103592, b: 0.26041293, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1772,6 +1772,7 @@ MonoBehaviour:
   refillTime: 2
   weapon: {fileID: 2365867676812280402}
   progress_bar: {fileID: 4862634664953182082}
+  refillStation: {fileID: 1844199872733155552}
   keyDown: 0
   playerTrigger: 0
   bulletFull: 0
@@ -2679,7 +2680,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: f1bd24e1aded8401493a2ed2700cd8d1, type: 3}
-  m_Color: {r: 0.9811321, g: 0.9593533, b: 0.9579922, a: 1}
+  m_Color: {r: 0.990566, g: 0.9869148, b: 0.98589355, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2704,6 +2705,7 @@ MonoBehaviour:
   weapon: {fileID: 2365867676812280402}
   submarine: {fileID: 8582862346553507120}
   weaponWarning: {fileID: 1001823346}
+  weaponGear: {fileID: 907014582662623333}
   healthBar: {fileID: 8107564601707161828}
   rotationSpeed: 3
   fireTimeDiff: 0.5
@@ -3966,6 +3968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   submarine: {fileID: 8582862346553507120}
+  movementGeat: {fileID: 6751103587811784780}
 --- !u!114 &6538417531017491360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4577,6 +4580,7 @@ MonoBehaviour:
   shield: {fileID: 6449448328158498596}
   submarine: {fileID: 8582862346553507120}
   shieldWarning: {fileID: 290093250578974086}
+  shieldGear: {fileID: 5675577625392023480}
   healthBar: {fileID: 4250473695180464267}
 --- !u!60 &2114175876
 PolygonCollider2D:
@@ -4965,11 +4969,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warning
-      objectReference: {fileID: 0}
-    - target: {fileID: 290093251247125323, guid: de90dacd185d04dce9f0eecc95e612c2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 290093251247125324, guid: de90dacd185d04dce9f0eecc95e612c2,
         type: 3}

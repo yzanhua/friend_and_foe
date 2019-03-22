@@ -9,8 +9,11 @@ public class MovementGearController : MonoBehaviour
     public float speed;
 
     public GameObject submarine;
+    public GameObject movementGeat;
+
     private SeatOnGear status;
-    Rigidbody2D submarine_rb;
+    private Rigidbody2D submarine_rb;
+    private SpriteRenderer rend;
 
     bool inPlaySoundRoutine = false;
     bool previous_status_onseat = false;
@@ -19,6 +22,7 @@ public class MovementGearController : MonoBehaviour
     {
         status = GetComponent<SeatOnGear>();
         submarine_rb = submarine.GetComponent<Rigidbody2D>();
+        rend = movementGeat.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -31,18 +35,19 @@ public class MovementGearController : MonoBehaviour
         previous_status_onseat = current_status_onseat;
         if (!current_status_onseat)
         {
+            rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
             if (TutorialManager.instance != null)
                 TutorialManager.TaskComplete(2, transform.position.x > 0f);
             return;
         }
-
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
         if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
         {
             bool isRight = transform.position.x > 0f;
             TutorialManager.TaskComplete(0, isRight);
 
             if (isRight && TutorialManager.rightTutorialState != 2)
-                    return;
+                return;
             else if (TutorialManager.leftTutorialState != 2)
                 return;
         }
