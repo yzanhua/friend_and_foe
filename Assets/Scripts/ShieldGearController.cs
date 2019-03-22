@@ -12,17 +12,20 @@ public class ShieldGearController : MonoBehaviour
     public GameObject shield;
     public GameObject submarine;
     public GameObject shieldWarning;
+    public GameObject shieldGear;
     public HealthBar healthBar;
 
-    float _initGravityScale;
-    float _lastFireDelta;
-    SeatOnGear _status;
+    float initGravityScale;
+    float lastFireDelta;
+    SeatOnGear status;
+    SpriteRenderer gearRend;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _status = GetComponent<SeatOnGear>();
+        gearRend = shieldGear.GetComponent<SpriteRenderer>();
+        status = GetComponent<SeatOnGear>();
     }
 
     void Update()
@@ -39,9 +42,13 @@ public class ShieldGearController : MonoBehaviour
             shieldWarning.SetActive(false);
         }
 
-        if (!_status.isPlayerOnSeat())
+        if (!status.isPlayerOnSeat())
+        {
+            gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 0.3f);
             return;
-        int playerID = _status.playerID();
+        }
+        gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 1.0f);
+        int playerID = status.playerID();
         //if (InputSystemManager.GetAction2(playerID))
         //{
         //    bool success = _shield.GetComponent<BubbleShieldController>().Defense();
@@ -77,8 +84,8 @@ public class ShieldGearController : MonoBehaviour
 
     void RotateShield()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(_status.playerID());
-        float inputY = InputSystemManager.GetLeftSVertical(_status.playerID());
+        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
+        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
 
         if (inputX != 0f || inputY != 0f)
         {

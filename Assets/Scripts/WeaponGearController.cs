@@ -8,16 +8,19 @@ public class WeaponGearController : MonoBehaviour
     public GameObject weapon;
     public GameObject submarine;
     public GameObject weaponWarning;
+    public GameObject weaponGear;
     public HealthBar healthBar;
     public float rotationSpeed;
     public float fireTimeDiff;
     public bool initialTowardRight = false;
 
     private SeatOnGear status;
+    private SpriteRenderer gearRend;
 
     void Start()
     {
         status = GetComponent<SeatOnGear>();
+        gearRend = weaponGear.GetComponent<SpriteRenderer>();
         weaponWarning.SetActive(false);
         if (initialTowardRight)
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, 180f);
@@ -38,8 +41,11 @@ public class WeaponGearController : MonoBehaviour
 
         // update weapon under player control
         if (!status.isPlayerOnSeat())
+        {
+            gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 0.3f);
             return;
-
+        }
+        gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 1.0f);
         if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
             TutorialManager.TaskComplete(4, transform.position.x > 0f);
         if (InputSystemManager.GetAction2(status.playerID()))
