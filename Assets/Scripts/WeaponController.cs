@@ -32,7 +32,6 @@ public class WeaponController : MonoBehaviour
         if (remainBullets > 0)
         {
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
-            print(offset.ToString() + " " +  (transform.position + offset).ToString());
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
             if (SoundManager.instance != null)

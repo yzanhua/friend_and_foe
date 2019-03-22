@@ -6,35 +6,46 @@ using UnityEngine;
 public class WeaponGearController : MonoBehaviour
 {
     public GameObject weapon;
-    public  GameObject submarine;
-    private  SeatOnGear status;
+    public GameObject submarine;
+    public GameObject weaponWarning;
     public HealthBar healthBar;
-
     public float rotationSpeed;
     public float fireTimeDiff;
     public bool initialTowardRight = false;
 
+    private SeatOnGear status;
+
     void Start()
     {
         status = GetComponent<SeatOnGear>();
+        weaponWarning.SetActive(false);
         if (initialTowardRight)
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, 180f);
     }
 
     private void Update()
     {
-        // update health bar of weapon
+        // update health bar and warning sign of weapon
         healthBar.SetSize(weapon.GetComponent<WeaponController>().Health());
+        if (weapon.GetComponent<WeaponController>().Health() <= 0)
+        {
+            weaponWarning.SetActive(true);
+        }
+        else
+        {
+            weaponWarning.SetActive(false);
+        }
 
+        // update weapon under player control
         if (!status.isPlayerOnSeat())
             return;
 
         if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
             TutorialManager.TaskComplete(4, transform.position.x > 0f);
-
         if (InputSystemManager.GetAction2(status.playerID()))
             FireBullet();
         RotateTheWeapon();
+
     }
 
     private void FireBullet()
