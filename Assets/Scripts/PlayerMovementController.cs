@@ -11,7 +11,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public float KnockBackTime = 0.2f;
     public float DizzyTime = 1.5f;
-    
+
     public bool movementEnable = true;
 
     public Animator an;
@@ -42,12 +42,12 @@ public class PlayerMovementController : MonoBehaviour
 
         if (!onLadder)
         {
-            verticalInput = 0f; 
+            verticalInput = 0f;
         }
         else if (climbingLadder)
         {
             if (InputSystemManager.GetAction1(playerID))
-            {   
+            {
                 Jump(horizontalInput, verticalInput);
                 return;
             }
@@ -70,10 +70,18 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         // set animation
-        if (Mathf.Abs(verticalInput)+ Mathf.Abs(horizontalInput) > 0f)
+        if (Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput) > 0f)
+        {
             an.speed = 1f;
-        an.SetFloat("vertical", verticalInput);
-        an.SetFloat("horizontal", horizontalInput);
+            an.SetFloat("vertical", verticalInput);
+            an.SetFloat("horizontal", horizontalInput);
+        }
+        else if (!movementEnable)
+        {
+            an.speed = 1f;
+            an.SetFloat("vertical", 0);
+            an.SetFloat("horizontal", 0);
+        }
     }
 
     void Jump(float horizontalInput, float verticalInput)
