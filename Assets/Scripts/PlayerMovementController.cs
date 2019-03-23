@@ -51,21 +51,23 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (InputSystemManager.GetAction1(playerID))
             {
-                Jump(horizontalInput, verticalInput);
+                Jump(horizontalInput);
                 return;
             }
             horizontalInput = 0f;
         }
         if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
-        {// horizontalInput = 0f; moves vertically
-            Vector3 temp = new Vector3(0f, verticalInput, 0f);
+        {// moves vertically
+            horizontalInput = 0f;
+            Vector3 temp = new Vector3(horizontalInput, verticalInput);
             temp = temp.normalized * Time.deltaTime * 2.5f;
             temp += transform.position;
             transform.position = new Vector3(ladder.transform.position.x, temp.y, temp.z);
         }
         else
-        {// verticalInput = 0f, moves horizontally
-            Vector2 temp = new Vector2(horizontalInput, 0f);
+        {// moves horizontally
+            verticalInput = 0f;
+            Vector2 temp = new Vector2(horizontalInput, verticalInput);
             temp = temp.normalized * speed;
             if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
             {// dash
@@ -92,8 +94,9 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    void Jump(float horizontalInput, float verticalInput)
+    void Jump(float horizontalInput)
     {
+        float verticalInput = -1f;
         rb2d.gravityScale = initGravityScale * 2f;
         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -104,9 +107,10 @@ public class PlayerMovementController : MonoBehaviour
         movementEnable = false;
 
         if (Mathf.Abs(horizontalInput) > 0f)
-            an.SetFloat("horizontal", horizontalInput);
-        else
-            an.SetFloat("vertical", -1f);
+            verticalInput = 0f;
+
+        an.SetFloat("horizontal", horizontalInput);
+        an.SetFloat("vertical", verticalInput);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
