@@ -10,6 +10,9 @@ public class SeatOnGear : MonoBehaviour
     private bool triggerStay = false;
     private float initGravityScale;
     private Vector3 offset;
+    private bool inLiftProgress = false;
+
+    private Vector3 targetPos;
 
     private void Update()
     {
@@ -22,14 +25,23 @@ public class SeatOnGear : MonoBehaviour
             {
                 playerOnSeat = true;
                 player.movementEnable = false;
+                StartCoroutine(LiftUp());
                 //player.SeatedOnGear = true;
             }
         }
         else if (InputSystemManager.GetAction1(player.playerID))
-            exit();
-
+            Exit();
     }
-    private void exit()
+
+    private void FixedUpdate()
+    {
+        if (!inLiftProgress)
+            return;
+        Transform playerTrans = playerGameObject.transform;
+        playerTrans.position = Vector3.Lerp(playerTrans.position, targetPos, 0.2f);
+    }
+
+    private void Exit()
     {
         playerOnSeat = false;
         player.movementEnable = true;
@@ -37,17 +49,36 @@ public class SeatOnGear : MonoBehaviour
         //player.SeatedOnGear = false;
     }
 
+    private IEnumerator LiftUp()
+    {
+        inLiftProgress = true;
+        playerGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+
+        Transform playerTrans = playerGameObject.transform;
+        while (playerOnSeat && Mathf.Abs(transform.position.x - playerTrans.position.x) > 0.01)
+        {
+            targetPos = new Vector3(transform.position.x, playerTrans.position.y, playerTrans.position.z);
+            yield return null;
+        }
+        while (playerOnSeat && Mathf.Abs(transform.position.y - playerTrans.position.y) > 0.01)
+        {
+            targetPos = new Vector3(transform.position.x, transform.position.y, playerTrans.position.z);
+            yield return null;
+        }
+        inLiftProgress = false;
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (triggerStay)
             return;
- 
+
         if (!collision.gameObject.CompareTag("Player"))
             return;
 
         playerGameObject = collision.gameObject;
         initGravityScale = playerGameObject.GetComponent<Rigidbody2D>().gravityScale;
-        //playerGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 
         player = playerGameObject.GetComponent<PlayerMovementController>();
         triggerStay = true;
@@ -60,7 +91,7 @@ public class SeatOnGear : MonoBehaviour
 
         triggerStay = false;
         if (playerOnSeat)
-            exit();
+            Exit();
     }
 
     public bool isPlayerOnSeat()
