@@ -18,6 +18,9 @@ public class PlayerMovementController : MonoBehaviour
 
     public float knockBackDistance = 300f;
 
+    public GameObject trailPrefab;
+    public GameObject playerProxy;
+
     private bool onLadder = false;
     private bool climbingLadder = false;
     private GameObject ladder;
@@ -64,8 +67,13 @@ public class PlayerMovementController : MonoBehaviour
         {// verticalInput = 0f, moves horizontally
             Vector2 temp = new Vector2(horizontalInput, 0f);
             temp = temp.normalized * speed;
-            if (InputSystemManager.GetAction1(playerID)) // dash
+            if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
+            {// dash
                 temp = temp * 15f;
+                GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
+                new_trail.transform.position = playerProxy.transform.position;
+            }
+                
             rb2d.AddForce(speed * temp * rb2d.mass);
         }
 
