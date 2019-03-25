@@ -17,6 +17,10 @@ Music & Sound Effects:
 		[Freesound - “Warning beep.wav” by Nkone_M](https://freesound.org/people/Nkone_M/sounds/408722/)
 	- Submarine collide with each other
 		[Freesound - “Bomb - Small” by Zangrutz](https://freesound.org/people/Zangrutz/sounds/155235/)
+	- Bomb warning bell 
+		[Freesound - “Electronic School Bell” by mpaol2023](https://freesound.org/people/mpaol2023/sounds/370181/)
+	- Bomb explode
+		[Freesound - “explode3.ogg” by rendensh](https://freesound.org/people/rendensh/sounds/105411/)
 
 Sprites:
 	- Bullet 
