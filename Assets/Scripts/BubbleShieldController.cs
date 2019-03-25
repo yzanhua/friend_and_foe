@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BubbleShieldController : MonoBehaviour
 {
-    public float ShieldCD = 5f;
-    public float MAX_HEALTH = 5f;
+    public float ShieldCD = 3f;
+    public float MAX_HEALTH = 7f;
     public Sprite full_shield_sprite;
     public float _current_health;
 
@@ -71,7 +71,7 @@ public class BubbleShieldController : MonoBehaviour
             {
                 _an[i].SetBool("GenerateShield", true);
             }
-            if(SoundManager.instance != null)
+            if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("bubble_generate");
             GetComponent<PolygonCollider2D>().enabled = true;
             return true;
