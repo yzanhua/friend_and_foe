@@ -8,5 +8,7 @@ Change: Add animation (light up sprite and lift up player) to give a clearer vie
 Change: Add damage for collision between two submarines and between submarine and school. Add random bombs in the environment. These give players other ways to attack each other and urge them to move the submarine instead of just attacking and shielding.
 5. Problem: Sprites are too small.
 Enlarge gears and players to make it clearer and more playable on a small screen.
-6. Other iterations: 
+6. Problem: Shield breaks to fast and has a long cool down time, making the game deseperating sometimes.
+Change: Increased max health of shield,prolonged apperance time and reduced cool down time.
+7. Other iterations: 
 Allow refilling before all bullets went out; Add player dashing and jumping; Add momentum to make the submarine movement more realistic; Allow the fishes to be killed; Change implementation of submarine movement to integrate with unity physics system.
