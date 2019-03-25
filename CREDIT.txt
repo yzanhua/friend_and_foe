@@ -49,4 +49,5 @@ Sprites:
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
 		
 Shaders:
-- [Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
+	- Station light up effect
+		[Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
