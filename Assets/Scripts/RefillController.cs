@@ -22,6 +22,7 @@ public class RefillController : MonoBehaviour
     void Start()
     {
         progress_bar.SetActive(false);
+        refillRend = refillStation.GetComponent<SpriteRenderer>();
 
     }
 

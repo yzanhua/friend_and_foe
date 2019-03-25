@@ -46,10 +46,12 @@ public class GameController : MonoBehaviour
             return;
         UpdateHealthBar(left_bar, left_sub);
         UpdateHealthBar(right_bar, right_sub);
+
         if (health_big.health <= 0 || health_small.health <= 0)
         {
             GameEnd();
         }
+
 
     }
 
@@ -67,6 +69,7 @@ public class GameController : MonoBehaviour
         _is_end = true;
         health_big = right_sub.GetComponent<HealthCounter>();
         health_small = left_sub.GetComponent<HealthCounter>();
+        
         SoundManager.instance.PlaySound("win");
 
         if (health_big.health < health_small.health)

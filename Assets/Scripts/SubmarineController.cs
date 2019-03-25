@@ -17,14 +17,14 @@ public class SubmarineController : MonoBehaviour
         GameObject other = collision.collider.gameObject;
         if (other.CompareTag("Bullet"))
         {
-            GetComponent<HealthCounter>().AlterHealth(-5);
+            GetComponent<HealthCounter>().AlterHealth(-2f);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("hit");
         }
         if (other.CompareTag("Submarine"))
         {
             CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
-            GetComponent<HealthCounter>().AlterHealth(-5);
+            GetComponent<HealthCounter>().AlterHealth(-2f);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("collide");
         }
@@ -61,7 +61,7 @@ public class SubmarineController : MonoBehaviour
 
     IEnumerator waitForAlterHealth() {
         inWaitRoutine = true;
-        GetComponent<HealthCounter>().AlterHealth(-1);
+        GetComponent<HealthCounter>().AlterHealth(-0.5f);
         yield return new WaitForSeconds(1);
         inWaitRoutine = false;
     }

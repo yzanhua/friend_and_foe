@@ -54,7 +54,7 @@ public class BulletController : MonoBehaviour
         {
             if (other.CompareTag("Submarine"))
             {
-                collision.collider.GetComponent<HealthCounter>().AlterHealth(-2);
+                collision.collider.GetComponent<HealthCounter>().AlterHealth(-1);
             }
             if (other.CompareTag("Fish"))
             {

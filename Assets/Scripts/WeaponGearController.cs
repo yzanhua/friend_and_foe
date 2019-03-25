@@ -47,8 +47,6 @@ public class WeaponGearController : MonoBehaviour
             return;
         }
         gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 1.0f);
-        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
-            TutorialManager.TaskComplete(4, transform.position.x > 0f);
         if (InputSystemManager.GetAction1(status.playerID()))
             FireBullet();
         RotateTheWeapon();

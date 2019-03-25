@@ -53,6 +53,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject leftStaticGear;
     public GameObject rightStaticGear;
     public GameObject rightGear;
+    public GameObject leftStaticRefill;
+    public GameObject leftRefill;
+    public GameObject rightStaticRefill;
+    public GameObject rightRefill;
 
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
@@ -208,52 +212,6 @@ public class TutorialManager : MonoBehaviour
         return false;
     }
 
-    static public bool TaskComplete(int task_num, bool isRight)
-    {
-        if (!instance.tutorialMode)
-            return false;
-        if (rightTutorialState == instance.task_map[task_num] && isRight)
-        {
-            if (task_num == 1)
-            {
-                instance.rightTaskBox.text = "Leave the blue ";
-            }
-            else if (task_num == 4)
-            {
-                instance.rightMovingBox.SetActive(true);
-                instance.rightTaskBox.text = "Shoot the red target";
-            }
-            else
-            {
-                instance.rightTaskBox.text = "Great!";
-            }
-
-
-            rightTutorialState++;
-            return true;
-        }
-        else if (leftTutorialState == instance.task_map[task_num] && !isRight)
-        {
-            if (task_num == 1)
-            {
-                instance.leftTaskBox.text = "Leave the blue gear";
-            }
-            else if (task_num == 4)
-            {
-                instance.leftMovingBox.SetActive(true);
-                instance.leftTaskBox.text = "Shoot the red target";
-            }
-            else
-            {
-                instance.leftTaskBox.text = "Great!";
-            }
-
-            leftTutorialState++;
-            return true;
-        }
-
-        return false;
-    }
 
 
     void Awake()
@@ -345,7 +303,7 @@ public class TutorialManager : MonoBehaviour
             }
         } else if (state == State.PRE_FINISHED)
         {
-            tutorialMode = false;
+            /*tutorialMode = false;
             GameUI.SetActive(true);
             gameController.SetActive(true);
             edge.SetActive(false);
@@ -354,8 +312,9 @@ public class TutorialManager : MonoBehaviour
             rightTrigger.SetActive(false);
             AlterChangeSceneState(true);
             AlterGearState(true);
-            state = State.FINISHED;
+            state = State.FINISHED;*/
             Global.instance.AllPlayersMovementEnable = true;
+            SceneManager.LoadScene("Game");
         } else if (leftTaskState && rightTaskState)
         {
             if (state == State.CHARACTER)
@@ -480,9 +439,14 @@ public class TutorialManager : MonoBehaviour
     {
         //
         leftGear.gameObject.SetActive(value);
+        leftRefill.gameObject.SetActive(value);
+        rightRefill.gameObject.SetActive(value);
         rightGear.gameObject.SetActive(value);
+
         leftStaticGear.gameObject.SetActive(value);
         rightStaticGear.gameObject.SetActive(value);
+        leftStaticGear.gameObject.SetActive(value);
+        leftStaticGear.gameObject.SetActive(value);
     }
 
     private void AlterChangeSceneState(bool value)
