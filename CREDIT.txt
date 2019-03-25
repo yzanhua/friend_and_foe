@@ -29,6 +29,13 @@ Sprites:
 		[LADDER | OMORI Wiki | FANDOM powered by Wikia](https://omori.fandom.com/wiki/LADDER)
 	- Gears & Refill station
 		[Game Boy Advance - Castlevania: Harmony of Dissonance - Bolt Magic - The Spriters Resource](https://www.spriters-resource.com/game_boy_advance/cvhod/sheet/52078/)
+		[Goolge Image] (https://www.google.com/search?q=cannon+icon&tbm=isch&tbs=rimg:CSJp0c5e3ojYIjhhhJoobAb8jvaJPxjU29jEAsW1ju1Cpucmt823BFEUuFMKGwB8lEbL5id9q3cC6SkomBpo_1v69dSoSCWGEmihsBvyOEfVZ1i2Uinz9KhIJ9ok_1GNTb2MQRDy7zgD8joSkqEgkCxbWO7UKm5xF-2eghoFq0SioSCSa3zbcEURS4EcVvv_1CZAk8_1KhIJUwobAHyURssRQ0IwFocdQsMqEgnmJ32rdwLpKRHaAoV7wUAvuioSCSiYGmj-_1r11ESHKfpp7a4r5&tbo=u&sa=X&ved=2ahUKEwjLufny5pHhAhWhrIMKHXw1DREQ9C96BAgBEBs&biw=1321&bih=709&dpr=2#imgdii=tzTt3Srjz7y-tM:&imgrc=wKpoBq17eBB8xM:)
+		[Google Image] (https://www.google.com/search?tbm=isch&q=steering+wheel+icon&chips=q:steering+wheel+icon,g_1:ship:zrbozMaZxzg%3D&usg=AI4_-kROwr-7beOCb6FE2n0ZpJ8tGyMHUw&sa=X&ved=0ahUKEwjgg5Ox-JHhAhUnxYMKHTfTCn4Q4lYIMygG&biw=1321&bih=660&dpr=2#imgrc=dn_mIs8L3gyAWM:)
+		[Google Image] (https://www.google.com/search?biw=1321&bih=660&tbm=isch&sa=1&ei=19WSXJ_LKZ7GjgSq9oKwCA&q=shield+icon+grey&oq=shield+icon+grey&gs_l=img.3..35i39j0i8i30.11908.12689..12949...0.0..0.65.285.5......1....1..gws-wiz-img.......0.UQy660UYgdI#imgrc=VeomdAWdVJgjmM:)
+		[Google Image] (https://www.google.com/search?tbm=isch&q=plus+icon&chips=q:plus+icon,g_1:grey:meLPmYn3ACY%3D&usg=AI4_-kR5XVTo5UvaJNfj5MKcUIEB2JrC9Q&sa=X&ved=0ahUKEwiMp7L8tpLhAhXL6YMKHSpSDKwQ4lYIMCgE&biw=1149&bih=660&dpr=2#imgrc=RXN6NGbEgA_YjM:
+)
+[Google Image] (https://www.google.com/search?q=bullet+icon&tbm=isch&tbs=rimg:CVbYsGvnyQZdIjhf2GzPKUIGaPSninnxjBz7ZH3atoDtO0Cl4IFogotJl7clc9zikwL35p4ieCdQ5u7VvlX8kBsLSCoSCV_1YbM8pQgZoEdzmfOhWtWKGKhIJ9KeKefGMHPsRINP0EXJnEz0qEglkfdq2gO07QBH5hxv5cGI9zioSCaXggWiCi0mXEVAqi3dHSh9FKhIJtyVz3OKTAvcRCiRHBLkiL50qEgnmniJ4J1Dm7hFoh0tzpI6yVCoSCdW-VfyQGwtIEQ5j9IuhIjqq&tbo=u&sa=X&ved=2ahUKEwj6tYLWuZLhAhUU3YMKHblqAC4Q9C96BAgBEBs&biw=1149&bih=660&dpr=2#imgrc=1b5V_JAbC0gaEM:)
+[Google Image] (https://www.google.com/search?tbm=isch&q=exclamation+mark+icon&chips=q:exclamation+mark+icon,g_1:warning:At4yGGqr2X0%3D&usg=AI4_-kSu48Jt_Dhy5GSXCCn0l8cGgRdYhg&sa=X&ved=0ahUKEwix2dvYvZLhAhUn3IMKHbXCBxgQ4lYIRSgP&biw=1149&bih=660&dpr=2#imgrc=K_7RuE7U6xheiM:)
 	- Weapon
 		[Jetshift Weapon Sprite Compilation by Four-Cubed on DeviantArt](https://www.deviantart.com/four-cubed/art/Jetshift-Weapon-Sprite-Compilation-751002269)
 	- Bullet explosion
@@ -41,4 +48,6 @@ Sprites:
 		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
 	- Bomb
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
-	
+		
+Shaders:
+- [Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
