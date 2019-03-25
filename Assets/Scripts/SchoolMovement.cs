@@ -40,10 +40,15 @@ public class SchoolMovement : MonoBehaviour
         // Stop when reach destination
         if (Mathf.Abs(transform.position.x - PresetPosition[DestPos].x) < 0.1f && !inWaitRoutine)
         {
-            for (int i = 0; i < fishCount; ++i)
+            for (int i = 0; i < fishes.Length; ++i)
             {
-                fishAnimators[i].speed = 0;
-                fishAnimators[i].SetBool("moving", false);
+                // if the fish is still active
+                if (transform.GetChild(i))
+                {
+                    fishAnimators[i].speed = 0;
+                    fishAnimators[i].SetBool("moving", false);
+                }
+               
             }
             rb.velocity = Vector2.zero;
             StartCoroutine(wait());
@@ -58,10 +63,13 @@ public class SchoolMovement : MonoBehaviour
 
     void travel() {
         traveling = true;
-        for (int i = 0; i < fishCount; ++i)
+        for (int i = 0; i < fishes.Length; ++i)
         {
-            fishAnimators[i].speed = 1;
-            fishAnimators[i].SetBool("moving", true);
+            if (transform.GetChild(i))
+            {
+                fishAnimators[i].speed = 1;
+                fishAnimators[i].SetBool("moving", true);
+            }
         }
         //rb.AddForce((PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed);
         rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
@@ -71,7 +79,7 @@ public class SchoolMovement : MonoBehaviour
     public void KillFish()
     {
         fishCount--;
-        fishes[fishCount].SetActive(false);
+        //fishes[fishCount].SetActive(false);
         if (fishCount == 0)
             StartCoroutine(wait());
     }
