@@ -58,7 +58,9 @@ public class BulletController : MonoBehaviour
             }
             if (other.CompareTag("Fish"))
             {
+                // Deactivate the fish
                 other.transform.parent.GetComponent<SchoolMovement>().KillFish();
+                other.SetActive(false);
             }
             StartCoroutine(Explode());
         }
