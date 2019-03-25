@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    public GameObject BombEdge;
     private bool isRotate = true;
 
     private SpriteRenderer sprite;
