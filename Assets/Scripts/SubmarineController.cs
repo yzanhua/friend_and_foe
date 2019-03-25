@@ -5,7 +5,13 @@ using UnityEngine;
 public class SubmarineController : MonoBehaviour
 {
     bool inWaitRoutine = false;
+    bool bombTriggered = false;
+    HealthCounter myHealth;
 
+    private void Start()
+    {
+        myHealth = GetComponent<HealthCounter>();
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
@@ -17,14 +23,9 @@ public class SubmarineController : MonoBehaviour
         }
         if (other.CompareTag("Submarine"))
         {
-            // Debug.Log("Submarine");
             CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("collide");
-            //Debug.Log(collision.relativeVelocity);
-            //other.transform.position -= (transform.position - other.transform.position).normalized;
-            //GetComponent<Rigidbody2D>().AddForce((transform.position - other.transform.position).normalized * 400000, ForceMode2D.Impulse);
-            //GetComponent<HealthCounter>().AlterHealth(-10);
         }
     }
 
@@ -36,6 +37,24 @@ public class SubmarineController : MonoBehaviour
             if (!inWaitRoutine)
                 StartCoroutine(waitForAlterHealth());
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Bomb"))
+            return;
+        bombTriggered = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Bomb"))
+            return;
+        bombTriggered = false;
+    }
+
+    private void Update()
+    {
+        if (bombTriggered)
+            myHealth.AlterHealth(-0.3f);
     }
 
     IEnumerator waitForAlterHealth() {
