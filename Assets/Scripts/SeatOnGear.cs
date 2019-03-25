@@ -23,7 +23,6 @@ public class SeatOnGear : MonoBehaviour
         {
             if (InputSystemManager.GetAction2(player.playerID))
             {
-                playerOnSeat = true;
                 player.movementEnable = false;
                 StartCoroutine(LiftUp());
                 //player.SeatedOnGear = true;
@@ -55,16 +54,17 @@ public class SeatOnGear : MonoBehaviour
         playerGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 
         Transform playerTrans = playerGameObject.transform;
-        while (playerOnSeat && Mathf.Abs(transform.position.x - playerTrans.position.x) > 0.01)
+        while (triggerStay && Mathf.Abs(transform.position.x - playerTrans.position.x) > 0.01)
         {
             targetPos = new Vector3(transform.position.x, playerTrans.position.y, playerTrans.position.z);
             yield return null;
         }
-        while (playerOnSeat && Mathf.Abs(transform.position.y - playerTrans.position.y) > 0.01)
+        while (triggerStay && Mathf.Abs(transform.position.y - playerTrans.position.y) > 0.01)
         {
             targetPos = new Vector3(transform.position.x, transform.position.y, playerTrans.position.z);
             yield return null;
         }
+        playerOnSeat = true;
         inLiftProgress = false;
     }
 
