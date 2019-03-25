@@ -17,14 +17,24 @@ Music & Sound Effects:
 		[Freesound - “Warning beep.wav” by Nkone_M](https://freesound.org/people/Nkone_M/sounds/408722/)
 	- Submarine collide with each other
 		[Freesound - “Bomb - Small” by Zangrutz](https://freesound.org/people/Zangrutz/sounds/155235/)
+	- Bomb warning bell 
+		[Freesound - “Electronic School Bell” by mpaol2023](https://freesound.org/people/mpaol2023/sounds/370181/)
+	- Bomb explode
+		[Freesound - “explode3.ogg” by rendensh](https://freesound.org/people/rendensh/sounds/105411/)
 
 Sprites:
 	- Bullet 
 		[Pixilart - magic bullet by flojelly](https://www.pixilart.com/art/magic-bullet-720a68da1dde545)
 	- Ladder
 		[LADDER | OMORI Wiki | FANDOM powered by Wikia](https://omori.fandom.com/wiki/LADDER)
-	- Gears & Refill station
-		[Game Boy Advance - Castlevania: Harmony of Dissonance - Bolt Magic - The Spriters Resource](https://www.spriters-resource.com/game_boy_advance/cvhod/sheet/52078/)
+	- Stations
+		[Military Cannon Icon | Android Iconset | Icons8](http://www.iconarchive.com/show/android-icons-by-icons8/Military-Cannon-icon.html)
+		[Ship, steering, wheel icon](https://www.iconfinder.com/icons/3067947/ship_steering_wheel_icon)
+		[Brand protection, defence, security, shield icon (https://www.iconfinder.com/icons/298320/brand_protection_defence_security_shield_icon)
+		[Plus Icon In Black On A White Background. Vector Illustration Royalty Free Cliparts, Vectors, And Stock Illustration. Image 79982234.](https://www.123rf.com/photo_79982234_stock-vector-plus-icon-in-black-on-a-white-background-vector-illustration.html)
+		[Bullets icon simple style Royalty Free Vector Image](https://www.vectorstock.com/royalty-free-vector/bullets-icon-simple-style-vector-9997742)
+	- Warning Sign
+		[Computer Icons Warning sign Icon design - exclamation mark png download - 1600*1600 - Free Transparent Computer Icons png Download.](https://www.kisspng.com/png-computer-icons-warning-sign-icon-design-exclamatio-809405/)
 	- Weapon
 		[Jetshift Weapon Sprite Compilation by Four-Cubed on DeviantArt](https://www.deviantart.com/four-cubed/art/Jetshift-Weapon-Sprite-Compilation-751002269)
 	- Bullet explosion
@@ -37,4 +47,7 @@ Sprites:
 		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
 	- Bomb
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
-	
+		
+Shaders:
+	- Station light up effect
+		[Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
