@@ -14,6 +14,7 @@ TagManager:
   - LadderForbidHorizontal
   - Weapon
   - Ladder_DownStair
+  - Bomb
   layers:
   - Default
   - TransparentFX

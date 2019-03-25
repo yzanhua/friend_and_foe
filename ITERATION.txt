@@ -1,4 +1,70 @@
-The biggest problem is balance. To solve the problem, we make the game 2vs2 and make both submarines identical. This change also helps us avoid having single player to have too much things to do.
-To make all three operations (attack, defense, move) interesting, we add a bullet refill mechanism for the weapon, make the shield portable and enable bouncing back the bullets, and add schools in the environment to push the submarines to make players want to move their submarine.
-To solve the feedback that the game cannot be played with Xbox, we changed from InControl to InputSystem. However, due to limited resources, we were only able to rent 1 Xbox but the IA said some problems only occurred when all four devices were plugged in. We tried our best to make sure Xbox is working.
-Other iterations: adjust control keys to make the control more intuitive; add tutorial for guidance; add music and sound effects; add flashing before the controllers change position to help players notice the change; add explosion effect of bullets for juciness; add shake effect when the two submarines collide for juciness; add health bars to the controller to show the state of weapon and shield for clearness
+1.
+Problem: 
+The relation between color of gear and gear function is not intuitive. Not friendly for color blind people.
+
+Change:
+Change the gear sprites to be related to corresponding functionality (weapon for attack, shield for defense, etc.).
+
+2.
+Problem:
+Players are not clear when to refill bullets and cannot clearly tell if they can use the shield or not.
+
+Change:
+Add warning sign when bullets went out/shield is in cool down stage.
+
+3.
+Problem: Players cannot tell if they are locked/unlocked to the station. They cannot clearly tell whether they are in operation mode or not.
+
+Change:
+Add animation (light up sprite and lift up player) to give a clearer view of "locked" and "unlocked" state. These changes make the game more intuitive and clearer for our players.
+
+4.
+Problem:
+Game not fun enough. Players just shoot at each other until someone wins.
+
+Change:
+a) Add damage for collision between two submarines and between submarine and school. (other ways to attack)
+b) Add random bombs in the environment. (urge them to move)
+
+5.
+Problem:
+Sprites are too small.
+
+Changes:
+Enlarge gears and players to make it clearer and more playable on a small screen.
+
+6.
+Problem:
+Shield breaks to fast and has a long cool down time, making the game deseperating sometimes.
+
+Change:
+Increased max health of shield,prolonged apperance time and reduced cool down time.
+
+7.
+Problem:
+The movement of Submarine does not feel like submarine: no momentum.
+
+Change:
+Re-disign the input-control system. Use addForce() instead of changing submarine's velocity directly.
+
+8.
+Problem:
+Player/Character movement is not fluent. 
+
+Changes:
+a) Add "dash" function for player movement.
+b) Add "jump down" function when player is on the ladder.
+c) Re-disign the input-control system. Use addForce() instead of changing player's velocity directly.
+
+9.
+Problem:
+Key usage not intuitive.
+
+Changes:
+Key usage redisgned.
+
+10. Other iterations: 
+a) Allow refilling before all bullets went out; 
+b) Tutorial is updated accordingly;
+c) Add some sound effect.
+

@@ -18,18 +18,16 @@ public class SeatOnGear : MonoBehaviour
     {
         if (!triggerStay)
             return;
-
-        if (!playerOnSeat)
+        if (InputSystemManager.GetAction2(player.playerID))
         {
-            if (InputSystemManager.GetAction2(player.playerID))
+            if (!playerOnSeat)
             {
                 player.movementEnable = false;
                 StartCoroutine(LiftUp());
-                //player.SeatedOnGear = true;
             }
+            else
+                Exit();
         }
-        else if (InputSystemManager.GetAction1(player.playerID))
-            Exit();
     }
 
     private void FixedUpdate()

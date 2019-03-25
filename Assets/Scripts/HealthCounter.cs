@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HealthCounter : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public float maxHealth = 100f;
 
-    public int health = 100;
+    public float health = 100f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,7 @@ public class HealthCounter : MonoBehaviour
     }
 
 
-    public void AlterHealth(int alt)
+    public void AlterHealth(float alt)
     {
         health += alt;
     }

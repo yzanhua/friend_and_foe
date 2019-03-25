@@ -1,12 +1,23 @@
 EECS494 p3.
 
 This game need 4 players with (4) controllers.
-We tested our game (only) using 3 PS4 controllers and 1 Xbox controller.
-Contact us if any issue related with input occurs.
 
-Left Stick: Character movement / Adjust direction the corresponding object controlled by gear (when sitting on gear)
-Red Gear: Weapon Gear (Stick to adjust direction, Press B (xbox) or O (ps4) to attack)
-Blue Gear: Submarine Movement Gear (Stick to move)
-Green Gear: Shield Control Gear (Stick to move shield, Press B (in xbox) or O (in ps4) to open a bubble shield)
+1. Use Left Stick to control character movement.
 
+2. When two players collide with each other, both of them will get dizzy and will be unable to move for about 3 seconds. However, players who have already sat down on a gear won’t get dizzy. According to the feedback of p3_milstone given by eecs494staffs (thank you!), we plan to add animation when players are under "dizzy" status.
 
+3. When collided with a station, press B (Xbox) or press O (PS4) to sit down on it.
+
+4. When sat down on a gear, press B (Xbox) or press O (PS4) to leave the seat.
+
+5. When sat down on the "attack station", use left stick to tune the direction of weapon and press A (Xbox) or press X (PS4) to attack. In tutorial mode, these two functionalities are sometimes intentionally forbidden.
+
+6. When sat down on a "shield station", the shield will be turned on automatically (if CD is OK). Use left stick to tune the direction of shield. In tutorial mode, these two functionalities are sometimes intentionally forbidden.
+
+7. When sat down on a “wheel station", use left stick to control submarine movement. In tutorial mode, this functionality is sometimes intentionally forbidden.
+
+8. Players can use Left Stick + A (on Xbox) or Left Stick + X (on PS4) to dash.
+
+9. On ladder, players can press A (Xbox) or press X (PS4) to Jump Down. When pressing X/A, player can also use left stick to change the direction of jumping.
+
+10. All operations can be achieved using left stick + A + B (on Xbox) or left stick + O + X (on PS4).
