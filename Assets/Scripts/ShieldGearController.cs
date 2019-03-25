@@ -69,11 +69,11 @@ public class ShieldGearController : MonoBehaviour
 
     void GenerateShield()
     {
-        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
+        if (TutorialManager.instance != null)
         {
-            if (!TutorialManager.TaskComplete(6, transform.position.x > 0f))
-                return;
+            TutorialManager.CompleteTask(TutorialManager.TaskType.SHIELD, transform.position.x > 0f);
         }
+
         bool success = shield.GetComponent<BubbleShieldController>().Defense();
         if (success)
         {

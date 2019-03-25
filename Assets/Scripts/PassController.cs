@@ -15,7 +15,7 @@ public class PassController : MonoBehaviour
         bool isRight = transform.position.x > 0f;
         if (collision.collider.tag.Contains("Submarine") && task_num == 1)
         {
-            if (TutorialManager.TaskComplete(task_num, isRight))
+            if (TutorialManager.instance != null && TutorialManager.CompleteTask(TutorialManager.TaskType.MOVE, isRight))
             {
                 GetComponent<SpriteRenderer>().color = new Color(37f / 255f, 250f / 255f, 18f / 255f, 1f);
             }
@@ -23,7 +23,7 @@ public class PassController : MonoBehaviour
         } else if (collision.collider.tag.Contains("Bullet") && task_num == 5)
         {
 
-            if (TutorialManager.TaskComplete(task_num, isRight))
+            if (TutorialManager.instance != null && TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, isRight))
             {
                 GetComponent<SpriteRenderer>().color = new Color(37f / 255f, 250f / 255f, 18f / 255f, 1f);
                 moving = false;

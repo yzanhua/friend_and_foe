@@ -30,6 +30,7 @@ public class WeaponGearController : MonoBehaviour
     {
         // update health bar and warning sign of weapon
         healthBar.SetSize(weapon.GetComponent<WeaponController>().Health());
+
         if (weapon.GetComponent<WeaponController>().Health() <= 0)
         {
             weaponWarning.SetActive(true);

@@ -31,6 +31,10 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(CD());
         if (remainBullets > 0)
         {
+            if(TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
+            }
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;

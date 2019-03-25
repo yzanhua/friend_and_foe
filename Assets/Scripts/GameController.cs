@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
         //WinText.enabled = true;
         yield return new WaitForSeconds(2f);
         //int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Tutorial");
     }
 
 }

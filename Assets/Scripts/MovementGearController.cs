@@ -36,20 +36,14 @@ public class MovementGearController : MonoBehaviour
         if (!current_status_onseat)
         {
             rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
-            if (TutorialManager.instance != null)
-                TutorialManager.TaskComplete(2, transform.position.x > 0f);
             return;
         }
         rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
-        if (TutorialManager.instance != null && TutorialManager.instance.tutorialMode)
+
+        if (TutorialManager.instance != null)
         {
             bool isRight = transform.position.x > 0f;
-            TutorialManager.TaskComplete(0, isRight);
-
-            if (isRight && TutorialManager.rightTutorialState != 2)
-                return;
-            else if (TutorialManager.leftTutorialState != 2)
-                return;
+            TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT, isRight);
         }
 
         // move if on seat
