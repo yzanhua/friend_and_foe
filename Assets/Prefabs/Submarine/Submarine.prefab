@@ -114,6 +114,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &2110404536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2110404537}
+  - component: {fileID: 2110404538}
+  m_Layer: 0
+  m_Name: BombInstantiate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2110404537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110404536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.77, y: 1.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6625917982602987341}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110404538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110404536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6241eaa96829bf44ab4e311cc949234d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCreateInterval: 30
+  MaxCreateInterval: 45
+  Bomb_prefab: {fileID: 8832257899679764802, guid: 3b8da1ba1f4e40d499e0dae559af6199,
+    type: 3}
+  submarine_id: 1
 --- !u!1 &65453510486131470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4696414687286297757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 7.18, z: 99.83728}
+  m_LocalPosition: {x: -25.2, y: 0.18, z: 99.83728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135600981909552012}
@@ -4202,7 +4250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8582862346553507120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.49, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135600980385540603}
@@ -4211,6 +4259,7 @@ Transform:
   - {fileID: 15333791889803707}
   - {fileID: 1844199872733155556}
   - {fileID: 135600980428429898}
+  - {fileID: 2110404537}
   m_Father: {fileID: 7792153698877969187}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -33,12 +33,12 @@ public class BombController : MonoBehaviour
 
     IEnumerator Flash()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.6f);
         for (int i = 0; i < 3; i++)
         {// flash
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.65f);
             sprite.color = new Color(1f, 1f, 1f, 0f);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
             sprite.color = new Color(1f, 1f, 1f, 1f);
         }
         yield return new WaitForSeconds(1.5f); // start "begin Explode"

@@ -52,3 +52,5 @@ MonoBehaviour:
   win_clip: {fileID: 8300000, guid: 167ce7e5684e54a52a739b3d7bc9cc48, type: 3}
   warning_clip: {fileID: 8300000, guid: 1504a3657898d40ae9409a590ef5b654, type: 3}
   collide_clip: {fileID: 8300000, guid: fc91520c68d7f4b1eb1c272fbc1423fe, type: 3}
+  bell_clip: {fileID: 8300000, guid: 1879c28f4f0da41419c4703017162312, type: 3}
+  bomb_explode_clip: {fileID: 8300000, guid: c2108a53f83ea44648f90b2ab7b00f0c, type: 3}
