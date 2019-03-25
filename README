@@ -4,7 +4,7 @@ This game need 4 players with (4) controllers.
 
 1. Use Left Stick to control character movement.
 
-2. When two players collide with each other, both of them will get dizzy and will be unable to move for about 3 seconds. However, players who have already sat down on a gear won’t get dizzy. According to the feedback of p3_milstone given by eecs494staffs (thank you!), we plan to add animation when players are under "dizzy" status.
+2. When two players collide with each other, both of them will get dizzy and will be unable to move for about 3 seconds. However, players who have already sat down on a gear won’t get dizzy. According to the feedback of p3_milestone given by eecs494staffs (thank you!), we plan to add animation when players are under "dizzy" status.
 
 3. When collided with a station, press B (Xbox) or press O (PS4) to sit down on it.
 
