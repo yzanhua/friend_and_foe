@@ -56,7 +56,7 @@ public class SubmarineController : MonoBehaviour
     private void Update()
     {
         if (bombTriggered)
-            myHealth.AlterHealth(-0.3f);
+            myHealth.AlterHealth(-myHealth.maxHealth * 1.5f / 1000f);
     }
 
     IEnumerator waitForAlterHealth() {
