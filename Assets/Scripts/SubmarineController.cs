@@ -17,8 +17,8 @@ public class SubmarineController : MonoBehaviour
         }
         if (other.CompareTag("Submarine"))
         {
-            // Debug.Log("Submarine");
             CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
+            GetComponent<HealthCounter>().AlterHealth(-5);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("collide");
             //Debug.Log(collision.relativeVelocity);
@@ -31,11 +31,12 @@ public class SubmarineController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
-        if (other.CompareTag("Submarine") || other.CompareTag("Fish") || other.CompareTag("Weapon"))
+        if (other.CompareTag("Fish"))
         {
             if (!inWaitRoutine)
                 StartCoroutine(waitForAlterHealth());
         }
+       
     }
 
     IEnumerator waitForAlterHealth() {
