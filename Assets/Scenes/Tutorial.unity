@@ -1357,6 +1357,31 @@ PrefabInstance:
       propertyPath: rightStaticGear
       value: 
       objectReference: {fileID: 583132351}
+    - target: {fileID: 4137053690565161523, guid: 692365557aa3b4c4599af5b8008f9847,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137053691925186375, guid: 692365557aa3b4c4599af5b8008f9847,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137053692035681301, guid: 692365557aa3b4c4599af5b8008f9847,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137053690930575786, guid: 692365557aa3b4c4599af5b8008f9847,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943949960766022852, guid: 692365557aa3b4c4599af5b8008f9847,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692365557aa3b4c4599af5b8008f9847, type: 3}
 --- !u!1 &803322977 stripped
