@@ -35,4 +35,6 @@ Sprites:
 		[Character template by isaiah658](https://www.pinterest.com/pin/592927107168523283/)
 	- Background & Fish
 		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
+	- Bomb
+		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
 	
