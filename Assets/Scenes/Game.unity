@@ -226,12 +226,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 17.780182, y: 1.1570368}
   m_EdgeRadius: 0
---- !u!1 &676363715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4669322525553404254, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1129823249}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &692701935
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,15 +718,6 @@ PrefabInstance:
       propertyPath: bulletoffset
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 9193086072840149056, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: playerID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: speed
-      value: 1.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3486594542978867807, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: playerID
@@ -743,9 +728,18 @@ PrefabInstance:
       propertyPath: initialTowardRight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9193086072840149056, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: playerID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2110404538, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
       propertyPath: submarine_id
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
+      propertyPath: speed
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
@@ -1206,7 +1200,7 @@ PrefabInstance:
         type: 3}
       propertyPath: submarine_proxy
       value: 
-      objectReference: {fileID: 676363715}
+      objectReference: {fileID: 1713441611}
     - target: {fileID: 5180230080270865029, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: submarine_proxy
@@ -1216,6 +1210,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230079963777032, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_Name
+      value: BombCreateController_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230080270865027, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_Name
+      value: BombCreateController_Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a96e0ea570cb41199142268c64cbf15, type: 3}
