@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class BombCreate : MonoBehaviour
 {
-    public float MinCreateInterval = 30f;
-    public float MaxCreateInterval = 45f;
+    public float MinCreateInterval = 15f;
+    public float MaxCreateInterval = 25f;
     public GameObject Bomb_prefab;
+    public GameObject targetSign_prefab;
     public GameObject submarine_proxy;
-    public int submarine_id = 1;
+    // public int submarine_id = 1;
 
     private void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         //init_distance = Vector3.Distance(transform.position, transform.parent.position);
         StartCoroutine(CreateBomb());
     }
 
     private IEnumerator CreateBomb()
     {
-        yield return new WaitForSeconds(MinCreateInterval * (2 - submarine_id) * 0.5f);
+        yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
+
         while (true)
         {
-            GameObject new_bomb =  Instantiate(Bomb_prefab);
-            new_bomb.transform.position = submarine_proxy.transform.position + new Vector3(2.77f, 1.15f);
-            new_bomb.transform.parent = null;
-            new_bomb.transform.RotateAround(submarine_proxy.transform.position, Vector3.forward, Random.Range(0f, 365f));
-            while (new_bomb != null)
-            {
-                yield return new WaitForSeconds(2f);
-            }
+            Transform target_transform = transform;
+            target_transform.position = submarine_proxy.transform.position + new Vector3(2.44f, 1.15f);
+            target_transform.parent = null;
+            target_transform.RotateAround(submarine_proxy.transform.position, Vector3.forward, Random.Range(0f, 365f));
+            GameObject targetSign = Instantiate(targetSign_prefab, target_transform);
+            yield return new WaitForSeconds(3f);
+            Destroy(targetSign, 0.2f);
+            GameObject new_bomb =  Instantiate(Bomb_prefab, target_transform);
             yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
         }
     }
