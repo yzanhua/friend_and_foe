@@ -8,6 +8,7 @@ public class BubbleShieldController : MonoBehaviour
     public float MAX_HEALTH = 7f;
     public Sprite full_shield_sprite;
     public float _current_health;
+    public int particleLayer;
     public GameObject bubbleShieldParticlePrefab;
 
     private SpriteRenderer[] _sr;
@@ -119,14 +120,14 @@ public class BubbleShieldController : MonoBehaviour
             ParticleSystemRenderer psr = child.gameObject.GetComponent<ParticleSystemRenderer>();
             if (psr != null)
             {
-                psr.sortingOrder = 10;
+                psr.sortingOrder = particleLayer;
             }
         }
 
         ParticleSystemRenderer parent_psr = effectobject.GetComponent<ParticleSystemRenderer>();
         if (parent_psr != null)
         {
-            parent_psr.sortingOrder = 10;
+            parent_psr.sortingOrder = particleLayer;
         }
     }
 
