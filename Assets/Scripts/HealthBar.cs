@@ -56,7 +56,6 @@ public class HealthBar : MonoBehaviour {
                 sr.color = originColor;
                 isRed = true;
             }
-            Debug.Log(duration);
             duration -= 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
