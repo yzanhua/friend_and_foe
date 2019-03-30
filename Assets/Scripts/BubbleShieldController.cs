@@ -8,19 +8,22 @@ public class BubbleShieldController : MonoBehaviour
     public float MAX_HEALTH = 7f;
     public Sprite full_shield_sprite;
     public float _current_health;
+    public GameObject bubbleShieldParticlePrefab;
 
     private SpriteRenderer[] _sr;
+    private GameObject[] _bubbleParticles;
     private Animator[] _an;
-    private Time startTime;
+    private Time _startTime;
     private bool _shield_ready = true;
     private int _childNum;
 
-    void Start()
+    private void Start()
     {
         _current_health = MAX_HEALTH;
         _childNum = transform.childCount;
         _sr = new SpriteRenderer[_childNum];
         _an = new Animator[_childNum];
+        _bubbleParticles = new GameObject[_childNum];
         for (int i = 0; i < _childNum; ++i)
         {
             _sr[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
@@ -30,7 +33,7 @@ public class BubbleShieldController : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
-    void Update()
+    private void Update()
     {
         if (_current_health <= 0.0f)
         {
@@ -38,7 +41,7 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Bullet"))
@@ -47,7 +50,7 @@ public class BubbleShieldController : MonoBehaviour
         }
     }
 
-    bool ShieldInUse()
+    private bool ShieldInUse()
     {
         for (int i = 0; i < _childNum; ++i)
         {
@@ -59,7 +62,7 @@ public class BubbleShieldController : MonoBehaviour
         return false;
     }
 
-    bool GenerateShield()
+    private bool GenerateShield()
     {
         if (!_shield_ready)
             return false;
@@ -74,9 +77,57 @@ public class BubbleShieldController : MonoBehaviour
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("bubble_generate");
             GetComponent<PolygonCollider2D>().enabled = true;
+            StartCoroutine(StartParticle());
             return true;
         }
+
         return false;
+    }
+
+    private IEnumerator StartParticle()
+    {
+        while (true)
+        {
+            if (_an[_childNum - 1].GetCurrentAnimatorStateInfo(0).IsName("BubbleShield"))
+            {
+                for (int i = 0; i < _childNum; ++i)
+                {
+                    GameObject bubble = Instantiate(bubbleShieldParticlePrefab, transform.GetChild(i).transform);
+                    bubble.transform.localScale = new Vector3(26f, 1f, 26f);
+                    bubble.transform.localPosition = new Vector3(0.2f, 2.8f, bubble.transform.position.z);
+                    ChangeSortingLayer(bubble);
+                    _bubbleParticles[i] = bubble;
+                }
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    private IEnumerator WaitShieldCD()
+    {
+        yield return new WaitForSeconds(ShieldCD);
+        _shield_ready = true;
+        _current_health = MAX_HEALTH;
+    }
+
+    private void ChangeSortingLayer(GameObject effectobject)
+    {
+
+        foreach (Transform child in effectobject.transform)
+        {
+            ParticleSystemRenderer psr = child.gameObject.GetComponent<ParticleSystemRenderer>();
+            if (psr != null)
+            {
+                psr.sortingOrder = 10;
+            }
+        }
+
+        ParticleSystemRenderer parent_psr = effectobject.GetComponent<ParticleSystemRenderer>();
+        if (parent_psr != null)
+        {
+            parent_psr.sortingOrder = 10;
+        }
     }
 
     public bool BreakShield()
@@ -86,6 +137,7 @@ public class BubbleShieldController : MonoBehaviour
             for (int i = 0; i < _childNum; ++i)
             {
                 _an[i].SetBool("ShieldBreak", true);
+                Destroy(_bubbleParticles[i]);
             }
             GetComponent<PolygonCollider2D>().enabled = false;
             if (SoundManager.instance != null)
@@ -94,13 +146,6 @@ public class BubbleShieldController : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    IEnumerator WaitShieldCD()
-    {
-        yield return new WaitForSeconds(ShieldCD);
-        _shield_ready = true;
-        _current_health = MAX_HEALTH;
     }
 
     public bool Defense()

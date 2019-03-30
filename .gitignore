@@ -57,6 +57,5 @@ crashlytics-build.properties
 Assets/InControl/Source/VersionInfo.*
 
 # build file
-p3_milestone_mengqiu_amberlyo_kaiweitu_zanhua/*
-milestone_windowsBuild/*
+Builds/*
 
