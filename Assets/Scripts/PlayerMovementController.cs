@@ -16,10 +16,11 @@ public class PlayerMovementController : MonoBehaviour
 
     public Animator an;
 
-    public float knockBackDistance = 300f;
+    public float knockBackDistance = 1f;
 
     public GameObject trailPrefab;
     public GameObject playerProxy;
+    public GameObject stunnedCirclingStarsPrefab;
 
     private bool onLadder = false;
     private bool climbingLadder = false;
@@ -159,8 +160,8 @@ public class PlayerMovementController : MonoBehaviour
 
             forceDirection = forceDirection.normalized;
             movementEnable = false;
-            rb2d.AddForce(-forceDirection * knockBackDistance);
-            StartCoroutine(KnockBackEffect());
+            rb2d.AddForce(-forceDirection * knockBackDistance * collision.relativeVelocity.magnitude);
+            StartCoroutine(KnockBackEffect(collision.relativeVelocity / 6f));
         }
         else if (other.layer == 13 && gameObject.layer == 15)
         {   // 13 = floor, 15 == Jump
@@ -169,11 +170,21 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    IEnumerator KnockBackEffect()
+    IEnumerator KnockBackEffect(Vector2 relativeVelocity)
     {
         yield return new WaitForSeconds(KnockBackTime);
         rb2d.velocity = Vector2.zero;
-        yield return new WaitForSeconds(DizzyTime);
+        GameObject stunnedStar = Instantiate(stunnedCirclingStarsPrefab, playerProxy.transform.position + new Vector3(0, 0.4f)
+            , Quaternion.FromToRotation(new Vector3(0f, 1f, 0f), new Vector3(0f, 0.2f, -1f)));
+        stunnedStar.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        //stunnedStar.transform.parent = playerProxy.transform;
+
+        for (int i = 0; i < DizzyTime * relativeVelocity.magnitude / Time.deltaTime; i++)
+        {
+            stunnedStar.transform.position = playerProxy.transform.position + new Vector3(0, 0.4f);
+            yield return null;
+        }
         movementEnable = true;
+        Destroy(stunnedStar);
     }
 }

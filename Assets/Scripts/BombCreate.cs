@@ -20,7 +20,7 @@ public class BombCreate : MonoBehaviour
 
     private IEnumerator CreateBomb()
     {
-        //yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
+        yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
 
         while (true)
         {

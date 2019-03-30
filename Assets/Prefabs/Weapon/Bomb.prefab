@@ -48,6 +48,11 @@ MonoBehaviour:
   projectileParticlePrefab: {fileID: 183996, guid: dde93ea5512f0e242a654a566c8605e5,
     type: 3}
   muzzleParticlePrefab: {fileID: 178120, guid: 134acf54a988c0641bd67617d5ab5a9e, type: 3}
+  hitParticlePrefab: {fileID: 149586, guid: 6ab7abbfd8e92a94eb0b6af1648572ac, type: 3}
+  firstStageDamage: 0.2
+  secondStageDamage: 0.15
+  firstStageForce: 3
+  secondStageForce: 13
 --- !u!58 &5632969621678983903
 CircleCollider2D:
   m_ObjectHideFlags: 0

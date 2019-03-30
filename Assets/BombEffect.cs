@@ -10,11 +10,13 @@ public class BombEffect : MonoBehaviour
 
     public GameObject muzzleParticlePrefab;
 
-    [Range(0f, 1f)]
-    public float firstStageDamage = 0.05f;
+    public GameObject hitParticlePrefab;
 
     [Range(0f, 1f)]
-    public float secondStageDamage = 0.05f;
+    public float firstStageDamage = 0.20f;
+
+    [Range(0f, 1f)]
+    public float secondStageDamage = 0.15f;
 
     [Range(0f, 20f)]
     public float firstStageForce = 3f;
@@ -72,15 +74,15 @@ public class BombEffect : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(_projectileParticle);
         _is_explosion = true;
-        _cc.radius = 5.6f;
+        _cc.radius = 3.8f;
         _trigger_explosion = true;
         GameObject impactParticle = Instantiate(impactParticlePrefab, transform.position, Quaternion.FromToRotation(new Vector3(0, 1f, 0), new Vector3(0, 0, 1f))) as GameObject;
         impactParticle.transform.localScale = new Vector3(1f, 1f, 1f);
 
-        yield return new WaitForSeconds(3f);
-        Destroy(impactParticle); // Lifetime of muzzle effect.
+        yield return new WaitForSeconds(1.5f);
         _cc.enabled = false;
-        _is_explosion = true;
+        Destroy(impactParticle); // Lifetime of muzzle effect.
+        _is_explosion = false;
         Destroy(this.gameObject);
     }
 
@@ -91,12 +93,15 @@ public class BombEffect : MonoBehaviour
             Rigidbody2D rd2D = collider.GetComponent<Rigidbody2D>();
             HealthCounter hc = collider.GetComponent<HealthCounter>();
 
-            Vector3 direction = collider.transform.position - transform.position;
+            Vector3 direction = (collider.transform.position - transform.position).normalized;
             float force_magnitude = _is_explosion ? secondStageForce : firstStageForce;
-            float damage = _is_explosion ? hc.health * secondStageDamage : hc.health * firstStageDamage;
-            rd2D.AddForce(rd2D.mass * direction.normalized * force_magnitude, ForceMode2D.Impulse);
+            float damage = _is_explosion ? hc.health * 0.15f : hc.health * 0.2f;
+            rd2D.AddForce(rd2D.mass * direction * force_magnitude, ForceMode2D.Impulse);
             hc.AlterHealth(-1 * damage);
+            GameObject hitSpark = Instantiate(hitParticlePrefab, collider.transform);
+            hitSpark.transform.position -= direction * 2.27f;
             _trigger_explosion = false;
+            Destroy(hitSpark, 1.5f);
         }
     }
 

@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6241eaa96829bf44ab4e311cc949234d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinCreateInterval: 30
-  MaxCreateInterval: 45
+  MinCreateInterval: 15
+  MaxCreateInterval: 25
   Bomb_prefab: {fileID: 1387039619815171320, guid: de627c7bfb8ce4f1a9a2f20532a22004,
     type: 3}
   targetSign_prefab: {fileID: 6575558976693992782, guid: c80e53c2180b541bc9d14e58c65320db,
