@@ -1,70 +1,64 @@
-﻿// credit: https://answers.unity.com/questions/1142089/moving-camera-with-2-players.html
-// Author: TreyH
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 // requirement:
 // 1): initial positions of two submarines (proxy):
-//     a): z-value are both 0
-//     b): Midpoint initially at (0,0,0)
-// 2): initial Camera's orthographicSize = 5f
 // 3): initial Camera's z-position = -10f;
 public class CameraController : MonoBehaviour
 {
-
     // How many units should we keep from the players
-    public float zoomFactor = 0.8f;
-    public float followTimeDelta = 0.8f;
+    public float followTimeDelta = 1f;
 
-    public Transform submarine1;
-    public Transform submarine2;
+    public Transform sub1;
+    public Transform sub2;
 
     private Camera cam;
-    private float init_distance;
+    private float size;
+    private Vector3 center;
+    private float radius;
 
     private void Start()
     {
         cam = GetComponent<Camera>();
-        init_distance = (submarine1.position - submarine2.position).magnitude;
+        center.z = -10f;
+        radius = sub1.gameObject.GetComponent<CircleCollider2D>().radius;
+        radius = radius * sub1.localScale.x * sub1.parent.localScale.x;
     }
 
     private void Update()
     {
-        FollowSubmarines();
+        CalculateShape();
+        cam.orthographicSize = size;
+        cam.transform.position = Vector3.Slerp(cam.transform.position, center, followTimeDelta);
+
+        if ((center - cam.transform.position).magnitude <= 0.05f)
+            cam.transform.position = center;
     }
 
-    private void FollowSubmarines()
+    private void CalculateShape()
     {
-        // Midpoint we're after
-        Vector3 midpoint = (submarine1.position + submarine2.position) / 2f;
+        float left = (Mathf.Min(sub1.position.x, sub2.position.x) - radius - 14.4f) / 2f;
+        float right = (Mathf.Max(sub1.position.x, sub2.position.x) + radius + 14.4f) / 2f;
+        float left_dis = left + 14.4f;
+        float right_dis = 14.4f - right;
 
-        // Distance between objects
-        float distance = (submarine1.position - submarine2.position).magnitude;
+        float down = (Mathf.Min(sub1.position.y, sub2.position.y) - radius - 8.1f )/ 2f;
+        float up = (Mathf.Max(sub1.position.y, sub2.position.y) + radius + 8.1f) / 2f;
+        float down_dis = down + 8.1f;
+        float up_dis = 8.1f - up;
 
-        // Move camera a certain distance
-        Vector3 cameraDestination = midpoint - cam.transform.forward * distance * zoomFactor;
-        if (cameraDestination.z > -10f)
-            cameraDestination.z = -10f;
+        size = Mathf.Max((right - left) / 32f * 9f, (up - down) / 2f);
 
-        //cameraDestination += Vector3.forward * 10f;
+        if (left_dis < right_dis)
+            center.x = Mathf.Min(left + size * 16f / 9f, 0f);
+        else
+            center.x = Mathf.Max(right - size * 16f / 9f, 0f);
 
-        // Adjust ortho size if we're using one of those
-        if (cam.orthographic)
-        {
-            // The camera's forward vector is irrelevant, only this size will matter
-            cam.orthographicSize = distance / init_distance * 5f;
-            if (cam.orthographicSize < 5f)
-                cam.orthographicSize = 5f;
-        }
-        // You specified to use MoveTowards instead of Slerp
-        cam.transform.position = Vector3.Slerp(cam.transform.position, cameraDestination, followTimeDelta);
-
-        // Snap when close enough to prevent annoying slerp behavior
-        if ((cameraDestination - cam.transform.position).magnitude <= 0.05f)
-            cam.transform.position = cameraDestination;
+        if (down_dis < up_dis)
+            center.y = Mathf.Min(down + size, 0f);
+        else if (down_dis > up_dis)
+            center.y = Mathf.Max(up - size, 0f);
     }
-
 }
