@@ -3597,6 +3597,7 @@ MonoBehaviour:
   MAX_HEALTH: 7
   full_shield_sprite: {fileID: 0}
   _current_health: 0
+  particleLayer: 2
   bubbleShieldParticlePrefab: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad,
     type: 3}
 --- !u!1 &6751103587811784780
