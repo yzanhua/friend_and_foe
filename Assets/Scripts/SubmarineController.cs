@@ -25,6 +25,7 @@ public class SubmarineController : MonoBehaviour
         {
             CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
             GetComponent<HealthCounter>().AlterHealth(-2f);
+            Handheld.Vibrate();
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("collide");
         }
