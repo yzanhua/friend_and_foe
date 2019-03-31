@@ -27,7 +27,6 @@ public class MovementGearController : MonoBehaviour
 
     void Update()
     {
-
         // check status (current + previous)
         bool current_status_onseat = status.isPlayerOnSeat();
         if (previous_status_onseat && !current_status_onseat)
