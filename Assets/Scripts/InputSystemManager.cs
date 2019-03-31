@@ -25,7 +25,7 @@ public class InputSystemManager : ScriptableObject
 
     void Awake()
     {
-        UpdateGamePad();
+        _gamepad_list = new List<Gamepad>(Gamepad.all);
     }
 
     static public void UpdateGamePad()
