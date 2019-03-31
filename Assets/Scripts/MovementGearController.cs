@@ -10,6 +10,7 @@ public class MovementGearController : MonoBehaviour
 
     public GameObject submarine;
     public GameObject movementGeat;
+    public float DashCD = 0.5f;
 
     private SeatOnGear status;
     private Rigidbody2D submarine_rb;
@@ -17,6 +18,8 @@ public class MovementGearController : MonoBehaviour
 
     bool inPlaySoundRoutine = false;
     bool previous_status_onseat = false;
+
+    bool dashOK = true;
 
     void Start()
     {
@@ -50,11 +53,11 @@ public class MovementGearController : MonoBehaviour
         Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
 
-        if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
+        if (dashOK && InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
         {// dash
-            temp = temp * 100f;
-            //GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
-            //new_trail.transform.position = playerProxy.transform.position;
+            submarine_rb.AddForce(temp * submarine_rb.mass * 20f, ForceMode2D.Impulse);
+            dashOK = false;
+            StartCoroutine(WaitDashCD());
         }
 
         submarine_rb.AddForce(speed * temp * submarine_rb.mass * 2f);
@@ -62,6 +65,11 @@ public class MovementGearController : MonoBehaviour
             StartCoroutine(playMoveSound());
     }
 
+    IEnumerator WaitDashCD()
+    {
+        yield return new WaitForSeconds(DashCD);
+        dashOK = true;
+    }
     IEnumerator playMoveSound()
     {
         inPlaySoundRoutine = true;

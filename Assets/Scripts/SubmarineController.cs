@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
 {
-    public float bumpForce1 = 15f;
+    public float bumpForce = 15f;
     bool inWaitRoutine = false;
     HealthCounter myHealth;
     Rigidbody2D rb2d;
@@ -35,7 +35,7 @@ public class SubmarineController : MonoBehaviour
         {
             Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
             rb2d.velocity = Vector2.zero;
-            rb2d.AddForce(direction * bumpForce1 * rb2d.mass, ForceMode2D.Impulse);
+            rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
         }    
     }
 
