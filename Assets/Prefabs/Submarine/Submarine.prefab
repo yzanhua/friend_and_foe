@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 92bde0195ecef4027b1fa63444b0773f, type: 3}
-  m_Color: {r: 0.5647059, g: 0.7294118, b: 0.8901961, a: 1}
+  m_Color: {r: 1, g: 0.48584908, b: 0.5370734, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   refillStation: {fileID: 3334737192229930126}
   MaxBullets: 15
   bulletoffset: 0.7
-  fireCD: 1
+  fireCD: 0.5
 --- !u!61 &2938957215869425869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1886,7 +1886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3486594542978867799}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 1.01, z: 0}
+  m_LocalPosition: {x: 0.83, y: -0.46, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_Children: []
   m_Father: {fileID: 135600980498755180}
@@ -1999,7 +1999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da35ecba3d8cd41aabde889f93cb0f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
+  playerID: 1
   speed: 7.5
   KnockBackTime: 0.2
   DizzyTime: 1
@@ -2715,7 +2715,7 @@ MonoBehaviour:
   healthBar: {fileID: 8107564601707161828}
   rotationSpeed: 3
   fireTimeDiff: 0.5
-  initialTowardRight: 0
+  initialTowardRight: 1
 --- !u!114 &638628375123315505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3072,7 +3072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4696414687286297757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.2, y: 0.18, z: 0}
+  m_LocalPosition: {x: -2.9, y: 17.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135600981909552012}
@@ -3959,7 +3959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186bdb63b0b01403c8a0eda743cebdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 1.8
   submarine: {fileID: 8582862346553507120}
   movementGeat: {fileID: 6751103587811784780}
 --- !u!114 &6538417531017491360
@@ -4331,8 +4331,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 1000000
-  m_LinearDrag: 10
+  m_Mass: 21.794645
+  m_LinearDrag: 2.5
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -4852,7 +4852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da35ecba3d8cd41aabde889f93cb0f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
+  playerID: 3
   speed: 7.5
   KnockBackTime: 0.2
   DizzyTime: 1
