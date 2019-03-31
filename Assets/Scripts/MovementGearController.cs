@@ -49,6 +49,14 @@ public class MovementGearController : MonoBehaviour
         int playerID = status.playerID();
         Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
+
+        if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
+        {// dash
+            temp = temp * 100f;
+            //GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
+            //new_trail.transform.position = playerProxy.transform.position;
+        }
+
         submarine_rb.AddForce(speed * temp * submarine_rb.mass * 2f);
         if (temp != Vector2.zero && !inPlaySoundRoutine)
             StartCoroutine(playMoveSound());
