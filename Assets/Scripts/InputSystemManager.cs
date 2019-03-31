@@ -25,10 +25,13 @@ public class InputSystemManager : ScriptableObject
 
     void Awake()
     {
-        _gamepad_list = new List<Gamepad>(Gamepad.all);
-
+        UpdateGamePad();
     }
 
+    static public void UpdateGamePad()
+    {
+        instance._gamepad_list = new List<Gamepad>(Gamepad.all);
+    }
 
     static public Gamepad GetGamePad(int playerID) 
     {
