@@ -5,6 +5,7 @@ using UnityEngine;
 public class Global : ScriptableObject
 {
     private static Global _instance = null;
+ 
     public static Global instance
     {
         get
@@ -18,4 +19,10 @@ public class Global : ScriptableObject
     }
 
     public bool AllPlayersMovementEnable = true;
+
+    public bool[] SelectedStatus = new bool[] {false, false, false, false};
+    public int[] PlayerID2GamePadID = new int[] {-1, -1, -1, -1};
+    public bool SelectionEnable = true;
+
+
 }

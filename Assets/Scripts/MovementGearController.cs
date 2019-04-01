@@ -17,7 +17,6 @@ public class MovementGearController : MonoBehaviour
     private SpriteRenderer rend;
 
     bool inPlaySoundRoutine = false;
-    bool previous_status_onseat = false;
 
     bool dashOK = true;
 
@@ -30,12 +29,7 @@ public class MovementGearController : MonoBehaviour
 
     void Update()
     {
-        // check status (current + previous)
-        bool current_status_onseat = status.isPlayerOnSeat();
-        if (previous_status_onseat && !current_status_onseat)
-            submarine_rb.velocity = Vector2.zero;
-        previous_status_onseat = current_status_onseat;
-        if (!current_status_onseat)
+        if (!status.isPlayerOnSeat())
         {
             rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
             return;
