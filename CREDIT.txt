@@ -42,9 +42,9 @@ Sprites:
 	- Bomb
 		[Free Crosshairs Cliparts, Download Free Clip Art, Free Clip Art on Clipart Library](http://clipart-library.com/crosshairs-cliparts.html)
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
-	- Stations and characters are created by ourselves
 	- Arrow Makrs
 		[Arrow marks at character selection] (https://iconscout.com/icon/chevron-48)
+	- Stations and characters are created by ourselves
 
 Fonts:
 	- Tutorial Font
