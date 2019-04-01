@@ -17,6 +17,8 @@ public class SelectCharacter : MonoBehaviour
     private GameObject curr_player;
     private GameObject curr_zone;
 
+    private GameObject bracket;
+
     private void Start()
     {
         Global.instance.PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
@@ -27,6 +29,8 @@ public class SelectCharacter : MonoBehaviour
         zone_pos = zones[CurrentSelection].transform.position;
         curr_player = Instantiate(players[CurrentSelection], player_pos, Quaternion.identity);
         curr_player.SetActive(true);
+
+        bracket = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -53,6 +57,7 @@ public class SelectCharacter : MonoBehaviour
         Global.instance.PlayerID2GamePadID[CurrentSelection] = -1;
         Global.instance.SelectedStatus[GamePadID] = false;
         Destroy(curr_zone);
+        bracket.SetActive(true);
     }
     void SelectThisCharacter()
     {
@@ -64,6 +69,7 @@ public class SelectCharacter : MonoBehaviour
         Global.instance.SelectedStatus[GamePadID] = true;
         curr_zone = Instantiate(zones[CurrentSelection], zone_pos, Quaternion.identity);
         curr_zone.SetActive(true);
+        bracket.SetActive(false);
 
         for (int i = 0; i < Global.instance.numOfPlayers; i++)
             if (!Global.instance.SelectedStatus[i]) return;
