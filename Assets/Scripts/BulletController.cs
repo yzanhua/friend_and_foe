@@ -12,6 +12,7 @@ public class BulletController : MonoBehaviour
     public PhysicsMaterial2D noBounceMaterial;
     public GameObject laserTrail;
     public GameObject explosionParticle;
+    public GameObject explosionFlash;
 
     private Rigidbody2D rb;
     private Vector3 originPos;
@@ -63,7 +64,7 @@ public class BulletController : MonoBehaviour
             }
             if (other.CompareTag("Fish"))
             {
-                // Deactivate the fish
+                // Daeactivate the fish
                 other.transform.parent.GetComponent<SchoolMovement>().KillFish();
                 other.SetActive(false);
             }
@@ -87,15 +88,19 @@ public class BulletController : MonoBehaviour
         }
         inExplosion = true;
         laserTrail.SetActive(false);
-        GetComponent<SpriteRenderer>().sprite = null;
+        // GetComponent<SpriteRenderer>().sprite = null;
         //animator.SetTrigger("Explode");
         animator.enabled = false;
         GetComponent<BoxCollider2D>().sharedMaterial = noBounceMaterial;
         rb.velocity = Vector2.zero;
+        GameObject expflash = Instantiate(explosionFlash, transform.position, Quaternion.identity);
+        Destroy(expflash, 2f);
+        yield return new WaitForSeconds(0.1f);
         GameObject exp = Instantiate(explosionParticle, transform.position, Quaternion.identity);
         exp.transform.localScale = new Vector2(1.5f, 1.5f);
         yield return new WaitForSeconds(0.5f);
-        Destroy(exp);
+
+        Destroy(expflash, 2f);
         Destroy(gameObject);
     }
 }

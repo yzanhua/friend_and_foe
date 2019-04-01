@@ -95,7 +95,7 @@ public class BombEffect : MonoBehaviour
 
             Vector3 direction = (collider.transform.position - transform.position).normalized;
             float force_magnitude = _is_explosion ? secondStageForce : firstStageForce;
-            float damage = _is_explosion ? hc.health * 0.15f : hc.health * 0.2f;
+            float damage = _is_explosion ? hc.health * 0.10f : hc.health * 0.15f;
             rd2D.AddForce(rd2D.mass * direction * force_magnitude, ForceMode2D.Impulse);
             hc.AlterHealth(-1 * damage);
             GameObject hitSpark = Instantiate(hitParticlePrefab, collider.transform);

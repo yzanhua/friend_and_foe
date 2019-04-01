@@ -89,9 +89,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
-        //WinText.enabled = true;
-        yield return new WaitForSeconds(2f);
-        //int scene = SceneManager.GetActiveScene().buildIndex;
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("Selection");
     }
 
