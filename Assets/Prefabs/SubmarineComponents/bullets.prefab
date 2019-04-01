@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  LongestDistance: 50
+  LongestDistance: 20
   direction: {x: 0, y: 0, z: 0}
   bounceMaterial: {fileID: 6200000, guid: f3c029cba401141899e9c7ed8f659e8d, type: 2}
   noBounceMaterial: {fileID: 6200000, guid: 5ebf283eb3306478ca26dfd02245ad47, type: 2}
