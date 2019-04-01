@@ -4,9 +4,9 @@ This game need 4 players with (4) controllers.
 
 1. Use Left Stick to control character movement.
 
-2. When two players collide with each other, both of them will get dizzy and will be unable to move for about 3 seconds. However, players who have already sat down on a gear won’t get dizzy. According to the feedback of p3_milestone given by eecs494staffs (thank you!), we plan to add animation when players are under "dizzy" status.
+2. When two players collide with each other, both of them will get dizzy and will be unable to move for about 0.5 seconds. However, players who have already sat down on a gear won’t get dizzy. We have added animation for "dizzy".
 
-3. When collided with a station, press B (Xbox) or press O (PS4) to sit down on it.
+3. When on a station, press B (Xbox) or press O (PS4) to sit down on it.
 
 4. When sat down on a gear, press B (Xbox) or press O (PS4) to leave the seat.
 
@@ -14,10 +14,12 @@ This game need 4 players with (4) controllers.
 
 6. When sat down on a "shield station", the shield will be turned on automatically (if CD is OK). Use left stick to tune the direction of shield. In tutorial mode, these two functionalities are sometimes intentionally forbidden.
 
-7. When sat down on a “wheel station", use left stick to control submarine movement and press A (Xbox) or press X (PS4)to make submarine dash. The dash has a short cd. In tutorial mode, this functionality is sometimes intentionally forbidden.
+7. When sat down on a “wheel station", use left stick to control submarine movement and press A (Xbox) or press X (PS4)to make submarine dash. The dash has a very short cd. In tutorial mode, this functionality is sometimes intentionally forbidden.
 
 8. Players can use Left Stick + A (on Xbox) or Left Stick + X (on PS4) to dash.
 
-9. On ladder, players can press A (Xbox) or press X (PS4) to Jump Down. When pressing X/A, player can also use left stick to change the direction of jumping.
+9. On ladder, players can press A (Xbox) or press X (PS4) to Jump Down. When pressing X/A, player can also use left stick to change the direction of jumping. Collision between players won't occur if at least one of them are "jumping".
 
 10. All operations can be achieved using left stick + A + B (on Xbox) or left stick + O + X (on PS4).
+
+11. Tutorial/UI is mostly designed for PS4 Controllers.
