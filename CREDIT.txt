@@ -27,26 +27,18 @@ Sprites:
 		[Pixilart - magic bullet by flojelly](https://www.pixilart.com/art/magic-bullet-720a68da1dde545)
 	- Ladder
 		[LADDER | OMORI Wiki | FANDOM powered by Wikia](https://omori.fandom.com/wiki/LADDER)
-	- Stations
-		[Military Cannon Icon | Android Iconset | Icons8](http://www.iconarchive.com/show/android-icons-by-icons8/Military-Cannon-icon.html)
-		[Ship, steering, wheel icon](https://www.iconfinder.com/icons/3067947/ship_steering_wheel_icon)
-		[Brand protection, defence, security, shield icon (https://www.iconfinder.com/icons/298320/brand_protection_defence_security_shield_icon)
-		[Plus Icon In Black On A White Background. Vector Illustration Royalty Free Cliparts, Vectors, And Stock Illustration. Image 79982234.](https://www.123rf.com/photo_79982234_stock-vector-plus-icon-in-black-on-a-white-background-vector-illustration.html)
-		[Bullets icon simple style Royalty Free Vector Image](https://www.vectorstock.com/royalty-free-vector/bullets-icon-simple-style-vector-9997742)
 	- Warning Sign
 		[Computer Icons Warning sign Icon design - exclamation mark png download - 1600*1600 - Free Transparent Computer Icons png Download.](https://www.kisspng.com/png-computer-icons-warning-sign-icon-design-exclamatio-809405/)
 	- Weapon
 		[Jetshift Weapon Sprite Compilation by Four-Cubed on DeviantArt](https://www.deviantart.com/four-cubed/art/Jetshift-Weapon-Sprite-Compilation-751002269)
-	- Bullet explosion
-		[purple fire sprite - Google Search](https://www.google.com/search?sa=G&hl=en&q=purple+fire+sprite&tbm=isch&tbs=simg:CAQSlgEJGtioJ2wlLpoaigELEKjU2AQaBAgVCAcMCxCwjKcIGmEKXwgDEif4A78JpAr_1CWT7Ca8UlxSWFMMDwieOKcMnjSnHN48pwCeLKYwpyDcaMJOgApB2Q9ORU7D1M5S920UgTCuWO7AE1dvb85NLPB3DFxs_1kSZZNADn23X3sAfKgCAEDAsQjq7-CBoKCggIARIEd5J8agw&ved=0ahUKEwiez-aK9IrhAhUJ8YMKHaMJDxoQwg4IKSgA&biw=1280&bih=579#imgrc=sui7vgWrt2G6nM:)
 	- Bubble shield
 		[Bubble burst vector | dreamstime](https://www.dreamstime.com/stock-illustration-cartoon-soap-bubble-burst-sprites-frames-animation-image61557457)
-	- Character
-		[Character template by isaiah658](https://www.pinterest.com/pin/592927107168523283/)
 	- Background & Fish
 		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
 	- Bomb
+		[Free Crosshairs Cliparts, Download Free Clip Art, Free Clip Art on Clipart Library](http://clipart-library.com/crosshairs-cliparts.html)
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
+	- Stations and characters are created by ourselves
 		
 Shaders:
 	- Station light up effect
