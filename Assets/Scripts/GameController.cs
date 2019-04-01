@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
 
     private HealthCounter health_big;
     private HealthCounter health_small;
-    private bool _is_end ;
+    private bool _is_end;
 
     void Awake()
     {
@@ -67,13 +67,13 @@ public class GameController : MonoBehaviour
         _is_end = true;
         health_big = right_sub.GetComponent<HealthCounter>();
         health_small = left_sub.GetComponent<HealthCounter>();
-        
+
         SoundManager.instance.PlaySound("win");
 
         if (health_big.health < health_small.health)
         {
             WinText.text = "Red Team Win!";
-           
+
         }
         else
         {
@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
 
         }
         StartCoroutine(ReloadScene());
-        
+
     }
 
     IEnumerator ReloadScene()
@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour
         //WinText.enabled = true;
         yield return new WaitForSeconds(2f);
         //int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Game");
     }
 
 }
