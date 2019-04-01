@@ -4795,6 +4795,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 290093251247125325, guid: de90dacd185d04dce9f0eecc95e612c2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de90dacd185d04dce9f0eecc95e612c2, type: 3}
 --- !u!4 &290093250578974081 stripped
@@ -4885,6 +4890,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 290093251247125325, guid: de90dacd185d04dce9f0eecc95e612c2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de90dacd185d04dce9f0eecc95e612c2, type: 3}
@@ -5083,6 +5093,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 135600980428429898}
     m_Modifications:
+    - target: {fileID: 8813743596370242007, guid: 2f040435c59b65246a1dc012b9cfcc20,
+        type: 3}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 3184716584500256428, guid: 2f040435c59b65246a1dc012b9cfcc20,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5138,11 +5153,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8813743596370242007, guid: 2f040435c59b65246a1dc012b9cfcc20,
-        type: 3}
-      propertyPath: m_Name
-      value: Player1
-      objectReference: {fileID: 0}
     - target: {fileID: 2056449693859869779, guid: 2f040435c59b65246a1dc012b9cfcc20,
         type: 3}
       propertyPath: transform_static
@@ -5175,6 +5185,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 135600980428429898}
     m_Modifications:
+    - target: {fileID: 936877654935419976, guid: f06d7657d45ec1a4ea65f1a78c3e62a2,
+        type: 3}
+      propertyPath: m_Name
+      value: Player0
+      objectReference: {fileID: 0}
     - target: {fileID: 6984196527466246212, guid: f06d7657d45ec1a4ea65f1a78c3e62a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5230,11 +5245,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 936877654935419976, guid: f06d7657d45ec1a4ea65f1a78c3e62a2,
-        type: 3}
-      propertyPath: m_Name
-      value: Player0
-      objectReference: {fileID: 0}
     - target: {fileID: 4682946483663114243, guid: f06d7657d45ec1a4ea65f1a78c3e62a2,
         type: 3}
       propertyPath: transform_static
@@ -5267,6 +5277,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 135600980428429898}
     m_Modifications:
+    - target: {fileID: 9157200387649347640, guid: cc7036a93dd949448b31933aea584bc6,
+        type: 3}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157200387649347640, guid: cc7036a93dd949448b31933aea584bc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9157200387649347644, guid: cc7036a93dd949448b31933aea584bc6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5320,16 +5340,6 @@ PrefabInstance:
     - target: {fileID: 9157200387649347644, guid: cc7036a93dd949448b31933aea584bc6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9157200387649347640, guid: cc7036a93dd949448b31933aea584bc6,
-        type: 3}
-      propertyPath: m_Name
-      value: Player2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9157200387649347640, guid: cc7036a93dd949448b31933aea584bc6,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157200387649347641, guid: cc7036a93dd949448b31933aea584bc6,
