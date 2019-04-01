@@ -1454,6 +1454,16 @@ PrefabInstance:
       propertyPath: MaxCreateInterval
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21
+      objectReference: {fileID: 0}
     - target: {fileID: 1467254428, guid: 4a96e0ea570cb41199142268c64cbf15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.772

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SchoolMovement : MonoBehaviour
 {
-   Vector3[] PresetPosition = { new Vector3(-14, 3, 0), new Vector3(12, 3, 0), 
-                                        new Vector3(-14, -3, 0), new Vector3(12, -3, 0)};
+   Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0), 
+                                        new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
     public int StartPos;
     public int DestPos;
     public float Speed = 2.0f;
