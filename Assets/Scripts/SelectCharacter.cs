@@ -21,6 +21,7 @@ public class SelectCharacter : MonoBehaviour
     {
         Global.instance.PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
         InputSystemManager.instance.PlayerID2GamePadID = new int[] {0, 1, 2, 3};
+        Global.instance.SelectionEnable = true;
 
         player_pos = players[CurrentSelection].transform.position;
         zone_pos = zones[CurrentSelection].transform.position;
@@ -45,9 +46,6 @@ public class SelectCharacter : MonoBehaviour
         {
             UnSelectThisCharacter();
         }
-
-        
-
     }
 
     void UnSelectThisCharacter()
@@ -67,21 +65,21 @@ public class SelectCharacter : MonoBehaviour
         curr_zone = Instantiate(zones[CurrentSelection], zone_pos, Quaternion.identity);
         curr_zone.SetActive(true);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < Global.instance.numOfPlayers; i++)
             if (!Global.instance.SelectedStatus[i]) return;
 
         Global.instance.SelectionEnable = false;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
             InputSystemManager.instance.PlayerID2GamePadID[i] = Global.instance.PlayerID2GamePadID[i];
 
-        SceneManager.LoadScene("Test_Huang");
+        StartCoroutine(LoadNextScene());
     }
 
     void UpdateCharacter(int inputX)
     {
         if (Global.instance.PlayerID2GamePadID[CurrentSelection] == -1)
             curr_player.GetComponent<SpriteRenderer>().color = Color.white;
-        else if (Global.instance.PlayerID2GamePadID[CurrentSelection] != CurrentSelection)
+        else if (Global.instance.PlayerID2GamePadID[CurrentSelection] != GamePadID)
             if (curr_player != null)
                 curr_player.GetComponent<SpriteRenderer>().color = Color.black;
 
@@ -113,7 +111,13 @@ public class SelectCharacter : MonoBehaviour
     }
     IEnumerator WaitCD()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         cdOK = true;
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Test_Huang");
     }
 }

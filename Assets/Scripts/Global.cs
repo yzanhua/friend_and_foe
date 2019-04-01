@@ -23,6 +23,7 @@ public class Global : ScriptableObject
     public bool[] SelectedStatus = new bool[] {false, false, false, false};
     public int[] PlayerID2GamePadID = new int[] {-1, -1, -1, -1};
     public bool SelectionEnable = true;
+    public int numOfPlayers = 4;
 
 
 }

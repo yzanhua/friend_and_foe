@@ -37,8 +37,9 @@ public class InputSystemManager : ScriptableObject
 
     static public Gamepad GetGamePad(int playerID) 
     {
-        playerID = instance.PlayerID2GamePadID[playerID];
-        Gamepad gp = playerID >= instance._gamepad_list.Count ? null : instance._gamepad_list[playerID];
+        int tempID = instance.PlayerID2GamePadID[playerID];
+        if (tempID < 0) tempID = 100;
+        Gamepad gp = tempID >= instance._gamepad_list.Count ? null : instance._gamepad_list[tempID];
         return gp;
     }
 
