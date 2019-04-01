@@ -51,3 +51,8 @@ Sprites:
 Shaders:
 	- Station light up effect
 		[Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
+
+Particle Effects:
+	- Explosion and trail effects
+		[Bullet explosion | Bullet Trail | Submarine Trail | Bomb Explosion] (https://assetstore.unity.com/packages/vfx/particles/epic-toon-fx-57772)
+	
