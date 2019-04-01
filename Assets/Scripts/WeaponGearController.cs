@@ -43,10 +43,8 @@ public class WeaponGearController : MonoBehaviour
         // update weapon under player control
         if (!status.isPlayerOnSeat())
         {
-            gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 0.3f);
             return;
         }
-        gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 1.0f);
         if (InputSystemManager.GetAction1(status.playerID()))
             FireBullet();
         RotateTheWeapon();

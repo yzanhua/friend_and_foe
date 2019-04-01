@@ -37,10 +37,10 @@ public class MovementGearController : MonoBehaviour
         previous_status_onseat = current_status_onseat;
         if (!current_status_onseat)
         {
-            rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
+            //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
             return;
         }
-        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
+        //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
 
         if (TutorialManager.instance != null)
         {
