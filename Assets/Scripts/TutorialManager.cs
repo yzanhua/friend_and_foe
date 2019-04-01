@@ -400,11 +400,11 @@ public class TutorialManager : MonoBehaviour
                 else if ((bool)_startMap[i]) start_num++;
             }
 
-            if (skip_num == 4)
+            if (skip_num == Global.instance.numOfPlayers)
             { 
                 state = State.PRE_FINISHED;
             }
-            else if (start_num == 4)
+            else if (start_num == Global.instance.numOfPlayers)
             {
                 Global.instance.AllPlayersMovementEnable = true;
                 state = State.CHARACTER;
