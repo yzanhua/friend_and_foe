@@ -19,8 +19,8 @@ public class GameController : MonoBehaviour
 
     private HealthCounter health_big;
     private HealthCounter health_small;
-    private bool _is_end;
-    private bool _is_start;
+    private bool _is_end = false;
+    private bool _is_start = false;
 
     void Awake()
     {
@@ -96,6 +96,7 @@ public class GameController : MonoBehaviour
     IEnumerator StartGame()
     {
         Global.instance.AllPlayersMovementEnable = false;
+        _is_start = true;
         GameObject startText = Instantiate(ready_text, transform);
         startText.transform.localScale = new Vector3(10f, 10f);
         startText.transform.position = new Vector3(0f, 4.0f);
@@ -123,6 +124,7 @@ public class GameController : MonoBehaviour
 
         Destroy(goText);
         Global.instance.AllPlayersMovementEnable = true;
+        _is_start = false;
 
 
     }
