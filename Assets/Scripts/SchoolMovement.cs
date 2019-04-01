@@ -1,16 +1,19 @@
-﻿using System.Collections;
+//<<<<<<< HEAD
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SchoolMovement : MonoBehaviour
 {
-   Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0), 
+    Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0),
                                         new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
     public int StartPos;
     public int DestPos;
     public float Speed = 2.0f;
     public float WaitTime;
     public GameObject[] fishes;
+    public GameObject particleLeft;
+    public GameObject particleRight;
 
     int fishCount = 7;
     Animator[] fishAnimators;
@@ -18,14 +21,16 @@ public class SchoolMovement : MonoBehaviour
     bool traveling;
     bool inTravelRountine;
     bool inWaitRoutine;
+    private float orgScale;
 
     // Start is called before the first frame update
     void Start()
     {
         fishAnimators = new Animator[fishes.Length];
-        for (int i = 0; i < transform.childCount; ++i)
+        for (int i = 0; i < transform.childCount - 1; ++i)
         {
             fishAnimators[i] = transform.GetChild(i).GetComponent<Animator>();
+            orgScale = transform.GetChild(i).localScale.x;
         }
         rb = GetComponent<Rigidbody2D>();
 
@@ -43,12 +48,59 @@ public class SchoolMovement : MonoBehaviour
             for (int i = 0; i < fishes.Length; ++i)
             {
                 // if the fish is still active
+
+                //=======
+                //﻿using System.Collections;
+                //using System.Collections.Generic;
+                //using UnityEngine;
+
+                //public class SchoolMovement : MonoBehaviour
+                //{
+                //   Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0), 
+                //                                        new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
+                //    public int StartPos;
+                //    public int DestPos;
+                //    public float Speed = 2.0f;
+                //    public float WaitTime;
+                //    public GameObject[] fishes;
+
+                //    int fishCount = 7;
+                //    Animator[] fishAnimators;
+                //    Rigidbody2D rb;
+                //    bool traveling;
+                //    bool inTravelRountine;
+                //    bool inWaitRoutine;
+
+                //    // Start is called before the first frame update
+                //    void Start()
+                //    {
+                //        fishAnimators = new Animator[fishes.Length];
+                //        for (int i = 0; i < transform.childCount; ++i)
+                //        {
+                //            fishAnimators[i] = transform.GetChild(i).GetComponent<Animator>();
+                //        }
+                //        rb = GetComponent<Rigidbody2D>();
+
+                //        StartPos = 0;
+                //        DestPos = 1;
+                //        travel();
+                //    }
+
+                //    // Update is called once per frame
+                //    void Update()
+                //    {
+                //        // Stop when reach destination
+                //        if (Mathf.Abs(transform.position.x - PresetPosition[DestPos].x) < 0.1f && !inWaitRoutine)
+                //        {
+                //            for (int i = 0; i < fishes.Length; ++i)
+                //            {
+                //                // if the fish is still active
+                //>>>>>>> 4d9a71794092ca9ce207c5d44115fe995629ff1b
                 if (transform.GetChild(i))
                 {
                     fishAnimators[i].speed = 0;
                     fishAnimators[i].SetBool("moving", false);
                 }
-               
             }
             rb.velocity = Vector2.zero;
             StartCoroutine(wait());
@@ -61,7 +113,8 @@ public class SchoolMovement : MonoBehaviour
 
     }
 
-    void travel() {
+    void travel()
+    {
         traveling = true;
         for (int i = 0; i < fishes.Length; ++i)
         {
@@ -71,7 +124,6 @@ public class SchoolMovement : MonoBehaviour
                 fishAnimators[i].SetBool("moving", true);
             }
         }
-        //rb.AddForce((PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed);
         rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
     }
 
@@ -81,7 +133,10 @@ public class SchoolMovement : MonoBehaviour
         fishCount--;
         //fishes[fishCount].SetActive(false);
         if (fishCount == 0)
+        {
             StartCoroutine(wait());
+            transform.GetChild(fishes.Length).gameObject.SetActive(false);
+        }
     }
 
 
@@ -96,14 +151,39 @@ public class SchoolMovement : MonoBehaviour
         {
             fishes[i].SetActive(true);
         }
+        transform.GetChild(fishes.Length).gameObject.SetActive(true);
         // rotate the school to the correct direction
-        if ((StartPos == 1 || StartPos == 3) && transform.localScale.x != -1.0f)
+        if ((StartPos == 1 || StartPos == 3) && transform.localScale.x != -3.0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            for (int i = 0; i < fishes.Length; ++i)
+            {
+                transform.GetChild(i).localScale = new Vector3(-1, 1, 1) * orgScale;
+            }
+            //set particle
+            int index = transform.childCount - 1;
+            transform.position = new Vector2(3.64f, -1.23f);
+            ParticleSystem ps = transform.GetChild(index).GetComponent<ParticleSystem>();
+            var sh = ps.shape;
+            sh.rotation = new Vector3(sh.rotation.x, 90, sh.rotation.y);
+            ps = transform.GetChild(index).GetChild(0).GetComponent<ParticleSystem>();
+            sh = ps.shape;
+            sh.rotation = new Vector3(sh.rotation.x, 90, sh.rotation.y);
         }
-        if ((StartPos == 0 || StartPos == 2) && transform.localScale.x != 1.0f)
+        if ((StartPos == 0 || StartPos == 2) && transform.localScale.x != 3.0f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            for (int i = 0; i < fishes.Length; ++i)
+            {
+                transform.GetChild(i).localScale = new Vector3(1, 1, 1) * orgScale;
+            }
+            //set particle
+            int index = transform.childCount - 1;
+            transform.position = new Vector2(2.18f, -1.23f);
+            ParticleSystem ps = transform.GetChild(index).GetComponent<ParticleSystem>();
+            var sh = ps.shape;
+            sh.rotation = new Vector3(sh.rotation.x, -90, sh.rotation.y);
+            ps = transform.GetChild(index).GetChild(0).GetComponent<ParticleSystem>();
+            sh = ps.shape;
+            sh.rotation = new Vector3(sh.rotation.x, -90, sh.rotation.y);
         }
         DestPos = getDestination(StartPos);
         transform.position = PresetPosition[StartPos];
@@ -111,8 +191,10 @@ public class SchoolMovement : MonoBehaviour
         inWaitRoutine = false;
     }
 
+
+
     // Given the start position of school, return the corresponding destination
-    int getDestination (int start)
+    int getDestination(int start)
     {
         switch (start)
         {
@@ -129,8 +211,6 @@ public class SchoolMovement : MonoBehaviour
                 return 4;
         }
     }
-
-
 
 
     // ------ using transform -------
@@ -158,6 +238,4 @@ public class SchoolMovement : MonoBehaviour
     //    transform.position = Vector3.Lerp(transform.position, LeavePosition, Time.deltaTime * speed);
 
     //}
-
-
 }
