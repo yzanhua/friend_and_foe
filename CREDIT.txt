@@ -39,12 +39,19 @@ Sprites:
 		[Free Crosshairs Cliparts, Download Free Clip Art, Free Clip Art on Clipart Library](http://clipart-library.com/crosshairs-cliparts.html)
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
 	- Stations and characters are created by ourselves
+	- Arrow Makrs
+		[Arrow marks at character selection] (https://iconscout.com/icon/chevron-48)
+
+Fonts:
+	- Tutorial Font
+		[Font for tutorial instructions] (https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059)
 		
 Shaders:
 	- Station light up effect
 		[Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
+	
 
 Particle Effects:
 	- Explosion and trail effects
-		[Bullet explosion | Bullet Trail | Submarine Trail | Bomb Explosion] (https://assetstore.unity.com/packages/vfx/particles/epic-toon-fx-57772)
+		[Bullet explosion | Submarine Trail | Bomb Explosion] (https://assetstore.unity.com/packages/vfx/particles/epic-toon-fx-57772)
 	
