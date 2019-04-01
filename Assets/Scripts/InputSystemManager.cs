@@ -8,6 +8,8 @@ public class InputSystemManager : ScriptableObject
     private static InputSystemManager _instance = null;
     public float deadZoneValue = 0.2f;
 
+    public int[] PlayerID2GamePadID = new int[] { 0, 1, 2, 3 };
+
 
     private List<Gamepad> _gamepad_list;
 
@@ -35,6 +37,7 @@ public class InputSystemManager : ScriptableObject
 
     static public Gamepad GetGamePad(int playerID) 
     {
+        playerID = instance.PlayerID2GamePadID[playerID];
         Gamepad gp = playerID >= instance._gamepad_list.Count ? null : instance._gamepad_list[playerID];
         return gp;
     }

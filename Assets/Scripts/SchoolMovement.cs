@@ -1,3 +1,4 @@
+//<<<<<<< HEAD
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,53 @@ public class SchoolMovement : MonoBehaviour
             {
                 // if the fish is still active
 
+                //=======
+                //﻿using System.Collections;
+                //using System.Collections.Generic;
+                //using UnityEngine;
+
+                //public class SchoolMovement : MonoBehaviour
+                //{
+                //   Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0), 
+                //                                        new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
+                //    public int StartPos;
+                //    public int DestPos;
+                //    public float Speed = 2.0f;
+                //    public float WaitTime;
+                //    public GameObject[] fishes;
+
+                //    int fishCount = 7;
+                //    Animator[] fishAnimators;
+                //    Rigidbody2D rb;
+                //    bool traveling;
+                //    bool inTravelRountine;
+                //    bool inWaitRoutine;
+
+                //    // Start is called before the first frame update
+                //    void Start()
+                //    {
+                //        fishAnimators = new Animator[fishes.Length];
+                //        for (int i = 0; i < transform.childCount; ++i)
+                //        {
+                //            fishAnimators[i] = transform.GetChild(i).GetComponent<Animator>();
+                //        }
+                //        rb = GetComponent<Rigidbody2D>();
+
+                //        StartPos = 0;
+                //        DestPos = 1;
+                //        travel();
+                //    }
+
+                //    // Update is called once per frame
+                //    void Update()
+                //    {
+                //        // Stop when reach destination
+                //        if (Mathf.Abs(transform.position.x - PresetPosition[DestPos].x) < 0.1f && !inWaitRoutine)
+                //        {
+                //            for (int i = 0; i < fishes.Length; ++i)
+                //            {
+                //                // if the fish is still active
+                //>>>>>>> 4d9a71794092ca9ce207c5d44115fe995629ff1b
                 if (transform.GetChild(i))
                 {
                     fishAnimators[i].speed = 0;

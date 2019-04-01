@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InputSystemManager.UpdateGamePad();
         if (_is_end)
             return;
         UpdateHealthBar(left_bar, left_sub);
