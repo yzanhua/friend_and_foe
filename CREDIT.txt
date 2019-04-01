@@ -44,6 +44,8 @@ Sprites:
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
 	- Arrow Makrs
 		[Arrow marks at character selection] (https://iconscout.com/icon/chevron-48)
+	- PS4 icons
+		[PS4 icons in tutorial] (https://www.gtagaming.com/360-to-ps4-controller-icons-f30380.html)
 	- Stations and characters are created by ourselves
 
 Fonts:
@@ -54,7 +56,6 @@ Shaders:
 	- Station light up effect
 		[Light up effect on exclaimation mark] (https://answers.unity.com/questions/583960/apply-shader-to-a-sprite.html)
 	
-
 Particle Effects:
 	- Explosion and trail effects
 		[Bullet explosion | Submarine Trail | Bomb Explosion] (https://assetstore.unity.com/packages/vfx/particles/epic-toon-fx-57772)
