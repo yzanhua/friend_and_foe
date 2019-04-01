@@ -52,7 +52,11 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (InputSystemManager.GetAction1(playerID))
             {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.JUMP, transform.position.x > 0f);
+                if (TutorialManager.instance != null)
+                {
+                    TutorialManager.CompleteTask(TutorialManager.TaskType.JUMP, transform.position.x > 0f);
+                }
+
                 Jump(horizontalInput);
                 return;
             }
@@ -73,7 +77,11 @@ public class PlayerMovementController : MonoBehaviour
             temp = temp.normalized * speed;
             if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
             {// dash
-                TutorialManager.CompleteTask(TutorialManager.TaskType.DASH, transform.position.x > 0f);
+                if (TutorialManager.instance != null)
+                {
+                    TutorialManager.CompleteTask(TutorialManager.TaskType.DASH, transform.position.x > 0f);
+                }
+
                 temp = temp * 15f;
                 GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
                 new_trail.transform.position = playerProxy.transform.position;

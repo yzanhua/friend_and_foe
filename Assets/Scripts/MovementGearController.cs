@@ -51,7 +51,21 @@ public class MovementGearController : MonoBehaviour
         {// dash
             submarine_rb.AddForce(temp * submarine_rb.mass * 20f, ForceMode2D.Impulse);
             dashOK = false;
+            if (TutorialManager.instance != null)
+            {
+                bool isRight = transform.position.x > 0f;
+                TutorialManager.CompleteTask(TutorialManager.TaskType.DASH_SUB, isRight);
+            }
             StartCoroutine(WaitDashCD());
+        }
+
+        if (TutorialManager.instance != null)
+        {
+            if (temp.magnitude > 0f)
+            {
+                bool isRight = transform.position.x > 0f;
+                TutorialManager.CompleteTask(TutorialManager.TaskType.MOVE, isRight);
+            }
         }
 
         submarine_rb.AddForce(speed * temp * submarine_rb.mass * 2f);

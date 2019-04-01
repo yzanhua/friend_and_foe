@@ -1,0 +1,975 @@
+fileFormatVersion: 2
+guid: f124602d68e6c42e0a0e91d6f2d439f5
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ps4_icon_0
+    21300002: ps4_icon_1
+    21300004: ps4_icon_2
+    21300006: ps4_icon_3
+    21300008: ps4_icon_4
+    21300010: ps4_icon_5
+    21300012: ps4_icon_6
+    21300014: ps4_icon_7
+    21300016: ps4_icon_8
+    21300018: ps4_icon_9
+    21300020: ps4_icon_10
+    21300022: ps4_icon_11
+    21300024: ps4_icon_12
+    21300026: ps4_icon_13
+    21300028: ps4_icon_14
+    21300030: ps4_icon_15
+    21300032: ps4_icon_16
+    21300034: ps4_icon_17
+    21300036: ps4_icon_18
+    21300038: ps4_icon_19
+    21300040: ps4_icon_20
+    21300042: ps4_icon_21
+    21300044: ps4_icon_22
+    21300046: ps4_icon_23
+    21300048: ps4_icon_24
+    21300050: ps4_icon_25
+    21300052: ps4_icon_26
+    21300054: ps4_icon_27
+    21300056: ps4_icon_28
+    21300058: ps4_icon_29
+    21300060: ps4_icon_30
+    21300062: ps4_icon_31
+    21300064: ps4_icon_32
+    21300066: ps4_icon_33
+    21300068: ps4_icon_34
+    21300070: ps4_icon_35
+    21300072: ps4_icon_36
+    21300074: ps4_icon_37
+    21300076: ps4_icon_38
+    21300078: ps4_icon_39
+    21300080: ps4_icon_40
+    21300082: ps4_icon_41
+    21300084: ps4_icon_42
+    21300086: ps4_icon_43
+    21300088: ps4_icon_44
+    21300090: ps4_icon_45
+    21300092: ps4_icon_46
+    21300094: ps4_icon_47
+    21300096: ps4_icon_48
+    21300098: ps4_icon_49
+    21300100: ps4_icon_50
+    21300102: ps4_icon_51
+    21300104: ps4_icon_52
+    21300106: ps4_icon_53
+    21300108: ps4_icon_54
+    21300110: ps4_icon_55
+    21300112: ps4_icon_56
+    21300114: ps4_icon_57
+    21300116: ps4_icon_58
+    21300118: ps4_icon_59
+    21300120: ps4_icon_60
+    21300122: ps4_icon_61
+    21300124: ps4_icon_62
+    21300126: ps4_icon_63
+    21300128: ps4_icon_64
+    21300130: ps4_icon_65
+    21300132: ps4_icon_66
+    21300134: ps4_icon_67
+    21300136: ps4_icon_68
+    21300138: ps4_icon_69
+    21300140: ps4_icon_70
+    21300142: ps4_icon_71
+    21300144: ps4_icon_72
+    21300146: ps4_icon_73
+    21300148: ps4_icon_74
+    21300150: ps4_icon_75
+    21300152: ps4_icon_76
+    21300154: ps4_icon_77
+    21300156: ps4_icon_78
+    21300158: ps4_icon_79
+    21300160: ps4_icon_80
+    21300162: ps4_icon_81
+    21300164: ps4_icon_82
+    21300166: ps4_icon_83
+    21300168: ps4_icon_84
+    21300170: ps4_icon_85
+    21300172: ps4_icon_86
+    21300174: ps4_icon_87
+    21300176: ps4_icon_88
+    21300178: ps4_icon_89
+    21300180: ps4_icon_90
+    21300182: ps4_icon_91
+    21300184: ps4_icon_92
+    21300186: ps4_icon_93
+    21300188: ps4_icon_94
+    21300190: ps4_icon_95
+    21300192: ps4_icon_96
+    21300194: ps4_icon_97
+    21300196: ps4_icon_98
+    21300198: ps4_icon_99
+    21300200: ps4_icon_100
+    21300202: ps4_icon_101
+    21300204: ps4_icon_102
+    21300206: ps4_icon_103
+    21300208: ps4_icon_104
+    21300210: ps4_icon_105
+    21300212: ps4_icon_106
+    21300214: ps4_icon_107
+    21300216: ps4_icon_108
+    21300218: ps4_icon_109
+    21300220: ps4_icon_110
+    21300222: ps4_icon_111
+    21300224: ps4_icon_112
+    21300226: ps4_icon_113
+    21300228: ps4_icon_114
+    21300230: ps4_icon_115
+    21300232: ps4_icon_116
+    21300234: ps4_icon_117
+    21300236: ps4_icon_118
+    21300238: ps4_icon_119
+    21300240: ps4_icon_120
+    21300242: ps4_icon_121
+    21300244: ps4_icon_122
+    21300246: ps4_icon_123
+    21300248: ps4_icon_124
+    21300250: ps4_icon_125
+    21300252: ps4_icon_126
+    21300254: ps4_icon_127
+    21300256: ps4_icon_128
+    21300258: ps4_icon_129
+    21300260: ps4_icon_130
+    21300262: ps4_icon_131
+    21300264: ps4_icon_132
+    21300266: ps4_icon_133
+    21300268: ps4_icon_134
+    21300270: ps4_icon_135
+    21300272: ps4_icon_136
+    21300274: ps4_icon_137
+    21300276: ps4_icon_138
+    21300278: ps4_icon_139
+    21300280: ps4_icon_140
+    21300282: ps4_icon_141
+    21300284: ps4_icon_142
+    21300286: ps4_icon_143
+    21300288: ps4_icon_144
+    21300290: ps4_icon_145
+    21300292: ps4_icon_146
+    21300294: ps4_icon_147
+    21300296: ps4_icon_148
+    21300298: ps4_icon_149
+    21300300: ps4_icon_150
+    21300302: ps4_icon_151
+    21300304: ps4_icon_152
+    21300306: ps4_icon_153
+    21300308: ps4_icon_154
+    21300310: ps4_icon_155
+    21300312: ps4_icon_156
+    21300314: ps4_icon_157
+    21300316: ps4_icon_158
+    21300318: ps4_icon_159
+    21300320: ps4_icon_160
+    21300322: ps4_icon_161
+    21300324: ps4_icon_162
+    21300326: ps4_icon_163
+    21300328: ps4_icon_164
+    21300330: ps4_icon_165
+    21300332: ps4_icon_166
+    21300334: ps4_icon_167
+    21300336: ps4_icon_168
+    21300338: ps4_icon_169
+    21300340: ps4_icon_170
+    21300342: ps4_icon_171
+    21300344: ps4_icon_172
+    21300346: ps4_icon_173
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ps4_icon_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 399
+        width: 56
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec74c1dc1ea24a34905342abf553254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 400
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8e567e51f2174629a6e3d744f38e15a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 410
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f7087db5ed8d44c9a5b9eba0688fc6b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_3
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 397
+        width: 61
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 973eb9c683f014e6d8d9752678a7f023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_4
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 397
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc2f99a39099c42c993815a76327b442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_5
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 397
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24597ab3fd724fb8908edd8c4e29b3f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_6
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 397
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2fb7ceba05f47a09ec05ff459de803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_7
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 306
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b237fa576b35542bbad878a96cc118b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_8
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 306
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d4b6a1a1b25413c8c44a3356c8f09b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_9
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 306
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a215ea15427e844d8bc5b2fef27185c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_10
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 306
+        width: 61
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379572f735c1f47d4a65daeca3a8ba5d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_11
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 315
+        width: 61
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35d607a9b861341029c89676e7586a01
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_12
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 307
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f08e98b05f14458bb29d13c9f6796c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_13
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 307
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f4e8ab6adeaa4ee3b43a67d8cee6792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_14
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 216
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 970a92f6fbdd94f19a3b2d66c99312db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_15
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 216
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c63f651cc9ec4395a56e2097ed89996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_16
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 216
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fe219e69edaf40c28c2c0f76df0aaac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_17
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 216
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9a35fb5a7a5940dca051a98bc91c73e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_18
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 216
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e982da14ddc4ccd8bd22b0b90e52cb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_19
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 216
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50dd682a16394c3a9234726fbd902af
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_20
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 215
+        width: 55
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 459303824b6084a998c656b987235fee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_21
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 133
+        width: 61
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd215d9b1e59a44d5868c9a28112f4f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_22
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 125
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 488618fc5eee640ab8bb3513f48a943c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_23
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 125
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de0e0482b16684e8f8c760be80594e5c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_24
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 125
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31025454f932c44fb92edc8d56205ccd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_25
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 125
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53cd0034603d6426f96132e9b08b8f0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_26
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 125
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76872c151cb324753a4d34cf4a6e36e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_27
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 125
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8dcc65499eba40a2a991cfcfc711e0b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_28
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 34
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2733d927a6ead4d579e7b7915e32d04c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_29
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 34
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89cce5af020e949d197ed26b5ff07444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_30
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 32
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc483839b95244abb8c1676b4b98d5e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_31
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 48
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55494fafd550d4f6ab7d5e6e040502b1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_32
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 35
+        width: 59
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80254b25d0372431cb7b9095e3a51ca7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ps4_icon_33
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 35
+        width: 58
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1b2a61065224941ad16a509c6f4534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d3049ce16f50847b591fefec3558a7c5
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

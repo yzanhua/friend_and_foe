@@ -46,7 +46,13 @@ public class WeaponGearController : MonoBehaviour
             return;
         }
         if (InputSystemManager.GetAction1(status.playerID()))
+        {
+            if (TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
+            }
             FireBullet();
+        }
         RotateTheWeapon();
 
     }

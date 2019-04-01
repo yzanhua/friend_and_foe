@@ -27,186 +27,273 @@ public class TutorialManager : MonoBehaviour
         JUMP,
         SEAT,
         MOVE,
+        DASH_SUB,
         REFILL,
         SHOOT,
         SHIELD,
         TASK
     }
 
+
     public bool tutorialMode = false;
 
-    public Text leftTextBox;
-    public Text rightTextBox;
-    public Text leftTaskBox;
-    public Text rightTaskBox;
-    public GameObject leftIndicator;
-    public GameObject rightIndicator;
-    public GameObject rightTrigger;
-    public GameObject leftTrigger;
-    public GameObject leftMovingBox;
-    public GameObject rightMovingBox;
-    public GameObject TutorialUI;
-    public GameObject GameUI;
-    public GameObject gameController;
-    public GameObject edge;
-    public GameObject leftGear;
-    public GameObject leftStaticGear;
-    public GameObject rightStaticGear;
-    public GameObject rightGear;
-    public GameObject leftStaticRefill;
-    public GameObject leftRefill;
-    public GameObject rightStaticRefill;
-    public GameObject rightRefill;
+    public GameObject RightSubmarine;
+    public GameObject LeftSubmarine;
+    public GameObject PreparedText;
 
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
     public State state;
-    private List<int> task_map;
-    private float original_target_time_left;
-    private float original_target_time_right;
-    private bool isStartingGame = false;
-    public static int rightTaskIndex;
-    public static int leftTaskIndex;
 
-    private Hashtable rightTaskList = new Hashtable();
-    private Hashtable leftTaskList = new Hashtable();
+    public delegate void CallBack();
 
-    public bool leftTaskState = false;
-    public bool rightTaskState = false;
+    private bool _isStartingGame = false;
+
+    // private Hashtable _rightTaskList = new Hashtable();
+    // private Hashtable _leftTaskList = new Hashtable();
+
+
+    public List<Hashtable> _TaskList = new List<Hashtable>(2);
+    public bool[] _TaskState = new bool[2];
+
+    // private bool _leftTaskState = false;
+    // private bool _rightTaskState = false;
+
+
+    private GameObject _leftGear;
+    private GameObject _leftStaticGear;
+    private GameObject _rightGear;
+    private GameObject _rightStaticGear;
+    private GameObject _leftRefill;
+    private GameObject _rightRefill;
+    private GameObject _leftStaticRefill;
+    private GameObject _rightStaticRefill;
+
+    private Hashtable _startMap = new Hashtable();
+    private Hashtable _skipMap = new Hashtable();
+
+    private bool _InStateTransition = false;
+
 
 
 
     static public bool CompleteTask(TaskType task, bool isRight)
     {
-        if (!instance.tutorialMode)
+        if (!instance.tutorialMode || instance._InStateTransition)
             return false;
 
-        if (isRight)
+
+        int pos = isRight ? 1 : 0;
+
+        if (instance.state == State.CHARACTER)
         {
-            if (instance.state == State.CHARACTER)
+            if (task == TaskType.DASH)
             {
-                if (task == TaskType.DASH || task == TaskType.JUMP)
+                instance._TaskList[pos][task] = true;
+                // instance._rightTaskBox.text = "Press Button A to jump from the ladder";
+
+                if ((bool)instance._TaskList[pos][TaskType.DASH])
                 {
-                    instance.rightTaskList[task] = true;
-                    instance.rightTaskBox.text = "Press Button A to jump from the latter";
-
-                    if ((bool)instance.rightTaskList[TaskType.DASH] && (bool)instance.rightTaskList[TaskType.JUMP])
-                    {
-                        instance.rightTaskBox.text = "Great!";
-                        instance.rightTaskState = true;
-                    }
-
-                    return true;
-                }
-            } else if (instance.state == State.MOVEMENT)
-            {
-                if (task == TaskType.SEAT || task == TaskType.MOVE)
-                {
-                    instance.rightTaskList[task] = true;
-                    instance.rightTaskBox.text = "Drive the submarine to the yellow area";
-                    instance.rightTrigger.SetActive(true);
-
-                    if ((bool)instance.rightTaskList[TaskType.SEAT] && (bool)instance.rightTaskList[TaskType.MOVE])
-                    {
-                        instance.rightTaskBox.text = "Great!";
-                        instance.rightTaskState = true;
-                    }
-
-                    return true;
-                }
-               
-            } else if (instance.state == State.WEAPON)
-            {
-                if (task == TaskType.REFILL|| task == TaskType.SHOOT)
-                {
-                    instance.rightTaskList[task] = true;
-                    instance.rightTaskBox.text = "Use Weapon controller to shoot the red target";
-                    instance.rightMovingBox.SetActive(true);
-
-                    if ((bool)instance.rightTaskList[TaskType.REFILL] && (bool)instance.rightTaskList[TaskType.SHOOT])
-                    {
-                        instance.rightTaskBox.text = "Great!";
-                        instance.rightTaskState = true;
-                    }
-                    return true;
+                    // instance._rightTaskBox.text = "Great!";
+                    instance._TaskState[pos] = true;
                 }
 
-            }
-            else if (instance.state == State.SHIELD)
-            {
-                if (task == TaskType.SHIELD)
-                {
-                    instance.rightTaskBox.text = "Great!";
-                    instance.rightTaskState = true;
-                    return true;
-                }
-
+                return true;
             }
         }
-        else
+        else if (instance.state == State.MOVEMENT)
         {
-            if (instance.state == State.CHARACTER)
+            if (task == TaskType.SEAT || task == TaskType.MOVE || task == TaskType.DASH_SUB)
             {
-                if (task == TaskType.DASH || task == TaskType.JUMP)
-                {
-                    instance.leftTaskList[task] = true;
-                    instance.leftTaskBox.text = "Press Button A to jump from the latter";
 
-                    if ((bool)instance.leftTaskList[TaskType.DASH] && (bool)instance.leftTaskList[TaskType.JUMP])
+                if (task == TaskType.SEAT)
+                {
+                    if (((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT]))
                     {
-                        instance.leftTaskBox.text = "Great!";
-                        instance.leftTaskState = true;
+                        return true;
                     }
 
-                    return true;
-                }
+                    int num = 0;
 
-            }
-            else if (instance.state == State.MOVEMENT)
-            {
-                if (task == TaskType.SEAT || task == TaskType.MOVE)
-                {
-                    instance.leftTaskList[task] = true;
-                    instance.leftTaskBox.text = "Drive the submarine to the yellow area";
-                    instance.leftTrigger.SetActive(true);
-
-                    if ((bool)instance.leftTaskList[TaskType.SEAT] && (bool)instance.leftTaskList[TaskType.MOVE])
+                    instance._TaskList[pos][task] = true;
+                    if ((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT])
                     {
-                        instance.leftTaskBox.text = "Great!";
-                        instance.leftTaskState = true;
+                        num = 2;
+                        instance._InStateTransition = true;
+                        instance.StartCoroutine(instance.ChangeState(1.5f, () =>
+                        {
+                            instance._InStateTransition = false;
+                            instance.EnableText("Move");
+                        }));
+
+                    }
+                    else if ((bool)instance._TaskList[0][TaskType.SEAT] || (bool)instance._TaskList[1][TaskType.SEAT])
+                    {
+                        num = 1;
                     }
 
-                    return true;
+                    GameObject num_text = instance.PreparedText.transform.Find("Seat").Find("flash_text").gameObject;
+                    num_text.transform.Find("seat_num").gameObject.GetComponent<Text>().text = num + " / 2";
                 }
-
-            }
-            else if (instance.state == State.WEAPON)
-            {
-                if (task == TaskType.REFILL || task == TaskType.SHOOT)
+                else if (task == TaskType.MOVE)
                 {
-                    instance.leftTaskList[task] = true;
-                    instance.leftTaskBox.text = "Use Weapon controller to shoot the red target";
-                    instance.leftMovingBox.SetActive(true);
-
-                    if ((bool)instance.leftTaskList[TaskType.REFILL] && (bool)instance.leftTaskList[TaskType.SHOOT])
+                    if (!((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT]))
                     {
-                        instance.leftTaskBox.text = "Great!";
-                        instance.leftTaskState = true;
+                        return false;
                     }
-                    return true;
-                }
+                    else if (((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE]))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        instance._TaskList[pos][task] = true;
+                        int num = 0;
 
-            }
-            else if (instance.state == State.SHIELD)
-            {
-                if (task == TaskType.SHIELD)
+
+                        if ((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE])
+                        {
+                            num = 2;
+                            instance._InStateTransition = true;
+                            instance.StartCoroutine(instance.ChangeState(2f, () =>
+                            {
+                                instance._InStateTransition = false;
+                                instance.EnableText("DashSub");
+                            }));
+                        }
+                        else if ((bool)instance._TaskList[0][TaskType.MOVE] || (bool)instance._TaskList[1][TaskType.MOVE])
+                        {
+                            num = 1;
+                        }
+                        GameObject num_text = instance.PreparedText.transform.Find("Move").Find("flash_text").gameObject;
+                        num_text.transform.Find("move_num").gameObject.GetComponent<Text>().text = num + " / 2";
+
+                    }
+                }
+                else if (task == TaskType.DASH_SUB)
                 {
-                    instance.leftTaskBox.text = "Great!";
-                    instance.leftTaskState = true;
-                    return true;
+                    if (!((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE]))
+                    {
+                        return false;
+                    }
+                    else if (((bool)instance._TaskList[0][TaskType.DASH_SUB] && (bool)instance._TaskList[1][TaskType.DASH_SUB]))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        instance._TaskList[pos][task] = true;
+                        int num = 0;
+
+                        if ((bool)instance._TaskList[0][TaskType.DASH_SUB] && (bool)instance._TaskList[1][TaskType.DASH_SUB])
+                        {
+                            num = 2;
+                        }
+                        else if ((bool)instance._TaskList[0][TaskType.DASH_SUB] || (bool)instance._TaskList[1][TaskType.DASH_SUB])
+                        {
+                            num = 1;
+                        }
+                        GameObject num_text = instance.PreparedText.transform.Find("DashSub").Find("flash_text").gameObject;
+                        num_text.transform.Find("dash_num").gameObject.GetComponent<Text>().text = num + " / 2";
+
+                    }
                 }
 
+
+                if ((bool)instance._TaskList[pos][TaskType.SEAT] && (bool)instance._TaskList[pos][TaskType.MOVE] && (bool)instance._TaskList[pos][TaskType.DASH_SUB])
+                {
+                    //instance.rightTaskBox.text = "Great!";
+                    instance._TaskState[pos] = true;
+                }
+
+                return true;
             }
+
+        }
+        else if (instance.state == State.WEAPON)
+        {
+            if (task == TaskType.REFILL || task == TaskType.SHOOT)
+            {
+                if (task == TaskType.REFILL)
+                {
+                    if (((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL]))
+                    {
+                        return true;
+                    }
+
+                    int num = 0;
+                    instance._TaskList[pos][task] = true;
+                    if ((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL])
+                    {
+                        num = 2;
+                        instance._InStateTransition = true;
+                        instance.StartCoroutine(instance.ChangeState(1.5f, () =>
+                        {
+                            instance._InStateTransition = false;
+                            instance.EnableText("Shoot");
+                        }));
+
+                    }
+                    else if ((bool)instance._TaskList[0][TaskType.REFILL] || (bool)instance._TaskList[1][TaskType.REFILL])
+                    {
+                        num = 1;
+                    }
+
+                    GameObject num_text = instance.PreparedText.transform.Find("Refill").Find("flash_text").gameObject;
+                    num_text.transform.Find("num").gameObject.GetComponent<Text>().text = num + " / 2";
+                }
+                else if (task == TaskType.SHOOT)
+                {
+                    if (!((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL]))
+                    {
+                        return false;
+                    }
+                    else if (((bool)instance._TaskList[0][TaskType.SHOOT] && (bool)instance._TaskList[1][TaskType.SHOOT]))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        instance._TaskList[pos][task] = true;
+                    }
+                }
+
+                if ((bool)instance._TaskList[pos][TaskType.REFILL] && (bool)instance._TaskList[pos][TaskType.SHOOT])
+                {
+                    instance._TaskState[pos] = true;
+                }
+
+                return true;
+            }
+
+        }
+        else if (instance.state == State.SHIELD)
+        {
+            if (task == TaskType.SHIELD)
+            {
+                instance._TaskList[pos][task] = true;
+                int num = 0;
+
+                if ((bool)instance._TaskList[0][TaskType.SHIELD] && (bool)instance._TaskList[1][TaskType.SHIELD])
+                {
+                    num = 2;
+                }
+                else if ((bool)instance._TaskList[0][TaskType.SHIELD] || (bool)instance._TaskList[1][TaskType.SHIELD])
+                {
+                    num = 1;
+                }
+                GameObject num_text = instance.PreparedText.transform.Find("Shield").Find("flash_text").gameObject;
+                num_text.transform.Find("num").gameObject.GetComponent<Text>().text = num + " / 2";
+            }
+
+            if ((bool)instance._TaskList[pos][TaskType.SHIELD])
+            {
+                //instance.rightTaskBox.text = "Great!";
+                instance._TaskState[pos] = true;
+            }
+
+            return true;
+
         }
 
         return false;
@@ -229,50 +316,52 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (tutorialMode)
+        // leftTaskBox.text = "Press B to start the tutorial.";
+        // rightTaskBox.text = "Press A to skip the tutorial";
+        Global.instance.AllPlayersMovementEnable = false;
+        state = State.SKIPTUTORIAL;
+        _TaskList.Add(new Hashtable());
+        _TaskList.Add(new Hashtable());
+
+        for (int i = 0; i < (int) TaskType.TASK; i++)
         {
-            // Activate the tutorial component
-            // edge.SetActive(true);
-            // leftTrigger.SetActive(true);
-            // rightTrigger.SetActive(true);
-            // Use the right text for the text box
-            // leftTextBox.text = "Use left sticker to control the character";
-            // rightTextBox.text = "Use action button 2 to attach to the control station";
-            leftTaskBox.text = "Press B to start the tutorial.";
-            rightTaskBox.text = "Press A to skip the tutorial";
-            Global.instance.AllPlayersMovementEnable = false;
-            state = State.SKIPTUTORIAL;
-            // leftIndicator.transform.localPosition = new Vector3(1.76f, 0.19f, 0f);
-            // rightIndicator.transform.localPosition = new Vector3(1.76f, 0.19f, 0f);
-            task_map = new List<int>();
-            task_map.Insert(0, 0);
-            task_map.Insert(1, 2);
-            task_map.Insert(2, 3);
-            task_map.Insert(3, 5);
-            task_map.Insert(4, 7);
-            task_map.Insert(5, 8);
-            task_map.Insert(6, 10);
-
-            for (int i = 0; i < (int) TaskType.TASK; i++)
-            {
-                leftTaskList[(TaskType)i] = false;
-                rightTaskList[(TaskType)i] = false;
-            }
-
-
-            // original_target_time_left = leftGear.GetComponent<ChangeScene>().targetTime;
-            // original_target_time_right = rightGear.GetComponent<ChangeScene>().targetTime;
-            AlterChangeSceneState(false);
-            AlterGearState(false);
+            _TaskList[0][(TaskType)i] = false;
+            _TaskList[1][(TaskType)i] = false;
         }
 
+        for (int i = 0; i < 4; i++)
+        {
+            _skipMap[i] = false;
+            _startMap[i] = false;
+        }
+
+        GameObject leftSubmarineProxy = LeftSubmarine.transform.Find("Submarine_proxy").gameObject;
+        GameObject leftSubmarineStatic = LeftSubmarine.transform.Find("Submarine_static").gameObject;
+        GameObject rightSubmarineProxy = RightSubmarine.transform.Find("Submarine_proxy").gameObject;
+        GameObject rightSubmarineStatic = RightSubmarine.transform.Find("Submarine_static").gameObject;
+
+        _leftGear = leftSubmarineProxy.transform.Find("Gear").gameObject;
+        _leftStaticGear = leftSubmarineStatic.transform.Find("Gear").gameObject;
+        _leftRefill = leftSubmarineProxy.transform.Find("refillStation").gameObject;
+        _leftStaticRefill = leftSubmarineStatic.transform.Find("refillStation").gameObject;
+
+        _rightGear = rightSubmarineProxy.transform.Find("Gear").gameObject;
+        _rightStaticGear = rightSubmarineStatic.transform.Find("Gear").gameObject;
+        _rightRefill = rightSubmarineProxy.transform.Find("refillStation").gameObject;
+        _rightStaticRefill = rightSubmarineStatic.transform.Find("refillStation").gameObject;
+
+        LeftSubmarine.SetActive(false);
+        RightSubmarine.SetActive(false);
+        AlterChangeSceneState(false);
+        AlterGearState(false);
+        EnableText("SkipTutorial");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tutorialMode)
+        if (tutorialMode && !_isStartingGame)
         {
             MoveToNextState();
         }
@@ -285,176 +374,241 @@ public class TutorialManager : MonoBehaviour
         {
             for (int i = 0; i < 4; i++)
             {
-                bool a1_value = InputSystemManager.GetAction1(i);
-                bool a2_value = InputSystemManager.GetAction2(i);
-                if (a1_value)
+                bool a3_value = InputSystemManager.GetAction3(i);
+                bool a4_value = InputSystemManager.GetAction4(i);
+
+                if (a3_value)
                 {
-                    state = State.PRE_FINISHED;
-                } else if (a2_value)
+                    _startMap[i] = true;
+                    _skipMap[i] = false;
+
+                } else if (a4_value)
                 {
-                    state = State.CHARACTER;
-                    leftTextBox.text = "Left sticker to control the player　";
-                    rightTextBox.text = "Use action button 1 to dash";
-                    rightTaskBox.text = "Press button A to dash";
-                    leftTaskBox.text = "Press button A to dash";
-                    edge.SetActive(true);
-                    Global.instance.AllPlayersMovementEnable = true;
+                    _skipMap[i] = true;
+                    _startMap[i] = false;
                 }
+
+ 
             }
+
+            int start_num = 0;
+            int skip_num = 0;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if ((bool)_skipMap[i]) skip_num++;
+                else if ((bool)_startMap[i]) start_num++;
+            }
+
+            if (skip_num == 4)
+            { 
+                state = State.PRE_FINISHED;
+            }
+            else if (start_num == 4)
+            {
+                Global.instance.AllPlayersMovementEnable = true;
+                state = State.CHARACTER;
+                EnableText("Dash");
+                LeftSubmarine.SetActive(true);
+                RightSubmarine.SetActive(true);
+            }
+
+            GameObject num_text = PreparedText.transform.Find("SkipTutorial").Find("flash_text").gameObject;
+
+            num_text.transform.Find("start_num").gameObject.GetComponent<Text>().text = start_num + " / 4";
+            num_text.transform.Find("skip_num").gameObject.GetComponent<Text>().text = skip_num + " / 4";
         } else if (state == State.PRE_FINISHED)
         {
-            /*tutorialMode = false;
-            GameUI.SetActive(true);
-            gameController.SetActive(true);
-            edge.SetActive(false);
-            TutorialUI.SetActive(false);
-            leftTrigger.SetActive(false);
-            rightTrigger.SetActive(false);
-            AlterChangeSceneState(true);
-            AlterGearState(true);
-            state = State.FINISHED;*/
             Global.instance.AllPlayersMovementEnable = true;
             SceneManager.LoadScene("Game");
-        } else if (leftTaskState && rightTaskState)
+        } else if (_TaskState[0] && _TaskState[1])
         {
             if (state == State.CHARACTER)
             {
-                state = State.MOVEMENT;
-                AlterGearState(true);
-                leftTextBox.text = "Left sticker to control the player, submarine or weapon";
-                rightTextBox.text = "Use action button 1 to attack and trigger the shield";
-                leftTaskBox.text = "Press action button 2 near the rudder area";
-                rightTaskBox.text = "Press action button 2 near the rudder area";
-                //GameObject movementGear = rightGear.gameObject.transform.Find("MovementGear").gameObject;
-                leftTaskState = false;
-                rightTaskState = false;
+                StartCoroutine(ChangeState(2f, () =>
+                {
+                    state = State.MOVEMENT;
+                    AlterGearState(true);
+                    ResetTaskState();
+                    EnableText("Seat");
+                    EnableGear("MovementGear");
+                }));
+
 
             } else if (state == State.MOVEMENT)
             {
-                state = State.WEAPON;
-                leftTextBox.text = "Left sticker to control the player, submarine or weapon";
-                rightTextBox.text = "Use action button 1 to attach and detach from the station";
-                leftTaskBox.text = "Press action button 2 near the bullet refill area";
-                rightTaskBox.text = "Press action button 2 near the bullet refill area";
-                leftTaskState = false;
-                rightTaskState = false;
+            
+
+                StartCoroutine(ChangeState(3f, () =>
+                {
+                    state = State.SHIELD;
+                    ResetTaskState();
+                    EnableText("Shield");
+                    EnableGear("ShieldGear");
+                }));
+
+                ResetTaskState();
             } else if (state == State.WEAPON)
             {
-                state = State.SHIELD;
-                leftTextBox.text = "Left sticker to control the player, submarine or weapon";
-                rightTextBox.text = "Use action button 1 to attack and trigger the shield";
-                leftTaskBox.text = "Press action button 2 near the shield area";
-                rightTaskBox.text = "Press action button 2 near the shield area";
-                leftTaskState = false;
-                rightTaskState = false;
+                state = State.FINISHED;
+                _isStartingGame = true;
+                StartCoroutine(ChangeState(5f, () =>
+                {
+                    StartCoroutine(StartTheGame());
+                }));
+
             } else if (state == State.SHIELD)
             {
-                state = State.FINISHED;
-                leftTaskBox.text = "Tutorial complete";
-                rightTaskBox.text = "Tutorial complete";
-                leftTaskState = false;
-                rightTaskState = false;
-                StartCoroutine(StartTheGame());
+                StartCoroutine(ChangeState(3f, () =>
+                {
+                    state = State.WEAPON;
+                    ResetTaskState();
+
+                    EnableText("Refill");
+                    EnableGear("WeaponGear");
+ 
+                    _leftStaticRefill.gameObject.SetActive(true);
+                    _rightStaticRefill.gameObject.SetActive(true);
+                    _leftRefill.gameObject.SetActive(true);
+                    _rightRefill.gameObject.SetActive(true);
+                }));
+
+
             }
         }
-        /*if (leftTutorialState == 1 && rightTutorialState ==1)
-        {
-            leftTutorialState++;
-            rightTutorialState++;
-            leftTextBox.text = "Left sticker to control the submarine";
-            rightTextBox.text = "Use action button 1 to leave the gear";
-            leftTaskBox.text = "Drive to the yellow area";
-            rightTaskBox.text = "Drive to the yellow area";
-        } else if (leftTutorialState == 4 && rightTutorialState == 4)
-        {
-            leftTutorialState++;
-            rightTutorialState++;
-            leftTrigger.SetActive(false);
-            rightTrigger.SetActive(false);
-            leftIndicator.transform.localPosition = new Vector3(-1.65f, 0f, 0f);
-            rightIndicator.transform.localPosition = new Vector3(-1.65f, 0f, 0f);
-            leftTextBox.text = "Left sticker to control the player";
-            rightTextBox.text = "Use action button 2 to fill the bullet";
-            leftTaskBox.text = "Fill the bullet";
-            rightTaskBox.text = "Fill the bullet";
-        } else if (leftTutorialState == 6 && rightTutorialState == 6)
-        {
-            leftTutorialState++;
-            rightTutorialState++;
-            leftIndicator.transform.localPosition = new Vector3(1.17f, 1.59f, 0f);
-            rightIndicator.transform.localPosition = new Vector3(1.17f, 1.59f, 0f);
-            leftTextBox.text = "Left sticker to control the weapon";
-            rightTextBox.text = "Use action button 2 to trigger the attack";
-            leftTaskBox.text = "Seat on the red gear";
-            rightTaskBox.text = "Seat on the red grea";
-        }
-        else if (leftTutorialState == 9 && rightTutorialState == 9)
-        {
-            leftTutorialState++;
-            rightTutorialState++;
-            leftIndicator.transform.localPosition = new Vector3(-0.5f, -1.12f, 0f);
-            rightIndicator.transform.localPosition = new Vector3(-0.5f, -1.12f, 0f);
-            leftTextBox.text = "Left sticker to rotate the shield";
-            rightTextBox.text = "Use action button 2 to trigger the shield";
-            leftMovingBox.SetActive(false);
-            rightMovingBox.SetActive(false);
-            leftTaskBox.text = "Trigger the shield";
-            rightTaskBox.text = "Trigger the shield";
-        } else if (leftTutorialState == 11 && rightTutorialState == 11)
-        {
-            leftTutorialState ++;
-            rightTutorialState ++;
-            leftTaskBox.text = "Tutorial complete";
-            rightTaskBox.text = "Tutorial complete";
-            instance.StartCoroutine(StartTheGame());
-            //StartCoroutine(instance.StartTheGame());
-        } else if ( !isStartingGame && leftTutorialState == 12 && rightTutorialState == 12)
-        {
-            tutorialMode = false;
-            GameUI.SetActive(true);
-            gameController.SetActive(true);
-            edge.SetActive(false);
-            TutorialUI.SetActive(false);
-            leftIndicator.SetActive(false);
-            rightIndicator.SetActive(false);
-            leftTrigger.SetActive(false);
-            rightTrigger.SetActive(false);
-            // leftGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_left;
-            // rightGear.GetComponent<ChangeScene>().targetTime = instance.original_target_time_right;
-            //SceneManager.LoadScene("Main");
-            TransitionEffect.TriggerDarkTransition();
-        }*/
 
     }
 
     IEnumerator StartTheGame()
     {
-        isStartingGame = true;
+        EnableText("Finished");
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Game");
     }
 
 
+    IEnumerator ChangeState(float delay, CallBack cb)
+    {
+        yield return new WaitForSeconds(delay);
+        cb();
+    }
+
     private void AlterGearState(bool value)
     {
         //
-        leftGear.gameObject.SetActive(value);
-        leftRefill.gameObject.SetActive(value);
-        rightRefill.gameObject.SetActive(value);
-        rightGear.gameObject.SetActive(value);
+        _leftGear.gameObject.SetActive(value);
+        _rightGear.gameObject.SetActive(value);
+        _leftStaticGear.gameObject.SetActive(value);
+         _rightStaticGear.gameObject.SetActive(value);
 
-        leftStaticGear.gameObject.SetActive(value);
-        rightStaticGear.gameObject.SetActive(value);
-        leftStaticGear.gameObject.SetActive(value);
-        leftStaticGear.gameObject.SetActive(value);
+
+
+        foreach (Transform child in _leftGear.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (Transform child in _rightGear.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (Transform child in _leftStaticGear.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (Transform child in _rightStaticGear.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        _leftStaticRefill.gameObject.SetActive(false);
+        _rightStaticRefill.gameObject.SetActive(false);
+        _leftRefill.gameObject.SetActive(false);
+        _rightRefill.gameObject.SetActive(false);
     }
 
     private void AlterChangeSceneState(bool value)
     {
-        leftGear.GetComponent<ChangeScene>().enabled = value;
-        rightGear.GetComponent<ChangeScene>().enabled = value;
-        leftStaticGear.GetComponent<ChangeScene>().enabled = value;
-        rightStaticGear.GetComponent<ChangeScene>().enabled = value;
+        _leftGear.GetComponent<ChangeScene>().enabled = value;
+        _rightGear.GetComponent<ChangeScene>().enabled = value;
+        _leftStaticGear.GetComponent<ChangeScene>().enabled = value;
+        _rightStaticGear.GetComponent<ChangeScene>().enabled = value;
+    }
+
+    private void EnableText(string go_name)
+    {
+        foreach (Transform child in PreparedText.transform)
+        {
+            if (child.gameObject.name == go_name)
+            {
+                child.gameObject.SetActive(true);
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void EnableGear(string gear_name)
+    {
+        foreach (Transform child in _leftGear.transform)
+        {
+            if (child.gameObject.name == gear_name)
+            {
+
+                child.gameObject.SetActive(true);
+            }
+            else if (gear_name == "ShieldGear" && child.name == "BubbleShield")
+            {
+                child.gameObject.SetActive(true);
+            }
+            else if (gear_name == "WeaponGear" && child.name == "Weapon")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        foreach (Transform child in _rightGear.transform)
+        {
+            if (child.gameObject.name == gear_name)
+            {
+
+                child.gameObject.SetActive(true);
+            }
+            else if (gear_name == "ShieldGear" && child.name == "BubbleShield")
+            {
+                child.gameObject.SetActive(true);
+            } else if (gear_name == "WeaponGear" && child.name == "Weapon")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        foreach (Transform child in _leftStaticGear.transform)
+        {
+            if (child.gameObject.name == gear_name)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        foreach (Transform child in _rightStaticGear.transform)
+        {
+            if (child.gameObject.name == gear_name)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+    }
+
+    private void ResetTaskState()
+    {
+        _TaskState[0] = false;
+        _TaskState[1] = false;
     }
 
 

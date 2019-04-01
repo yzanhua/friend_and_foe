@@ -17,5 +17,9 @@ public class HealthCounter : MonoBehaviour
     public void AlterHealth(float alt)
     {
         health += alt;
+        if (health < 0)
+        {
+            health = 0;
+        }
     }
 }

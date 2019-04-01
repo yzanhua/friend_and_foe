@@ -29,7 +29,7 @@ public class BombCreate : MonoBehaviour
             target_transform.parent = null;
             target_transform.RotateAround(submarine_proxy.transform.position, Vector3.forward, Random.Range(0f, 365f));
             GameObject targetSign = Instantiate(targetSign_prefab, target_transform);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             Destroy(targetSign, 0.2f);
             GameObject new_bomb =  Instantiate(Bomb_prefab, target_transform);
             yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
