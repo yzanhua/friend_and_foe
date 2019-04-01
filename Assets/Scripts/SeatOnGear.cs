@@ -16,6 +16,7 @@ public class SeatOnGear : MonoBehaviour
     private bool inLiftProgress = false;
     private Vector3 targetPos;
     private Sprite inactiveSprite;
+    private string spriteNum;
 
     private void Start()
     {
@@ -55,12 +56,28 @@ public class SeatOnGear : MonoBehaviour
         playerTrans.position = Vector3.Lerp(playerTrans.position, targetPos, 0.2f);
     }
 
+    private void LateUpdate()
+    {
+        if (playerOnSeat)
+        {
+            GameObject proxyPlayer = playerGameObject.GetComponent<PlayerMovementController>().playerProxy;
+            string backSpriteName = "char" + spriteNum + "_back";
+            int spriteNumFolder = int.Parse(spriteNum) - 1;
+            string folderPath = "Player/Player" + spriteNumFolder + "/";
+            proxyPlayer.GetComponent<Animator>().enabled = false;
+            Sprite backSprite = Resources.LoadAll<Sprite>(folderPath + backSpriteName)[0];
+            proxyPlayer.GetComponent<SpriteRenderer>().sprite = backSprite;
+        }
+    }
+
     private void Exit()
     {
         playerOnSeat = false;
         player.movementEnable = true;
         playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
         station.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+        GameObject proxyPlayer = playerGameObject.GetComponent<PlayerMovementController>().playerProxy;
+        proxyPlayer.GetComponent<Animator>().enabled = true;
     }
 
     private IEnumerator LiftUp()
@@ -94,6 +111,7 @@ public class SeatOnGear : MonoBehaviour
 
         playerGameObject = collision.gameObject;
         initGravityScale = playerGameObject.GetComponent<Rigidbody2D>().gravityScale;
+        spriteNum = playerGameObject.GetComponent<PlayerMovementController>().playerProxy.GetComponent<SpriteRenderer>().sprite.name.Substring(4, 1);
 
         player = playerGameObject.GetComponent<PlayerMovementController>();
         triggerStay = true;
