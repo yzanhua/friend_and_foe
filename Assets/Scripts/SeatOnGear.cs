@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SeatOnGear : MonoBehaviour
 {
+    public Sprite activeSprite;
+    public GameObject station;
+
     private bool playerOnSeat = false;
     private PlayerMovementController player;
     private GameObject playerGameObject;
@@ -11,8 +14,13 @@ public class SeatOnGear : MonoBehaviour
     private float initGravityScale;
     private Vector3 offset;
     private bool inLiftProgress = false;
-
     private Vector3 targetPos;
+    private Sprite inactiveSprite;
+
+    private void Start()
+    {
+        inactiveSprite = station.GetComponent<SpriteRenderer>().sprite;
+    }
 
     private void Update()
     {
@@ -23,10 +31,19 @@ public class SeatOnGear : MonoBehaviour
             if (!playerOnSeat)
             {
                 player.movementEnable = false;
+                if (!CompareTag("MovementStation"))
+                {
+                    station.GetComponent<SpriteRenderer>().sprite = activeSprite;
+                }
                 StartCoroutine(LiftUp());
             }
             else
                 Exit();
+        }
+        if (playerOnSeat && CompareTag("MovementStation"))
+        {
+            Quaternion targetRot = station.transform.rotation * Quaternion.Euler(0, 0, 10);
+            station.transform.rotation = Quaternion.RotateTowards(station.transform.rotation, targetRot, 3);
         }
     }
 
@@ -43,7 +60,7 @@ public class SeatOnGear : MonoBehaviour
         playerOnSeat = false;
         player.movementEnable = true;
         playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
-        //player.SeatedOnGear = false;
+        station.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
     }
 
     private IEnumerator LiftUp()

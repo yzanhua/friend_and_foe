@@ -15,6 +15,7 @@ TagManager:
   - Weapon
   - Ladder_DownStair
   - Bomb
+  - MovementStation
   layers:
   - Default
   - TransparentFX

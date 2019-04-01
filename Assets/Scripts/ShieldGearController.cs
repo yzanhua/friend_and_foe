@@ -44,10 +44,8 @@ public class ShieldGearController : MonoBehaviour
 
         if (!status.isPlayerOnSeat())
         {
-            gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 0.3f);
             return;
         }
-        gearRend.color = new Color(gearRend.color.r, gearRend.color.g, gearRend.color.b, 1.0f);
         int playerID = status.playerID();
         //if (InputSystemManager.GetAction2(playerID))
         //{

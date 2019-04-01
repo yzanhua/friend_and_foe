@@ -47,12 +47,14 @@ public class ChangeScene : MonoBehaviour
         {
             for (int i = 0; i < gearNum; ++i)
             {
-                gears[i].GetComponent<SpriteRenderer>().enabled = false;
+                //gears[i].GetComponent<SpriteRenderer>().enabled = false;
+                SetSpriteStatus(gears[i], false);
             }
             yield return new WaitForSeconds(0.3f);
             for (int i = 0; i < gearNum; ++i)
             {
-                gears[i].GetComponent<SpriteRenderer>().enabled = true;
+                //gears[i].GetComponent<SpriteRenderer>().enabled = true;
+                SetSpriteStatus(gears[i], true);
             }
             yield return new WaitForSeconds(0.3f);
         }
@@ -62,5 +64,20 @@ public class ChangeScene : MonoBehaviour
         gears[0].position = gears[1].position;
         gears[1].position = gears[2].position;
         gears[2].position = temp_pos;
+    }
+
+    private void SetSpriteStatus(Transform t, bool status)
+    {
+        if (t.GetComponent<SpriteRenderer>())
+        {
+            t.GetComponent<SpriteRenderer>().enabled = status;
+        }
+        for (int i = 0; i < t.childCount; ++i)
+        {
+            if (t.GetChild(i).GetComponent<SpriteRenderer>())
+            {
+                t.GetChild(i).GetComponent<SpriteRenderer>().enabled = status;
+            }
+        }
     }
 }
