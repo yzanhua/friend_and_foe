@@ -118,6 +118,6 @@ public class SelectCharacter : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Test_Huang");
+        SceneManager.LoadScene("Game");
     }
 }
