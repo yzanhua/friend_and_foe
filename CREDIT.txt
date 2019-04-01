@@ -1,6 +1,10 @@
-Music & Sound Effects:
-	- Background music
+Music:
+	- Character selection scene
+	 	[Busy Day At The Market ( | OpenGameArt.org](https://opengameart.org/content/busy-day-at-the-market)
+	- Game scene
 		[Underwater battle | OpenGameArt.org](https://opengameart.org/content/underwater-battle)
+		
+Sound Effects:
 	- Bubble shield break
 		[Freesound - “Pop (made by DuffyBro)” by DuffyBro](https://freesound.org/people/DuffyBro/sounds/319107/)
 	- Bubble shield generate 
