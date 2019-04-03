@@ -24,6 +24,8 @@ public class SubmarineController : MonoBehaviour
             myHealth.AlterHealth(-2f);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("hit");
+            InputSystemManager.SetVibration(playerID1, 0.3f, 0.2f);
+            InputSystemManager.SetVibration(playerID2, 0.3f, 0.2f);
         }
         if (other.CompareTag("Submarine"))
         {

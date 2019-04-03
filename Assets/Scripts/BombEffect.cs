@@ -13,10 +13,10 @@ public class BombEffect : MonoBehaviour
     public GameObject hitParticlePrefab;
 
     [Range(0f, 1f)]
-    public float firstStageDamage = 0.20f;
+    public float firstStageDamage = 0.15f;
 
     [Range(0f, 1f)]
-    public float secondStageDamage = 0.15f;
+    public float secondStageDamage = 0.1f;
 
     [Range(0f, 20f)]
     public float firstStageForce = 3f;
@@ -92,10 +92,17 @@ public class BombEffect : MonoBehaviour
         {
             Rigidbody2D rd2D = collider.GetComponent<Rigidbody2D>();
             HealthCounter hc = collider.GetComponent<HealthCounter>();
+            SubmarineController sc = collider.GetComponent<SubmarineController>();
 
             Vector3 direction = (collider.transform.position - transform.position).normalized;
+
             float force_magnitude = _is_explosion ? secondStageForce : firstStageForce;
-            float damage = _is_explosion ? hc.health * 0.10f : hc.health * 0.15f;
+            float damage = _is_explosion ? hc.maxHealth * secondStageDamage : hc.maxHealth * firstStageDamage;
+            float vibration_mag = _is_explosion ? 0.6f : 1.0f;
+
+            InputSystemManager.SetVibration(sc.playerID1, vibration_mag, 0.2f);
+            InputSystemManager.SetVibration(sc.playerID2, vibration_mag, 0.2f);
+
             rd2D.AddForce(rd2D.mass * direction * force_magnitude, ForceMode2D.Impulse);
             hc.AlterHealth(-1 * damage);
             GameObject hitSpark = Instantiate(hitParticlePrefab, collider.transform);
