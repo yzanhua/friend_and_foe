@@ -5,7 +5,13 @@ using UnityEngine;
 public class Global : ScriptableObject
 {
     private static Global _instance = null;
- 
+
+    public bool AllPlayersMovementEnable = true;
+    public bool[] SelectedStatus = new bool[] { false, false, false, false };
+    public int[] PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
+    public bool SelectionEnable = true;
+    public int numOfPlayers = 4;
+
     public static Global instance
     {
         get
@@ -17,13 +23,4 @@ public class Global : ScriptableObject
             return _instance;
         }
     }
-
-    public bool AllPlayersMovementEnable = true;
-
-    public bool[] SelectedStatus = new bool[] {false, false, false, false};
-    public int[] PlayerID2GamePadID = new int[] {-1, -1, -1, -1};
-    public bool SelectionEnable = true;
-    public int numOfPlayers = 4;
-
-
 }

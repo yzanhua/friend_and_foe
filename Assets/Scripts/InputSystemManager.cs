@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Experimental.Input;
+using Rewired;
 
 public class InputSystemManager : ScriptableObject
 {
@@ -9,9 +8,7 @@ public class InputSystemManager : ScriptableObject
     public float deadZoneValue = 0.2f;
 
     public int[] PlayerID2GamePadID = new int[] { 0, 1, 2, 3 };
-
-
-    private List<Gamepad> _gamepad_list;
+    private Player[] players = new Player[4];
 
     public static InputSystemManager instance
     {
@@ -27,179 +24,107 @@ public class InputSystemManager : ScriptableObject
 
     void Awake()
     {
-        _gamepad_list = new List<Gamepad>(Gamepad.all);
-    }
-
-    static public void UpdateGamePad()
-    {
-        instance._gamepad_list = new List<Gamepad>(Gamepad.all);
-    }
-
-    static public Gamepad GetGamePad(int playerID) 
-    {
-        int tempID = instance.PlayerID2GamePadID[playerID];
-        Gamepad gp = null;
-        if (tempID >= 0) 
-            gp = tempID >= instance._gamepad_list.Count ? null : instance._gamepad_list[tempID];
-        return gp;
-    }
-
-    static public int GetGamePadNum()
-    {
-        return instance._gamepad_list.Count;
+        for (int i = 0; i < Global.instance.numOfPlayers; i++)
+            players[i] = ReInput.players.GetPlayer(i);
     }
 
     static public float GetRightSVertical(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return instance.GetDeadZoneValue(gp.rightStick.y.ReadValue());
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return 0f;
-        }
-
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return 0f;
+        return instance.GetDeadZoneValue(instance.players[newID].GetAxis("RightStickY"));
     }
 
     static public float GetRightSHorizontal(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return instance.GetDeadZoneValue(gp.rightStick.x.ReadValue());
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return 0f;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return 0f;
+        return instance.GetDeadZoneValue(instance.players[newID].GetAxis("RightStickX"));
     }
 
     static public float GetLeftSVertical(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return instance.GetDeadZoneValue(gp.leftStick.y.ReadValue());
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return 0f;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return 0f;
+        return instance.GetDeadZoneValue(instance.players[newID].GetAxis("LeftStickY"));
     }
 
     static public float GetLeftSHorizontal(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return 0f;
+        return instance.GetDeadZoneValue(instance.players[newID].GetAxis("LeftStickX"));
+    }
 
-        if (gp != null)
+    static public void SetVibration(int playerID, float motorLevel, float duration)
+    {
+        if (playerID == -1)
         {
-            return instance.GetDeadZoneValue(gp.leftStick.x.ReadValue());
+            for (int i = 0; i < Global.instance.numOfPlayers; i++)
+                instance.players[i].SetVibration(0, motorLevel, duration);
+            return;
         }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return 0f;
-        }
+
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return;
+        instance.players[newID].SetVibration(0, motorLevel, duration);
     }
 
     static public bool GetAction1(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.aButton.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("ActionButton1");
     }
 
     static public bool GetAction2(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.bButton.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("ActionButton2");
     }
 
     static public bool GetAction3(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.xButton.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("ActionButton3");
     }
 
     static public bool GetAction4(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.yButton.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.Log("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("ActionButton4");
     }
 
-    static public bool GetRightShoulder(int playerID)
+    static public bool GetRightShoulderButton(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.rightShoulder.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("RightShoulderButton");
     }
 
-    static public bool GetLeftShoulder(int playerID)
+    static public bool GetRightShoulderTrigger(int playerID)
     {
-        Gamepad gp = GetGamePad(playerID);
-
-        if (gp != null)
-        {
-            return gp.leftShoulder.wasPressedThisFrame;
-        }
-        else
-        {
-            //Debug.LogError("Unknown player ID");
-            return false;
-        }
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("RightShoulderTrigger");
     }
 
+    static public bool GetLeftShoulderButton(int playerID)
+    {
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("LeftShoulderButton");
+    }
+
+    static public bool GetLeftShoulderTrigger(int playerID)
+    {
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("LeftShoulderTrigger");
+    }
 
     private float GetDeadZoneValue(float value)
     {

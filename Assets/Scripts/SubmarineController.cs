@@ -36,6 +36,7 @@ public class SubmarineController : MonoBehaviour
             Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
             rb2d.velocity = Vector2.zero;
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
+            InputSystemManager.SetVibration(-1, 0.6f, 0.3f);
         }    
     }
 
