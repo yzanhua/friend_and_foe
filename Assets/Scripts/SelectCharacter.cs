@@ -16,7 +16,6 @@ public class SelectCharacter : MonoBehaviour
 
     private GameObject curr_player;
     private GameObject curr_zone;
-
     private GameObject bracket;
 
     private void Start()
@@ -44,14 +43,10 @@ public class SelectCharacter : MonoBehaviour
             int inputX = GetInputX();
             UpdateCharacter(inputX);
             if (InputSystemManager.GetAction1(GamePadID))
-            {
-                SelectThisCharacter();
-            }
+                SelectThisCharacter();  
         }
         else if (InputSystemManager.GetAction1(GamePadID))
-        {
             UnSelectThisCharacter();
-        }
     }
 
     void UnSelectThisCharacter()
@@ -64,9 +59,8 @@ public class SelectCharacter : MonoBehaviour
     void SelectThisCharacter()
     {
         if (Global.instance.PlayerID2GamePadID[CurrentSelection] != -1)
-        {
             return;
-        }
+
         Global.instance.PlayerID2GamePadID[CurrentSelection] = GamePadID;
         Global.instance.SelectedStatus[GamePadID] = true;
         curr_zone = Instantiate(zones[CurrentSelection], zone_pos, Quaternion.identity);
@@ -105,6 +99,7 @@ public class SelectCharacter : MonoBehaviour
 
         curr_player = Instantiate(players[CurrentSelection], player_pos, Quaternion.identity);
         curr_player.SetActive(true);
+        UpdateCharacter(0); // update color
     }
     int GetInputX()
     {
@@ -112,9 +107,7 @@ public class SelectCharacter : MonoBehaviour
         float horizontalInput = InputSystemManager.GetLeftSHorizontal(GamePadID);
         if (horizontalInput == 0f) return 0;
         if (Mathf.Abs(verticalInput) < Mathf.Abs(horizontalInput))
-        {
             return (int)Mathf.Sign(horizontalInput);
-        }
         return 0;
     }
     IEnumerator WaitCD()
