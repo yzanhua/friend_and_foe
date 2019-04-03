@@ -20,11 +20,7 @@ public class SelectCharacter : MonoBehaviour
 
     private void Start()
     {
-        Global.instance.PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
-        Global.instance.SelectedStatus = new bool[] { false, false, false, false };
-        Global.instance.SelectionEnable = true;
-
-        InputSystemManager.instance.PlayerID2GamePadID = new int[] { 0, 1, 2, 3 };
+        Global.initializeVariables();
 
         player_pos = players[CurrentSelection].transform.position;
         zone_pos = zones[CurrentSelection].transform.position;

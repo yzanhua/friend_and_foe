@@ -5,6 +5,8 @@ using UnityEngine;
 public class SubmarineController : MonoBehaviour
 {
     public float bumpForce = 15f;
+    public int playerID1 = 0;
+    public int playerID2 = 2;
     bool inWaitRoutine = false;
     HealthCounter myHealth;
     Rigidbody2D rb2d;
@@ -36,7 +38,8 @@ public class SubmarineController : MonoBehaviour
             Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
             rb2d.velocity = Vector2.zero;
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
-            InputSystemManager.SetVibration(-1, 0.6f, 0.3f);
+            InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
+            InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
         }    
     }
 

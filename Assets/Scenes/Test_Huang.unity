@@ -610,6 +610,16 @@ PrefabInstance:
       propertyPath: bumpForce
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: playerID1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: playerID2
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1846276475522664818, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: initialTowardRight

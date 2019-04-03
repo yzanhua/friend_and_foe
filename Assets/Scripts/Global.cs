@@ -7,6 +7,7 @@ public class Global : ScriptableObject
     private static Global _instance = null;
 
     public bool AllPlayersMovementEnable = true;
+    public bool isGameEnd = false;
     public bool[] SelectedStatus = new bool[] { false, false, false, false };
     public int[] PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
     public bool SelectionEnable = true;
@@ -22,5 +23,15 @@ public class Global : ScriptableObject
             }
             return _instance;
         }
+    }
+
+    public static void initializeVariables()
+    {
+        instance.PlayerID2GamePadID = new int[] { -1, -1, -1, -1 };
+        instance.SelectedStatus = new bool[] { false, false, false, false };
+        instance.SelectionEnable = true;
+        instance.AllPlayersMovementEnable = true;
+        instance.isGameEnd = false;
+        InputSystemManager.instance.PlayerID2GamePadID = new int[] { 0, 1, 2, 3 }; 
     }
 }

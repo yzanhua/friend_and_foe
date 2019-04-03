@@ -24,6 +24,8 @@ public class BombCreate : MonoBehaviour
 
         while (true)
         {
+            if (Global.instance.isGameEnd)
+                break;
             Transform target_transform = transform;
             target_transform.position = submarine_proxy.transform.position + new Vector3(2.44f, 1.15f);
             target_transform.parent = null;
@@ -32,6 +34,8 @@ public class BombCreate : MonoBehaviour
             // SoundManager.instance.PlaySound("bomb_bell");
             yield return new WaitForSeconds(2.5f);
             Destroy(targetSign, 0.2f);
+            if (Global.instance.isGameEnd)
+                break;
             GameObject new_bomb =  Instantiate(Bomb_prefab, target_transform);
             yield return new WaitForSeconds(Random.Range(MinCreateInterval, MaxCreateInterval));
         }

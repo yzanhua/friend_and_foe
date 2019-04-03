@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
             WinText.text = "Blue Team Win!";
 
         }
+        Global.instance.AllPlayersMovementEnable = false;
         StartCoroutine(ReloadScene());
 
     }
