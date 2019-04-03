@@ -7,7 +7,7 @@ public class WeaponGearController : MonoBehaviour
 {
     public GameObject weapon;
     public GameObject submarine;
-    public GameObject weaponWarning;
+    //public GameObject weaponWarning;
     public GameObject weaponGear;
     public HealthBar healthBar;
     public float rotationSpeed;
@@ -16,29 +16,21 @@ public class WeaponGearController : MonoBehaviour
 
     private SeatOnGear status;
     private SpriteRenderer gearRend;
+    private WeaponController weaponController;
 
     void Start()
     {
         status = GetComponent<SeatOnGear>();
         gearRend = weaponGear.GetComponent<SpriteRenderer>();
-        weaponWarning.SetActive(false);
         if (initialTowardRight)
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, 180f);
+        weaponController = weapon.GetComponent<WeaponController>();
     }
 
     private void Update()
     {
         // update health bar and warning sign of weapon
-        healthBar.SetSize(weapon.GetComponent<WeaponController>().Health());
-
-        if (weapon.GetComponent<WeaponController>().Health() <= 0)
-        {
-            weaponWarning.SetActive(true);
-        }
-        else
-        {
-            weaponWarning.SetActive(false);
-        }
+        healthBar.SetSize(weaponController.Health());
 
         // update weapon under player control
         if (!status.isPlayerOnSeat())
@@ -51,15 +43,14 @@ public class WeaponGearController : MonoBehaviour
             {
                 TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
             }
-            FireBullet();
+            FireBullet(status.playerID());
         }
         RotateTheWeapon();
-
     }
 
-    private void FireBullet()
+    private void FireBullet(int playerID)
     {
-        weapon.GetComponent<WeaponController>().Fire();
+        weaponController.Fire(playerID);
     }
 
     private void RotateTheWeapon()

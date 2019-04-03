@@ -34,39 +34,44 @@ public class SoundManager : MonoBehaviour
 
 
     //Used to play single sound clips.
-    public void PlaySound(string s)
+    public void PlaySound(string s, Vector3? pos = null)
     {
+        Vector3 _pos;
+        if (!pos.HasValue)
+            _pos = Camera.main.transform.position;
+        else _pos = pos.Value;
+
         switch (s)
         {
             case "win":
-                AudioSource.PlayClipAtPoint(win_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(win_clip, _pos);
                 break;
             case "shoot":
-                AudioSource.PlayClipAtPoint(shoot_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(shoot_clip, _pos);
                 break;
             case "move":
-                AudioSource.PlayClipAtPoint(move_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(move_clip, _pos);
                 break;
             case "bubble_generate":
-                AudioSource.PlayClipAtPoint(bubble_generate_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
                 break;
             case "bubble_break":
-                AudioSource.PlayClipAtPoint(bubble_generate_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
                 break;
             case "hit":
-                AudioSource.PlayClipAtPoint(hit_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(hit_clip, _pos);
                 break;
             case "warning":
-                AudioSource.PlayClipAtPoint(warning_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(warning_clip, _pos);
                 break;
             case "collide":
-                AudioSource.PlayClipAtPoint(collide_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(collide_clip, _pos);
                 break;
             case "bomb_bell":
-                AudioSource.PlayClipAtPoint(bell_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(bell_clip, _pos);
                 break;
             case "bomb_explode":
-                AudioSource.PlayClipAtPoint(bomb_explode_clip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(bomb_explode_clip, _pos);
                 break;
             default:
                 Debug.LogWarning("WARNING: no such kind of audio clip");

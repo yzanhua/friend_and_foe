@@ -9,21 +9,24 @@ public class WeaponController : MonoBehaviour
     public int MaxBullets = 15;
     public float bulletoffset;
     public float fireCD = 1f;
+    public GameObject weaponWarning;
 
-    GameObject submarine;
-    int remainBullets;
-    bool isAbleToFire = true;
-    RefillController rc;
+    private GameObject submarine;
+    private int remainBullets;
+    private bool isAbleToFire = true;
+    private RefillController rc;
 
     void Start()
     {
-        submarine = transform.parent.gameObject;
-        remainBullets = 0;
+        submarine = transform.parent.parent.gameObject;
+        
+        remainBullets = MaxBullets * 2/ 3;
         rc = refillStation.GetComponent<RefillController>();
         rc.SetBulletStatus(remainBullets == MaxBullets);
+        weaponWarning.SetActive(false);
     }
 
-    public void Fire()
+    public void Fire(int playerID)
     {
         if (!isAbleToFire)
             return;
@@ -51,6 +54,8 @@ public class WeaponController : MonoBehaviour
                 SoundManager.instance.PlaySound("warning");
             rc = refillStation.GetComponent<RefillController>();
             rc.SetBulletStatus(false);
+            InputSystemManager.SetVibration(playerID, 0.2f, 0.3f);
+            weaponWarning.SetActive(true);
         }
 
     }
@@ -63,6 +68,7 @@ public class WeaponController : MonoBehaviour
     public void FillBullets()
     {
         remainBullets = MaxBullets;
+        weaponWarning.SetActive(false);
     }
 
     public float Health()
