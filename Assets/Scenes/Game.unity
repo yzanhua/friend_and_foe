@@ -977,12 +977,12 @@ PrefabInstance:
         type: 3}
       propertyPath: left_sub
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 118899551}
     - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: right_sub
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1667396101}
     - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: WinText
