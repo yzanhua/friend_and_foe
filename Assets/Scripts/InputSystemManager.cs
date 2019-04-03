@@ -84,6 +84,13 @@ public class InputSystemManager : ScriptableObject
         return instance.players[newID].GetButtonDown("ActionButton2");
     }
 
+    static public bool GetAction2Hold(int playerID)
+    {
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButton("ActionButton2");
+    }
+
     static public bool GetAction3(int playerID)
     {
         int newID = instance.PlayerID2GamePadID[playerID];

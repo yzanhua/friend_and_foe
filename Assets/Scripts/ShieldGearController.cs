@@ -15,10 +15,11 @@ public class ShieldGearController : MonoBehaviour
     public GameObject shieldGear;
     public HealthBar healthBar;
 
-    float initGravityScale;
-    float lastFireDelta;
-    SeatOnGear status;
-    SpriteRenderer gearRend;
+    private float initGravityScale;
+    private float lastFireDelta;
+    private SeatOnGear status;
+    private SpriteRenderer gearRend;
+    private BubbleShieldController bubbleShieldController;
 
 
     // Start is called before the first frame update
@@ -26,12 +27,13 @@ public class ShieldGearController : MonoBehaviour
     {
         gearRend = shieldGear.GetComponent<SpriteRenderer>();
         status = GetComponent<SeatOnGear>();
+        bubbleShieldController = shield.GetComponent<BubbleShieldController>();
     }
 
     void Update()
     {
         // update cd bar and warning
-        float health = shield.GetComponent<BubbleShieldController>().Health();
+        float health = bubbleShieldController.Health();
         healthBar.SetSize(health);
         if (health <= 0)
         {
@@ -47,14 +49,7 @@ public class ShieldGearController : MonoBehaviour
             return;
         }
         int playerID = status.playerID();
-        //if (InputSystemManager.GetAction2(playerID))
-        //{
-        //    bool success = _shield.GetComponent<BubbleShieldController>().Defense();
-        //    if (success)
-        //    {
-        //        StartCoroutine(WaitTillBreak());
-        //    }
-        //}
+
         GenerateShield();
         RotateShield();
     }
@@ -75,7 +70,6 @@ public class ShieldGearController : MonoBehaviour
         bool success = shield.GetComponent<BubbleShieldController>().Defense();
         if (success)
         {
-
             StartCoroutine(WaitTillBreak());
         }
     }

@@ -9,15 +9,14 @@ public class RefillController : MonoBehaviour
     public GameObject progress_bar;
     public GameObject refillStation;
     public Sprite activeSprite;
-    // whether key was pressed in this collision period
-    public bool keyDown = false;
-    public bool playerTrigger = false;
+
     public bool bulletFull = false;
 
-    private int playerID;
+    private int playerID = -1;
     private float curFilledTime = 0;
     private SpriteRenderer refillRend;
     private Sprite inactiveSprite;
+    private HealthBar healthbar_of_progggressbar;
 
 
     void Start()
@@ -25,33 +24,34 @@ public class RefillController : MonoBehaviour
         progress_bar.SetActive(false);
         refillRend = refillStation.GetComponent<SpriteRenderer>();
         inactiveSprite = refillRend.GetComponent<SpriteRenderer>().sprite;
+        healthbar_of_progggressbar = progress_bar.GetComponent<HealthBar>();
     }
 
     void Update()
     {
-        if (bulletFull || !playerTrigger)
+        if (playerID < 0)
+            return;
+
+        if (bulletFull)
         {
-            keyDown = false;
-        }
-        else if (playerTrigger && InputSystemManager.GetAction2(playerID))
-        {
-            keyDown = true;
+            if (InputSystemManager.GetAction2(playerID))
+                InputSystemManager.SetVibration(playerID, 0.3f, 0.3f);
+            return;
         }
 
-        if (keyDown)
+        if (InputSystemManager.GetAction2Hold(playerID))
         {
             if (curFilledTime <= 0)
-            {
                 progress_bar.SetActive(true);
-            }
+            
             curFilledTime += Time.deltaTime;
-            progress_bar.GetComponent<HealthBar>().SetSize((float)curFilledTime / (float)refillTime);
-            refillStation.GetComponent<SpriteRenderer>().sprite = activeSprite;
+            healthbar_of_progggressbar.SetSize((float)curFilledTime / (float)refillTime);
+            refillRend.sprite = activeSprite;
             //refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 1.0f);
         }
         else
         {
-            refillStation.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+            refillRend.sprite = inactiveSprite;
             //refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 0.3f);
         }
 
@@ -59,14 +59,11 @@ public class RefillController : MonoBehaviour
         if (curFilledTime >= refillTime)
         {
             curFilledTime = 0;
-            keyDown = false;
             weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
             bulletFull = true;
             if (TutorialManager.instance != null)
-            {
                 TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
-            }
         }
     }
 
@@ -74,27 +71,20 @@ public class RefillController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        if (other.CompareTag("Player"))
-        {
+        if (other.CompareTag("Player") && playerID == -1)
             playerID = other.GetComponent<PlayerMovementController>().playerID;
-            playerTrigger = true;
-        }
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        if (other.CompareTag("Player"))
-        {
-            playerTrigger = false;
-        }
-
+        if (other.CompareTag("Player") && playerID == other.GetComponent<PlayerMovementController>().playerID)
+            playerID = -1;          
     }
 
     public void SetBulletStatus(bool status)
     {
         bulletFull = status;
-        refillRend = refillStation.GetComponent<SpriteRenderer>();
     }
 }
