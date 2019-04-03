@@ -5323,7 +5323,6 @@ GameObject:
   - component: {fileID: 5180230080710909173}
   - component: {fileID: 5180230080710909175}
   - component: {fileID: 5180230080710909172}
-  - component: {fileID: 2467553411790558490}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5365,6 +5364,8 @@ MonoBehaviour:
   right_bar: {fileID: 0}
   right_sub: {fileID: 0}
   left_sub: {fileID: 0}
+  ready_text: {fileID: 0}
+  go_text: {fileID: 0}
   WinText: {fileID: 0}
 --- !u!114 &5180230080710909172
 MonoBehaviour:
@@ -5380,18 +5381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 0}
   start_time: 5
---- !u!114 &2467553411790558490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5180230080710909170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c731dfc34214b2b4ebb490f94509443f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6582704520158473873
 GameObject:
   m_ObjectHideFlags: 0
