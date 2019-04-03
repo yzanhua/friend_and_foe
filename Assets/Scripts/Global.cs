@@ -6,6 +6,8 @@ public class Global : ScriptableObject
 {
     private static Global _instance = null;
 
+    public float maxScreenSize = 12f;
+
     public bool AllPlayersMovementEnable = true;
     public bool isGameEnd = false;
     public bool[] SelectedStatus = new bool[] { false, false, false, false };

@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &5666206026161365497
 GameObject:
@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &5666206027007421373
 GameObject:
@@ -123,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5666206027007421372}
+  - component: {fileID: 471686002115206487}
   m_Layer: 11
   m_Name: Edge
   m_TagString: Edge
@@ -148,6 +149,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &471686002115206487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666206027007421373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414584f1cd2d3184e9e2e7a324cc758d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: {fileID: 5666206027412802926}
+  right: {fileID: 5666206027466146222}
+  up: {fileID: 5666206026024317586}
+  down: {fileID: 5666206026161365497}
 --- !u!1 &5666206027412802926
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +220,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 20}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &5666206027466146222
 GameObject:
@@ -260,5 +277,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 20}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

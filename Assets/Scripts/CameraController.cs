@@ -39,15 +39,15 @@ public class CameraController : MonoBehaviour
 
     private void CalculateShape()
     {
-        float left = (Mathf.Min(sub1.position.x, sub2.position.x) - radius - 14.4f) / 2f;
-        float right = (Mathf.Max(sub1.position.x, sub2.position.x) + radius + 14.4f) / 2f;
-        float left_dis = left + 14.4f;
-        float right_dis = 14.4f - right;
+        float left = (Mathf.Min(sub1.position.x, sub2.position.x) - radius - Global.instance.maxScreenSize / 9f * 16f) / 2f;
+        float right = (Mathf.Max(sub1.position.x, sub2.position.x) + radius + Global.instance.maxScreenSize / 9f * 16f) / 2f;
+        float left_dis = left + Global.instance.maxScreenSize / 9f * 16f;
+        float right_dis = Global.instance.maxScreenSize / 9f * 16f - right;
 
-        float down = (Mathf.Min(sub1.position.y, sub2.position.y) - radius - 8.1f )/ 2f;
-        float up = (Mathf.Max(sub1.position.y, sub2.position.y) + radius + 8.1f) / 2f;
-        float down_dis = down + 8.1f;
-        float up_dis = 8.1f - up;
+        float down = (Mathf.Min(sub1.position.y, sub2.position.y) - radius - Global.instance.maxScreenSize) / 2f;
+        float up = (Mathf.Max(sub1.position.y, sub2.position.y) + radius + Global.instance.maxScreenSize) / 2f;
+        float down_dis = down + Global.instance.maxScreenSize;
+        float up_dis = Global.instance.maxScreenSize - up;
 
         size = Mathf.Max((right - left) / 32f * 9f, (up - down) / 2f);
 
