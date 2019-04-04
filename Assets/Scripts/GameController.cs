@@ -15,10 +15,10 @@ public class GameController : MonoBehaviour
     public GameObject ready_text;
     public GameObject go_text;
     public Text WinText;
+    public GameObject sByeBye;
 
-
-    private HealthCounter health_big;
-    private HealthCounter health_small;
+    private HealthCounter health_right;
+    private HealthCounter health_left;
     private bool _is_end = false;
     private bool _is_start = false;
 
@@ -37,8 +37,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health_big = right_sub.GetComponent<HealthCounter>();
-        health_small = left_sub.GetComponent<HealthCounter>();
+        health_right = right_sub.GetComponent<HealthCounter>();
+        health_left = left_sub.GetComponent<HealthCounter>();
         StartCoroutine(StartGame());
     }
 
@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
         UpdateHealthBar(left_bar, left_sub);
         UpdateHealthBar(right_bar, right_sub);
 
-        if (health_big.health <= 0 || health_small.health <= 0)
+        if (health_right.health <= 0 || health_left.health <= 0)
         {
             GameEnd();
         }
@@ -68,29 +68,73 @@ public class GameController : MonoBehaviour
     public void GameEnd()
     {
         _is_end = true;
-        health_big = right_sub.GetComponent<HealthCounter>();
-        health_small = left_sub.GetComponent<HealthCounter>();
+        health_right = right_sub.GetComponent<HealthCounter>();
+        health_left = left_sub.GetComponent<HealthCounter>();
+        Global.instance.AllPlayersMovementEnable = false;
 
-        SoundManager.instance.PlaySound("win");
-
-        if (health_big.health < health_small.health)
+        if (health_right.health < health_left.health)
         {
             WinText.text = "Red Team Win!";
-
+            StartCoroutine(DestroyLoser(right_sub, left_sub));
         }
         else
         {
             WinText.text = "Blue Team Win!";
-
+            StartCoroutine(DestroyLoser(left_sub, right_sub));
         }
-        Global.instance.AllPlayersMovementEnable = false;
+    }
+
+    IEnumerator FixCamera(GameObject loser, GameObject winner)
+    {
+        Global.instance.GameEndCustomizeScreen = true;
+        Vector3 init_pos = Camera.main.transform.position;
+        Vector3 target_pos = loser.transform.position;
+        target_pos.z = init_pos.z;
+        float init_size = Camera.main.orthographicSize;
+        float temp = 0f;
+        while (temp < 1f)
+        {
+            temp += Time.deltaTime / 5f;
+            Camera.main.transform.position = Vector3.Lerp(init_pos, target_pos, temp);
+            Camera.main.orthographicSize = Mathf.Lerp(init_size, 6.4f, temp);
+            yield return null;
+        }
+        yield return new WaitForSeconds(5f);
+        init_pos = Camera.main.transform.position;
+        target_pos = winner.transform.position;
+        target_pos.z = init_pos.z;
+        temp = 0f;
+
+        while (temp < 1f)
+        {
+            temp += Time.deltaTime / 3f;
+            Camera.main.transform.position = Vector3.Lerp(init_pos, target_pos, temp);
+            Camera.main.orthographicSize = Mathf.Lerp(6.4f, 7.5f, temp);
+            yield return null;
+        }
+    }
+
+    private IEnumerator DestroyLoser(GameObject loser, GameObject winner)
+    {
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(FixCamera(loser, winner));
+        InputSystemManager.SetVibration(-1, 0.3f, 7f);
+        yield return new WaitForSeconds(7f);
+        InputSystemManager.SetVibration(-1, 0.9f, 2.7f);
+        GameObject temp = Instantiate(sByeBye);
+        temp.transform.position = loser.transform.position;
+        yield return new WaitForSeconds(1.56f);
+        Destroy(loser.transform.parent.gameObject);
+        yield return new WaitForSeconds(1.44f);
+
+        SoundManager.instance.PlaySound("win", winner.transform.position);
         StartCoroutine(ReloadScene());
 
     }
-
+    
     IEnumerator ReloadScene()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(7f);
         SceneManager.LoadScene("Selection");
     }
 

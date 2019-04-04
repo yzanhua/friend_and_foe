@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (Global.instance.GameEndCustomizeScreen)
+            return;
+
         CalculateShape();
         cam.orthographicSize = size;
         cam.transform.position = Vector3.Slerp(cam.transform.position, center, followTimeDelta);

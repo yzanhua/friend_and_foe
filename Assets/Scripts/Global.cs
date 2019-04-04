@@ -7,6 +7,7 @@ public class Global : ScriptableObject
     private static Global _instance = null;
 
     public float maxScreenSize = 12f;
+    public bool GameEndCustomizeScreen = false;
 
     public bool AllPlayersMovementEnable = true;
     public bool isGameEnd = false;
@@ -34,6 +35,7 @@ public class Global : ScriptableObject
         instance.SelectionEnable = true;
         instance.AllPlayersMovementEnable = true;
         instance.isGameEnd = false;
+        instance.GameEndCustomizeScreen = false;
         InputSystemManager.instance.PlayerID2GamePadID = new int[] { 0, 1, 2, 3 }; 
     }
 }
