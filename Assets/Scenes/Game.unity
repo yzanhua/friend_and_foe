@@ -1008,61 +1008,16 @@ PrefabInstance:
       propertyPath: go_text
       value: 
       objectReference: {fileID: 100000, guid: e2937e433861b7348a3d78e06bcc0ca2, type: 3}
-    - target: {fileID: 5180230080710909172, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: timer
-      value: 
-      objectReference: {fileID: 972462976}
-    - target: {fileID: 5180230080099450137, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6481231079324147333, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
+    - target: {fileID: 5180230080710909172, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
-      propertyPath: submarine_proxy
+      propertyPath: timer
       value: 
-      objectReference: {fileID: 118899551}
-    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: MinCreateInterval
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: MaxCreateInterval
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: submarine_proxy
-      value: 
-      objectReference: {fileID: 1667396101}
-    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: MinCreateInterval
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: MaxCreateInterval
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5180230080295163029, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.60784316
-      objectReference: {fileID: 0}
-    - target: {fileID: 4709494598045214803, guid: 4a96e0ea570cb41199142268c64cbf15,
-        type: 3}
-      propertyPath: submarine_proxy
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 972462976}
     - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1072,6 +1027,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230080099450137, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1467254428, guid: 4a96e0ea570cb41199142268c64cbf15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1381,10 +1341,50 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 2.0961795
       objectReference: {fileID: 0}
+    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: submarine_proxy
+      value: 
+      objectReference: {fileID: 118899551}
+    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: MinCreateInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435312015318113012, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: MaxCreateInterval
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5180230080043736968, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_Mass
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: submarine_proxy
+      value: 
+      objectReference: {fileID: 1667396101}
+    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: MinCreateInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806245475387880359, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: MaxCreateInterval
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230080295163029, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 4709494598045214803, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: submarine_proxy
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5180230079963777034, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}

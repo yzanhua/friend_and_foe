@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
         health_right = right_sub.GetComponent<HealthCounter>();
         health_left = left_sub.GetComponent<HealthCounter>();
         Global.instance.AllPlayersMovementEnable = false;
+        Global.instance.isGameEnd = true;
 
         if (health_right.health < health_left.health)
         {
