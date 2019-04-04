@@ -44,7 +44,8 @@ public class SoundManager : MonoBehaviour
         switch (s)
         {
             case "win":
-                AudioSource.PlayClipAtPoint(win_clip, _pos);
+                AudioSource temp = transform.Find("win").GetComponent<AudioSource>();
+                temp.Play();
                 break;
             case "shoot":
                 AudioSource.PlayClipAtPoint(shoot_clip, _pos);
