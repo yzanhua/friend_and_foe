@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
 {
+    public int ID;
     public float bumpForce = 15f;
     public int playerID1 = 0;
     public int playerID2 = 2;

@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
     {
         health_right = right_sub.GetComponent<HealthCounter>();
         health_left = left_sub.GetComponent<HealthCounter>();
+        UpdateHealthBar(left_bar, left_sub);
+        UpdateHealthBar(right_bar, right_sub);
         StartCoroutine(StartGame());
     }
 

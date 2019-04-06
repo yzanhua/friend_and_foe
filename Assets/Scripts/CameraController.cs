@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
         cam.orthographicSize = size;
         cam.transform.position = Vector3.Slerp(cam.transform.position, center, followTimeDelta);
 
+        // This change could be overrided by camera shake
         if ((center - cam.transform.position).magnitude <= 0.05f)
             cam.transform.position = center;
     }

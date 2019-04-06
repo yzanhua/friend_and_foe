@@ -30,8 +30,8 @@ public class BombEffect : MonoBehaviour
     private CircleCollider2D _cc;
     private GameObject _projectileParticle;
     private GameObject _muzzleParticle;
-    private bool _trigger_explosion = true;
     private bool _is_explosion = false;
+    private HashSet<int> _damage_map;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +43,7 @@ public class BombEffect : MonoBehaviour
         ChangeSortingLayer(impactParticlePrefab);
         ChangeSortingLayer(projectileParticlePrefab);
         ChangeSortingLayer(muzzleParticlePrefab);
-
+        _damage_map = new HashSet<int>();
     }
 
     // Update is called once per frame
@@ -73,23 +73,28 @@ public class BombEffect : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Destroy(_projectileParticle);
+        _damage_map.Clear();
         _is_explosion = true;
         _cc.radius = 3.8f;
-        _trigger_explosion = true;
         GameObject impactParticle = Instantiate(impactParticlePrefab, transform.position, Quaternion.FromToRotation(new Vector3(0, 1f, 0), new Vector3(0, 0, 1f))) as GameObject;
         impactParticle.transform.localScale = new Vector3(1f, 1f, 1f);
-
         yield return new WaitForSeconds(1.5f);
-        _cc.enabled = false;
         Destroy(impactParticle); // Lifetime of muzzle effect.
-        _is_explosion = false;
         Destroy(this.gameObject);
     }
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (_trigger_explosion && collider.tag.Contains("Submarine"))
+        int collider_ID = collider.GetComponent<SubmarineController>().ID;
+
+        if (collider.tag.Contains("Submarine"))
         {
+            if (_damage_map.Contains(collider_ID)) return;
+            else
+            {
+                _damage_map.Add(collider_ID);
+            }
+
             Rigidbody2D rd2D = collider.GetComponent<Rigidbody2D>();
             HealthCounter hc = collider.GetComponent<HealthCounter>();
             SubmarineController sc = collider.GetComponent<SubmarineController>();
@@ -107,7 +112,7 @@ public class BombEffect : MonoBehaviour
             hc.AlterHealth(-1 * damage);
             GameObject hitSpark = Instantiate(hitParticlePrefab, collider.transform);
             hitSpark.transform.position -= direction * 2.27f;
-            _trigger_explosion = false;
+            
             Destroy(hitSpark, 1.5f);
         }
     }

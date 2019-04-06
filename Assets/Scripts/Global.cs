@@ -8,6 +8,7 @@ public class Global : ScriptableObject
 
     public float maxScreenSize = 12f;
     public bool GameEndCustomizeScreen = false;
+    public bool CameraShake;
 
     public bool AllPlayersMovementEnable = true;
     public bool isGameEnd = false;
