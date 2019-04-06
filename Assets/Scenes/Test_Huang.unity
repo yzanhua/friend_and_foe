@@ -337,6 +337,16 @@ PrefabInstance:
       propertyPath: bumpForce
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: shake_decay
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: shake_intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2590433532045199457, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -427,6 +437,11 @@ PrefabInstance:
     - target: {fileID: 1846276475522664818, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: initialTowardRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893666096000913453, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -660,6 +675,16 @@ PrefabInstance:
       propertyPath: playerID2
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: shake_decay
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582862346553507086, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: shake_intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2590433532045199457, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -828,6 +853,11 @@ PrefabInstance:
       objectReference: {fileID: 571931721}
     - target: {fileID: 2110404538, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
       propertyPath: submarine_id
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893666096000913453, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
