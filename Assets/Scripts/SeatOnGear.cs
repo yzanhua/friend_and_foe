@@ -76,7 +76,8 @@ public class SeatOnGear : MonoBehaviour
     private void Exit()
     {
         playerOnSeat = false;
-        player.movementEnable = true;
+        //player.movementEnable = true;
+        player.gameObject.layer = 15; // 15 == Jump, PlayerMovementController.cs Update();
         playerGameObject.GetComponent<Rigidbody2D>().gravityScale = initGravityScale;
         station.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
         GameObject proxyPlayer = playerGameObject.GetComponent<PlayerMovementController>().playerProxy;
