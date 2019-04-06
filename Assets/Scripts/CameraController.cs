@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     private float size;
     private Vector3 center;
     private float radius;
+    private Transform cam_container;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class CameraController : MonoBehaviour
         center.z = -10f;
         radius = sub1.gameObject.GetComponent<CircleCollider2D>().radius;
         radius = radius * sub1.localScale.x * sub1.parent.localScale.x;
+        cam_container = transform.parent;
     }
 
     private void Update()
@@ -34,11 +36,11 @@ public class CameraController : MonoBehaviour
 
         CalculateShape();
         cam.orthographicSize = size;
-        cam.transform.position = Vector3.Slerp(cam.transform.position, center, followTimeDelta);
+        cam_container.position = Vector3.Slerp(cam_container.position, center, followTimeDelta);
 
         // This change could be overrided by camera shake
-        if ((center - cam.transform.position).magnitude <= 0.05f)
-            cam.transform.position = center;
+        if ((center - cam_container.position).magnitude <= 0.05f)
+            cam_container.position = center;
     }
 
     private void CalculateShape()

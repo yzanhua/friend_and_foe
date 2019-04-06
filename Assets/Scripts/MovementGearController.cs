@@ -29,6 +29,8 @@ public class MovementGearController : MonoBehaviour
 
     void Update()
     {
+        if (!Global.instance.AllPlayersMovementEnable)
+            return;
         if (!status.isPlayerOnSeat())
         {
             //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);

@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
     IEnumerator FixCamera(GameObject loser, GameObject winner)
     {
         Global.instance.GameEndCustomizeScreen = true;
-        Vector3 init_pos = Camera.main.transform.position;
+        Vector3 init_pos = Camera.main.transform.parent.position;
         Vector3 target_pos = loser.transform.position;
         target_pos.z = init_pos.z;
         float init_size = Camera.main.orthographicSize;
@@ -98,12 +98,12 @@ public class GameController : MonoBehaviour
         while (temp < 1f)
         {
             temp += Time.deltaTime / 5f;
-            Camera.main.transform.position = Vector3.Lerp(init_pos, target_pos, temp);
+            Camera.main.transform.parent.position = Vector3.Lerp(init_pos, target_pos, temp);
             Camera.main.orthographicSize = Mathf.Lerp(init_size, 6.4f, temp);
             yield return null;
         }
         yield return new WaitForSeconds(5f);
-        init_pos = Camera.main.transform.position;
+        init_pos = Camera.main.transform.parent.position;
         target_pos = winner.transform.position;
         target_pos.z = init_pos.z;
         temp = 0f;
@@ -111,7 +111,7 @@ public class GameController : MonoBehaviour
         while (temp < 1f)
         {
             temp += Time.deltaTime / 3f;
-            Camera.main.transform.position = Vector3.Lerp(init_pos, target_pos, temp);
+            Camera.main.transform.parent.position = Vector3.Lerp(init_pos, target_pos, temp);
             Camera.main.orthographicSize = Mathf.Lerp(6.4f, 7.5f, temp);
             yield return null;
         }

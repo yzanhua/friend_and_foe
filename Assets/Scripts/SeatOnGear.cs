@@ -25,6 +25,9 @@ public class SeatOnGear : MonoBehaviour
 
     private void Update()
     {
+        if (!Global.instance.AllPlayersMovementEnable)
+            return;
+
         if (!triggerStay)
             return;
         if (InputSystemManager.GetAction2(player.playerID))
