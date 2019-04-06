@@ -6,16 +6,16 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance = null;     //Allows other scripts to call functions from SoundManager.             
 
-    public AudioClip shoot_clip;
-    public AudioClip move_clip;
-    public AudioClip bubble_generate_clip;
-    public AudioClip bubble_break_clip;
-    public AudioClip hit_clip;
-    public AudioClip win_clip;
-    public AudioClip warning_clip;
-    public AudioClip collide_clip;
-    public AudioClip bell_clip;
-    public AudioClip bomb_explode_clip; 
+    //public AudioClip shoot_clip;
+    //public AudioClip move_clip;
+    //public AudioClip bubble_generate_clip;
+    //public AudioClip bubble_break_clip;
+    //public AudioClip hit_clip;
+    //public AudioClip win_clip;
+    //public AudioClip warning_clip;
+    //public AudioClip collide_clip;
+    //public AudioClip bell_clip;
+    //public AudioClip bomb_explode_clip; 
 
     void Awake()
     {
@@ -34,51 +34,58 @@ public class SoundManager : MonoBehaviour
 
 
     //Used to play single sound clips.
-    public void PlaySound(string s, Vector3? pos = null)
+    public void PlaySound(string s)
     {
-        Vector3 _pos;
-        if (!pos.HasValue)
-            _pos = Camera.main.transform.position;
-        else _pos = pos.Value;
-
-        switch (s)
+        Transform child_transform = transform.Find(s);
+        if (child_transform == null)
         {
-            case "win":
-                AudioSource temp = transform.Find("win").GetComponent<AudioSource>();
-                temp.Play();
-                break;
-            case "shoot":
-                AudioSource.PlayClipAtPoint(shoot_clip, _pos);
-                break;
-            case "move":
-                AudioSource.PlayClipAtPoint(move_clip, _pos);
-                break;
-            case "bubble_generate":
-                AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
-                break;
-            case "bubble_break":
-                AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
-                break;
-            case "hit":
-                AudioSource.PlayClipAtPoint(hit_clip, _pos);
-                break;
-            case "warning":
-                AudioSource.PlayClipAtPoint(warning_clip, _pos);
-                break;
-            case "collide":
-                AudioSource.PlayClipAtPoint(collide_clip, _pos);
-                break;
-            case "bomb_bell":
-                AudioSource.PlayClipAtPoint(bell_clip, _pos);
-                break;
-            case "bomb_explode":
-                AudioSource.PlayClipAtPoint(bomb_explode_clip, _pos);
-                break;
-            default:
-                Debug.LogWarning("WARNING: no such kind of audio clip");
-                break;
+            Debug.LogWarning("WARNING: no such kind of audio clip");
+            return;
         }
-
+        AudioSource temp = child_transform.GetComponent<AudioSource>();
+        if (temp == null)
+        {
+            Debug.LogWarning("WARNING: audio source component not found");
+            return;
+        }
+        temp.Play();
+        //switch (s)
+        //{
+        //    case "win":
+        //        AudioSource temp = transform.Find("win").GetComponent<AudioSource>();
+        //        temp.Play();
+        //        break;
+        //    case "shoot":
+        //        //AudioSource.PlayClipAtPoint(shoot_clip, _pos);
+        //        break;
+        //    case "move":
+        //        AudioSource.PlayClipAtPoint(move_clip, _pos);
+        //        break;
+        //    case "bubble_generate":
+        //        AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
+        //        break;
+        //    case "bubble_break":
+        //        AudioSource.PlayClipAtPoint(bubble_generate_clip, _pos);
+        //        break;
+        //    case "hit":
+        //        AudioSource.PlayClipAtPoint(hit_clip, _pos);
+        //        break;
+        //    case "warning":
+        //        AudioSource.PlayClipAtPoint(warning_clip, _pos);
+        //        break;
+        //    case "collide":
+        //        AudioSource.PlayClipAtPoint(collide_clip, _pos);
+        //        break;
+        //    case "bomb_bell":
+        //        AudioSource.PlayClipAtPoint(bell_clip, _pos);
+        //        break;
+        //    case "bomb_explode":
+        //        AudioSource.PlayClipAtPoint(bomb_explode_clip, _pos);
+        //        break;
+        //    default:
+        //        Debug.LogWarning("WARNING: no such kind of audio clip");
+        //        break;
+        //}
     }
 
 }
