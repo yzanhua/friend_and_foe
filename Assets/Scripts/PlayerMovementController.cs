@@ -178,8 +178,6 @@ public class PlayerMovementController : MonoBehaviour
             movementEnable = true;
         }
 
-        Debug.Log(other.name);
-        Debug.Log(other.layer);
         if (__seat_on_gear_exit && !other.CompareTag("Player"))
         {
             __seat_on_gear_exit = false;
