@@ -43,11 +43,11 @@ public class ChangeScene : MonoBehaviour
 
     IEnumerator ChangeGearsPositions()
     {
+        StartCoroutine(GameController.instance.SwitchStation());
         for (int t = 0; t < flashCount; t += 1)
         {
             for (int i = 0; i < gearNum; ++i)
             {
-                //gears[i].GetComponent<SpriteRenderer>().enabled = false;
                 SetSpriteStatus(gears[i].GetComponent<SeatOnGear>().station.transform, false);
             }
             yield return new WaitForSeconds(0.3f);
