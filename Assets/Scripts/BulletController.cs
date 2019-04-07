@@ -101,8 +101,7 @@ public class BulletController : MonoBehaviour
         GameObject exp = Instantiate(explosionParticle, transform.position, Quaternion.identity);
         exp.transform.localScale = new Vector2(1.5f, 1.5f);
         yield return new WaitForSeconds(0.5f);
-
-        Destroy(expflash, 2f);
+        Destroy(exp, 2f);
         Destroy(gameObject);
     }
 }

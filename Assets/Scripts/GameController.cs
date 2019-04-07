@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         Global.instance.AllPlayersMovementEnable = false;
         Global.instance.bombCreate = false;
         _is_start = true;
