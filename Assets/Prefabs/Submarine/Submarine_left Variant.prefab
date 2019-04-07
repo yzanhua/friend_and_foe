@@ -364,6 +364,11 @@ PrefabInstance:
       propertyPath: playerProxy
       value: 
       objectReference: {fileID: 1893989410820255430}
+    - target: {fileID: 6538417531017491360, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: station
+      value: 
+      objectReference: {fileID: 4320477799323208741}
     - target: {fileID: 3486594542978867807, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: playerID
@@ -409,6 +414,12 @@ Transform:
 --- !u!1 &7369533152887007259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1001823346, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7369533152479278185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4320477799323208741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6751103587811784780, guid: b971c8b55737d4fe1bc0843778b8b0d9,
     type: 3}
   m_PrefabInstance: {fileID: 7369533152479278185}
   m_PrefabAsset: {fileID: 0}
