@@ -85,10 +85,9 @@ public class BombEffect : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        int collider_ID = collider.GetComponent<SubmarineController>().ID;
-
         if (collider.tag.Contains("Submarine"))
         {
+            int collider_ID = collider.GetComponent<SubmarineController>().ID;
             if (_damage_map.Contains(collider_ID)) return;
             else
             {

@@ -28,6 +28,8 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 target;
 
+    public bool __seat_on_gear_exit = false;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -173,6 +175,14 @@ public class PlayerMovementController : MonoBehaviour
         else if (other.layer == 13 && gameObject.layer == 15)
         {   // 13 = floor, 15 == Jump
             gameObject.layer = 14; // 14 = Player
+            movementEnable = true;
+        }
+
+        Debug.Log(other.name);
+        Debug.Log(other.layer);
+        if (__seat_on_gear_exit && !other.CompareTag("Player"))
+        {
+            __seat_on_gear_exit = false;
             movementEnable = true;
         }
     }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// credit: https://gist.github.com/GuilleUCM/d882e228d93c7f7d0820
+
 public class SubmarineController : MonoBehaviour
 {
     public int ID;
@@ -58,7 +60,7 @@ public class SubmarineController : MonoBehaviour
         }
         if (other.CompareTag("Submarine"))
         {
-            CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
+            //CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
             if (!collision.otherCollider.CompareTag("Weapon") && !collision.otherCollider.CompareTag("Shield"))
                 myHealth.AlterHealth(-2f);
             if (SoundManager.instance != null)
