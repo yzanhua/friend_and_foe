@@ -7,10 +7,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance = null;     //Allows other scripts to call functions from SoundManager.             
 
-    private Hashtable _current_playing = new Hashtable();
-    private int _next_ID = 0;
-    private List<int> _available_ID = new List<int>();
-
     void Awake()
     {
         //Check if there is already an instance of SoundManager
@@ -24,48 +20,49 @@ public class SoundManager : MonoBehaviour
 
         //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
-        
+
     }
 
     //Used to play single sound clips.
-    public int PlaySound(string s)
+    public void PlaySound(string s)
     {
         Transform child_transform = transform.Find(s);
         if (child_transform == null)
         {
             Debug.LogWarning("WARNING: no such kind of audio clip");
-            return -1;
+            return;
         }
         AudioSource temp = child_transform.GetComponent<AudioSource>();
         if (temp == null)
         {
             Debug.LogWarning("WARNING: audio source component not found");
-            return -1;
+            return;
         }
-        temp.Play();
 
-        int ID = -1;
-        if (_available_ID.Count != 0)
+        if (!temp.isPlaying)
         {
-            ID = _available_ID[_available_ID.Count - 1];
+            temp.Play();
         }
-        else
-        {
-            ID = _next_ID;
-            _next_ID++;
-        }
-        _current_playing.Add(ID, temp);
-
-        return ID;
     }
 
-    public void StopSound(int ID)
+    public void StopSound(string s)
     {
-        if (_current_playing.Contains(ID))
+        Transform child_transform = transform.Find(s);
+        if (child_transform == null)
         {
-            AudioSource aS = (AudioSource)_current_playing[ID];
-            aS.Stop();
-            _current_playing.Remove(ID);
+            Debug.LogWarning("WARNING: no such kind of audio clip");
+            return;
+        }
+        AudioSource temp = child_transform.GetComponent<AudioSource>();
+        if (temp == null)
+        {
+            Debug.LogWarning("WARNING: audio source component not found");
+            return;
+        }
+
+        if (temp.isPlaying)
+        {
+            temp.Stop();
         }
     }
 

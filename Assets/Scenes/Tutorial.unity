@@ -7010,6 +7010,159 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1522619579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522619582}
+  - component: {fileID: 1522619580}
+  m_Layer: 0
+  m_Name: TransitionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1522619580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522619579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a93778f23f3e04f8bc8fda61deef8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitForTransitionIn: 1
+  AutoRun: 0
+  RepeatWhenEnabled: 0
+  TransitionInConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0
+    Duration: 0.3
+    TimeUpdateMethod: 0
+    TransitionType: 22
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  TransitionOutConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0
+    Duration: 0.3
+    TimeUpdateMethod: 0
+    TransitionType: 22
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase+TransitionStepEvent,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  Target: {fileID: 0}
+  MoveInConfig:
+    StartTarget: {fileID: 0}
+    MoveX: 1
+    MoveY: 1
+    MoveZ: 1
+  MoveOutConfig:
+    EndTarget: {fileID: 0}
+    MoveX: 1
+    MoveY: 1
+    MoveZ: 1
+--- !u!4 &1522619582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522619579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.6782265, y: 3.587436, z: -0.09869832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618893923
 GameObject:
   m_ObjectHideFlags: 0
