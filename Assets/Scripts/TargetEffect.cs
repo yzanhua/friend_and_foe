@@ -8,17 +8,36 @@ public class TargetEffect : MonoBehaviour
 
 
     private bool _increase = false;
-    private float speed = 2f;
+    private float speed = 4f;
+    private bool isFlashing = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _sr = GetComponent<SpriteRenderer>();
+        StartCoroutine(RotateSelf());
+    }
+
+    IEnumerator RotateSelf()
+    {
+        yield return new WaitForSeconds(2f);
+        isFlashing = true;
+    }
+
+    private void Update()
+    {
+        if (!isFlashing)
+            transform.Rotate(Vector3.forward, Time.deltaTime * 20f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!isFlashing)
+        {
+            return;
+        }
+
         speed += Time.fixedDeltaTime * 2;
         if (!_increase)
         {
