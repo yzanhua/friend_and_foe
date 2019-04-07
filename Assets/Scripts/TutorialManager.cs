@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BeautifulTransitions.Scripts.Transitions.Components;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -400,7 +401,7 @@ public class TutorialManager : MonoBehaviour
                 else if ((bool)_startMap[i]) start_num++;
             }
 
-            if (skip_num == Global.instance.numOfPlayers)
+            if (skip_num == 1)
             { 
                 state = State.PRE_FINISHED;
             }
@@ -416,7 +417,7 @@ public class TutorialManager : MonoBehaviour
         } else if (state == State.PRE_FINISHED)
         {
             Global.instance.AllPlayersMovementEnable = true;
-            SceneManager.LoadScene("Game");
+            TransitionManager.Instance.TransitionOutAndLoadScene("Game");
         } else if (_TaskState[0] && _TaskState[1])
         {
             if (state == State.CHARACTER)
@@ -479,7 +480,7 @@ public class TutorialManager : MonoBehaviour
     {
         EnableText("Finished");
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Game");
+        TransitionManager.Instance.TransitionOutAndLoadScene("Game");
     }
 
 

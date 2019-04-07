@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Global.instance.GameEndCustomizeScreen)
+        if (Global.instance.GameEndCustomizeScreen || !Global.instance.cameraControl)
             return;
 
         CalculateShape();

@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         UpdateHealthBar(left_bar, left_sub);
         UpdateHealthBar(right_bar, right_sub);
         StartCoroutine(StartGame());
+        Global.instance.cameraControl = false;
     }
 
     // Update is called once per frame
@@ -143,8 +144,14 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        yield return new WaitForSeconds(0.3f);
         Global.instance.AllPlayersMovementEnable = false;
+        Global.instance.bombCreate = false;
         _is_start = true;
+        Global.instance.godMode = true;
+
+        left_sub.transform.localPosition = new Vector3(-12.75f, 0f, 0f);
+        right_sub.transform.localPosition = new Vector3(12.75f, 0f, 0f);
         GameObject startText = Instantiate(ready_text, transform);
         startText.transform.localScale = new Vector3(10f, 10f);
         startText.transform.position = new Vector3(0f, 4.0f);
@@ -154,10 +161,26 @@ public class GameController : MonoBehaviour
             float old_value = startText.transform.localScale.x;
             startText.transform.localScale = new Vector3(old_value - 0.2f, old_value - 0.2f);
             yield return null;
-            
         }
+
         Destroy(startText);
 
+        Rigidbody2D left_rd2 = left_sub.GetComponent<Rigidbody2D>();
+        Rigidbody2D right_rd2 = right_sub.GetComponent<Rigidbody2D>();
+
+        left_rd2.AddForce(new Vector2(80f, 0f) * left_rd2.mass, ForceMode2D.Impulse);
+        right_rd2.AddForce(new Vector2(-80f, 0f) * left_rd2.mass, ForceMode2D.Impulse);
+
+
+        while(left_sub.transform.localPosition.x < -2.5f)
+        {
+            yield return null;
+        }
+
+
+        Global.instance.cameraControl = true;
+
+        Global.instance.godMode = false;
         GameObject goText = Instantiate(go_text, transform);
         goText.transform.localScale = new Vector3(10f, 10f);
         goText.transform.position = new Vector3(0f, 4.0f);

@@ -16,6 +16,9 @@ public class HealthCounter : MonoBehaviour
 
     public void AlterHealth(float alt)
     {
+        if (Global.instance.godMode)
+            return;
+
         health += alt;
         if (health < 0)
         {

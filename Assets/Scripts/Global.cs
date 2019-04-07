@@ -17,6 +17,10 @@ public class Global : ScriptableObject
     public bool SelectionEnable = true;
     public int numOfPlayers = 4;
 
+    public bool bombCreate = true;
+    public bool cameraControl = true;
+    public bool godMode = false;
+
     public static Global instance
     {
         get
