@@ -11,6 +11,11 @@ public class SeatOnGear : MonoBehaviour
     private PlayerMovementController player;
     private GameObject playerGameObject;
     private bool triggerStay = false;
+<<<<<<< HEAD
+=======
+    //private float initGravityScale;
+    //private Vector3 offset;
+>>>>>>> 0d2c09a40d4c64647f460bdc2289784924d70156
     private bool inLiftProgress = false;
     private Vector3 targetPos;
     private Sprite inactiveSprite;
@@ -100,10 +105,14 @@ public class SeatOnGear : MonoBehaviour
         //player.__seat_on_gear_exit = true
         exitPlayer.GetComponent<PlayerMovementController>().__seat_on_gear_exit = true;
         exitPlayer.GetComponent<Rigidbody2D>().gravityScale = exitPlayer.GetComponent<PlayerMovementController>().__init_gravity_scale;
+<<<<<<< HEAD
         if (!station.CompareTag("MovementStation"))
         {
             station.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
         }
+=======
+        station.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+>>>>>>> 0d2c09a40d4c64647f460bdc2289784924d70156
         GameObject proxyPlayer = exitPlayer.GetComponent<PlayerMovementController>().playerProxy;
         proxyPlayer.GetComponent<Animator>().enabled = true;
     }
@@ -127,6 +136,10 @@ public class SeatOnGear : MonoBehaviour
         }
         if (currPlayer != playerGameObject)
         {
+<<<<<<< HEAD
+=======
+            //Exit(currPlayer);
+>>>>>>> 0d2c09a40d4c64647f460bdc2289784924d70156
             inLiftProgress = false;
             yield break;
         }
