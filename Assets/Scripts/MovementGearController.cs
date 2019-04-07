@@ -31,7 +31,7 @@ public class MovementGearController : MonoBehaviour
     {
         if (!Global.instance.AllPlayersMovementEnable)
             return;
-        if (!status.isPlayerOnSeat())
+        if (!status.IsPlayerOnSeat())
         {
             //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
             return;
@@ -45,7 +45,7 @@ public class MovementGearController : MonoBehaviour
         }
 
         // move if on seat
-        int playerID = status.playerID();
+        int playerID = status.PlayerID();
         Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
 

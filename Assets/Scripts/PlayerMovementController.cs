@@ -21,19 +21,21 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject playerProxy;
     public GameObject stunnedCirclingStarsPrefab;
 
+    public bool __seat_on_gear_exit = false;
+    public float __init_gravity_scale;
+
     private bool onLadder = false;
     private bool climbingLadder = false;
     private GameObject ladder;
-    private float initGravityScale;
     private Rigidbody2D rb2d;
     private Vector2 target;
 
-    public bool __seat_on_gear_exit = false;
+
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        initGravityScale = rb2d.gravityScale;
+        __init_gravity_scale = rb2d.gravityScale;
     }
 
     private void Update()
@@ -87,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour
                 GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
                 new_trail.transform.position = playerProxy.transform.position;
             }
-                
+
             rb2d.AddForce(speed * temp * rb2d.mass);
         }
 
@@ -109,7 +111,7 @@ public class PlayerMovementController : MonoBehaviour
     void Jump(float horizontalInput)
     {
         float verticalInput = -1f;
-        rb2d.gravityScale = initGravityScale * 2f;
+        rb2d.gravityScale = __init_gravity_scale * 2f;
         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         Vector2 horizontalForce = (new Vector2(horizontalInput, 0f)).normalized;
@@ -146,7 +148,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ladder"))
         {
-            rb2d.gravityScale = initGravityScale;
+            rb2d.gravityScale = __init_gravity_scale;
             onLadder = false;
         }
         if (collision.gameObject.CompareTag("LadderForbidHorizontal"))

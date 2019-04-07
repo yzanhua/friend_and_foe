@@ -7,7 +7,6 @@ TagManager:
   - Ladder
   - Submarine
   - Bullet
-  - MovementGeer
   - Shield
   - Edge
   - Fish
@@ -16,6 +15,7 @@ TagManager:
   - Ladder_DownStair
   - Bomb
   - MovementStation
+  - Wheel
   layers:
   - Default
   - TransparentFX

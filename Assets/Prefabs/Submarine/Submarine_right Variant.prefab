@@ -301,6 +301,11 @@ PrefabInstance:
       propertyPath: playerProxy
       value: 
       objectReference: {fileID: 217427330451195958}
+    - target: {fileID: 6538417531017491360, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: station
+      value: 
+      objectReference: {fileID: 6258667854742985429}
     - target: {fileID: 3486594542978867807, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: knockBackDistance
@@ -321,6 +326,12 @@ Transform:
 --- !u!4 &5807392802355733972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6625917982602987341, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 823030292242391705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6258667854742985429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6751103587811784780, guid: b971c8b55737d4fe1bc0843778b8b0d9,
     type: 3}
   m_PrefabInstance: {fileID: 823030292242391705}
   m_PrefabAsset: {fileID: 0}
