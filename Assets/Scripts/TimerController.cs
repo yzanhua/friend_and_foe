@@ -21,7 +21,7 @@ public class TimerController : MonoBehaviour
 
     IEnumerator countDown()
     {
-        while(true) {
+        while(true && !Global.instance.isGameEnd) {
             if (_second == 0)
             {
                 _min--;
