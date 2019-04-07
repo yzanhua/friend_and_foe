@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour
         Destroy(loser.transform.parent.gameObject);
         yield return new WaitForSeconds(1.44f);
 
-        SoundManager.instance.PlaySound("win", winner.transform.position);
+        SoundManager.instance.PlaySound("win");
         StartCoroutine(ReloadScene());
 
     }

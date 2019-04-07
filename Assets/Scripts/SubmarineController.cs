@@ -12,10 +12,38 @@ public class SubmarineController : MonoBehaviour
     HealthCounter myHealth;
     Rigidbody2D rb2d;
 
+    // shake effect
+    private Quaternion originRotation;
+    private float temp_shake_intensity = 0f;
+    public float shake_decay = 0.004f;
+    public float shake_intensity = .2f;
+
     private void Start()
     {
         myHealth = GetComponent<HealthCounter>();
         rb2d = GetComponent<Rigidbody2D>();
+        originRotation = transform.rotation;
+    }
+
+    public void shake(float shake_intensity_ = -1f)
+    {
+        if (shake_intensity_ < 0f) shake_intensity_ = shake_intensity;
+        temp_shake_intensity = shake_intensity_;
+    }
+
+    private void Update()
+    {
+        if (temp_shake_intensity > 0)
+        {
+            transform.rotation = new Quaternion(
+                originRotation.x + Random.Range(-temp_shake_intensity, temp_shake_intensity) * .2f,
+                originRotation.y + Random.Range(-temp_shake_intensity, temp_shake_intensity) * .2f,
+                originRotation.z + Random.Range(-temp_shake_intensity, temp_shake_intensity) * .2f,
+                originRotation.w + Random.Range(-temp_shake_intensity, temp_shake_intensity) * .2f);
+            temp_shake_intensity -= shake_decay;
+            if (temp_shake_intensity <= 0)
+                transform.rotation = originRotation;
+        }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -43,6 +71,7 @@ public class SubmarineController : MonoBehaviour
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
             InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
             InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
+            shake();
         }    
     }
 
