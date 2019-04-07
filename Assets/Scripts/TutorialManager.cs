@@ -499,7 +499,7 @@ public class TutorialManager : MonoBehaviour
         _leftGear.gameObject.SetActive(value);
         _rightGear.gameObject.SetActive(value);
         _leftStaticGear.gameObject.SetActive(value);
-         _rightStaticGear.gameObject.SetActive(value);
+        _rightStaticGear.gameObject.SetActive(value);
 
 
 
