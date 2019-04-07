@@ -44,11 +44,11 @@ public class ShieldGearController : MonoBehaviour
             shieldWarning.SetActive(false);
         }
 
-        if (!status.isPlayerOnSeat())
+        if (!status.IsPlayerOnSeat())
         {
             return;
         }
-        int playerID = status.playerID();
+        int playerID = status.PlayerID();
 
         GenerateShield();
         RotateShield();
@@ -76,8 +76,8 @@ public class ShieldGearController : MonoBehaviour
 
     void RotateShield()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
-        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
+        float inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
+        float inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
 
         if (inputX != 0f || inputY != 0f)
         {

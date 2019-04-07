@@ -33,17 +33,17 @@ public class WeaponGearController : MonoBehaviour
         healthBar.SetSize(weaponController.Health());
 
         // update weapon under player control
-        if (!status.isPlayerOnSeat())
+        if (!status.IsPlayerOnSeat())
         {
             return;
         }
-        if (InputSystemManager.GetAction1(status.playerID()))
+        if (InputSystemManager.GetAction1(status.PlayerID()))
         {
             if (TutorialManager.instance != null)
             {
                 TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
             }
-            FireBullet(status.playerID());
+            FireBullet(status.PlayerID());
         }
         RotateTheWeapon();
     }
@@ -55,8 +55,8 @@ public class WeaponGearController : MonoBehaviour
 
     private void RotateTheWeapon()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(status.playerID());
-        float inputY = InputSystemManager.GetLeftSVertical(status.playerID());
+        float inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
+        float inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
 
         if (inputX != 0f || inputY != 0f)
         {
