@@ -26,7 +26,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (currTime >= targetTime)
         {
-            StartCoroutine(changeGearsPositions());
+            StartCoroutine(ChangeGearsPositions());
             currTime = 0f;
         }
     }
@@ -41,20 +41,20 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
-    IEnumerator changeGearsPositions()
+    IEnumerator ChangeGearsPositions()
     {
         for (int t = 0; t < flashCount; t += 1)
         {
             for (int i = 0; i < gearNum; ++i)
             {
                 //gears[i].GetComponent<SpriteRenderer>().enabled = false;
-                SetSpriteStatus(gears[i], false);
+                SetSpriteStatus(gears[i].GetComponent<SeatOnGear>().station.transform, false);
             }
             yield return new WaitForSeconds(0.3f);
             for (int i = 0; i < gearNum; ++i)
             {
                 //gears[i].GetComponent<SpriteRenderer>().enabled = true;
-                SetSpriteStatus(gears[i], true);
+                SetSpriteStatus(gears[i].GetComponent<SeatOnGear>().station.transform, true);
             }
             yield return new WaitForSeconds(0.3f);
         }
