@@ -75,10 +75,12 @@ public class BombEffect : MonoBehaviour
         Destroy(_projectileParticle);
         _damage_map.Clear();
         _is_explosion = true;
-        _cc.radius = 3.8f;
+        _cc.radius = 2.1f;
         GameObject impactParticle = Instantiate(impactParticlePrefab, transform.position, Quaternion.FromToRotation(new Vector3(0, 1f, 0), new Vector3(0, 0, 1f))) as GameObject;
         impactParticle.transform.localScale = new Vector3(1f, 1f, 1f);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
+        _cc.enabled = false;
+        yield return new WaitForSeconds(1f);
         Destroy(impactParticle); // Lifetime of muzzle effect.
         Destroy(this.gameObject);
     }
