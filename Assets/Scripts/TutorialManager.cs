@@ -404,13 +404,9 @@ public class TutorialManager : MonoBehaviour
             { 
                 state = State.PRE_FINISHED;
             }
-            else if (start_num == Global.instance.numOfPlayers)
+            else if (start_num == 1)
             {
-                Global.instance.AllPlayersMovementEnable = true;
-                state = State.CHARACTER;
-                EnableText("Dash");
-                LeftSubmarine.SetActive(true);
-                RightSubmarine.SetActive(true);
+                StartCoroutine(StartTutorialTransition());
             }
 
             GameObject num_text = PreparedText.transform.Find("SkipTutorial").Find("flash_text").gameObject;
@@ -491,6 +487,28 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         cb();
+    }
+
+    IEnumerator StartTutorialTransition()
+    {
+        Vector3 target_position = new Vector3(0f, 3.5f, -10f);
+        Transform container_transform = Camera.main.transform.parent;
+
+        LeftSubmarine.SetActive(true);
+        RightSubmarine.SetActive(true);
+
+        while ((container_transform.position - target_position).magnitude > 0.01f)
+        {
+            container_transform.position += (target_position - container_transform.position) * Time.deltaTime * 0.2f;
+            yield return null;
+        }
+
+
+        Global.instance.AllPlayersMovementEnable = true;
+        state = State.CHARACTER;
+        EnableText("Dash");
+
+
     }
 
     private void AlterGearState(bool value)

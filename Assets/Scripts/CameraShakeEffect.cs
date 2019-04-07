@@ -36,10 +36,16 @@ public class CameraShakeEffect : MonoBehaviour
 
     Vector3 _velocity = Vector3.zero;
 
-    public static void Bump(float amount)
+    public static void BumpRandom(float amount)
     {
-        //instance.velocity += new Vector3(force.x, force.y, 0) * 10;
+
         instance._velocity += Random.onUnitSphere * amount;
+        instance._velocity.z = 0f;
+    }
+
+    public static void BumpDirection(Vector3 force, float amount)
+    {
+        instance._velocity += new Vector3(force.x, force.y, 0) * amount;
         instance._velocity.z = 0f;
     }
 
@@ -75,7 +81,7 @@ public class CameraShakeEffect : MonoBehaviour
         while (Time.time < endTime)
         {
             // transform.position = _original_pos + Random.insideUnitSphere * amount;
-            Bump(amount);
+            BumpRandom(amount);
             yield return null;
         }
         _isShake = false;
