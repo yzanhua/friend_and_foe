@@ -308,7 +308,7 @@ PrefabInstance:
     - target: {fileID: 7275708545202217326, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8938829486216387247, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: weaponWarning
       value: 
       objectReference: {fileID: 7369533152887007259}
+    - target: {fileID: 2365867676812280404, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3486594542978867795, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_LocalPosition.x
