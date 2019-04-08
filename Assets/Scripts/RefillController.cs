@@ -9,6 +9,7 @@ public class RefillController : MonoBehaviour
     public GameObject progress_bar;
     public GameObject refillStation;
     public Sprite activeSprite;
+    public GameObject button;
 
     public bool bulletFull = false;
 
@@ -32,6 +33,9 @@ public class RefillController : MonoBehaviour
         if (playerID < 0)
             return;
 
+
+
+
         if (bulletFull)
         {
             if (InputSystemManager.GetAction2(playerID))
@@ -47,10 +51,13 @@ public class RefillController : MonoBehaviour
             curFilledTime += Time.deltaTime;
             healthbar_of_progggressbar.SetSize((float)curFilledTime / (float)refillTime);
             refillRend.sprite = activeSprite;
+            button.SetActive(false);
             //refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 1.0f);
         }
         else
         {
+            if (!bulletFull)
+                button.SetActive(true);
             refillRend.sprite = inactiveSprite;
             //refillRend.color = new Color(refillRend.color.r, refillRend.color.g, refillRend.color.b, 0.3f);
         }
@@ -58,6 +65,7 @@ public class RefillController : MonoBehaviour
         //finished filling
         if (curFilledTime >= refillTime)
         {
+            button.SetActive(false);
             curFilledTime = 0;
             weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
@@ -72,7 +80,9 @@ public class RefillController : MonoBehaviour
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Player") && playerID == -1)
+        {
             playerID = other.GetComponent<PlayerMovementController>().playerID;
+        }
 
     }
 
@@ -80,7 +90,10 @@ public class RefillController : MonoBehaviour
     {
         GameObject other = collision.gameObject;
         if (other.CompareTag("Player") && playerID == other.GetComponent<PlayerMovementController>().playerID)
-            playerID = -1;          
+        {
+            playerID = -1;
+            button.SetActive(false);
+        }
     }
 
     public void SetBulletStatus(bool status)
