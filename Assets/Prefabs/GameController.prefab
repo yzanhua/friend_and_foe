@@ -5366,6 +5366,7 @@ MonoBehaviour:
   left_sub: {fileID: 0}
   ready_text: {fileID: 0}
   go_text: {fileID: 0}
+  confetti_prefab: {fileID: 0}
   WinText: {fileID: 0}
   sByeBye: {fileID: 2561049763960051357, guid: ac60da5de68a5c943afab8e357ece1c9, type: 3}
   station_switch_text: {fileID: 100002, guid: 158e1aea83921e845a1428dd3d52e25d, type: 3}
