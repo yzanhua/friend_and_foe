@@ -61,7 +61,6 @@ public class SubmarineController : MonoBehaviour
         }
         if (other.CompareTag("Submarine"))
         {
-            //CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
             if (!collision.otherCollider.CompareTag("Weapon") && !collision.otherCollider.CompareTag("Shield"))
                 myHealth.AlterHealth(-2f);
             if (SoundManager.instance != null)
@@ -78,7 +77,7 @@ public class SubmarineController : MonoBehaviour
             spark.transform.position = collision.GetContact(0).point;
             Destroy(spark, 1f);
             shake();
-        }    
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

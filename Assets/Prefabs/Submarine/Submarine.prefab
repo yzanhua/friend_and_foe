@@ -3646,6 +3646,9 @@ MonoBehaviour:
   particleLayer: 2
   bubbleShieldParticlePrefab: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad,
     type: 3}
+  shieldWarning: {fileID: 290093250578974086}
+  healthBar: {fileID: 4250473695180464267}
+  status: {fileID: 0}
 --- !u!1 &6751103587811784780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4557,8 +4560,7 @@ MonoBehaviour:
   PlayerCD: 2
   rotationSpeed: 3
   shield: {fileID: 6449448328158498596}
-  shieldGear: {fileID: 5675577625392023480}
-  shieldWarning: {fileID: 290093250578974086}
+  submarine_proxy_transform: {fileID: 6625917982602987341}
 --- !u!61 &589049337
 BoxCollider2D:
   m_ObjectHideFlags: 0

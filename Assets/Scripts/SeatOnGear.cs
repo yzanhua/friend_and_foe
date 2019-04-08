@@ -76,8 +76,11 @@ public class SeatOnGear : MonoBehaviour
         }
     }
 
-    private void Exit()
+    public void Exit()
     {
+        if (!playerOnSeat)
+            return;
+
         playerOnSeat = false;
         playerController.__seat_on_gear_exit = true;
         playerController.gameObject.GetComponent<Rigidbody2D>().gravityScale = playerController.__init_gravity_scale;

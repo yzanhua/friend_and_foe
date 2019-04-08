@@ -9,7 +9,12 @@ public class BubbleShieldController : MonoBehaviour
 
     public float _current_health;
     public int particleLayer;
+    
     public GameObject bubbleShieldParticlePrefab;
+    public GameObject shieldWarning;
+    public HealthBar healthBar;
+
+    public SeatOnGear status = null;
 
     private SpriteRenderer[] _sr;
     private GameObject[] _bubbleParticles;
@@ -32,14 +37,7 @@ public class BubbleShieldController : MonoBehaviour
             _an[i] = transform.GetChild(i).GetComponent<Animator>();
         }
         GetComponent<PolygonCollider2D>().enabled = false;
-    }
-
-    private void Update()
-    {
-        if (_current_health <= 0.0f)
-        {
-            BreakShield();
-        }
+        healthBar.SetSize(_current_health / MAX_HEALTH);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,23 +45,30 @@ public class BubbleShieldController : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.CompareTag("Bullet"))
         {
-            _current_health -= 1;
+            ModifyHealth(-1f);
         }
     }
 
-    private bool ShieldInUse()
+    public void ModifyHealth(float off)
     {
-        for (int i = 0; i < _childNum; ++i)
+        if (_current_health <= 0f && off <= 0f)
+            return;
+
+        _current_health += off;
+
+        if (_current_health <= 0.0f)
         {
-            if (!_an[i].GetCurrentAnimatorStateInfo(0).IsName("NoBubbleShield"))
-            {
-                return true;
-            }
+            _current_health = 0f;
+            BreakShield();
+            shieldWarning.SetActive(true);
+            status.Exit();
+            StartCoroutine(WaitShieldCD());
         }
-        return false;
+
+        healthBar.SetSize(_current_health / MAX_HEALTH);
     }
 
-    private bool GenerateShield()
+    public bool GenerateShield()
     {
         if (!_shield_ready)
             return false;
@@ -81,7 +86,6 @@ public class BubbleShieldController : MonoBehaviour
             StartCoroutine(StartParticle());
             return true;
         }
-
         return false;
     }
 
@@ -107,14 +111,20 @@ public class BubbleShieldController : MonoBehaviour
 
     private IEnumerator WaitShieldCD()
     {
-        yield return new WaitForSeconds(ShieldCD);
+        float time = 0f;
+        while (time < 1f)
+        {
+            time += Time.deltaTime / ShieldCD;
+            healthBar.SetSize(time);
+            yield return null;
+        }
         _shield_ready = true;
         _current_health = MAX_HEALTH;
+        shieldWarning.SetActive(false);
     }
 
     private void ChangeSortingLayer(GameObject effectobject)
     {
-
         foreach (Transform child in effectobject.transform)
         {
             ParticleSystemRenderer psr = child.gameObject.GetComponent<ParticleSystemRenderer>();
@@ -143,31 +153,8 @@ public class BubbleShieldController : MonoBehaviour
             GetComponent<PolygonCollider2D>().enabled = false;
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("bubble_break");
-            StartCoroutine(WaitShieldCD());
             return true;
         }
         return false;
-    }
-
-    public bool Defense()
-    {
-        return GenerateShield();
-    }
-
-    public float Health()
-    {
-        if (ShieldInUse())
-        {
-            return _current_health / MAX_HEALTH;
-        }
-        if (_shield_ready)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-
     }
 }

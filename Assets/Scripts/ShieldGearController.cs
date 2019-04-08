@@ -10,49 +10,26 @@ public class ShieldGearController : MonoBehaviour
     public float rotationSpeed;
 
     public GameObject shield;
-    public GameObject shieldGear;
-    public GameObject shieldWarning;
-    
+    public Transform submarine_proxy_transform;
+
     private float initGravityScale;
     private float lastFireDelta;
 
     private SeatOnGear status;
-    private SpriteRenderer gearRend;
     private BubbleShieldController bubbleShieldController;
-    private Transform submarine_proxy_transform;
-    private HealthBar healthBar;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        gearRend = shieldGear.GetComponent<SpriteRenderer>();
         status = GetComponent<SeatOnGear>();
         bubbleShieldController = shield.GetComponent<BubbleShieldController>();
-        submarine_proxy_transform = shieldGear.transform.parent;
-        healthBar = shieldGear.transform.Find("HealthBar").GetComponent<HealthBar>();
+        bubbleShieldController.status = status;
     }
 
     void Update()
     {
-        // update cd bar and warning
-        float health = bubbleShieldController.Health();
-        healthBar.SetSize(health);
-        if (health <= 0)
-        {
-            shieldWarning.SetActive(true);
-        }
-        else
-        {
-            shieldWarning.SetActive(false);
-        }
-
         if (!status.IsPlayerOnSeat())
-        {
             return;
-        }
-
-        //int playerID = status.PlayerID();
 
         GenerateShield();
         RotateShield();
@@ -60,8 +37,13 @@ public class ShieldGearController : MonoBehaviour
 
     IEnumerator WaitTillBreak()
     {
-        yield return new WaitForSeconds(ShieldTime);
-        shield.GetComponent<BubbleShieldController>().BreakShield();
+        float temp = 0f;
+        while (temp < 1f)
+        {
+            temp += Time.deltaTime / ShieldTime;
+            yield return null;
+            bubbleShieldController.ModifyHealth(-bubbleShieldController.MAX_HEALTH * Time.deltaTime / ShieldTime);
+        }
     }
 
     void GenerateShield()
@@ -71,7 +53,7 @@ public class ShieldGearController : MonoBehaviour
             TutorialManager.CompleteTask(TutorialManager.TaskType.SHIELD, transform.position.x > 0f);
         }
 
-        bool success = shield.GetComponent<BubbleShieldController>().Defense();
+        bool success = shield.GetComponent<BubbleShieldController>().GenerateShield();
         if (success)
         {
             StartCoroutine(WaitTillBreak());
