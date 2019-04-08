@@ -39,10 +39,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        if (!temp.isPlaying)
-        {
-            temp.Play();
-        }
+        temp.Play();
     }
 
     public void StopSound(string s)
