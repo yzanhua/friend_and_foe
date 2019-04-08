@@ -48,6 +48,7 @@ public class SubmarineController : MonoBehaviour
                 transform.rotation = originRotation;
         }
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.collider.gameObject;
