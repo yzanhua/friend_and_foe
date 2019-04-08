@@ -17,7 +17,6 @@ public class MainSceneController : MonoBehaviour
     {
         if (InputSystemManager.GetAction4(0))
         {
-            // Initiate.Fade("Selection", Color.black, 2.0f);
             TransitionManager.Instance.TransitionOutAndLoadScene("Selection");
         }
     }
