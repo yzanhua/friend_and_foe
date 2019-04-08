@@ -283,6 +283,11 @@ PrefabInstance:
       propertyPath: targetTime
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6337632436019242295, guid: b5f70e900fe55452bb4943d73e1bc60a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9212849673957391643, guid: b5f70e900fe55452bb4943d73e1bc60a,
         type: 3}
       propertyPath: initialTowardRight
@@ -921,6 +926,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetTime
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241794865100764103, guid: 1b06f7649d286486987ded91d2d07b7e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 940502700932114345, guid: 1b06f7649d286486987ded91d2d07b7e,
         type: 3}
