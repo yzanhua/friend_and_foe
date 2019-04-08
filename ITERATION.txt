@@ -1,61 +1,58 @@
-1.
-Problem: 
-The relation between color of gear and gear function is not intuitive. Not friendly for color blind people.
-Change:
-Change the gear sprites to be related to corresponding functionality (weapon for attack, shield for defense, etc.).
+a. What's new and what's the motivation?
 
-2.
-Problem:
-Players are not clear when to refill bullets and cannot clearly tell if they can use the shield or not.
-Change:
-Add warning sign when bullets went out/shield is in cool down stage.
+1. Add vibaration to controllers.
+With vibaration added to controllers, players can not only see the game or hear the game but also feel the game. It is a good way to inform players that something is hapeening because we can accurately control which controller to vibarate.
 
-3.
-Problem: Players cannot tell if they are locked/unlocked to the station. They cannot clearly tell whether they are in operation mode or not.
-Change:
-Add animation (light up sprite and lift up player) to give a clearer view of "locked" and "unlocked" state. These changes make the game more intuitive and clearer for our players.
+2. Add main menu page with corresponding transition effect.
+Main menu page is usually the first page a player see. It make players get prepared for the game and make the game itself look more professional.
 
-4.
-Problem:
-Game not fun enough. The only way to win is to shoot at each other until someone wins. Movement is not useful comparing to shielding and attacking.
-Change:
-a) Add damage for collision between two submarines and between submarine and school. (other ways to attack)
-b) Add random bombs in the environment. (urge players to move)
+3. Change sprites (submarine and gun)
+Changing to more beautiful sprites which fits to the theme (Submarine)
 
-5.
-Problem:
-Sprites are too small so players cannot see them clear on a small screen.
-Changes:
-Enlarge gears and players to make it clearer and more playable on a small screen.
+4. Add CD to Dash
+In the previous version, we found many players use "dash" too frequently. We want to add limit to this.
 
-6.
-Problem:
-Shield breaks to fast and has a long cool down time, making the game deseperating sometimes.
-Change:
-Increased max health of shield,prolonged apperance time and reduced cool down time.
+5. Rewrite Shiled CD bar:
+The previous shiled cd bar is not informative enough.
 
-7.
-Problem:
-The movement of Submarine does not feel real: no momentum.
-Change:
-Re-design the input-control system. Use addForce() instead of changing submarine's velocity directly.
+6. Add Shiled Functionality (avoid submarine collision)
+The previous shiled is not useful enough. We now make shield more powerful to encourage players using it.
 
-8.
-Problem:
-Player movement is not fluent and too slow.
-Changes:
-a) Add "dash" function for player movement.
-b) Add "jump down" function when player is on the ladder.
-c) Re-design the input-control system. Use addForce() instead of changing player's velocity directly.
+7. Remove "dizzy" effect when two players collide.
+We got many feedbacks that this "dizzy" effect is too annoying.
 
-9.
-Problem:
-Key usage not intuitive.
-Changes:
-Reassign key usage, so that lock/unlock to station using one key, with all other operation using another key.
+8. Rewrite selection page code:
+In the previous version, the character selection menu has some characters that flash before going black.
 
-10. Other iterations: 
-a) Allow refilling before all bullets went out; 
-b) Tutorial is updated accordingly;
-c) Add extra sound effects.
+9. Add winning effect at the end of the game.
+Make winning more eciting.
+
+10. Add rotation effect when two submarine collide.
+The original screen shake is a little bit annoying. Now we make the collision effect more natural and smoother.
+
+11. Rewrite screen/camer shake effect.
+Now the shake effect is more like a "spring" which is smoother. Screen shake effect only occurs when there is a bomb.
+
+12. Some small improvements: 
+a) Change sprites mode to "point".
+b) Add ammos at the beginning.
+c) Change bomb damage calculation algorithm.
+d) Make Screen Larger.
+We do the above modification becuase of the feedback we received from play testing.
+
+13. Add some signals to inform the players about the coming change on Staion positions.
+Many players were confused when the stations suddenly change positions.
+
+14. Change bullet/gun sprites.
+Make special effect more cool.
+
+15. Use another input system to fit to both PS4 and Xbox controllers. 
+
+==================================================
+b. What's next?
+1. Redesign the theme of our game.
+Now our game is more like gundams.
+
+2. Change how selection page looks.
+Quite a lot sprites in our game are drawn by ourselves. We've already finished about 65% of new selection page.
 
