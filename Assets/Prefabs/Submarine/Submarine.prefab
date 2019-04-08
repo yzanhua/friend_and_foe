@@ -3642,7 +3642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShieldCD: 5
-  MAX_HEALTH: 7
+  MAX_HEALTH: 11
   _current_health: 0
   particleLayer: 2
   bubbleShieldParticlePrefab: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad,
@@ -4297,6 +4297,7 @@ MonoBehaviour:
   playerID1: 0
   playerID2: 2
   sparkParticle: {fileID: 0}
+  shieldBounceParticle: {fileID: 159062, guid: e4fc72c1b3da74d4697708bcd2a9db60, type: 3}
   shake_decay: 0.004
   shake_intensity: 0.2
 --- !u!58 &3347693639692125302
