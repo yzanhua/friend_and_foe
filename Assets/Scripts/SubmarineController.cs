@@ -11,6 +11,7 @@ public class SubmarineController : MonoBehaviour
     public int playerID1 = 0;
     public int playerID2 = 2;
     public GameObject sparkParticle;
+    public GameObject shieldBounceParticle;
     bool inWaitRoutine = false;
     HealthCounter myHealth;
     Rigidbody2D rb2d;
@@ -60,34 +61,37 @@ public class SubmarineController : MonoBehaviour
             InputSystemManager.SetVibration(playerID1, 0.3f, 0.2f);
             InputSystemManager.SetVibration(playerID2, 0.3f, 0.2f);
         }
-        //if (other.CompareTag("Submarine"))
-        //{
-        //    //CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
-        //    if (!collision.otherCollider.CompareTag("Weapon") && !collision.otherCollider.CompareTag("Shield"))
-        //        myHealth.AlterHealth(-2f);
-        //    if (SoundManager.instance != null)
-        //        SoundManager.instance.PlaySound("collide");
-        //}
         Collider2D thisCollider = collision.otherCollider;
         if (thisCollider.CompareTag("Submarine") || thisCollider.CompareTag("Weapon"))
         {
             if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
             {
-                if (other.CompareTag("Shield"))
-                    myHealth.AlterHealth(-4f);
-                else
-                    myHealth.AlterHealth(-2f);
                 if (SoundManager.instance != null)
                     SoundManager.instance.PlaySound("collide");
-
                 Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
                 rb2d.velocity = Vector2.zero;
-                rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
+                Vector3 contactPoint = collision.GetContact(0).point;
+                if (other.CompareTag("Shield"))
+                {
+                    float damage = other.GetComponent<BubbleShieldController>().Health() * 1.5f;
+                    myHealth.AlterHealth(-damage);
+                    float angle = -Vector2.SignedAngle(Vector2.up, direction);
+                    GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
+                    bounceEffect.transform.position = contactPoint;
+                    SetParticleRotation(bounceEffect, angle);
+                    Destroy(bounceEffect, 1f);
+                    rb2d.AddForce(direction * bumpForce * rb2d.mass * 2, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    myHealth.AlterHealth(-2f);
+                    rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
+                    GameObject spark = Instantiate(sparkParticle, transform);
+                    spark.transform.position = contactPoint;
+                    Destroy(spark, 2f);
+                }
                 InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
                 InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
-                GameObject spark = Instantiate(sparkParticle, transform);
-                spark.transform.position = collision.GetContact(0).point;
-                Destroy(spark, 1f);
                 shake();
             }
         }
@@ -104,7 +108,7 @@ public class SubmarineController : MonoBehaviour
 
     }
 
-    IEnumerator waitForAlterHealth()
+    private IEnumerator waitForAlterHealth()
     {
         inWaitRoutine = true;
         myHealth.AlterHealth(-0.5f);
@@ -112,4 +116,14 @@ public class SubmarineController : MonoBehaviour
         inWaitRoutine = false;
     }
 
+    private void SetParticleRotation(GameObject particle, float angle)
+    {
+        var sh = particle.GetComponent<ParticleSystem>().shape;
+        sh.rotation = new Vector3(sh.rotation.x, angle, sh.rotation.z);
+        for (int i = 0; i < particle.transform.childCount; ++i)
+        {
+            sh = particle.transform.GetChild(i).GetComponent<ParticleSystem>().shape;
+            sh.rotation = new Vector3(sh.rotation.x, angle, sh.rotation.z);
+        }
+    }
 }

@@ -47,6 +47,10 @@ public class BubbleShieldController : MonoBehaviour
         {
             ModifyHealth(-1f);
         }
+        if (other.CompareTag("Weapon") || other.CompareTag("Submarine"))
+        {
+            ModifyHealth(-_current_health);
+        }
     }
 
     public void ModifyHealth(float off)
