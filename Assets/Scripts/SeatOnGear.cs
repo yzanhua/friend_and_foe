@@ -19,6 +19,7 @@ public class SeatOnGear : MonoBehaviour
     private Sprite inactiveSprite;
     private string spriteNum;
     private Vector3 prevPos;
+    private bool LiftUpbreak = false;
 
     private void Start()
     {
@@ -84,17 +85,20 @@ public class SeatOnGear : MonoBehaviour
 
     public void Exit()
     {
-        if (!playerOnSeat)
-            return;
-
-        playerOnSeat = false;
-        playerController.__seat_on_gear_exit = true;
-        playerController.gameObject.GetComponent<Rigidbody2D>().gravityScale = playerController.__init_gravity_scale;
-        if (!proxy_gear.CompareTag("MovementStation"))
+        if (playerOnSeat || inLiftProgress || LiftUpbreak)
         {
-            proxy_gear.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+            playerOnSeat = false;
+            playerController.__seat_on_gear_exit = true;
+            playerController.gameObject.GetComponent<Rigidbody2D>().gravityScale = playerController.__init_gravity_scale;
+            if (!proxy_gear.CompareTag("MovementStation"))
+            {
+                proxy_gear.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+            }
+            playerController.playerProxy.GetComponent<Animator>().enabled = true;
+            LiftUpbreak = false;
+            inLiftProgress = false;
         }
-        playerController.playerProxy.GetComponent<Animator>().enabled = true;
+  
     }
 
     private IEnumerator LiftUp()
@@ -123,7 +127,8 @@ public class SeatOnGear : MonoBehaviour
 
     public void GearPostionChanged()
     {
-        inLiftProgress = false;
+        LiftUpbreak = true;
+        inLiftProgress = false;   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -131,7 +136,6 @@ public class SeatOnGear : MonoBehaviour
         if (triggerStay || !collision.gameObject.CompareTag("Player"))
             return;
 
-        //buttonHint.SetActive(true);
         playerController = collision.gameObject.GetComponent<PlayerMovementController>();
         spriteNum = playerController.playerProxy.GetComponent<SpriteRenderer>().sprite.name.Substring(4, 1);
         triggerStay = true;
@@ -142,12 +146,10 @@ public class SeatOnGear : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player"))
             return;
 
-        //buttonHint.SetActive(false);
         if (collision.gameObject.GetComponent<PlayerMovementController>() != playerController)
             return;
 
-        if (playerOnSeat || inLiftProgress)
-            Exit();
+        Exit();
 
         playerController = null;
         triggerStay = false;

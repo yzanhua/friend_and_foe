@@ -178,9 +178,12 @@ public class PlayerMovementController : MonoBehaviour
         {   // 13 = floor, 15 == Jump
             gameObject.layer = 14; // 14 = Player
             movementEnable = true;
-        }
+        }  
+    }
 
-        if (__seat_on_gear_exit && !other.CompareTag("Player"))
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (__seat_on_gear_exit && !collision.collider.CompareTag("Player"))
         {
             __seat_on_gear_exit = false;
             movementEnable = true;

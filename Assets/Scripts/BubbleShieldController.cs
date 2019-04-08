@@ -162,8 +162,4 @@ public class BubbleShieldController : MonoBehaviour
         return false;
     }
 
-    //public float Health()
-    //{
-    //    return _current_health;
-    //}
 }

@@ -92,14 +92,8 @@ public class SubmarineController : MonoBehaviour
             Vector3 contactPoint = collision.GetContact(0).point;
 
             if (!thisCollider.tag.Contains("Shield"))
-            {
-                Debug.Log("Collide one shield");
                 myHealth.AlterHealth(-myHealth.maxHealth * 0.15f);
-            }
-            else
-            {
-                Debug.Log("Collide two shield");
-            }
+            
 
             float angle = -Vector2.SignedAngle(Vector2.up, direction);
             GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
