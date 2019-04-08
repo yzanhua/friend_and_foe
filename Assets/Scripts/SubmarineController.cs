@@ -59,26 +59,37 @@ public class SubmarineController : MonoBehaviour
             InputSystemManager.SetVibration(playerID1, 0.3f, 0.2f);
             InputSystemManager.SetVibration(playerID2, 0.3f, 0.2f);
         }
-        if (other.CompareTag("Submarine"))
+        //if (other.CompareTag("Submarine"))
+        //{
+        //    //CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
+        //    if (!collision.otherCollider.CompareTag("Weapon") && !collision.otherCollider.CompareTag("Shield"))
+        //        myHealth.AlterHealth(-2f);
+        //    if (SoundManager.instance != null)
+        //        SoundManager.instance.PlaySound("collide");
+        //}
+        Collider2D thisCollider = collision.otherCollider;
+        if (thisCollider.CompareTag("Submarine") || thisCollider.CompareTag("Weapon"))
         {
-            //CameraShakeEffect.ShakeCamera(0.2f, 0.5f);
-            if (!collision.otherCollider.CompareTag("Weapon") && !collision.otherCollider.CompareTag("Shield"))
-                myHealth.AlterHealth(-2f);
-            if (SoundManager.instance != null)
-                SoundManager.instance.PlaySound("collide");
+            if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
+            {
+                if (other.CompareTag("Shield"))
+                    myHealth.AlterHealth(-4f);
+                else
+                    myHealth.AlterHealth(-2f);
+                if (SoundManager.instance != null)
+                    SoundManager.instance.PlaySound("collide");
+
+                Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
+                rb2d.velocity = Vector2.zero;
+                rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
+                InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
+                InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
+                GameObject spark = Instantiate(sparkParticle, transform);
+                spark.transform.position = collision.GetContact(0).point;
+                Destroy(spark, 1f);
+                shake();
+            }
         }
-        if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
-        {
-            Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
-            rb2d.velocity = Vector2.zero;
-            rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
-            InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
-            InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
-            GameObject spark = Instantiate(sparkParticle, transform);
-            spark.transform.position = collision.GetContact(0).point;
-            Destroy(spark, 1f);
-            shake();
-        }    
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -89,10 +100,11 @@ public class SubmarineController : MonoBehaviour
             if (!inWaitRoutine)
                 StartCoroutine(waitForAlterHealth());
         }
-       
+
     }
 
-    IEnumerator waitForAlterHealth() {
+    IEnumerator waitForAlterHealth()
+    {
         inWaitRoutine = true;
         myHealth.AlterHealth(-0.5f);
         yield return new WaitForSeconds(1);
