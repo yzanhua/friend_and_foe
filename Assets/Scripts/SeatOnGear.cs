@@ -6,6 +6,7 @@ public class SeatOnGear : MonoBehaviour
 {
     public Sprite activeSprite;
     public GameObject proxy_gear;
+    public GameObject buttonHint;
 
     private bool playerOnSeat = false;
     private PlayerMovementController playerController;
@@ -34,6 +35,11 @@ public class SeatOnGear : MonoBehaviour
         if (!Global.instance.AllPlayersMovementEnable)
             return;
 
+        // button hint
+        if (triggerStay && !playerOnSeat)
+            buttonHint.SetActive(true);
+        else
+            buttonHint.SetActive(false);
         if (!triggerStay)
             return;
         if (InputSystemManager.GetAction2(playerController.playerID))
@@ -125,6 +131,7 @@ public class SeatOnGear : MonoBehaviour
         if (triggerStay || !collision.gameObject.CompareTag("Player"))
             return;
 
+        //buttonHint.SetActive(true);
         playerController = collision.gameObject.GetComponent<PlayerMovementController>();
         spriteNum = playerController.playerProxy.GetComponent<SpriteRenderer>().sprite.name.Substring(4, 1);
         triggerStay = true;
@@ -134,6 +141,8 @@ public class SeatOnGear : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player"))
             return;
+
+        //buttonHint.SetActive(false);
         if (collision.gameObject.GetComponent<PlayerMovementController>() != playerController)
             return;
 
