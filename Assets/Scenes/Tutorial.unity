@@ -2954,6 +2954,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4264493210611227564, guid: e09be6c88c68945e3901520b8f821bd9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4264493210611227565, guid: e09be6c88c68945e3901520b8f821bd9,
         type: 3}
       propertyPath: m_LocalPosition.x

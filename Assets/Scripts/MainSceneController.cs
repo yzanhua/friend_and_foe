@@ -15,7 +15,7 @@ public class MainSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputSystemManager.GetAction4(0))
+        if (InputSystemManager.GetAction3(0))
         {
             TransitionManager.Instance.TransitionOutAndLoadScene("Selection");
         }
