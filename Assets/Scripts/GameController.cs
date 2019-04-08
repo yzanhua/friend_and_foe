@@ -17,11 +17,13 @@ public class GameController : MonoBehaviour
     public GameObject confetti_prefab;
     public Text WinText;
     public GameObject sByeBye;
+    public GameObject station_switch_text;
 
     private HealthCounter health_right;
     private HealthCounter health_left;
     private bool _is_end = false;
     private bool _is_start = false;
+    private bool _in_switch_station = false;
 
     void Awake()
     {
@@ -150,7 +152,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(ReloadScene(7f));
 
     }
-    
     IEnumerator ReloadScene(float time)
     {
         yield return new WaitForSeconds(time);
@@ -187,7 +188,7 @@ public class GameController : MonoBehaviour
         right_rd2.AddForce(new Vector2(-80f, 0f) * left_rd2.mass, ForceMode2D.Impulse);
 
 
-        while(left_sub.transform.localPosition.x < -2.5f)
+        while (left_sub.transform.localPosition.x < -2.5f)
         {
             yield return null;
         }
@@ -212,8 +213,26 @@ public class GameController : MonoBehaviour
         Global.instance.AllPlayersMovementEnable = true;
         Global.instance.bombCreate = true;
         _is_start = false;
-
-
     }
 
+    public IEnumerator SwitchStation()
+    {
+        if (_in_switch_station)
+        {
+            yield break;
+        }
+        _in_switch_station = true;
+        Vector3 pos = CameraShakeEffect.instance.transform.position;
+        pos.z = 0;
+        GameObject stationSwitchText = Instantiate(station_switch_text, pos, Quaternion.identity, transform);
+        stationSwitchText.transform.localScale = new Vector3(8f, 8f);
+        while (stationSwitchText.transform.localScale.x >= 1)
+        {
+            float old_value = stationSwitchText.transform.localScale.x;
+            stationSwitchText.transform.localScale = new Vector3(old_value - 0.1f, old_value - 0.1f);
+            yield return null;
+        }
+        Destroy(stationSwitchText);
+        _in_switch_station = false;
+    }
 }
