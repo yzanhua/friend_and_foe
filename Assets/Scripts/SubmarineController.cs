@@ -61,38 +61,50 @@ public class SubmarineController : MonoBehaviour
             InputSystemManager.SetVibration(playerID1, 0.3f, 0.2f);
             InputSystemManager.SetVibration(playerID2, 0.3f, 0.2f);
         }
+
         Collider2D thisCollider = collision.otherCollider;
+
+        if (other.CompareTag("Submarine") && !collision.otherCollider.tag.Contains("Shield"))
+        {
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySound("collide");
+            Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
+            rb2d.velocity = Vector2.zero;
+            Vector3 contactPoint = collision.GetContact(0).point;
+
+            myHealth.AlterHealth(-2f);
+            rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
+            GameObject spark = Instantiate(sparkParticle, transform);
+            spark.transform.position = contactPoint;
+            Destroy(spark, 2f);
+
+            InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
+            InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
+            shake();
+        }
+        
         if (thisCollider.CompareTag("Submarine") || thisCollider.CompareTag("Weapon"))
         {
             if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
             {
-                if (SoundManager.instance != null)
-                    SoundManager.instance.PlaySound("collide");
-                Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
-                rb2d.velocity = Vector2.zero;
-                Vector3 contactPoint = collision.GetContact(0).point;
-                if (other.CompareTag("Shield"))
-                {
-                    float damage = other.GetComponent<BubbleShieldController>().Health() * 1.5f;
-                    myHealth.AlterHealth(-damage);
-                    float angle = -Vector2.SignedAngle(Vector2.up, direction);
-                    GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
-                    bounceEffect.transform.position = contactPoint;
-                    SetParticleRotation(bounceEffect, angle);
-                    Destroy(bounceEffect, 1f);
-                    rb2d.AddForce(direction * bumpForce * rb2d.mass * 2, ForceMode2D.Impulse);
-                }
-                else
-                {
-                    myHealth.AlterHealth(-2f);
-                    rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
-                    GameObject spark = Instantiate(sparkParticle, transform);
-                    spark.transform.position = contactPoint;
-                    Destroy(spark, 2f);
-                }
-                InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
-                InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
-                shake();
+                
+                
+                //if (other.CompareTag("Shield"))
+                //{
+                //    float damage = other.GetComponent<BubbleShieldController>().Health() * 1.5f;
+                //    myHealth.AlterHealth(-damage);
+                //    float angle = -Vector2.SignedAngle(Vector2.up, direction);
+                //    GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
+                //    bounceEffect.transform.position = contactPoint;
+                //    SetParticleRotation(bounceEffect, angle);
+                //    Destroy(bounceEffect, 1f);
+                //    rb2d.AddForce(direction * bumpForce * rb2d.mass * 2, ForceMode2D.Impulse);
+                //}
+                //else
+                //{
+                    
+                //}
+                
             }
         }
     }
