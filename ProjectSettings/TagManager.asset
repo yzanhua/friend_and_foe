@@ -34,10 +34,10 @@ TagManager:
   - Player
   - Jump
   - SubmarineStatic
-  - WeaponGun
-  - Shield
-  - 
-  - 
+  - WeaponGun_left
+  - Shield_left
+  - WeaponGun_right
+  - Shield_right
   - 
   - 
   - 

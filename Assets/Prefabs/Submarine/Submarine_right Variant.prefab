@@ -7,15 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4669322525553404254, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: m_Name
-      value: Submarine_right Variant
-      objectReference: {fileID: 0}
     - target: {fileID: 607854772745087663, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669322525553404254, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Name
+      value: Submarine_right Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7792153698877969187, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
@@ -304,7 +304,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2365867676812280403, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
-# <<<<<<< HEAD
       propertyPath: particleLayer
       value: 2
       objectReference: {fileID: 0}
@@ -313,11 +312,11 @@ PrefabInstance:
       propertyPath: MAX_HEALTH
       value: 11
       objectReference: {fileID: 0}
-# =======
-      propertyPath: sparkPrefab
-      value: 
-      objectReference: {fileID: 119250, guid: f828b47b39be99849b37530c987975e5, type: 3}
-# >>>>>>> 4dcee020e81ce5f73022af42bfb410d5fae6a714
+    - target: {fileID: 3285575806375178408, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: particleLayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2938957215869425869, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -370,11 +369,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300004, guid: 61864ee7faca24e599cf83d47aae07ae,
         type: 3}
-    - target: {fileID: 3285575806375178408, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: particleLayer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 619405686, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -385,6 +379,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300010, guid: 61864ee7faca24e599cf83d47aae07ae,
         type: 3}
+    - target: {fileID: 2365867676812280402, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449448328158498596, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167869198084913228, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116364304866420288, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580789191597170773, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
 --- !u!4 &8430627053157759701 stripped
