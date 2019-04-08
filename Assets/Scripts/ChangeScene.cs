@@ -53,7 +53,6 @@ public class ChangeScene : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             for (int i = 0; i < gearNum; ++i)
             {
-                //gears[i].GetComponent<SpriteRenderer>().enabled = true;
                 SetSpriteStatus(gears[i].GetComponent<SeatOnGear>().station.transform, true);
             }
             yield return new WaitForSeconds(0.3f);

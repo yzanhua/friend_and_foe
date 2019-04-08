@@ -10,7 +10,7 @@ public class WeaponController : MonoBehaviour
     public float bulletoffset;
     public float fireCD = 1f;
     public GameObject weaponWarning;
-
+    public GameObject sparkPrefab;
     private GameObject submarine;
     private int remainBullets;
     private bool isAbleToFire = true;
@@ -19,8 +19,8 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         submarine = transform.parent.parent.gameObject;
-        
-        remainBullets = MaxBullets * 2/ 3;
+
+        remainBullets = MaxBullets * 2 / 3;
         rc = refillStation.GetComponent<RefillController>();
         rc.SetBulletStatus(remainBullets == MaxBullets);
         weaponWarning.SetActive(false);
@@ -34,11 +34,12 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(CD());
         if (remainBullets > 0)
         {
-            if(TutorialManager.instance != null)
+            if (TutorialManager.instance != null)
             {
                 TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
             }
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
+            Instantiate(sparkPrefab, transform.position + offset, transform.rotation);
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
             if (SoundManager.instance != null)
