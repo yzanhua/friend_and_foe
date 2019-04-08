@@ -71,6 +71,7 @@ public class WeaponController : MonoBehaviour
     public void FillBullets()
     {
         remainBullets = MaxBullets;
+        Debug.Log(remainBullets);
         weaponWarning.SetActive(false);
     }
 

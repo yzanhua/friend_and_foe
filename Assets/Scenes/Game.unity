@@ -5176,7 +5176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   k: 0.3
-  dampening_factor: 0.85
+  dampening_factor: 0.75
   debug_displacement: 1
 --- !u!4 &1278315129
 Transform:
@@ -6490,11 +6490,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4132437981211333038, guid: 1b06f7649d286486987ded91d2d07b7e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8968793744054411176, guid: 1b06f7649d286486987ded91d2d07b7e,
         type: 3}
       propertyPath: maxHealth
@@ -6519,6 +6514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetTime
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132437981211333038, guid: 1b06f7649d286486987ded91d2d07b7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b06f7649d286486987ded91d2d07b7e, type: 3}
@@ -7780,7 +7780,7 @@ PrefabInstance:
     - target: {fileID: 5180230080710909172, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: start_time
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
