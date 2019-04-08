@@ -44,6 +44,7 @@ public class ChangeScene : MonoBehaviour
 
     IEnumerator ChangeGearsPositions()
     {
+        StartCoroutine(GameController.instance.SwitchStation());
         for (int t = 0; t < flashCount; t += 1)
         {
             SetSpriteStatus(false);

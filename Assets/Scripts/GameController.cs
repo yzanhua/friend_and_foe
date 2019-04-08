@@ -14,13 +14,16 @@ public class GameController : MonoBehaviour
     public GameObject left_sub;
     public GameObject ready_text;
     public GameObject go_text;
+    public GameObject confetti_prefab;
     public Text WinText;
     public GameObject sByeBye;
+    public GameObject station_switch_text;
 
     private HealthCounter health_right;
     private HealthCounter health_left;
     private bool _is_end = false;
     private bool _is_start = false;
+    private bool _in_switch_station = false;
 
     void Awake()
     {
@@ -81,14 +84,21 @@ public class GameController : MonoBehaviour
             WinText.text = "Red Team Win!";
             StartCoroutine(DestroyLoser(right_sub, left_sub));
         }
-        else
+        else if (health_right.health > health_left.health)
         {
             WinText.text = "Blue Team Win!";
             StartCoroutine(DestroyLoser(left_sub, right_sub));
         }
+        else
+        {
+            WinText.text = "Draw!";
+            InputSystemManager.SetVibration(-1, 0.3f, 10f);
+            StartCoroutine(FixCamera(left_sub, right_sub, 1f, true));
+            StartCoroutine(ReloadScene(12f));
+        }
     }
 
-    IEnumerator FixCamera(GameObject loser, GameObject winner)
+    IEnumerator FixCamera(GameObject loser, GameObject winner, float wait_time, bool isDraw = false)
     {
         Global.instance.GameEndCustomizeScreen = true;
         Vector3 init_pos = Camera.main.transform.parent.position;
@@ -103,11 +113,16 @@ public class GameController : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Lerp(init_size, 6.4f, temp);
             yield return null;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(wait_time);
         init_pos = Camera.main.transform.parent.position;
         target_pos = winner.transform.position;
         target_pos.z = init_pos.z;
         temp = 0f;
+        if (isDraw)
+        {
+            GameObject confetti_lose = Instantiate(confetti_prefab, loser.transform);
+            Destroy(confetti_lose, 2f);
+        }
 
         while (temp < 1f)
         {
@@ -116,12 +131,14 @@ public class GameController : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Lerp(6.4f, 7.5f, temp);
             yield return null;
         }
+        GameObject confetti = Instantiate(confetti_prefab, winner.transform);
+        Destroy(confetti, 2f);
     }
 
     private IEnumerator DestroyLoser(GameObject loser, GameObject winner)
     {
         yield return new WaitForSeconds(2f);
-        StartCoroutine(FixCamera(loser, winner));
+        StartCoroutine(FixCamera(loser, winner, 5f));
         InputSystemManager.SetVibration(-1, 0.3f, 7f);
         yield return new WaitForSeconds(7f);
         InputSystemManager.SetVibration(-1, 0.9f, 2.7f);
@@ -132,13 +149,12 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(1.44f);
 
         SoundManager.instance.PlaySound("win");
-        StartCoroutine(ReloadScene());
+        StartCoroutine(ReloadScene(7f));
 
     }
-    
-    IEnumerator ReloadScene()
+    IEnumerator ReloadScene(float time)
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene("Selection");
     }
 
@@ -172,7 +188,7 @@ public class GameController : MonoBehaviour
         right_rd2.AddForce(new Vector2(-80f, 0f) * left_rd2.mass, ForceMode2D.Impulse);
 
 
-        while(left_sub.transform.localPosition.x < -2.5f)
+        while (left_sub.transform.localPosition.x < -2.5f)
         {
             yield return null;
         }
@@ -195,9 +211,28 @@ public class GameController : MonoBehaviour
 
         Destroy(goText);
         Global.instance.AllPlayersMovementEnable = true;
+        Global.instance.bombCreate = true;
         _is_start = false;
-
-
     }
 
+    public IEnumerator SwitchStation()
+    {
+        if (_in_switch_station)
+        {
+            yield break;
+        }
+        _in_switch_station = true;
+        Vector3 pos = CameraShakeEffect.instance.transform.position;
+        pos.z = 0;
+        GameObject stationSwitchText = Instantiate(station_switch_text, pos, Quaternion.identity, transform);
+        stationSwitchText.transform.localScale = new Vector3(8f, 8f);
+        while (stationSwitchText.transform.localScale.x >= 1)
+        {
+            float old_value = stationSwitchText.transform.localScale.x;
+            stationSwitchText.transform.localScale = new Vector3(old_value - 0.1f, old_value - 0.1f);
+            yield return null;
+        }
+        Destroy(stationSwitchText);
+        _in_switch_station = false;
+    }
 }
