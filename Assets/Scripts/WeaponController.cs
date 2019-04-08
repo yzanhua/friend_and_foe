@@ -39,7 +39,8 @@ public class WeaponController : MonoBehaviour
                 TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
             }
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
-            Instantiate(sparkPrefab, transform.position + offset, transform.rotation);
+            GameObject spark = Instantiate(sparkPrefab, transform.position + offset, transform.rotation);
+            Destroy(spark, 1f);
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
             bullet.GetComponent<BulletController>().direction = -submarine.transform.position + transform.position;
             if (SoundManager.instance != null)
