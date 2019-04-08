@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: targetTime
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 1365917920450718699, guid: 1b06f7649d286486987ded91d2d07b7e,
+        type: 3}
+      propertyPath: initialTowardRight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 822973284632629558, guid: 1b06f7649d286486987ded91d2d07b7e,
         type: 3}
       propertyPath: dashRecoverToltalTime
