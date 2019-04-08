@@ -84,6 +84,6 @@ public class ChangeScene : MonoBehaviour
                     t.GetChild(j).GetComponent<SpriteRenderer>().enabled = status;
                 }
             }
-        }  
+        }
     }
 }
