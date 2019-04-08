@@ -10,16 +10,17 @@ public class ShieldGearController : MonoBehaviour
     public float rotationSpeed;
 
     public GameObject shield;
-    public GameObject submarine;
-    public GameObject shieldWarning;
     public GameObject shieldGear;
-    public HealthBar healthBar;
-
+    public GameObject shieldWarning;
+    
     private float initGravityScale;
     private float lastFireDelta;
+
     private SeatOnGear status;
     private SpriteRenderer gearRend;
     private BubbleShieldController bubbleShieldController;
+    private Transform submarine_proxy_transform;
+    private HealthBar healthBar;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,8 @@ public class ShieldGearController : MonoBehaviour
         gearRend = shieldGear.GetComponent<SpriteRenderer>();
         status = GetComponent<SeatOnGear>();
         bubbleShieldController = shield.GetComponent<BubbleShieldController>();
+        submarine_proxy_transform = shieldGear.transform.parent;
+        healthBar = shieldGear.transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     void Update()
@@ -48,7 +51,8 @@ public class ShieldGearController : MonoBehaviour
         {
             return;
         }
-        int playerID = status.PlayerID();
+
+        //int playerID = status.PlayerID();
 
         GenerateShield();
         RotateShield();
@@ -90,7 +94,7 @@ public class ShieldGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
-            shield.transform.RotateAround(submarine.transform.position, Vector3.forward, angle * rotationSpeed);
+            shield.transform.RotateAround(submarine_proxy_transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
 }
