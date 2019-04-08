@@ -10,6 +10,7 @@ public class SubmarineController : MonoBehaviour
     public float bumpForce = 15f;
     public int playerID1 = 0;
     public int playerID2 = 2;
+    public GameObject sparkParticle;
     bool inWaitRoutine = false;
     HealthCounter myHealth;
     Rigidbody2D rb2d;
@@ -73,6 +74,9 @@ public class SubmarineController : MonoBehaviour
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
             InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
             InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
+            GameObject spark = Instantiate(sparkParticle, transform);
+            spark.transform.position = collision.GetContact(0).point;
+            Destroy(spark, 1f);
             shake();
         }    
     }

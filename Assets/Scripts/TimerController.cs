@@ -32,13 +32,6 @@ public class TimerController : MonoBehaviour
                 _second--;
             }
 
-            if (_min == 0 && _second == 0)
-            {
-                // Game end call game controller
-                GameController.instance.GameEnd();
-                break;
-            }
-
             if (_second < 10)
             {
                 timer.text = "0" + _min + ":0" + _second;
@@ -47,6 +40,15 @@ public class TimerController : MonoBehaviour
             {
                 timer.text = "0" + _min + ":" + _second;
             }
+
+            if (_min == 0 && _second == 0)
+            {
+                // Game end call game controller
+                GameController.instance.GameEnd();
+                break;
+            }
+
+
 
             yield return new WaitForSeconds(1f);
         }
