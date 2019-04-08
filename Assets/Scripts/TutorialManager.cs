@@ -30,8 +30,11 @@ public class TutorialManager : MonoBehaviour
         MOVE,
         DASH_SUB,
         REFILL,
+        SEAT_WEAPON,
+        RO_WEAPON,
         SHOOT,
         SHIELD,
+        BOUNCE,
         TASK
     }
 
@@ -74,6 +77,21 @@ public class TutorialManager : MonoBehaviour
     private Hashtable _skipMap = new Hashtable();
 
     private bool _InStateTransition = false;
+    private List<List<TaskType>> _task_list = new List<List<TaskType>>();
+
+    private Dictionary<TaskType, string> _task2str = new Dictionary<TaskType, string>() 
+    { 
+        { TaskType.MOVE , "Move" },
+        { TaskType.DASH, "Dash" },
+        { TaskType.SEAT, "Seat"},
+        { TaskType.DASH_SUB, "DashSub"},
+        { TaskType.SHIELD, "Shield"},
+        { TaskType.REFILL, "Refill"},
+        { TaskType.SHOOT, "Shoot"},
+        { TaskType.BOUNCE, "Bounce"},
+        { TaskType.RO_WEAPON, "Ro_weapon"},
+        { TaskType.SEAT_WEAPON, "Seat_weapon"}
+        };
 
 
 
@@ -85,7 +103,7 @@ public class TutorialManager : MonoBehaviour
 
 
         int pos = isRight ? 1 : 0;
-
+        /*
         if (instance.state == State.CHARACTER)
         {
             if (task == TaskType.DASH)
@@ -295,10 +313,83 @@ public class TutorialManager : MonoBehaviour
 
             return true;
 
+        }*/
+
+        if (instance.state < State.PRE_FINISHED)
+        {
+            for (int index = 0; index < instance._task_list[(int)instance.state].Count; index++)
+            {
+                List<TaskType> list = instance._task_list[(int)instance.state];
+                if (list[index] == task)
+                {
+                    if (index == 0)
+                    {
+                        if (((bool)instance._TaskList[0][task] && (bool)instance._TaskList[1][task]))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (!((bool)instance._TaskList[0][list[index - 1]] && (bool)instance._TaskList[1][list[index - 1]]))
+                        {
+                            return false;
+                        }
+                        else if (((bool)instance._TaskList[0][task] && (bool)instance._TaskList[1][task]))
+                        {
+                            return true;
+                        }
+                    }
+
+                    instance._TaskList[pos][task] = true;
+                    int num = 0;
+
+                    if ((bool)instance._TaskList[0][task] && (bool)instance._TaskList[1][task])
+                    {
+                        num = 2;
+
+                        if (index < list.Count - 1)
+                        {
+                            instance._InStateTransition = true;
+                            instance.StartCoroutine(instance.ChangeState(2f, () =>
+                            {
+                                instance._InStateTransition = false;
+                                instance.EnableText(instance._task2str[list[index + 1]]);
+                            }));
+                        }
+
+                    }
+                    else if ((bool)instance._TaskList[0][task] || (bool)instance._TaskList[1][task])
+                    {
+                        num = 1;
+                    }
+
+                    Transform num_text = instance.PreparedText.transform.Find(instance._task2str[task]).Find("flash_text");
+                    if (num_text != null)
+                    {
+
+                        num_text.Find("num").gameObject.GetComponent<Text>().text = num + " / 2";
+                    }
+
+                    foreach (TaskType tt in list)
+                    {
+                        if (!(bool)instance._TaskList[pos][tt])
+                        {
+                            return true;
+                        }
+                    }
+
+                    instance._TaskState[pos] = true;
+                    return true;
+
+                }
+            }
         }
 
         return false;
     }
+
+
 
 
 
@@ -336,6 +427,13 @@ public class TutorialManager : MonoBehaviour
             _startMap[i] = false;
         }
 
+
+        _task_list.Add(new List<TaskType>());
+        _task_list.Add(new List<TaskType>() { TaskType.DASH });
+        _task_list.Add(new List<TaskType>() { TaskType.SEAT, TaskType.MOVE, TaskType.DASH_SUB });
+        _task_list.Add(new List<TaskType>() { TaskType.REFILL, TaskType.SEAT_WEAPON, TaskType.RO_WEAPON ,TaskType.SHOOT });
+        _task_list.Add(new List<TaskType>() { TaskType.SHIELD, TaskType.BOUNCE });
+
         GameObject leftSubmarineProxy = LeftSubmarine.transform.Find("Submarine_proxy").gameObject;
         GameObject leftSubmarineStatic = LeftSubmarine.transform.Find("Submarine_static").gameObject;
         GameObject rightSubmarineProxy = RightSubmarine.transform.Find("Submarine_proxy").gameObject;
@@ -356,8 +454,6 @@ public class TutorialManager : MonoBehaviour
         AlterChangeSceneState(false);
         AlterGearState(false);
         EnableText("SkipTutorial");
-        // SoundManager.instance.StopSound("main_scene_background");
-        //SoundManager.instance.PlaySound("background_battle");
         SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
 
     }

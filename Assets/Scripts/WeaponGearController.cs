@@ -37,6 +37,12 @@ public class WeaponGearController : MonoBehaviour
         {
             return;
         }
+
+        if (TutorialManager.instance != null)
+        {
+            TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
+        }
+
         if (InputSystemManager.GetAction1(status.PlayerID()))
         {
             if (TutorialManager.instance != null)
@@ -64,6 +70,10 @@ public class WeaponGearController : MonoBehaviour
             float curr_angle = weapon.transform.eulerAngles.z - 180f;
             angle = angle - curr_angle;
 
+            if (TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.RO_WEAPON, transform.position.x > 0);
+            }
             if (angle < -180f)
                 angle += 360f;
             if (angle > 180f)
