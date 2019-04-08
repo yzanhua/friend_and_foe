@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBar : MonoBehaviour
+{
 
     public bool isHealth = false;
 
     private Transform _bar;
     private bool isFlash = false;
 
-	void Awake ()
+    void Awake()
     {
         _bar = transform.Find("Bar");
-	}
+    }
 
     public void SetSize(float sizeNormalized)
     {
@@ -42,8 +43,6 @@ public class HealthBar : MonoBehaviour {
 
         while (duration > 0f)
         {
-
-
             if (isRed)
             {
                 sr.color = new Color(1f, 0f, 0f, 1f);
