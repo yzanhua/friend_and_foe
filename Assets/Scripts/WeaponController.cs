@@ -59,14 +59,15 @@ public class WeaponController : MonoBehaviour
             InputSystemManager.SetVibration(playerID, 0.2f, 0.3f);
             weaponWarning.SetActive(true);
         }
-
     }
 
-    IEnumerator CD()
+    private IEnumerator CD()
     {
         yield return new WaitForSeconds(fireCD);
         isAbleToFire = true;
     }
+
+
     public void FillBullets()
     {
         remainBullets = MaxBullets;

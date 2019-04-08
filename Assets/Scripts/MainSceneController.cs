@@ -15,9 +15,8 @@ public class MainSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputSystemManager.GetAction4(0))
+        if (InputSystemManager.GetAction3(0))
         {
-            // Initiate.Fade("Selection", Color.black, 2.0f);
             TransitionManager.Instance.TransitionOutAndLoadScene("Selection");
         }
     }
