@@ -305,14 +305,14 @@ PrefabInstance:
     - target: {fileID: 2365867676812280403, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
 # <<<<<<< HEAD
-#       propertyPath: particleLayer
-#       value: 2
-#       objectReference: {fileID: 0}
-#     - target: {fileID: 3285575806375178408, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-#         type: 3}
-#       propertyPath: MAX_HEALTH
-#       value: 11
-#       objectReference: {fileID: 0}
+      propertyPath: particleLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285575806375178408, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: MAX_HEALTH
+      value: 11
+      objectReference: {fileID: 0}
 # =======
       propertyPath: sparkPrefab
       value: 
