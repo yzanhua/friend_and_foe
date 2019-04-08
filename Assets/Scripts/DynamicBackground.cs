@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DynamicBackground : MonoBehaviour
 {
-    [Range(0f, 0.5f)]
+    [Range(0f, 0.1f)]
     public float speed;
 
     private Transform _bg1;
