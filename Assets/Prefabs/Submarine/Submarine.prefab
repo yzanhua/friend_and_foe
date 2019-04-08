@@ -2329,7 +2329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  speed: 7.5
+  speed: 5.5
   KnockBackTime: 0.2
   DizzyTime: 1
   movementEnable: 1
@@ -2806,7 +2806,7 @@ MonoBehaviour:
   submarine: {fileID: 8582862346553507120}
   weaponGear: {fileID: 907014582662623333}
   healthBar: {fileID: 8107564601707161828}
-  rotationSpeed: 3
+  rotationSpeed: 2
   fireTimeDiff: 0.5
   initialTowardRight: 1
 --- !u!114 &638628375123315505
@@ -4014,8 +4014,9 @@ MonoBehaviour:
   submarine: {fileID: 8582862346553507120}
   movementGeat: {fileID: 6751103587811784780}
   DashCD: 0.5
-  maxDash: 10
   healthBar: {fileID: 3486400738887953306}
+  dashDeductPecentage: 50
+  dashRecoverToltalTime: 3
 --- !u!114 &6538417531017491360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4293,10 +4294,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  bumpForce: 5
+  bumpForce: 15
   playerID1: 0
   playerID2: 2
-  sparkParticle: {fileID: 0}
+  sparkParticle: {fileID: 128010, guid: 9f6e8efda3a5af24983aa491ef86446f, type: 3}
   shieldBounceParticle: {fileID: 159062, guid: e4fc72c1b3da74d4697708bcd2a9db60, type: 3}
   shake_decay: 0.004
   shake_intensity: 0.2
@@ -4733,7 +4734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 3
-  speed: 7.5
+  speed: 5.5
   KnockBackTime: 0.2
   DizzyTime: 1
   movementEnable: 1
