@@ -289,6 +289,14 @@ PrefabInstance:
       propertyPath: speed
       value: 1.8
       objectReference: {fileID: 0}
+    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
+      propertyPath: dashRecoverToltalTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
+      propertyPath: dashDeductPecentage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1515015426738110692, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_LocalPosition.y

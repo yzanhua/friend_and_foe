@@ -356,6 +356,9 @@ public class TutorialManager : MonoBehaviour
         AlterChangeSceneState(false);
         AlterGearState(false);
         EnableText("SkipTutorial");
+        // SoundManager.instance.StopSound("main_scene_background");
+        //SoundManager.instance.PlaySound("background_battle");
+        SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
 
     }
 
@@ -373,7 +376,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (state == State.SKIPTUTORIAL)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Global.instance.numOfPlayers; i++)
             {
                 bool a3_value = InputSystemManager.GetAction3(i);
                 bool a4_value = InputSystemManager.GetAction4(i);
@@ -395,25 +398,25 @@ public class TutorialManager : MonoBehaviour
             int start_num = 0;
             int skip_num = 0;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Global.instance.numOfPlayers; i++)
             {
                 if ((bool)_skipMap[i]) skip_num++;
                 else if ((bool)_startMap[i]) start_num++;
             }
 
-            if (skip_num == 1)
+            if (skip_num == Global.instance.numOfPlayers)
             { 
                 state = State.PRE_FINISHED;
             }
-            else if (start_num == 1)
+            else if (start_num == Global.instance.numOfPlayers)
             {
                 StartCoroutine(StartTutorialTransition());
             }
 
             GameObject num_text = PreparedText.transform.Find("SkipTutorial").Find("flash_text").gameObject;
 
-            num_text.transform.Find("start_num").gameObject.GetComponent<Text>().text = start_num + " / 4";
-            num_text.transform.Find("skip_num").gameObject.GetComponent<Text>().text = skip_num + " / 4";
+            num_text.transform.Find("start_num").gameObject.GetComponent<Text>().text = start_num + " / " + Global.instance.numOfPlayers;
+            num_text.transform.Find("skip_num").gameObject.GetComponent<Text>().text = skip_num + " / " + Global.instance.numOfPlayers;
         } else if (state == State.PRE_FINISHED)
         {
             Global.instance.AllPlayersMovementEnable = true;

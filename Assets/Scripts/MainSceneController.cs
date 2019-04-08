@@ -9,7 +9,7 @@ public class MainSceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SoundManager.instance.PlaySound("main_scene_background");
+        SoundManager.instance.SoundTransition("background_battle", "main_scene_background", 0.8f);
     }
 
     // Update is called once per frame

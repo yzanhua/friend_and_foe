@@ -24,7 +24,7 @@ public class InputSystemManager : ScriptableObject
 
     void Awake()
     {
-        for (int i = 0; i < Global.instance.numOfPlayers; i++)
+        for (int i = 0; i < 4; i++)
             players[i] = ReInput.players.GetPlayer(i);
     }
 

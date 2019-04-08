@@ -39,10 +39,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        if (!temp.isPlaying)
-        {
-            temp.Play();
-        }
+        temp.Play();
     }
 
     public void StopSound(string s)
@@ -63,6 +60,41 @@ public class SoundManager : MonoBehaviour
         if (temp.isPlaying)
         {
             temp.Stop();
+        }
+    }
+
+    public void SoundTransition (string fadeout, string fadein, float fadeRate = 0.5f)
+    {
+        StartCoroutine(FadeInout(fadeout, fadein, fadeRate));
+    }
+
+    IEnumerator FadeInout(string fadeout, string fadein, float fadeRate)
+    {
+        Transform child_transform_out= transform.Find(fadeout);
+        Transform child_transform_in = transform.Find(fadein);
+
+        AudioSource fade_out = child_transform_out.GetComponent<AudioSource>();
+        AudioSource fade_in = child_transform_in.GetComponent<AudioSource>();
+
+        if (fade_out.isPlaying)
+        {
+            fade_in.Play();
+            fade_in.volume = 0f;
+            while (fade_out.volume > 0.1f || fade_in.volume < 0.6f)
+            {
+                fade_out.volume = Mathf.Lerp(fade_out.volume, 0.0f, fadeRate * Time.deltaTime);
+                fade_in.volume = Mathf.Lerp(fade_in.volume, 1.0f, fadeRate * Time.deltaTime);
+                yield return null;
+            }
+
+            // Close enough, turn it off!
+            fade_out.volume = 0.0f;
+            fade_out.Stop();
+            fade_in.volume = 0.6f;
+        }
+        else if (!fade_in.isPlaying)
+        {
+            fade_in.Play();
         }
     }
 

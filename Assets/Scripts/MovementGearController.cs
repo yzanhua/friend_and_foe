@@ -10,23 +10,43 @@ public class MovementGearController : MonoBehaviour
     public GameObject submarine;
     public GameObject movementGeat;
     public float DashCD = 0.5f;
-    public int maxDash = 10;
+
     public HealthBar healthBar;
 
     private SeatOnGear status;
     private Rigidbody2D submarine_rb;
     private SpriteRenderer rend;
     private bool inPlaySoundRoutine = false;
-    //private bool dashOK = true;
-    private int availableDash;
-    private float dashInterval;
+    private bool dashOK = true;
+
+    private float currDashHealth;
+    private float MaxDashHealth = 100f;
+    public float dashDeductPecentage = 50f;
+    public float dashRecoverToltalTime = 3f;
+
+
 
     void Start()
     {
         status = GetComponent<SeatOnGear>();
         submarine_rb = submarine.GetComponent<Rigidbody2D>();
         rend = movementGeat.GetComponent<SpriteRenderer>();
-        availableDash = maxDash;
+        currDashHealth = MaxDashHealth;
+        healthBar.SetSize(currDashHealth / MaxDashHealth);
+    }
+
+    private void ModifyDashHealth(float off)
+    {
+        if (currDashHealth == MaxDashHealth && off > 0f) return;
+        if (currDashHealth == 0f && off < 0f) return;
+
+        currDashHealth += off;
+        if (currDashHealth > MaxDashHealth) currDashHealth = MaxDashHealth;
+        float show_health = currDashHealth;
+        if (show_health <= 0f)
+            show_health = 0f;   
+
+        healthBar.SetSize(show_health / MaxDashHealth);
     }
 
     void Update()
@@ -34,14 +54,7 @@ public class MovementGearController : MonoBehaviour
         if (!Global.instance.AllPlayersMovementEnable)
             return;
 
-        // increase dash health
-        dashInterval += Time.deltaTime;
-        if (dashInterval > DashCD && availableDash < maxDash)
-        {
-            availableDash += 1;
-            dashInterval = 0;
-        }
-        healthBar.SetSize(Health());
+        ModifyDashHealth(Time.deltaTime / dashRecoverToltalTime * MaxDashHealth);
 
         if (!status.IsPlayerOnSeat())
             return;
@@ -56,17 +69,19 @@ public class MovementGearController : MonoBehaviour
         int playerID = status.PlayerID();
         Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
+        
         // dash
-        if (availableDash > 0 && InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
+        if (currDashHealth > MaxDashHealth * dashDeductPecentage / 200f && InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
         {
             submarine_rb.AddForce(temp * submarine_rb.mass * 20f, ForceMode2D.Impulse);
-            availableDash -= 1;
             if (TutorialManager.instance != null)
             {
                 bool isRight = transform.position.x > 0f;
                 TutorialManager.CompleteTask(TutorialManager.TaskType.DASH_SUB, isRight);
             }
             //StartCoroutine(WaitDashCD());
+            ModifyDashHealth(-MaxDashHealth * dashDeductPecentage / 100f);
+
         }
 
         if (TutorialManager.instance != null)
@@ -98,8 +113,4 @@ public class MovementGearController : MonoBehaviour
         inPlaySoundRoutine = false;
     }
 
-    private float Health()
-    {
-        return (float)availableDash / maxDash;
-    }
 }

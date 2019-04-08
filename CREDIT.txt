@@ -59,4 +59,6 @@ Shaders:
 Particle Effects:
 	- Explosion and trail effects
 		[Bullet explosion | Submarine Trail | Bomb Explosion] (https://assetstore.unity.com/packages/vfx/particles/epic-toon-fx-57772)
+	- Transition Effect
+		[Transition] (https://assetstore.unity.com/packages/tools/gui/beautiful-transitions-56442)
 	
