@@ -48,7 +48,9 @@ Sprites:
 		[Arrow marks at character selection] (https://iconscout.com/icon/chevron-48)
 	- PS4 icons
 		[PS4 icons in tutorial] (https://www.gtagaming.com/360-to-ps4-controller-icons-f30380.html)
-	- Stations and characters are created by ourselves
+	- Main menu page background
+		[Underwater Fantasy Pixel Art Environment by ansimuz](https://ansimuz.itch.io/underwater-fantasy-pixel-art-environment)
+	- Stations, characters, submarine and character selection background are created by ourselves
 
 
 Fonts:
