@@ -64,15 +64,15 @@ public class SubmarineController : MonoBehaviour
 
         Collider2D thisCollider = collision.otherCollider;
 
-        if (other.CompareTag("Submarine") && !collision.otherCollider.tag.Contains("Shield"))
-        {
+        if ((other.CompareTag("Submarine") || other.CompareTag("Weapon")) && !thisCollider.tag.Contains("Shield"))
+        { // if no shiled involved
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("collide");
             Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
             rb2d.velocity = Vector2.zero;
             Vector3 contactPoint = collision.GetContact(0).point;
 
-            myHealth.AlterHealth(-2f);
+            myHealth.AlterHealth(-myHealth.maxHealth * 0.07f);
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
             GameObject spark = Instantiate(sparkParticle, transform);
             spark.transform.position = contactPoint;
@@ -82,7 +82,37 @@ public class SubmarineController : MonoBehaviour
             InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
             shake();
         }
-        
+        else if (other.CompareTag("Shield"))
+        {
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySound("collide");
+
+            Vector2 direction = ((Vector2)(transform.position - other.transform.position)).normalized;
+            rb2d.velocity = Vector2.zero;
+            Vector3 contactPoint = collision.GetContact(0).point;
+
+            if (!thisCollider.tag.Contains("Shield"))
+            {
+                Debug.Log("Collide one shield");
+                myHealth.AlterHealth(-myHealth.maxHealth * 0.15f);
+            }
+            else
+            {
+                Debug.Log("Collide two shield");
+            }
+
+            float angle = -Vector2.SignedAngle(Vector2.up, direction);
+            GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
+            bounceEffect.transform.position = contactPoint;
+            SetParticleRotation(bounceEffect, angle);
+            Destroy(bounceEffect, 1f);
+            rb2d.AddForce(direction * bumpForce * rb2d.mass * 2f, ForceMode2D.Impulse);
+
+            InputSystemManager.SetVibration(playerID1, 0.7f, 0.3f);
+            InputSystemManager.SetVibration(playerID2, 0.7f, 0.3f);
+            shake();
+        }
+
         if (thisCollider.CompareTag("Submarine") || thisCollider.CompareTag("Weapon"))
         {
             if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
