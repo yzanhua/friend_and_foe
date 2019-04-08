@@ -9,7 +9,7 @@ public class BubbleShieldController : MonoBehaviour
 
     public float _current_health;
     public int particleLayer;
-    
+
     public GameObject bubbleShieldParticlePrefab;
     public GameObject shieldWarning;
     public HealthBar healthBar;
@@ -156,5 +156,10 @@ public class BubbleShieldController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public float Health()
+    {
+        return _current_health;
     }
 }
