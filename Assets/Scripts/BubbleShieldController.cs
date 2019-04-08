@@ -6,7 +6,7 @@ public class BubbleShieldController : MonoBehaviour
 {
     public float ShieldCD = 3f;
     public float MAX_HEALTH = 7f;
-    public Sprite full_shield_sprite;
+
     public float _current_health;
     public int particleLayer;
     public GameObject bubbleShieldParticlePrefab;
