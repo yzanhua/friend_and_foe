@@ -7,37 +7,45 @@ public class MovementGearController : MonoBehaviour
 {
     [Range(0f, 10f)]
     public float speed;
-
     public GameObject submarine;
     public GameObject movementGeat;
     public float DashCD = 0.5f;
+    public int maxDash = 10;
+    public HealthBar healthBar;
 
     private SeatOnGear status;
     private Rigidbody2D submarine_rb;
     private SpriteRenderer rend;
-
-    bool inPlaySoundRoutine = false;
-
-    bool dashOK = true;
+    private bool inPlaySoundRoutine = false;
+    //private bool dashOK = true;
+    private int availableDash;
+    private float dashInterval;
 
     void Start()
     {
         status = GetComponent<SeatOnGear>();
         submarine_rb = submarine.GetComponent<Rigidbody2D>();
         rend = movementGeat.GetComponent<SpriteRenderer>();
+        availableDash = maxDash;
     }
 
     void Update()
     {
         if (!Global.instance.AllPlayersMovementEnable)
             return;
-        if (!status.IsPlayerOnSeat())
-        {
-            //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.3f);
-            return;
-        }
-        //rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
 
+        // increase dash health
+        dashInterval += Time.deltaTime;
+        if (dashInterval > DashCD && availableDash < maxDash)
+        {
+            availableDash += 1;
+            dashInterval = 0;
+        }
+        healthBar.SetSize(Health());
+
+        if (!status.IsPlayerOnSeat())
+            return;
+        // tutorial
         if (TutorialManager.instance != null)
         {
             bool isRight = transform.position.x > 0f;
@@ -48,17 +56,17 @@ public class MovementGearController : MonoBehaviour
         int playerID = status.PlayerID();
         Vector2 temp = new Vector2(InputSystemManager.GetLeftSHorizontal(playerID), InputSystemManager.GetLeftSVertical(playerID));
         temp = temp.normalized;
-
-        if (dashOK && InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
-        {// dash
+        // dash
+        if (availableDash > 0 && InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
+        {
             submarine_rb.AddForce(temp * submarine_rb.mass * 20f, ForceMode2D.Impulse);
-            dashOK = false;
+            availableDash -= 1;
             if (TutorialManager.instance != null)
             {
                 bool isRight = transform.position.x > 0f;
                 TutorialManager.CompleteTask(TutorialManager.TaskType.DASH_SUB, isRight);
             }
-            StartCoroutine(WaitDashCD());
+            //StartCoroutine(WaitDashCD());
         }
 
         if (TutorialManager.instance != null)
@@ -75,11 +83,12 @@ public class MovementGearController : MonoBehaviour
             StartCoroutine(playMoveSound());
     }
 
-    IEnumerator WaitDashCD()
-    {
-        yield return new WaitForSeconds(DashCD);
-        dashOK = true;
-    }
+    //IEnumerator WaitDashCD()
+    //{
+    //    yield return new WaitForSeconds(DashCD);
+    //    dashOK = true;
+    //}
+
     IEnumerator playMoveSound()
     {
         inPlaySoundRoutine = true;
@@ -87,5 +96,10 @@ public class MovementGearController : MonoBehaviour
             SoundManager.instance.PlaySound("move");
         yield return new WaitForSeconds(7.8f);
         inPlaySoundRoutine = false;
+    }
+
+    private float Health()
+    {
+        return (float)availableDash / maxDash;
     }
 }
