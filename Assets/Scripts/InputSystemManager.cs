@@ -105,6 +105,13 @@ public class InputSystemManager : ScriptableObject
         return instance.players[newID].GetButtonDown("ActionButton4");
     }
 
+    static public bool GetMenuButton(int playerID)
+    {
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("Menu");
+    }
+
     static public bool GetRightShoulderButton(int playerID)
     {
         int newID = instance.PlayerID2GamePadID[playerID];
