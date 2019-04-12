@@ -17,22 +17,37 @@ public class ShieldGearController : MonoBehaviour
 
     private SeatOnGear status;
     private BubbleShieldController bubbleShieldController;
-    
+    private AutomatedShiled automatedShiled;
+
     // Start is called before the first frame update
     void Start()
     {
         status = GetComponent<SeatOnGear>();
         bubbleShieldController = shield.GetComponent<BubbleShieldController>();
         bubbleShieldController.status = status;
+        automatedShiled = GetComponent<AutomatedShiled>();
+        if (submarine_proxy_transform == null)
+            Debug.Log("null null null");
+        
+        if (automatedShiled != null)
+            automatedShiled.submarine_proxy_transform = submarine_proxy_transform;
     }
 
     void Update()
     {
-        if (!status.IsPlayerOnSeat())
-            return;
+        if (automatedShiled != null && automatedShiled.isAutomated && bubbleShieldController.inUse)
+        {
+            RotateShield();
+        }
+        else
+        {
+            if (!status.IsPlayerOnSeat())
+                return;
 
-        GenerateShield();
-        RotateShield();
+            GenerateShield();
+            RotateShield();
+        }
+        
     }
 
     IEnumerator WaitTillBreak()
@@ -62,8 +77,16 @@ public class ShieldGearController : MonoBehaviour
 
     void RotateShield()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
-        float inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
+        float inputX = 0f;
+        float inputY = 0f;
+
+        if (automatedShiled != null && automatedShiled.isAutomated)
+            automatedShiled.GetFakeInput(ref inputX, ref inputY);
+        else
+        {
+            inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
+            inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
+        }
 
         if (inputX != 0f || inputY != 0f)
         {
@@ -72,13 +95,17 @@ public class ShieldGearController : MonoBehaviour
                 TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
             }
             float angle = Vector2.SignedAngle(Vector2.left, new Vector2(inputX, inputY));
-            float curr_angle = shield.transform.eulerAngles.z - 180f;
+
+            float curr_angle = shield.transform.eulerAngles.z - 180f + 20f;
+            // 20f is the initial state angle offset
+
             angle = angle - curr_angle;
 
             if (angle < -180f)
                 angle += 360f;
             if (angle > 180f)
                 angle -= 360f;
+
             angle = angle * Mathf.Deg2Rad;
             shield.transform.RotateAround(submarine_proxy_transform.position, Vector3.forward, angle * rotationSpeed);
         }
