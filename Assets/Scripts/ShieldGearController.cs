@@ -35,11 +35,19 @@ public class ShieldGearController : MonoBehaviour
 
     void Update()
     {
-        if (!status.IsPlayerOnSeat())
-            return;
+        if (automatedShiled != null && automatedShiled.isAutomated && bubbleShieldController.inUse)
+        {
+            RotateShield();
+        }
+        else
+        {
+            if (!status.IsPlayerOnSeat())
+                return;
 
-        GenerateShield();
-        RotateShield();
+            GenerateShield();
+            RotateShield();
+        }
+        
     }
 
     IEnumerator WaitTillBreak()
@@ -69,11 +77,16 @@ public class ShieldGearController : MonoBehaviour
 
     void RotateShield()
     {
-        float inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
-        float inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
+        float inputX = 0f;
+        float inputY = 0f;
 
-        if (automatedShiled != null)
+        if (automatedShiled != null && automatedShiled.isAutomated)
             automatedShiled.GetFakeInput(ref inputX, ref inputY);
+        else
+        {
+            inputX = InputSystemManager.GetLeftSHorizontal(status.PlayerID());
+            inputY = InputSystemManager.GetLeftSVertical(status.PlayerID());
+        }
 
         if (inputX != 0f || inputY != 0f)
         {

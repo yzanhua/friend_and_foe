@@ -16,6 +16,8 @@ public class BubbleShieldController : MonoBehaviour
 
     public SeatOnGear status = null;
 
+    public bool inUse = false;
+
     private SpriteRenderer[] _sr;
     private GameObject[] _bubbleParticles;
     private Animator[] _an;
@@ -88,6 +90,7 @@ public class BubbleShieldController : MonoBehaviour
                 SoundManager.instance.PlaySound("bubble_generate");
             GetComponent<PolygonCollider2D>().enabled = true;
             StartCoroutine(StartParticle());
+            inUse = true;
             return true;
         }
         return false;
@@ -157,6 +160,7 @@ public class BubbleShieldController : MonoBehaviour
             GetComponent<PolygonCollider2D>().enabled = false;
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("bubble_break");
+            inUse = false;
             return true;
         }
         return false;
