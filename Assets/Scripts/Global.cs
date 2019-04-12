@@ -21,6 +21,8 @@ public class Global : ScriptableObject
     public bool cameraControl = true;
     public bool godMode = false;
 
+    public bool AutomatedShiled = true;
+
     public static Global instance
     {
         get
