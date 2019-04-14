@@ -17,7 +17,7 @@ public class MovementGearController : MonoBehaviour
     private Rigidbody2D submarine_rb;
     private SpriteRenderer rend;
     private bool inPlaySoundRoutine = false;
-    private bool dashOK = true;
+    //private bool dashOK = true;
 
     private float currDashHealth;
     private float MaxDashHealth = 100f;

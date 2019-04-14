@@ -29,7 +29,8 @@ public class PlayerMovementController : MonoBehaviour
     private GameObject ladder;
     private Rigidbody2D rb2d;
     private Vector2 target;
-
+    float verticalInput;
+    float horizontalInput;
 
 
     void Start()
@@ -37,15 +38,14 @@ public class PlayerMovementController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         __init_gravity_scale = rb2d.gravityScale;
     }
-
+    
     private void Update()
     {
-        an.speed = 0f;
         if (!movementEnable || !Global.instance.AllPlayersMovementEnable)
             return;
 
-        float verticalInput = InputSystemManager.GetLeftSVertical(playerID);
-        float horizontalInput = InputSystemManager.GetLeftSHorizontal(playerID);
+        verticalInput = InputSystemManager.GetLeftSVertical(playerID);
+        horizontalInput = InputSystemManager.GetLeftSHorizontal(playerID);
 
         if (!onLadder)
         {
@@ -64,7 +64,15 @@ public class PlayerMovementController : MonoBehaviour
                 return;
             }
             horizontalInput = 0f;
-        }
+        } 
+    }
+
+    private void FixedUpdate()
+    {
+        an.speed = 0f;
+        if (!movementEnable || !Global.instance.AllPlayersMovementEnable)
+            return;
+
         if (Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
         {// moves vertically
             horizontalInput = 0f;
@@ -81,15 +89,12 @@ public class PlayerMovementController : MonoBehaviour
             if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
             {// dash
                 if (TutorialManager.instance != null)
-                {
                     TutorialManager.CompleteTask(TutorialManager.TaskType.DASH, transform.position.x > 0f);
-                }
-
+                
                 temp = temp * 25f;
                 GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
                 new_trail.transform.position = playerProxy.transform.position;
             }
-
             rb2d.AddForce(speed * temp * rb2d.mass);
         }
 
@@ -110,6 +115,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Jump(float horizontalInput)
     {
+        an.speed = 0f;
         float verticalInput = -1f;
         rb2d.gravityScale = __init_gravity_scale * 2f;
         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
