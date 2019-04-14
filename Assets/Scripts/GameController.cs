@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public GameObject ready_text;
     public GameObject go_text;
     public GameObject confetti_prefab;
-    public Text WinText;
+    public GameObject winText;
     public GameObject sByeBye;
     public GameObject station_switch_text;
 
@@ -80,19 +80,24 @@ public class GameController : MonoBehaviour
         Global.instance.AllPlayersMovementEnable = false;
         Global.instance.isGameEnd = true;
 
+        TextController winTextCtrller = winText.GetComponent<TextController>();
         if (health_right.health < health_left.health)
         {
-            WinText.text = "Red Team Win!";
+
+            //WinText.text = "Red Team Win!";
+            winTextCtrller.SetText("Red Team Win!");
             StartCoroutine(DestroyLoser(right_sub, left_sub));
         }
         else if (health_right.health > health_left.health)
         {
-            WinText.text = "Blue Team Win!";
+            //WinText.text = "Blue Team Win!";
+            winTextCtrller.SetText("Blue Team Win!");
             StartCoroutine(DestroyLoser(left_sub, right_sub));
         }
         else
         {
-            WinText.text = "Draw!";
+            //WinText.text = "Draw!";
+            winTextCtrller.SetText("Draw!");
             InputSystemManager.SetVibration(-1, 0.3f, 10f);
             StartCoroutine(FixCamera(left_sub, right_sub, 1f, true));
             StartCoroutine(ReloadScene(12f));

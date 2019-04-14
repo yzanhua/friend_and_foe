@@ -3363,7 +3363,7 @@ PrefabInstance:
     - target: {fileID: 4325301820724576242, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_Text
-      value: 
+      value: Blue team win
       objectReference: {fileID: 0}
     - target: {fileID: 4325301820724576242, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
@@ -3423,7 +3423,7 @@ PrefabInstance:
     - target: {fileID: 4325301820724576241, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3.4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4325301820724576241, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
@@ -3438,7 +3438,17 @@ PrefabInstance:
     - target: {fileID: 4325301820724576241, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -98.485
+      value: -106
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325301820724576241, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325301820724576241, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27, type: 3}
@@ -3454,6 +3464,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 731415480}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &731415483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4325301820724576240, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+    type: 3}
+  m_PrefabInstance: {fileID: 731415480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &731415484
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731415483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c1f4de36d93d4a61a6d2524779d5080, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &731415491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731415483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832d8901c0e7a4cf09d85d0e5805ac93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &778793814
 GameObject:
   m_ObjectHideFlags: 0
@@ -6335,18 +6382,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1604825586 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4325301820724576242, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
-    type: 3}
-  m_PrefabInstance: {fileID: 731415480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1607992351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7915,7 +7950,7 @@ PrefabInstance:
         type: 3}
       propertyPath: WinText
       value: 
-      objectReference: {fileID: 1604825586}
+      objectReference: {fileID: 731415483}
     - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: left_bar
@@ -7946,6 +7981,11 @@ PrefabInstance:
       propertyPath: confetti_prefab
       value: 
       objectReference: {fileID: 129898, guid: 36bdc02b23d9ca94d93bd715c0cca5c0, type: 3}
+    - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: winText
+      value: 
+      objectReference: {fileID: 731415483}
     - target: {fileID: 6481231079324147333, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_IsActive

@@ -34,7 +34,7 @@ public class ChangeScene : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             currTime += 1f;
-            if (currTime >= targetTime)
+            if (currTime >= targetTime && !Global.instance.isGameEnd)
             {
                 StartCoroutine(ChangeGearsPositions());
                 currTime = 0f;
