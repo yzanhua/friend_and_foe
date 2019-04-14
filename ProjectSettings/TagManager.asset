@@ -53,3 +53,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: p0_pre
+    uniqueID: 1939319407
+    locked: 0
+  - name: p1_pre
+    uniqueID: 1304389565
+    locked: 0
+  - name: p2_pre
+    uniqueID: 43474451
+    locked: 0
+  - name: p3_pre
+    uniqueID: 3638749115
+    locked: 0
+  - name: player
+    uniqueID: 2302812635
+    locked: 0
