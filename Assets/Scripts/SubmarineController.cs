@@ -55,7 +55,7 @@ public class SubmarineController : MonoBehaviour
         GameObject other = collision.collider.gameObject;
         if (other.CompareTag("Bullet"))
         {
-            myHealth.AlterHealth(-2f);
+            myHealth.AlterHealth(-3f);
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("hit");
             InputSystemManager.SetVibration(playerID1, 0.3f, 0.2f);
@@ -72,7 +72,8 @@ public class SubmarineController : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             Vector3 contactPoint = collision.GetContact(0).point;
 
-            myHealth.AlterHealth(-myHealth.maxHealth * 0.07f);
+            // myHealth.AlterHealth(-myHealth.maxHealth * 0.05f);
+            myHealth.AlterHealth(-8f);
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
             GameObject spark = Instantiate(sparkParticle, transform);
             spark.transform.position = contactPoint;
@@ -92,7 +93,8 @@ public class SubmarineController : MonoBehaviour
             Vector3 contactPoint = collision.GetContact(0).point;
 
             if (!thisCollider.tag.Contains("Shield"))
-                myHealth.AlterHealth(-myHealth.maxHealth * 0.15f);
+                //myHealth.AlterHealth(-myHealth.maxHealth * 0.15f);
+                myHealth.AlterHealth(-12f);
             
 
             float angle = -Vector2.SignedAngle(Vector2.up, direction);

@@ -22,7 +22,7 @@ public class MovementGearController : MonoBehaviour
     private float currDashHealth;
     private float MaxDashHealth = 100f;
     public float dashDeductPecentage = 50f;
-    public float dashRecoverToltalTime = 3f;
+    public float dashRecoverToltalTime = 2.5f;
 
 
 

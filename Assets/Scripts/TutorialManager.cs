@@ -44,10 +44,12 @@ public class TutorialManager : MonoBehaviour
     public GameObject RightSubmarine;
     public GameObject LeftSubmarine;
     public GameObject PreparedText;
+    public GameObject TutorialUI;
 
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
     public State state;
+    public float speed = 20f;
 
     public delegate void CallBack();
 
@@ -103,217 +105,6 @@ public class TutorialManager : MonoBehaviour
 
 
         int pos = isRight ? 1 : 0;
-        /*
-        if (instance.state == State.CHARACTER)
-        {
-            if (task == TaskType.DASH)
-            {
-                instance._TaskList[pos][task] = true;
-                // instance._rightTaskBox.text = "Press Button A to jump from the ladder";
-
-                if ((bool)instance._TaskList[pos][TaskType.DASH])
-                {
-                    // instance._rightTaskBox.text = "Great!";
-                    instance._TaskState[pos] = true;
-                }
-
-                return true;
-            }
-        }
-        else if (instance.state == State.MOVEMENT)
-        {
-            if (task == TaskType.SEAT || task == TaskType.MOVE || task == TaskType.DASH_SUB)
-            {
-
-                if (task == TaskType.SEAT)
-                {
-                    if (((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT]))
-                    {
-                        return true;
-                    }
-
-                    int num = 0;
-
-                    instance._TaskList[pos][task] = true;
-                    if ((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT])
-                    {
-                        num = 2;
-                        instance._InStateTransition = true;
-                        instance.StartCoroutine(instance.ChangeState(1.5f, () =>
-                        {
-                            instance._InStateTransition = false;
-                            instance.EnableText("Move");
-                        }));
-
-                    }
-                    else if ((bool)instance._TaskList[0][TaskType.SEAT] || (bool)instance._TaskList[1][TaskType.SEAT])
-                    {
-                        num = 1;
-                    }
-
-                    GameObject num_text = instance.PreparedText.transform.Find("Seat").Find("flash_text").gameObject;
-                    num_text.transform.Find("seat_num").gameObject.GetComponent<Text>().text = num + " / 2";
-                }
-                else if (task == TaskType.MOVE)
-                {
-                    if (!((bool)instance._TaskList[0][TaskType.SEAT] && (bool)instance._TaskList[1][TaskType.SEAT]))
-                    {
-                        return false;
-                    }
-                    else if (((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE]))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        instance._TaskList[pos][task] = true;
-                        int num = 0;
-
-
-                        if ((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE])
-                        {
-                            num = 2;
-                            instance._InStateTransition = true;
-                            instance.StartCoroutine(instance.ChangeState(2f, () =>
-                            {
-                                instance._InStateTransition = false;
-                                instance.EnableText("DashSub");
-                            }));
-                        }
-                        else if ((bool)instance._TaskList[0][TaskType.MOVE] || (bool)instance._TaskList[1][TaskType.MOVE])
-                        {
-                            num = 1;
-                        }
-                        GameObject num_text = instance.PreparedText.transform.Find("Move").Find("flash_text").gameObject;
-                        num_text.transform.Find("move_num").gameObject.GetComponent<Text>().text = num + " / 2";
-
-                    }
-                }
-                else if (task == TaskType.DASH_SUB)
-                {
-                    if (!((bool)instance._TaskList[0][TaskType.MOVE] && (bool)instance._TaskList[1][TaskType.MOVE]))
-                    {
-                        return false;
-                    }
-                    else if (((bool)instance._TaskList[0][TaskType.DASH_SUB] && (bool)instance._TaskList[1][TaskType.DASH_SUB]))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        instance._TaskList[pos][task] = true;
-                        int num = 0;
-
-                        if ((bool)instance._TaskList[0][TaskType.DASH_SUB] && (bool)instance._TaskList[1][TaskType.DASH_SUB])
-                        {
-                            num = 2;
-                        }
-                        else if ((bool)instance._TaskList[0][TaskType.DASH_SUB] || (bool)instance._TaskList[1][TaskType.DASH_SUB])
-                        {
-                            num = 1;
-                        }
-                        GameObject num_text = instance.PreparedText.transform.Find("DashSub").Find("flash_text").gameObject;
-                        num_text.transform.Find("dash_num").gameObject.GetComponent<Text>().text = num + " / 2";
-
-                    }
-                }
-
-
-                if ((bool)instance._TaskList[pos][TaskType.SEAT] && (bool)instance._TaskList[pos][TaskType.MOVE] && (bool)instance._TaskList[pos][TaskType.DASH_SUB])
-                {
-                    //instance.rightTaskBox.text = "Great!";
-                    instance._TaskState[pos] = true;
-                }
-
-                return true;
-            }
-
-        }
-        else if (instance.state == State.WEAPON)
-        {
-            if (task == TaskType.REFILL || task == TaskType.SHOOT)
-            {
-                if (task == TaskType.REFILL)
-                {
-                    if (((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL]))
-                    {
-                        return true;
-                    }
-
-                    int num = 0;
-                    instance._TaskList[pos][task] = true;
-                    if ((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL])
-                    {
-                        num = 2;
-                        instance._InStateTransition = true;
-                        instance.StartCoroutine(instance.ChangeState(1.5f, () =>
-                        {
-                            instance._InStateTransition = false;
-                            instance.EnableText("Shoot");
-                        }));
-
-                    }
-                    else if ((bool)instance._TaskList[0][TaskType.REFILL] || (bool)instance._TaskList[1][TaskType.REFILL])
-                    {
-                        num = 1;
-                    }
-
-                    GameObject num_text = instance.PreparedText.transform.Find("Refill").Find("flash_text").gameObject;
-                    num_text.transform.Find("num").gameObject.GetComponent<Text>().text = num + " / 2";
-                }
-                else if (task == TaskType.SHOOT)
-                {
-                    if (!((bool)instance._TaskList[0][TaskType.REFILL] && (bool)instance._TaskList[1][TaskType.REFILL]))
-                    {
-                        return false;
-                    }
-                    else if (((bool)instance._TaskList[0][TaskType.SHOOT] && (bool)instance._TaskList[1][TaskType.SHOOT]))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        instance._TaskList[pos][task] = true;
-                    }
-                }
-
-                if ((bool)instance._TaskList[pos][TaskType.REFILL] && (bool)instance._TaskList[pos][TaskType.SHOOT])
-                {
-                    instance._TaskState[pos] = true;
-                }
-
-                return true;
-            }
-
-        }
-        else if (instance.state == State.SHIELD)
-        {
-            if (task == TaskType.SHIELD)
-            {
-                instance._TaskList[pos][task] = true;
-                int num = 0;
-
-                if ((bool)instance._TaskList[0][TaskType.SHIELD] && (bool)instance._TaskList[1][TaskType.SHIELD])
-                {
-                    num = 2;
-                }
-                else if ((bool)instance._TaskList[0][TaskType.SHIELD] || (bool)instance._TaskList[1][TaskType.SHIELD])
-                {
-                    num = 1;
-                }
-                GameObject num_text = instance.PreparedText.transform.Find("Shield").Find("flash_text").gameObject;
-                num_text.transform.Find("num").gameObject.GetComponent<Text>().text = num + " / 2";
-            }
-
-            if ((bool)instance._TaskList[pos][TaskType.SHIELD])
-            {
-                //instance.rightTaskBox.text = "Great!";
-                instance._TaskState[pos] = true;
-            }
-
-            return true;
-
-        }*/
 
         if (instance.state < State.PRE_FINISHED)
         {
@@ -353,8 +144,9 @@ public class TutorialManager : MonoBehaviour
                             instance._InStateTransition = true;
                             instance.StartCoroutine(instance.ChangeState(2f, () =>
                             {
-                                instance._InStateTransition = false;
-                                instance.EnableText(instance._task2str[list[index + 1]]);
+
+                                instance.StartCoroutine((instance.DialogBoxAnimation(instance._task2str[list[index + 1]])));
+                                //instance.EnableText(instance._task2str[list[index + 1]]);
                             }));
                         }
 
@@ -408,8 +200,6 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // leftTaskBox.text = "Press B to start the tutorial.";
-        // rightTaskBox.text = "Press A to skip the tutorial";
         Global.instance.AllPlayersMovementEnable = false;
         state = State.SKIPTUTORIAL;
         _TaskList.Add(new Hashtable());
@@ -454,6 +244,7 @@ public class TutorialManager : MonoBehaviour
         AlterChangeSceneState(false);
         AlterGearState(false);
         EnableText("SkipTutorial");
+        // StartCoroutine(DialogBoxAnimation(false));
         SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
 
     }
@@ -608,7 +399,6 @@ public class TutorialManager : MonoBehaviour
         state = State.CHARACTER;
         EnableText("Dash");
 
-
     }
 
     private void AlterGearState(bool value)
@@ -729,5 +519,33 @@ public class TutorialManager : MonoBehaviour
         _TaskState[1] = false;
     }
 
+
+    IEnumerator DialogBoxAnimation(string text)
+    {
+        Vector3 target;
+        target = new Vector3(0f, 150f, 0f);
+
+        RectTransform rt = TutorialUI.GetComponent<RectTransform>();
+
+        while ((rt.localPosition - target).magnitude > 0.1f)
+        {
+            rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
+            yield return null;
+        }
+
+
+        EnableText(text);
+        target = new Vector3(0f, 0f, 0f);
+
+        while ((rt.localPosition - target).magnitude > 0.1f)
+        {
+            rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
+            yield return null;
+        }
+
+        instance._InStateTransition = false;
+
+
+    }
 
 }

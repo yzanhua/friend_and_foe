@@ -60,7 +60,6 @@ public class BulletController : MonoBehaviour
         {
             if (other.CompareTag("Submarine"))
             {
-                collision.collider.GetComponent<HealthCounter>().AlterHealth(-1);
                 SubmarineController temp = collision.collider.GetComponent<SubmarineController>();
 
             }

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 24
-  LongestDistance: 20
+  LongestDistance: 25
   direction: {x: 0, y: 0, z: 0}
   bounceMaterial: {fileID: 6200000, guid: f3c029cba401141899e9c7ed8f659e8d, type: 2}
   noBounceMaterial: {fileID: 6200000, guid: 5ebf283eb3306478ca26dfd02245ad47, type: 2}
@@ -228,6 +228,10 @@ PrefabInstance:
     - target: {fileID: 499462, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19959462, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19812862, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
       propertyPath: InitialModule.startSize.maxCurve.m_Curve.Array.size
@@ -432,10 +436,6 @@ PrefabInstance:
     - target: {fileID: 19812862, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
       propertyPath: SizeModule.y.maxCurve.m_Curve.Array.data[1].outWeight
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19959462, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19916514, guid: 4c41ec3ab37ac8b4c9490c39838a71d1, type: 3}
       propertyPath: m_SortingOrder
