@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class SchoolMovement : MonoBehaviour
 {
-    Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0),
-                                        new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
     public int StartPos;
     public int DestPos;
     public float Speed = 2.0f;
     public float WaitTime;
     public GameObject[] fishes;
-    public GameObject particleLeft;
-    public GameObject particleRight;
 
+    //Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0),
+    //new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
+    Vector3[] PresetPosition;
     int fishCount = 7;
-    Animator[] fishAnimators;
-    Rigidbody2D rb;
     bool traveling;
     bool inTravelRountine;
     bool inWaitRoutine;
-    private float orgScale;
+    float orgScale;
+    Animator[] fishAnimators;
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        PresetPosition = new Vector3[4];
         fishAnimators = new Animator[fishes.Length];
         for (int i = 0; i < transform.childCount - 1; ++i)
         {
@@ -33,7 +33,6 @@ public class SchoolMovement : MonoBehaviour
             orgScale = transform.GetChild(i).localScale.x;
         }
         rb = GetComponent<Rigidbody2D>();
-
         StartPos = 0;
         DestPos = 1;
         travel();
@@ -48,54 +47,6 @@ public class SchoolMovement : MonoBehaviour
             for (int i = 0; i < fishes.Length; ++i)
             {
                 // if the fish is still active
-
-                //=======
-                //﻿using System.Collections;
-                //using System.Collections.Generic;
-                //using UnityEngine;
-
-                //public class SchoolMovement : MonoBehaviour
-                //{
-                //   Vector3[] PresetPosition = { new Vector3(-21, 3, 0), new Vector3(16, 3, 0), 
-                //                                        new Vector3(-21, -3, 0), new Vector3(16, -3, 0)};
-                //    public int StartPos;
-                //    public int DestPos;
-                //    public float Speed = 2.0f;
-                //    public float WaitTime;
-                //    public GameObject[] fishes;
-
-                //    int fishCount = 7;
-                //    Animator[] fishAnimators;
-                //    Rigidbody2D rb;
-                //    bool traveling;
-                //    bool inTravelRountine;
-                //    bool inWaitRoutine;
-
-                //    // Start is called before the first frame update
-                //    void Start()
-                //    {
-                //        fishAnimators = new Animator[fishes.Length];
-                //        for (int i = 0; i < transform.childCount; ++i)
-                //        {
-                //            fishAnimators[i] = transform.GetChild(i).GetComponent<Animator>();
-                //        }
-                //        rb = GetComponent<Rigidbody2D>();
-
-                //        StartPos = 0;
-                //        DestPos = 1;
-                //        travel();
-                //    }
-
-                //    // Update is called once per frame
-                //    void Update()
-                //    {
-                //        // Stop when reach destination
-                //        if (Mathf.Abs(transform.position.x - PresetPosition[DestPos].x) < 0.1f && !inWaitRoutine)
-                //        {
-                //            for (int i = 0; i < fishes.Length; ++i)
-                //            {
-                //                // if the fish is still active
-                //>>>>>>> 4d9a71794092ca9ce207c5d44115fe995629ff1b
                 if (transform.GetChild(i))
                 {
                     fishAnimators[i].speed = 0;
@@ -103,19 +54,26 @@ public class SchoolMovement : MonoBehaviour
                 }
             }
             rb.velocity = Vector2.zero;
-            StartCoroutine(wait());
+            StartCoroutine(Wait());
         }
         else if (!inWaitRoutine)
         {
-            //rb.AddForce((PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed);
             rb.velocity = (PresetPosition[DestPos] - PresetPosition[StartPos]).normalized * Speed;
         }
-
     }
 
     void travel()
     {
         traveling = true;
+        Vector3 camCenter = CameraShakeEffect.instance.transform.position;
+        float hHalfScreen = Global.instance.maxScreenSize * 2f;
+        float vHalfScreen = Global.instance.maxScreenSize / 16 * 9 * 0.7f;
+        PresetPosition[0] = new Vector3(camCenter.x - hHalfScreen, camCenter.y + vHalfScreen, 0);
+        PresetPosition[1] = new Vector3(camCenter.x + hHalfScreen, camCenter.y + vHalfScreen, 0);
+        PresetPosition[2] = new Vector3(camCenter.x - hHalfScreen, camCenter.y - vHalfScreen, 0);
+        PresetPosition[3] = new Vector3(camCenter.x + hHalfScreen, camCenter.y - vHalfScreen, 0);
+
+        transform.position = PresetPosition[StartPos];
         for (int i = 0; i < fishes.Length; ++i)
         {
             if (transform.GetChild(i))
@@ -134,18 +92,19 @@ public class SchoolMovement : MonoBehaviour
         //fishes[fishCount].SetActive(false);
         if (fishCount == 0)
         {
-            StartCoroutine(wait());
+            StartCoroutine(Wait());
             transform.GetChild(fishes.Length).gameObject.SetActive(false);
         }
     }
 
 
     // Wait for a period of time and reset school
-    IEnumerator wait()
+    IEnumerator Wait()
     {
         inWaitRoutine = true;
         yield return new WaitForSeconds(WaitTime);
         StartPos = new System.Random().Next(0, 4);
+        DestPos = getDestination(StartPos);
         fishCount = fishes.Length;
         for (int i = 0; i < fishes.Length; ++i)
         {
@@ -185,13 +144,9 @@ public class SchoolMovement : MonoBehaviour
             sh = ps.shape;
             sh.rotation = new Vector3(sh.rotation.x, -90, sh.rotation.y);
         }
-        DestPos = getDestination(StartPos);
-        transform.position = PresetPosition[StartPos];
         travel();
         inWaitRoutine = false;
     }
-
-
 
     // Given the start position of school, return the corresponding destination
     int getDestination(int start)
@@ -211,31 +166,4 @@ public class SchoolMovement : MonoBehaviour
                 return 4;
         }
     }
-
-
-    // ------ using transform -------
-    //if ((transform.position - PausePosition).magnitude < 0.3f && !inStopRountine)
-    //    StartCoroutine(pause());
-
-    //// moving to target position
-    //if (approaching)
-    //{
-    //    for (int i = 0; i < fishAnimators.Length; ++i)
-    //    {
-    //        fishAnimators[i].speed = 1;
-    //        fishAnimators[i].SetBool("moving", true);
-    //    }
-    //    transform.position = Vector3.Lerp(transform.position, PausePosition, Time.deltaTime * speed);
-    //}
-    //// leaving
-    //else
-    //{
-    //    for (int i = 0; i < fishAnimators.Length; ++i)
-    //    {
-    //        fishAnimators[i].speed = 1;
-    //        fishAnimators[i].SetBool("moving", true);
-    //    }
-    //    transform.position = Vector3.Lerp(transform.position, LeavePosition, Time.deltaTime * speed);
-
-    //}
 }
