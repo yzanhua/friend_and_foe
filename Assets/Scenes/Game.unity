@@ -3363,7 +3363,7 @@ PrefabInstance:
     - target: {fileID: 4325301820724576242, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_Text
-      value: Blue team win
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4325301820724576242, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
