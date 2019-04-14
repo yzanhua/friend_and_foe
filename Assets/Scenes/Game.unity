@@ -7986,6 +7986,12 @@ PrefabInstance:
       propertyPath: winText
       value: 
       objectReference: {fileID: 731415483}
+    - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: swirl_prefab
+      value: 
+      objectReference: {fileID: 5872608242191984085, guid: 187b4cfd732cd4c9999aafa6c015d697,
+        type: 3}
     - target: {fileID: 6481231079324147333, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_IsActive
