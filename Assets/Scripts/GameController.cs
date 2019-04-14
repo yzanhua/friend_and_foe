@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
         float temp = 0f;
         while (temp < 1f)
         {
-            temp += Time.deltaTime / 5f;
+            temp += Time.deltaTime / 1.5f;
             Camera.main.transform.parent.position = Vector3.Lerp(init_pos, target_pos, temp);
             Camera.main.orthographicSize = Mathf.Lerp(init_size, 6.4f, temp);
             yield return null;
@@ -127,32 +127,32 @@ public class GameController : MonoBehaviour
         if (isDraw)
         {
             GameObject confetti_lose = Instantiate(confetti_prefab, loser.transform);
-            Destroy(confetti_lose, 2f);
+            Destroy(confetti_lose, 4f);
         }
 
         while (temp < 1f)
         {
-            temp += Time.deltaTime / 3f;
+            temp += Time.deltaTime / 1f;
             Camera.main.transform.parent.position = Vector3.Lerp(init_pos, target_pos, temp);
             Camera.main.orthographicSize = Mathf.Lerp(6.4f, 7.5f, temp);
             yield return null;
         }
         GameObject confetti = Instantiate(confetti_prefab, winner.transform);
-        Destroy(confetti, 2f);
+        Destroy(confetti, 4f);
     }
 
     private IEnumerator DestroyLoser(GameObject loser, GameObject winner)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine(FixCamera(loser, winner, 5f));
         InputSystemManager.SetVibration(-1, 0.3f, 7f);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(3f);
         InputSystemManager.SetVibration(-1, 0.9f, 2.7f);
         GameObject temp = Instantiate(sByeBye);
         temp.transform.position = loser.transform.position;
         yield return new WaitForSeconds(1.56f);
         Destroy(loser.transform.parent.gameObject);
-        yield return new WaitForSeconds(1.44f);
+        yield return new WaitForSeconds(2.8f);
 
         SoundManager.instance.PlaySound("win");
         StartCoroutine(ReloadScene(7f));
