@@ -46,6 +46,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (GameController.instance != null)
             StartCoroutine(GameController.instance.SwitchStation());
+        yield return new WaitForSeconds(1.5f);
         for (int t = 0; t < flashCount; t += 1)
         {
             SetSpriteStatus(false);
