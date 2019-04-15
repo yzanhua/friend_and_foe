@@ -24,7 +24,7 @@ public class Global : ScriptableObject
     public bool AutomatedShiled = true;
     public bool[] ExtraSkillEnable = new bool[] {false, false};
     public bool[] ExtraSkillEnableDown = new bool[] {false, false};
-
+    public bool[] ChargeBarFull = new bool[] { false, false };
     public static Global instance
     {
         get
