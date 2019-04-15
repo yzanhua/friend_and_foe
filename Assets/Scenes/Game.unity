@@ -7986,10 +7986,16 @@ PrefabInstance:
       propertyPath: winText
       value: 
       objectReference: {fileID: 731415483}
+    - target: {fileID: 5180230080710909175, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: swirl_prefab
+      value: 
+      objectReference: {fileID: 5872608242191984085, guid: 187b4cfd732cd4c9999aafa6c015d697,
+        type: 3}
     - target: {fileID: 6481231079324147333, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180230080710909172, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
@@ -8004,12 +8010,12 @@ PrefabInstance:
     - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 6481231079324147332, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 5180230080099450137, guid: 4a96e0ea570cb41199142268c64cbf15,
         type: 3}
@@ -8398,6 +8404,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BombCreateController_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230079686993284, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180230079686993284, guid: 4a96e0ea570cb41199142268c64cbf15,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a96e0ea570cb41199142268c64cbf15, type: 3}

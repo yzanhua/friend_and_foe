@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public GameObject winText;
     public GameObject sByeBye;
     public GameObject station_switch_text;
+    public GameObject swirl_prefab;
 
     private HealthCounter health_right;
     private HealthCounter health_left;
@@ -228,16 +229,24 @@ public class GameController : MonoBehaviour
             yield break;
         }
         _in_switch_station = true;
-        Vector3 pos = CameraShakeEffect.instance.transform.position;
-        pos.z = 0;
+        Vector3 camCenter = CameraShakeEffect.instance.transform.position;
+        float halfScreenSize = Global.instance.maxScreenSize * 2;
+        Vector3 pos = new Vector3(camCenter.x, camCenter.y, 0);
+        Vector3 swirlOrg = new Vector3(camCenter.x - halfScreenSize, camCenter.y, 0);
+        Vector3 swirlTarget = new Vector3(camCenter.x + halfScreenSize, camCenter.y, 0);
+        GameObject swirl = Instantiate(swirl_prefab, swirlOrg, Quaternion.identity, transform);
         GameObject stationSwitchText = Instantiate(station_switch_text, pos, Quaternion.identity, transform);
         stationSwitchText.transform.localScale = new Vector3(8f, 8f);
-        while (stationSwitchText.transform.localScale.x >= 1)
+        float swirlTime = 2f;
+        for (float currTime = 0; currTime < swirlTime; currTime += Time.deltaTime)
         {
+            swirl.transform.position = Vector3.Lerp(swirlOrg, swirlTarget, currTime / swirlTime);
             float old_value = stationSwitchText.transform.localScale.x;
-            stationSwitchText.transform.localScale = new Vector3(old_value - 0.1f, old_value - 0.1f);
+            stationSwitchText.transform.localScale = new Vector3(old_value * 0.985f, old_value * 0.985f);
             yield return null;
         }
+        Destroy(swirl);
+        yield return new WaitForSeconds(1f);
         Destroy(stationSwitchText);
         _in_switch_station = false;
     }

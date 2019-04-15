@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeScene : MonoBehaviour
 {
     public float targetTime = 10f;
-    public int flashCount = 3;
+    public int flashCount = 5;
     public int gearNum = 3;
 
     private float currTime;
@@ -24,7 +24,7 @@ public class ChangeScene : MonoBehaviour
             proxy_gears_transforms[i] = gears_transforms[i].GetComponent<SeatOnGear>().proxy_gear.transform;
             seatOnGears[i] = gears_transforms[i].GetComponent<SeatOnGear>();
         }
-        currTime = 0f;
+        currTime = 20f;
         StartCoroutine(CountTime());
     }
 
@@ -46,6 +46,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (GameController.instance != null)
             StartCoroutine(GameController.instance.SwitchStation());
+        yield return new WaitForSeconds(1.5f);
         for (int t = 0; t < flashCount; t += 1)
         {
             SetSpriteStatus(false);
