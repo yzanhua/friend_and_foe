@@ -49,7 +49,7 @@ public class TutorialManager : MonoBehaviour
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
     public State state;
-    public float speed = 20f;
+    public float speed = 35f;
 
     public delegate void CallBack();
 
@@ -59,8 +59,9 @@ public class TutorialManager : MonoBehaviour
     // private Hashtable _leftTaskList = new Hashtable();
 
 
-    public List<Hashtable> _TaskList = new List<Hashtable>(2);
-    public bool[] _TaskState = new bool[2];
+    private List<Hashtable> _TaskList = new List<Hashtable>(2);
+   
+    private bool[] _TaskState = new bool[2];
 
     // private bool _leftTaskState = false;
     // private bool _rightTaskState = false;
@@ -252,7 +253,7 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tutorialMode && !_isStartingGame)
+        if (tutorialMode && !_isStartingGame && !_InStateTransition)
         {
             MoveToNextState();
         }
@@ -297,6 +298,7 @@ public class TutorialManager : MonoBehaviour
             }
             else if (start_num == Global.instance.numOfPlayers)
             {
+                _InStateTransition = true;
                 StartCoroutine(StartTutorialTransition());
             }
 
@@ -310,14 +312,16 @@ public class TutorialManager : MonoBehaviour
             TransitionManager.Instance.TransitionOutAndLoadScene("Game");
         } else if (_TaskState[0] && _TaskState[1])
         {
+            _InStateTransition = true;
             if (state == State.CHARACTER)
             {
+                
                 StartCoroutine(ChangeState(2f, () =>
                 {
                     state = State.MOVEMENT;
                     AlterGearState(true);
                     ResetTaskState();
-                    EnableText("Seat");
+                    StartCoroutine(DialogBoxAnimation("Seat"));
                     EnableGear("MovementGear");
                 }));
 
@@ -330,7 +334,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     state = State.SHIELD;
                     ResetTaskState();
-                    EnableText("Shield");
+                    StartCoroutine(DialogBoxAnimation("Shield"));
                     EnableGear("ShieldGear");
                 }));
 
@@ -350,8 +354,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     state = State.WEAPON;
                     ResetTaskState();
-
-                    EnableText("Refill");
+                    StartCoroutine(DialogBoxAnimation("Refill"));
                     EnableGear("WeaponGear");
  
                     _leftStaticRefill.gameObject.SetActive(true);
@@ -388,16 +391,16 @@ public class TutorialManager : MonoBehaviour
         LeftSubmarine.SetActive(true);
         RightSubmarine.SetActive(true);
 
-        while ((container_transform.position - target_position).magnitude > 0.01f)
+        while ((container_transform.position - target_position).magnitude > 0.1f)
         {
-            container_transform.position += (target_position - container_transform.position) * Time.deltaTime * 0.2f;
+            container_transform.position += (target_position - container_transform.position).normalized * 5 * Time.deltaTime;
             yield return null;
         }
 
 
         Global.instance.AllPlayersMovementEnable = true;
         state = State.CHARACTER;
-        EnableText("Dash");
+        StartCoroutine(DialogBoxAnimation("Dash"));
 
     }
 
@@ -522,12 +525,13 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator DialogBoxAnimation(string text)
     {
+        instance._InStateTransition = true;
         Vector3 target;
-        target = new Vector3(0f, 150f, 0f);
+        target = new Vector3(0f, 120f, 0f);
 
         RectTransform rt = TutorialUI.GetComponent<RectTransform>();
 
-        while ((rt.localPosition - target).magnitude > 0.1f)
+        while ((rt.localPosition - target).magnitude > 0.15f)
         {
             rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
             yield return null;
@@ -537,7 +541,7 @@ public class TutorialManager : MonoBehaviour
         EnableText(text);
         target = new Vector3(0f, 0f, 0f);
 
-        while ((rt.localPosition - target).magnitude > 0.1f)
+        while ((rt.localPosition - target).magnitude > 0.15f)
         {
             rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
             yield return null;
