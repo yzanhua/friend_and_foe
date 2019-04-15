@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
         UpdateHealthBar(left_bar, left_sub);
         UpdateHealthBar(right_bar, right_sub);
         StartCoroutine(StartGame());
+        Global.initializeVariables();
         Global.instance.cameraControl = false;
         SoundManager.instance.SoundTransition("main_scene_background", "background_battle", 0.8f);
     }

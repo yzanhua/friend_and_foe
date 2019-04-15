@@ -38,13 +38,20 @@ public class HealthCounter : MonoBehaviour
         health += alt;
         if (alt <= 0)
             SetChargeBar(-alt);
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
+
+            if (TutorialManager.instance != null)
+            {
+                health = maxHealth * 0.1f;
+            }
         }
+
+        
     }
 
-    private void SetChargeBar(float alt)
+    public void SetChargeBar(float alt)
     {
         if (laserNotFinished || MyChargeBar == null)
             return;
@@ -64,6 +71,7 @@ public class HealthCounter : MonoBehaviour
     {
         StartCoroutine(ResetSize());
     }
+
     IEnumerator ResetSize()
     {
         float temp = 0;

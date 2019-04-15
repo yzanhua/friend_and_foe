@@ -74,23 +74,29 @@ public class MenuController : MonoBehaviour
             }
         }
 
+        if (MenuUI.activeInHierarchy) {
+            if (InputSystemManager.GetAction2(0))
+            {
+                Time.timeScale = 1f;
+                MenuUI.SetActive(false);
+                if (_curr_pos == 0)
+                {
+                    TransitionManager.Instance.TransitionOutAndLoadScene("Main");
+                } else if (_curr_pos == 2)
+                {
+                    Application.Quit();
+                }
+                else
+                {
+                    _curr_pos = 0;
+                }
 
-        if (InputSystemManager.GetAction2(0) && MenuUI.activeInHierarchy)
-        {
-            Time.timeScale = 1f;
-            MenuUI.SetActive(false);
-            if (_curr_pos == 0)
+            } else if (InputSystemManager.GetRightShoulder1(0) && InputSystemManager.GetRightSVertical(0) > 0.5f)
             {
-                TransitionManager.Instance.TransitionOutAndLoadScene("Main");
-            } else if (_curr_pos == 2)
-            {
-                Application.Quit();
+                Time.timeScale = 1f;
+                MenuUI.SetActive(false);
+                TransitionManager.Instance.TransitionOutAndLoadScene("Game");
             }
-            else
-            {
-                _curr_pos = 0;
-            }
-
         }
 
         if (!isCD)

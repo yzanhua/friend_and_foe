@@ -35,6 +35,7 @@ public class TutorialManager : MonoBehaviour
         SHOOT,
         SHIELD,
         BOUNCE,
+        HUGE_CANON,
         TASK
     }
 
@@ -42,16 +43,23 @@ public class TutorialManager : MonoBehaviour
     public bool tutorialMode = false;
 
     public GameObject RightSubmarine;
-    public GameObject RightSubmarine_NPC;
+    // public GameObject RightSubmarine_NPC;
     public GameObject LeftSubmarine;
-    public GameObject LeftSubmarine_NPC;
+    // public GameObject LeftSubmarine_NPC;
+
+    public GameObject LeftHealthBar;
+    public GameObject RightHealthBar;
+
     public GameObject PreparedText;
     public GameObject TutorialUI;
+
+    // public GameObject CanvsGame;
+
 
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
     public State state;
-    public float speed = 35f;
+    public float speed = 50f;
 
     public delegate void CallBack();
 
@@ -84,6 +92,8 @@ public class TutorialManager : MonoBehaviour
     private bool _InStateTransition = false;
     private List<List<TaskType>> _task_list = new List<List<TaskType>>();
 
+    private bool isPosition1 = true;
+
     private Dictionary<TaskType, string> _task2str = new Dictionary<TaskType, string>() 
     { 
         { TaskType.MOVE , "Move" },
@@ -95,7 +105,8 @@ public class TutorialManager : MonoBehaviour
         { TaskType.SHOOT, "Shoot"},
         { TaskType.BOUNCE, "Bounce"},
         { TaskType.RO_WEAPON, "Ro_weapon"},
-        { TaskType.SEAT_WEAPON, "Seat_weapon"}
+        { TaskType.SEAT_WEAPON, "Seat_weapon"},
+        { TaskType.HUGE_CANON, "HugeCanon"}
         };
 
 
@@ -148,6 +159,11 @@ public class TutorialManager : MonoBehaviour
                             instance.StartCoroutine(instance.ChangeState(2f, () =>
                             {
 
+                                if (task == TaskType.SHOOT)
+                                {
+                                    instance.LeftSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
+                                    instance.RightSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
+                                }
                                 instance.StartCoroutine((instance.DialogBoxAnimation(instance._task2str[list[index + 1]])));
                                 //instance.EnableText(instance._task2str[list[index + 1]]);
                             }));
@@ -224,7 +240,7 @@ public class TutorialManager : MonoBehaviour
         _task_list.Add(new List<TaskType>());
         _task_list.Add(new List<TaskType>() { TaskType.DASH });
         _task_list.Add(new List<TaskType>() { TaskType.SEAT, TaskType.MOVE, TaskType.DASH_SUB });
-        _task_list.Add(new List<TaskType>() { TaskType.REFILL, TaskType.SEAT_WEAPON, TaskType.RO_WEAPON ,TaskType.SHOOT });
+        _task_list.Add(new List<TaskType>() { TaskType.REFILL, TaskType.SEAT_WEAPON, TaskType.RO_WEAPON ,TaskType.SHOOT, TaskType.HUGE_CANON });
         _task_list.Add(new List<TaskType>() { TaskType.SHIELD, TaskType.BOUNCE });
 
         GameObject leftSubmarineProxy = LeftSubmarine.transform.Find("Submarine_proxy").gameObject;
@@ -247,6 +263,7 @@ public class TutorialManager : MonoBehaviour
         AlterChangeSceneState(false);
         AlterGearState(false);
         EnableText("SkipTutorial");
+        Global.instance.godMode = true;
         // StartCoroutine(DialogBoxAnimation(false));
         SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
 
@@ -258,6 +275,12 @@ public class TutorialManager : MonoBehaviour
         if (tutorialMode && !_isStartingGame && !_InStateTransition)
         {
             MoveToNextState();
+        }
+
+        if (!isPosition1)
+        {
+            UpdateHealthBar(LeftHealthBar, LeftSubmarine);
+            UpdateHealthBar(RightHealthBar, RightSubmarine);
         }
 
     }
@@ -358,7 +381,12 @@ public class TutorialManager : MonoBehaviour
                     ResetTaskState();
                     StartCoroutine(DialogBoxAnimation("Refill"));
                     EnableGear("WeaponGear");
- 
+                    Global.instance.godMode = false;
+                    isPosition1 = false;
+
+                    LeftHealthBar.SetActive(true);
+                    RightHealthBar.SetActive(true);
+
                     _leftStaticRefill.gameObject.SetActive(true);
                     _rightStaticRefill.gameObject.SetActive(true);
                     _leftRefill.gameObject.SetActive(true);
@@ -541,7 +569,15 @@ public class TutorialManager : MonoBehaviour
 
 
         EnableText(text);
-        target = new Vector3(0f, 0f, 0f);
+
+        if (!isPosition1)
+        {
+            target = new Vector3(0f, -70f, 0f);
+        }
+        else
+        {
+            target = new Vector3(0f, 0f, 0f);
+        }
 
         while ((rt.localPosition - target).magnitude > 0.2f)
         {
@@ -550,8 +586,21 @@ public class TutorialManager : MonoBehaviour
         }
 
         instance._InStateTransition = false;
+    }
 
 
+    void UpdateHealthBar(GameObject bar, GameObject sub)
+    {
+        HealthBar bar_script = bar.GetComponent<HealthBar>();
+        HealthCounter health = sub.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>();
+
+        bar_script.SetSize((float)health.health / (float)health.maxHealth);
+
+    }
+
+    private void OnDestroy()
+    {
+        Global.instance.godMode = false;
     }
 
 }

@@ -12,6 +12,7 @@ public class DynamicBackground : MonoBehaviour
 
     private List<Transform> _bgs;
     private Vector3 _last;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -52,6 +52,10 @@ public class WeaponGearController : MonoBehaviour
         if (healthCounter.readyToShootLaser && InputSystemManager.GetRightShoulder1(status.PlayerID()))
         {
             extra_skill_shooted = true;
+            if(TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.HUGE_CANON, transform.position.x > 0f);
+            }
             GameObject temp = Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
             temp.transform.parent = weapon.transform;
             StartCoroutine(ExtraSkill());
@@ -60,10 +64,6 @@ public class WeaponGearController : MonoBehaviour
 
         if (InputSystemManager.GetAction1(status.PlayerID()))
         {
-            if (TutorialManager.instance != null)
-            {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
-            }
             FireBullet(status.PlayerID());
         }
         RotateTheWeapon();

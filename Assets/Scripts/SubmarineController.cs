@@ -72,8 +72,12 @@ public class SubmarineController : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             Vector3 contactPoint = collision.GetContact(0).point;
 
+            if (TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
+            }
             // myHealth.AlterHealth(-myHealth.maxHealth * 0.05f);
-            myHealth.AlterHealth(-8f);
+            myHealth.AlterHealth(-5f);
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
             GameObject spark = Instantiate(sparkParticle, transform);
             spark.transform.position = contactPoint;
@@ -94,8 +98,12 @@ public class SubmarineController : MonoBehaviour
 
             if (!thisCollider.tag.Contains("Shield"))
                 //myHealth.AlterHealth(-myHealth.maxHealth * 0.15f);
-                myHealth.AlterHealth(-12f);
-            
+                myHealth.AlterHealth(-10f);
+
+            if (TutorialManager.instance != null)
+            {
+                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
+            }
 
             float angle = -Vector2.SignedAngle(Vector2.up, direction);
             GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);

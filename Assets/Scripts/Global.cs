@@ -44,6 +44,9 @@ public class Global : ScriptableObject
         instance.SelectionEnable = true;
         instance.AllPlayersMovementEnable = true;
         instance.isGameEnd = false;
+        instance.godMode = false;
+        instance.cameraControl = true;
+        instance.bombCreate = true;
         instance.GameEndCustomizeScreen = false;
         InputSystemManager.instance.PlayerID2GamePadID = new int[] { 0, 1, 2, 3 }; 
         instance.ExtraSkillEnable = new bool[] { false, false };

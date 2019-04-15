@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
         {
             if (TutorialManager.instance != null)
             {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
+                TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
             }
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
             GameObject spark = Instantiate(sparkPrefab, transform.position + offset, transform.rotation);
@@ -71,7 +71,6 @@ public class WeaponController : MonoBehaviour
     public void FillBullets()
     {
         remainBullets = MaxBullets;
-        Debug.Log(remainBullets);
         weaponWarning.SetActive(false);
     }
 
