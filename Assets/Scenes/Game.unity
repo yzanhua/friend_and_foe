@@ -5601,12 +5601,17 @@ PrefabInstance:
     - target: {fileID: 2547263120176290240, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.4
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 2547263120176290240, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15
+      value: -6.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547263120176290240, guid: ff203444fd8ee40d0882225f481f5ed2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 357625447161033734, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
@@ -5626,22 +5631,22 @@ PrefabInstance:
     - target: {fileID: 2547263120403899556, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 2547263120403899556, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2547263120403899556, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.33
+      value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 2547263120403899556, guid: ff203444fd8ee40d0882225f481f5ed2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9
+      value: -0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff203444fd8ee40d0882225f481f5ed2, type: 3}
@@ -6567,12 +6572,12 @@ PrefabInstance:
         type: 3}
       propertyPath: InConfig.MaskTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 5ea61caf06bb9014bb380e3a37a24b4e, type: 3}
+      objectReference: {fileID: 2800000, guid: 4601d4b439b82a841acaf1c0f13680cb, type: 3}
     - target: {fileID: 2136853250516010860, guid: 6ae9a5a65338f41aa9978e75af964d4f,
         type: 3}
       propertyPath: OutConfig.MaskTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 378cccde11c67cd459a5f61c5478861a, type: 3}
+      objectReference: {fileID: 2800000, guid: 4601d4b439b82a841acaf1c0f13680cb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ae9a5a65338f41aa9978e75af964d4f, type: 3}
 --- !u!1 &1608844477
