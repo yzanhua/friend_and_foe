@@ -73,3 +73,6 @@ Particle Effects:
 		[Transition] (https://assetstore.unity.com/packages/tools/gui/beautiful-transitions-56442)
 	- Rewired
 		[Controller Input] (https://assetstore.unity.com/packages/tools/utilities/rewired-21676)	
+	- Weapon
+		[Weapon Laser Effect] (https://assetstore.unity.com/packages/vfx/particles/spells/volumetric-3d-lasers-104580)
+		
