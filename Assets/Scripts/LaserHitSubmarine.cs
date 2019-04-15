@@ -10,7 +10,6 @@ public class LaserHitSubmarine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.CompareTag("Submarine"))
         {
             submarine = collision.gameObject;
@@ -35,7 +34,7 @@ public class LaserHitSubmarine : MonoBehaviour
         if (submarine == null)
             return;
         health.AlterHealth(-0.2f);
-        InputSystemManager.SetVibrationBySubmarine(subController.ID, 0.7f, Time.fixedDeltaTime);                                           
+        InputSystemManager.SetVibrationBySubmarine(subController.ID, 1f, Time.fixedDeltaTime * 5f);                                           
     }
 
 }
