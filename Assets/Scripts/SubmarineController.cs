@@ -72,10 +72,6 @@ public class SubmarineController : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             Vector3 contactPoint = collision.GetContact(0).point;
 
-            if (TutorialManager.instance != null)
-            {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
-            }
             // myHealth.AlterHealth(-myHealth.maxHealth * 0.05f);
             myHealth.AlterHealth(-5f);
             rb2d.AddForce(direction * bumpForce * rb2d.mass, ForceMode2D.Impulse);
@@ -102,7 +98,7 @@ public class SubmarineController : MonoBehaviour
 
             if (TutorialManager.instance != null)
             {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
+                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x < 0);
             }
 
             float angle = -Vector2.SignedAngle(Vector2.up, direction);

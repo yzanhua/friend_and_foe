@@ -59,7 +59,7 @@ public class TutorialManager : MonoBehaviour
     public static int leftTutorialState = 0;
     public static int rightTutorialState = 0;
     public State state;
-    public float speed = 50f;
+    public float speed = 75f;
 
     public delegate void CallBack();
 
@@ -158,12 +158,7 @@ public class TutorialManager : MonoBehaviour
                             instance._InStateTransition = true;
                             instance.StartCoroutine(instance.ChangeState(2f, () =>
                             {
-
-                                if (task == TaskType.SHOOT)
-                                {
-                                    instance.LeftSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
-                                    instance.RightSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
-                                }
+                           
                                 instance.StartCoroutine((instance.DialogBoxAnimation(instance._task2str[list[index + 1]])));
                                 //instance.EnableText(instance._task2str[list[index + 1]]);
                             }));
@@ -561,7 +556,7 @@ public class TutorialManager : MonoBehaviour
 
         RectTransform rt = TutorialUI.GetComponent<RectTransform>();
 
-        while ((rt.localPosition - target).magnitude > 0.2f)
+        while ((rt.localPosition - target).magnitude > 0.4f)
         {
             rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
             yield return null;
@@ -579,13 +574,19 @@ public class TutorialManager : MonoBehaviour
             target = new Vector3(0f, 0f, 0f);
         }
 
-        while ((rt.localPosition - target).magnitude > 0.2f)
+        while ((rt.localPosition - target).magnitude > 0.4f)
         {
             rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
             yield return null;
         }
 
         instance._InStateTransition = false;
+
+        if (text == _task2str[TaskType.HUGE_CANON])
+        {
+            instance.LeftSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
+            instance.RightSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
+        }
     }
 
 
