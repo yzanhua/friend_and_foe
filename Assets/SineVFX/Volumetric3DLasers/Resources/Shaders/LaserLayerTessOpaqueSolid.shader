@@ -54,7 +54,7 @@ Shader "Sine VFX/V3DLasers/LaserLayerTessOpaqueSolid" {
             #pragma multi_compile_fwdbase_fullshadows
             #pragma multi_compile_fog
             #pragma only_renderers d3d9 d3d11 glcore gles 
-            #pragma target 5.0
+            #pragma target 4.6
             uniform float4 _StartPosition;
             uniform float4 _EndPosition;
             uniform float4 _FinalColor;

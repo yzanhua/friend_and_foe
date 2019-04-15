@@ -7,21 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7865443304640690761, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: submarineID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3723327892983027246, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: submarineID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1355436739328008335, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: targetCursor
-      value: 
-      objectReference: {fileID: 3896686064306821790}
     - target: {fileID: 4669322525553404254, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_Name
@@ -353,6 +338,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300008, guid: 61864ee7faca24e599cf83d47aae07ae,
         type: 3}
+    - target: {fileID: 1355436739328008335, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: targetCursor
+      value: 
+      objectReference: {fileID: 3896686064306821790}
+    - target: {fileID: 7865443304640690761, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: submarineID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9193086072840149056, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: playerID
@@ -391,22 +386,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300004, guid: 61864ee7faca24e599cf83d47aae07ae,
         type: 3}
+    - target: {fileID: 3723327892983027246, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: submarineID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3486594542978867807, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: knockBackDistance
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: speed
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: dashDeductPecentage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: dashRecoverToltalTime
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 638628375123315505, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
@@ -513,7 +501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428298, guid: 8118656e898f2fb4daa469e2393514dd, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 428298, guid: 8118656e898f2fb4daa469e2393514dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

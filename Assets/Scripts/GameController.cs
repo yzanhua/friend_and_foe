@@ -162,7 +162,7 @@ public class GameController : MonoBehaviour
     IEnumerator ReloadScene(float time)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene("Selection");
+        SceneManager.LoadScene("Ready");
     }
 
     IEnumerator StartGame()

@@ -42,7 +42,9 @@ public class TutorialManager : MonoBehaviour
     public bool tutorialMode = false;
 
     public GameObject RightSubmarine;
+    public GameObject RightSubmarine_NPC;
     public GameObject LeftSubmarine;
+    public GameObject LeftSubmarine_NPC;
     public GameObject PreparedText;
     public GameObject TutorialUI;
 

@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 418688, guid: 96db9f59e0051f24ab7a2843ba7a6cb7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 418688, guid: 96db9f59e0051f24ab7a2843ba7a6cb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -445,18 +445,6 @@ PrefabInstance:
     - target: {fileID: 406481065, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: speed
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: dashRecoverToltalTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 57617562235823, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}
-      propertyPath: dashDeductPecentage
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 638628375123315505, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
