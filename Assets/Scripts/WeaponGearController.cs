@@ -21,6 +21,7 @@ public class WeaponGearController : MonoBehaviour
     public GameObject weapon_charge;
     int submarine_id;
     bool extra_skill_shooted = false;
+    private HealthCounter healthCounter;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class WeaponGearController : MonoBehaviour
         weaponController = weapon.GetComponent<WeaponController>();
         weapon_laser = weapon.transform.Find("laser").gameObject;
         submarine_id = submarine.GetComponent<SubmarineController>().ID;
+        healthCounter = submarine.GetComponent<HealthCounter>();
     }
 
     private void Update()
@@ -47,10 +49,11 @@ public class WeaponGearController : MonoBehaviour
         if (TutorialManager.instance != null)
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
-        if (InputSystemManager.GetRightShoulder1(status.PlayerID()))
+        if (healthCounter.readyToShootLaser && InputSystemManager.GetRightShoulder1(status.PlayerID()))
         {
             extra_skill_shooted = true;
-            Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
+            GameObject temp = Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
+            temp.transform.parent = weapon_laser.transform;
             StartCoroutine(ExtraSkill());
             return;
         }
@@ -76,6 +79,8 @@ public class WeaponGearController : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         Global.instance.ExtraSkillEnableDown[submarine_id] = false;
+
+        healthCounter.ResetChargeBar();
         yield return new WaitForSeconds(4f);
         Global.instance.ExtraSkillEnable[submarine_id] = false;
         weapon_laser.SetActive(false);

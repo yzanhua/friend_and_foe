@@ -5767,7 +5767,7 @@ PrefabInstance:
         type: 3}
       propertyPath: MyChargeBar
       value: 
-      objectReference: {fileID: 1656824709}
+      objectReference: {fileID: 1419645621}
     - target: {fileID: 4241794865100764103, guid: 1b06f7649d286486987ded91d2d07b7e,
         type: 3}
       propertyPath: targetTime
@@ -7329,6 +7329,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1419645621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 333242233979578025, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+    type: 3}
+  m_PrefabInstance: {fileID: 433432788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1428883749
 GameObject:
   m_ObjectHideFlags: 0
@@ -8291,12 +8297,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1656824709 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2104485648844876256, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
-    type: 3}
-  m_PrefabInstance: {fileID: 433432788}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1661646408
 PrefabInstance:
   m_ObjectHideFlags: 0
