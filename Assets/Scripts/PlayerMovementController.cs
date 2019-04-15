@@ -91,7 +91,7 @@ public class PlayerMovementController : MonoBehaviour
                 if (TutorialManager.instance != null)
                     TutorialManager.CompleteTask(TutorialManager.TaskType.DASH, transform.position.x > 0f);
                 
-                temp = temp * 25f;
+                temp = temp * 12.5f;
                 GameObject new_trail = Instantiate(trailPrefab, playerProxy.transform);
                 new_trail.transform.position = playerProxy.transform.position;
             }

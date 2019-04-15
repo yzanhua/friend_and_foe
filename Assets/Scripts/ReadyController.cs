@@ -14,6 +14,8 @@ public class ReadyController : MonoBehaviour
 
     void Start()
     {
+        Global.initializeVariables();
+
         ready_mask = transform.Find("char").Find("mask");
         init_mask_position = ready_mask.localPosition;
         target_mask_position = init_mask_position;
