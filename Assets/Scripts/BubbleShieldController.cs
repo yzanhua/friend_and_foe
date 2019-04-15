@@ -51,10 +51,20 @@ public class BubbleShieldController : MonoBehaviour
         }
         if (other.CompareTag("Weapon") || other.CompareTag("Submarine"))
         {
-            ModifyHealth(-_current_health);
+            ModifyHealth(-MAX_HEALTH / 3f);
         }
     }
 
+    public IEnumerator WaitTillBreak(float time)
+    {
+        float temp = 0f;
+        while (temp < 1f && inUse)
+        {
+            temp += Time.deltaTime / time;
+            yield return null;
+            ModifyHealth(-MAX_HEALTH * Time.deltaTime / time);
+        }
+    }
     public void ModifyHealth(float off)
     {
         if (_current_health <= 0f && off <= 0f)

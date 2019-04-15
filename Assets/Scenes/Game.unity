@@ -1126,6 +1126,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1667396102}
+    - target: {fileID: 5466633904391832769, guid: b5f70e900fe55452bb4943d73e1bc60a,
+        type: 3}
+      propertyPath: MAX_HEALTH
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248581463438362267, guid: b5f70e900fe55452bb4943d73e1bc60a,
+        type: 3}
+      propertyPath: ShieldTime
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5f70e900fe55452bb4943d73e1bc60a, type: 3}
 --- !u!1 &118899551 stripped
@@ -3490,15 +3500,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3197080821822049896, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197080821822049896, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.25943398
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197080821822049896, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.25943398
+      objectReference: {fileID: 0}
     - target: {fileID: 4771781366857016538, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_Name
       value: LeftChargeBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6516708654592704232, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.503827
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516708654592704232, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5455031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516708654592704232, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516708654592704232, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 333242233979578025, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
       propertyPath: m_Name
       value: RightChargeBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 333242233979578025, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4325301819992488171, guid: 7a63ffb2117dea94cb5dfaeb2fae6a27,
         type: 3}
@@ -7373,6 +7423,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 118899552}
+    - target: {fileID: 2806666679287960113, guid: 1b06f7649d286486987ded91d2d07b7e,
+        type: 3}
+      propertyPath: MAX_HEALTH
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628413210836996203, guid: 1b06f7649d286486987ded91d2d07b7e,
+        type: 3}
+      propertyPath: ShieldTime
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b06f7649d286486987ded91d2d07b7e, type: 3}
 --- !u!1 &1667396101 stripped

@@ -50,16 +50,7 @@ public class ShieldGearController : MonoBehaviour
         
     }
 
-    IEnumerator WaitTillBreak()
-    {
-        float temp = 0f;
-        while (temp < 1f)
-        {
-            temp += Time.deltaTime / ShieldTime;
-            yield return null;
-            bubbleShieldController.ModifyHealth(-bubbleShieldController.MAX_HEALTH * Time.deltaTime / ShieldTime);
-        }
-    }
+    
 
     void GenerateShield()
     {
@@ -68,11 +59,9 @@ public class ShieldGearController : MonoBehaviour
             TutorialManager.CompleteTask(TutorialManager.TaskType.SHIELD, transform.position.x > 0f);
         }
 
-        bool success = shield.GetComponent<BubbleShieldController>().GenerateShield();
+        bool success = bubbleShieldController.GenerateShield();
         if (success)
-        {
-            StartCoroutine(WaitTillBreak());
-        }
+            StartCoroutine(bubbleShieldController.WaitTillBreak(ShieldTime));
     }
 
     void RotateShield()
