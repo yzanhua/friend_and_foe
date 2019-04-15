@@ -39,8 +39,10 @@ Sprites:
 		[Jetshift Weapon Sprite Compilation by Four-Cubed on DeviantArt](https://www.deviantart.com/four-cubed/art/Jetshift-Weapon-Sprite-Compilation-751002269)
 	- Bubble shield
 		[Bubble burst vector | dreamstime](https://www.dreamstime.com/stock-illustration-cartoon-soap-bubble-burst-sprites-frames-animation-image61557457)
-	- Background & Fish
+	- Background
 		[Underwater diving pack | OpenGameArt.org] (https://opengameart.org/content/underwater-diving-pack)
+	- Fish
+		[Yellow Tang Animated Sprite Sheet](https://www.deviantart.com/robertbrooksgds/art/Yellow-fish-sprite-sheet-492514013)
 	- Bomb
 		[Free Crosshairs Cliparts, Download Free Clip Art, Free Clip Art on Clipart Library](http://clipart-library.com/crosshairs-cliparts.html)
 		[RPG Maker VX Ace] (https://www.spriters-resource.com/pc_computer/rpgmakervxace/sheet/100121/)
