@@ -46,17 +46,17 @@ public class HealthCounter : MonoBehaviour
 
     private void SetChargeBar(float alt)
     {
-        if (laserNotFinished)
+        if (laserNotFinished || MyChargeBar == null)
             return;
 
         currentCharge += alt / (maxHealth * 0.3f);
         if (currentCharge >= 1f)
         {
             currentCharge = 1f;
-            //Global.instance.ChargeBarFull[submarine_id] = true;
+            StartCoroutine(FlashEffect());
             laserNotFinished = true;
         }
-            
+        
         MyChargeBar.transform.localScale = new Vector3(currentCharge, 1f);
     }
 
@@ -76,5 +76,17 @@ public class HealthCounter : MonoBehaviour
         currentCharge = 0f;
         MyChargeBar.transform.localScale = new Vector3(0f, 1f);
         laserNotFinished = false;
+    }
+
+    IEnumerator FlashEffect()
+    {
+        bool temp = true;
+        while(currentCharge >= 1f && !Global.instance.ExtraSkillEnable[submarine_id])
+        {
+            temp = !temp;
+            MyChargeBar.SetActive(temp);
+            yield return new WaitForSeconds(0.3f);
+        }
+        MyChargeBar.SetActive(true);
     }
 }

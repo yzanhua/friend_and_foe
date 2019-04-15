@@ -53,7 +53,7 @@ public class WeaponGearController : MonoBehaviour
         {
             extra_skill_shooted = true;
             GameObject temp = Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
-            temp.transform.parent = weapon_laser.transform;
+            temp.transform.parent = weapon.transform;
             StartCoroutine(ExtraSkill());
             return;
         }
