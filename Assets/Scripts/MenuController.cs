@@ -54,23 +54,6 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (isPopup)
-        {
-            
-            if (MenuUI.GetComponent<RectTransform>().position.magnitude > 2f)
-            {
-
-                MenuUI.GetComponent<RectTransform>().position = Vector3.Lerp(Vector3.zero, new Vector3(530f, 285f, 0f), );
-                //MenuUI.GetComponent<RectTransform>().localScale += (new Vector3(1f, 1f, 1f) - MenuUI.GetComponent<RectTransform>().localScale).normalized * 10f * Time.deltaTime;
-
-            }
-            else
-            {
-                isPopup = false;
-                Time.timeScale = 0f;
-            }
-        }*/
 
         // Stop the scene
         if (InputSystemManager.GetMenuButton(0))
@@ -114,27 +97,21 @@ public class MenuController : MonoBehaviour
         {
             if (InputSystemManager.GetLeftSVertical(0) < -0.5f)
             {
+                _curr_pos = (_curr_pos + 1) % _options.Count;
 
-                if (_curr_pos < _options.Count - 1)
-                {
-                    _curr_pos++;
-                    isCD = true;
-                }
+                isCD = true;
             }
             else if (InputSystemManager.GetLeftSVertical(0) > 0.5f)
             {
                 isCD = true;
-                if (_curr_pos > 0)
-                {
-                    _curr_pos--;
-                }
+                _curr_pos = (_curr_pos - 1 + _options.Count) % _options.Count;
             }
             _box.transform.position = _options[_curr_pos].transform.position;
         }
         else
         {
             frame++;
-            if (frame == 25)
+            if (frame == 20)
             {
                 isCD = false;
                 frame = 0;

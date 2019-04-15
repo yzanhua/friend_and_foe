@@ -17,7 +17,7 @@ public class MainSceneController : MonoBehaviour
     {
         if (InputSystemManager.GetAction3(0))
         {
-            TransitionManager.Instance.TransitionOutAndLoadScene("Selection");
+            TransitionManager.Instance.TransitionOutAndLoadScene("Ready");
         }
     }
 }

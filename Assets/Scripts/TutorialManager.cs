@@ -531,7 +531,7 @@ public class TutorialManager : MonoBehaviour
 
         RectTransform rt = TutorialUI.GetComponent<RectTransform>();
 
-        while ((rt.localPosition - target).magnitude > 0.15f)
+        while ((rt.localPosition - target).magnitude > 0.2f)
         {
             rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
             yield return null;
@@ -541,7 +541,7 @@ public class TutorialManager : MonoBehaviour
         EnableText(text);
         target = new Vector3(0f, 0f, 0f);
 
-        while ((rt.localPosition - target).magnitude > 0.15f)
+        while ((rt.localPosition - target).magnitude > 0.2f)
         {
             rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
             yield return null;
