@@ -22,6 +22,8 @@ public class Global : ScriptableObject
     public bool godMode = false;
 
     public bool AutomatedShiled = true;
+    public bool[] ExtraSkillEnable = new bool[] {false, false};
+    public bool[] ExtraSkillEnableDown = new bool[] {false, false};
 
     public static Global instance
     {
@@ -44,5 +46,7 @@ public class Global : ScriptableObject
         instance.isGameEnd = false;
         instance.GameEndCustomizeScreen = false;
         InputSystemManager.instance.PlayerID2GamePadID = new int[] { 0, 1, 2, 3 }; 
+        instance.ExtraSkillEnable = new bool[] { false, false };
+        instance.ExtraSkillEnableDown = new bool[] { false, false };
     }
 }

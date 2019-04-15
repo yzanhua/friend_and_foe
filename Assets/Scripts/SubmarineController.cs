@@ -109,30 +109,6 @@ public class SubmarineController : MonoBehaviour
             shake();
         }
 
-        if (thisCollider.CompareTag("Submarine") || thisCollider.CompareTag("Weapon"))
-        {
-            if (other.CompareTag("Submarine") || other.CompareTag("Weapon") || other.CompareTag("Shield"))
-            {
-                
-                
-                //if (other.CompareTag("Shield"))
-                //{
-                //    float damage = other.GetComponent<BubbleShieldController>().Health() * 1.5f;
-                //    myHealth.AlterHealth(-damage);
-                //    float angle = -Vector2.SignedAngle(Vector2.up, direction);
-                //    GameObject bounceEffect = Instantiate(shieldBounceParticle, transform);
-                //    bounceEffect.transform.position = contactPoint;
-                //    SetParticleRotation(bounceEffect, angle);
-                //    Destroy(bounceEffect, 1f);
-                //    rb2d.AddForce(direction * bumpForce * rb2d.mass * 2, ForceMode2D.Impulse);
-                //}
-                //else
-                //{
-                    
-                //}
-                
-            }
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -164,4 +140,5 @@ public class SubmarineController : MonoBehaviour
             sh.rotation = new Vector3(sh.rotation.x, angle, sh.rotation.z);
         }
     }
+
 }

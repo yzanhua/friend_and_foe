@@ -16,6 +16,7 @@ TagManager:
   - Bomb
   - MovementStation
   - Wheel
+  - ExtraSkillLaser
   layers:
   - Default
   - TransparentFX

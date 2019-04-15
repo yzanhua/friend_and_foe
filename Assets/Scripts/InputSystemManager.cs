@@ -70,6 +70,17 @@ public class InputSystemManager : ScriptableObject
         instance.players[newID].SetVibration(0, motorLevel, duration);
     }
 
+    static public void SetVibrationBySubmarine(int submarineID, float motorLevel, float duration)
+    {
+        int[] IDs =  new int[] { (submarineID + 1) % 2, 2 + (submarineID + 1) % 2 };
+        foreach(int playerID in IDs)
+        {
+            int newID = instance.PlayerID2GamePadID[playerID];
+            if (newID < 0) return;
+            instance.players[newID].SetVibration(0, motorLevel, duration);
+        }
+    }
+
     static public bool GetAction1(int playerID)
     {
         int newID = instance.PlayerID2GamePadID[playerID];
@@ -112,33 +123,35 @@ public class InputSystemManager : ScriptableObject
         return instance.players[newID].GetButtonDown("Menu");
     }
 
-    static public bool GetRightShoulderButton(int playerID)
+    static public bool GetRightShoulder1(int playerID)
     {
         int newID = instance.PlayerID2GamePadID[playerID];
         if (newID < 0) return false;
-        return instance.players[newID].GetButtonDown("RightShoulderButton");
+        return instance.players[newID].GetButtonDown("R1");
     }
 
-    static public bool GetRightShoulderTrigger(int playerID)
-    {
-        int newID = instance.PlayerID2GamePadID[playerID];
-        if (newID < 0) return false;
-        return instance.players[newID].GetButtonDown("RightShoulderTrigger");
-    }
+    //static public bool GetRightShoulderTrigger(int playerID)
+    //{
+    //    int newID = instance.PlayerID2GamePadID[playerID];
+    //    if (newID < 0) return false;
+    //    return instance.players[newID].GetButtonDown("RightShoulderTrigger");
+    //}
 
-    static public bool GetLeftShoulderButton(int playerID)
-    {
-        int newID = instance.PlayerID2GamePadID[playerID];
-        if (newID < 0) return false;
-        return instance.players[newID].GetButtonDown("LeftShoulderButton");
-    }
+    //static public bool GetLeftShoulderButton(int playerID)
+    //{
+    //    int newID = instance.PlayerID2GamePadID[playerID];
+    //    if (newID < 0) return false;
+    //    return instance.players[newID].GetButtonDown("LeftShoulderButton");
+    //}
 
-    static public bool GetLeftShoulderTrigger(int playerID)
-    {
-        int newID = instance.PlayerID2GamePadID[playerID];
-        if (newID < 0) return false;
-        return instance.players[newID].GetButtonDown("LeftShoulderTrigger");
-    }
+    //static public bool GetLeftShoulderTrigger(int playerID)
+    //{
+    //    int newID = instance.PlayerID2GamePadID[playerID];
+    //    if (newID < 0) return false;
+    //    return instance.players[newID].GetButtonDown("LeftShoulderTrigger");
+    //}
+
+
 
     private float GetDeadZoneValue(float value)
     {

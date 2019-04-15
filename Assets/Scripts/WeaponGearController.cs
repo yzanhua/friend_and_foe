@@ -17,6 +17,10 @@ public class WeaponGearController : MonoBehaviour
     private SeatOnGear status;
     private SpriteRenderer gearRend;
     private WeaponController weaponController;
+    private GameObject weapon_laser;
+    public GameObject weapon_charge;
+    int submarine_id;
+    bool extra_skill_shooted = false;
 
     void Start()
     {
@@ -25,6 +29,8 @@ public class WeaponGearController : MonoBehaviour
         if (initialTowardRight)
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, 180f);
         weaponController = weapon.GetComponent<WeaponController>();
+        weapon_laser = weapon.transform.Find("laser").gameObject;
+        submarine_id = submarine.GetComponent<SubmarineController>().ID;
     }
 
     private void Update()
@@ -33,14 +39,20 @@ public class WeaponGearController : MonoBehaviour
         healthBar.SetSize(weaponController.Health());
 
         // update weapon under player control
-        if (!status.IsPlayerOnSeat())
+        if (!status.IsPlayerOnSeat() || extra_skill_shooted)
         {
             return;
         }
 
         if (TutorialManager.instance != null)
-        {
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
+
+        if (InputSystemManager.GetRightShoulder1(status.PlayerID()))
+        {
+            extra_skill_shooted = true;
+            Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
+            StartCoroutine(ExtraSkill());
+            return;
         }
 
         if (InputSystemManager.GetAction1(status.PlayerID()))
@@ -52,6 +64,23 @@ public class WeaponGearController : MonoBehaviour
             FireBullet(status.PlayerID());
         }
         RotateTheWeapon();
+    }
+
+    IEnumerator ExtraSkill()
+    {
+        yield return new WaitForSeconds(3.5f);
+        weapon_laser.SetActive(true);
+        Global.instance.ExtraSkillEnable[submarine_id] = true;
+        Global.instance.ExtraSkillEnableDown[submarine_id] = true;
+        InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4f);
+
+        yield return new WaitForEndOfFrame();
+        Global.instance.ExtraSkillEnableDown[submarine_id] = false;
+        yield return new WaitForSeconds(4f);
+        Global.instance.ExtraSkillEnable[submarine_id] = false;
+        weapon_laser.SetActive(false);
+        extra_skill_shooted = false;
+
     }
 
     private void FireBullet(int playerID)
