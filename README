@@ -20,7 +20,7 @@ This game need 4 players with (4) controllers.
 
 9. On ladder, players can press A (Xbox) or press X (PS4) to Jump Down. When pressing X/A, player can also use left stick to change the direction of jumping. Collision between players won't occur if at least one of them are "jumping".
 
-10. When submarine collider with each other, angry points will be added to both submarines. When the angry points bar is full, the player can use right shoulder trigger super laser weapon whem sitting on weapon station.
+10. When submarine gets hurt, angry points will be added to the submarines. When the angry points bar is full, the player can use right shoulder to trigger super laser weapon when sitting on weapon station.
 
 11. All operations can be achieved using left stick + A + B (on Xbox) or left stick + O + X (on PS4).
 
