@@ -241,13 +241,21 @@ public class GameController : MonoBehaviour
         float swirlTime = 2f;
         for (float currTime = 0; currTime < swirlTime; currTime += Time.deltaTime)
         {
-            swirl.transform.position = Vector3.Lerp(swirlOrg, swirlTarget, currTime / swirlTime);
+            swirl.transform.position = Vector3.Lerp(swirlOrg, camCenter, currTime / swirlTime);
             float old_value = stationSwitchText.transform.localScale.x;
-            stationSwitchText.transform.localScale = new Vector3(old_value * 0.985f, old_value * 0.985f);
+            stationSwitchText.transform.localScale = new Vector3(old_value * 0.99f, old_value * 0.99f);
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        for (float currTime = 0; currTime < swirlTime; currTime += Time.deltaTime)
+        {
+            swirl.transform.position = Vector3.Lerp(swirl.transform.position, swirlTarget, currTime / swirlTime);
+            float old_value = stationSwitchText.transform.localScale.x;
+            stationSwitchText.transform.localScale = new Vector3(old_value * 0.98f, old_value * 0.98f);
             yield return null;
         }
         Destroy(swirl);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(stationSwitchText);
         _in_switch_station = false;
     }
