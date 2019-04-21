@@ -61098,8 +61098,8 @@ MonoBehaviour:
   MAX_HEALTH: 11
   _current_health: 0
   particleLayer: 2
-  bubbleShieldParticlePrefab: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad,
-    type: 3}
+  bubbleShieldParticle: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad, type: 3}
+  bubbleBounceParticle: {fileID: 183890, guid: 9e4bcae82995535429d012d5fe4a76c0, type: 3}
   shieldWarning: {fileID: 290093250578974086}
   healthBar: {fileID: 4250473695180464267}
   status: {fileID: 0}
@@ -61796,6 +61796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 180
   health: 180
+  MyChargeBar: {fileID: 0}
 --- !u!114 &8582862346553507086
 MonoBehaviour:
   m_ObjectHideFlags: 0
