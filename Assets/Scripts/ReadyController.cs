@@ -49,6 +49,10 @@ public class ReadyController : MonoBehaviour
         Global.instance.SelectedStatus[GamePadID] = true;
         show_ready_img = true;
         inTransitionAnim = true;
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("ready_select");
+
         StartCoroutine(ShowReadyImg());
 
         for (int i = 0; i < Global.instance.numOfPlayers; i++)
