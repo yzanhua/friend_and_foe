@@ -11,6 +11,7 @@ public class BulletController : MonoBehaviour
     public PhysicsMaterial2D bounceMaterial;
     public PhysicsMaterial2D noBounceMaterial;
     public GameObject laserTrail;
+    public GameObject bounceTrail;
     public GameObject explosionParticle;
     public GameObject explosionFlash;
 
@@ -75,6 +76,8 @@ public class BulletController : MonoBehaviour
 
     IEnumerator ChangeRotation()
     {
+        laserTrail.SetActive(false);
+        bounceTrail.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 180;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -89,8 +92,6 @@ public class BulletController : MonoBehaviour
         }
         inExplosion = true;
         laserTrail.SetActive(false);
-        // GetComponent<SpriteRenderer>().sprite = null;
-        //animator.SetTrigger("Explode");
         animator.enabled = false;
         GetComponent<BoxCollider2D>().sharedMaterial = noBounceMaterial;
         rb.velocity = Vector2.zero;

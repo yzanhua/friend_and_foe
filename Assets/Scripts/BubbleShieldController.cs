@@ -6,20 +6,18 @@ public class BubbleShieldController : MonoBehaviour
 {
     public float ShieldCD = 3f;
     public float MAX_HEALTH = 7f;
-
     public float _current_health;
     public int particleLayer;
-
-    public GameObject bubbleShieldParticlePrefab;
+    public GameObject bubbleShieldParticle;
+    public GameObject bubbleBounceParticle;
     public GameObject shieldWarning;
     public HealthBar healthBar;
-
     public SeatOnGear status = null;
-
     public bool inUse = false;
 
     private SpriteRenderer[] _sr;
     private GameObject[] _bubbleParticles;
+    private GameObject[] _bubbleBounceParticles;
     private Animator[] _an;
     private Time _startTime;
     private bool _shield_ready = true;
@@ -32,6 +30,7 @@ public class BubbleShieldController : MonoBehaviour
         _sr = new SpriteRenderer[_childNum];
         _an = new Animator[_childNum];
         _bubbleParticles = new GameObject[_childNum];
+        _bubbleBounceParticles = new GameObject[_childNum];
         for (int i = 0; i < _childNum; ++i)
         {
             _sr[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
@@ -48,6 +47,14 @@ public class BubbleShieldController : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             ModifyHealth(-1f);
+            for (int i = 0; i < _childNum; ++i)
+            {
+                GameObject bounce = Instantiate(bubbleBounceParticle, transform.GetChild(i));
+                bounce.transform.localEulerAngles = Vector3.zero;
+                bounce.transform.localScale = new Vector3(50, 50, 1);
+                _bubbleBounceParticles[i] = bounce;
+                Destroy(bounce, 0.8f);
+            }
         }
         if (other.CompareTag("Weapon") || other.CompareTag("Submarine"))
         {
@@ -114,7 +121,7 @@ public class BubbleShieldController : MonoBehaviour
             {
                 for (int i = 0; i < _childNum; ++i)
                 {
-                    GameObject bubble = Instantiate(bubbleShieldParticlePrefab, transform.GetChild(i).transform);
+                    GameObject bubble = Instantiate(bubbleShieldParticle, transform.GetChild(i).transform);
                     bubble.transform.localScale = new Vector3(26f, 1f, 26f);
                     bubble.transform.localPosition = new Vector3(0.2f, 2.8f, bubble.transform.position.z);
                     ChangeSortingLayer(bubble);
@@ -166,6 +173,10 @@ public class BubbleShieldController : MonoBehaviour
             {
                 _an[i].SetBool("ShieldBreak", true);
                 Destroy(_bubbleParticles[i]);
+                if (_bubbleBounceParticles[i])
+                {
+                    Destroy(_bubbleBounceParticles[i]);
+                }
             }
             GetComponent<PolygonCollider2D>().enabled = false;
             if (SoundManager.instance != null)
@@ -175,5 +186,4 @@ public class BubbleShieldController : MonoBehaviour
         }
         return false;
     }
-
 }
