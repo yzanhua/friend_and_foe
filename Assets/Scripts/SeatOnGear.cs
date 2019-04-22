@@ -7,6 +7,7 @@ public class SeatOnGear : MonoBehaviour
     public Sprite activeSprite;
     public GameObject proxy_gear;
     public GameObject buttonHint;
+    public GameObject buttonHintOnStation;
 
     private bool playerOnSeat = false;
     private PlayerMovementController playerController;
@@ -41,6 +42,11 @@ public class SeatOnGear : MonoBehaviour
             buttonHint.SetActive(true);
         else
             buttonHint.SetActive(false);
+        if (playerOnSeat)
+            buttonHintOnStation.SetActive(true);
+        else
+            buttonHintOnStation.SetActive(false);
+
         if (!triggerStay)
             return;
         if (InputSystemManager.GetAction2(playerController.playerID))
@@ -110,7 +116,7 @@ public class SeatOnGear : MonoBehaviour
             LiftUpbreak = false;
             inLiftProgress = false;
         }
-  
+
     }
 
     private IEnumerator LiftUp()
@@ -140,7 +146,7 @@ public class SeatOnGear : MonoBehaviour
     public void GearPostionChanged()
     {
         LiftUpbreak = true;
-        inLiftProgress = false;   
+        inLiftProgress = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

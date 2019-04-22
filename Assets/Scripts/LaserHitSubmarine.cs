@@ -34,6 +34,7 @@ public class LaserHitSubmarine : MonoBehaviour
         if (submarine == null)
             return;
         health.AlterHealth(-0.2f);
+        subController.shake(0.1f);
         InputSystemManager.SetVibrationBySubmarine(subController.ID, 1f, Time.fixedDeltaTime * 5f);                                           
     }
 

@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class ReadyController : MonoBehaviour
 {
     public int GamePadID = 0;
+    public float fadeTime = 1f;
+    public AnimationCurve fadeInCurve;
 
     private Transform ready_mask;
     private Vector3 init_mask_position;
     private Vector3 target_mask_position;
     private bool show_ready_img = false;
+    private bool inTransitionAnim = false;
 
     void Start()
     {
@@ -25,7 +28,7 @@ public class ReadyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Global.instance.SelectionEnable)
+        if (!Global.instance.SelectionEnable || inTransitionAnim)
             return;
 
         if (InputSystemManager.GetAction1(GamePadID))
@@ -45,6 +48,11 @@ public class ReadyController : MonoBehaviour
     {
         Global.instance.SelectedStatus[GamePadID] = true;
         show_ready_img = true;
+        inTransitionAnim = true;
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("ready_select");
+
         StartCoroutine(ShowReadyImg());
 
         for (int i = 0; i < Global.instance.numOfPlayers; i++)
@@ -59,8 +67,12 @@ public class ReadyController : MonoBehaviour
     {
         Global.instance.SelectedStatus[GamePadID] = false;
         show_ready_img = false;
-        ready_mask.localPosition = init_mask_position;
-        //ready_char.SetActive(false);
+        inTransitionAnim = true;
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("ready_deselect");
+
+        StartCoroutine(DeShowReadyImg());
     }
 
     IEnumerator LoadNextScene()
@@ -74,9 +86,22 @@ public class ReadyController : MonoBehaviour
         float temp = 0f;
         while (show_ready_img && temp < 1f)
         {
-            temp += Time.deltaTime / 0.4f;
-            ready_mask.localPosition = Vector3.Lerp(init_mask_position, target_mask_position, temp);
+            temp += Time.deltaTime / fadeTime;
+            ready_mask.localPosition = Vector3.Lerp(init_mask_position, target_mask_position, fadeInCurve.Evaluate(temp));
             yield return null;
         }
+        inTransitionAnim = false;
+    }
+
+    IEnumerator DeShowReadyImg()
+    {
+        float temp = 0f;
+        while (!show_ready_img && temp < 1f)
+        {
+            temp += Time.deltaTime / fadeTime;
+            ready_mask.localPosition = Vector3.Lerp(init_mask_position, target_mask_position, fadeInCurve.Evaluate(1 - temp));
+            yield return null;
+        }
+        inTransitionAnim = false;
     }
 }

@@ -41,15 +41,20 @@ public class WeaponGearController : MonoBehaviour
         healthBar.SetSize(weaponController.Health());
 
         // update weapon under player control
-        if (!status.IsPlayerOnSeat() || extra_skill_shooted)
-        {
+        if (!status.IsPlayerOnSeat())
             return;
-        }
+
+        RotateTheWeapon();
+
+        if (extra_skill_shooted)
+            return;
 
         if (TutorialManager.instance != null)
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
-        if (healthCounter.readyToShootLaser && InputSystemManager.GetRightShoulder1(status.PlayerID()))
+        bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
+        if (rightshoulderTriggered)
+        //if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
             extra_skill_shooted = true;
 
@@ -68,16 +73,26 @@ public class WeaponGearController : MonoBehaviour
         {
             FireBullet(status.PlayerID());
         }
-        RotateTheWeapon();
+        
     }
 
     IEnumerator ExtraSkill()
     {
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("laser_concentrate");
+
         yield return new WaitForSeconds(3.5f);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.StopSound("laser_concentrate");
+
         weapon_laser.SetActive(true);
         Global.instance.ExtraSkillEnable[submarine_id] = true;
         Global.instance.ExtraSkillEnableDown[submarine_id] = true;
-        InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4f);
+        InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4.6f);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("laser_start");
 
         yield return new WaitForEndOfFrame();
         Global.instance.ExtraSkillEnableDown[submarine_id] = false;
@@ -85,6 +100,9 @@ public class WeaponGearController : MonoBehaviour
         healthCounter.ResetChargeBar();
         yield return new WaitForSeconds(4f);
         Global.instance.ExtraSkillEnable[submarine_id] = false;
+        yield return new WaitForSeconds(0.6f);
+        if (SoundManager.instance != null)
+            SoundManager.instance.StopSound("laser_start");
         weapon_laser.SetActive(false);
         extra_skill_shooted = false;
 
@@ -111,6 +129,9 @@ public class WeaponGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
+            if (extra_skill_shooted)
+                angle *= 0.025f;
+
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
