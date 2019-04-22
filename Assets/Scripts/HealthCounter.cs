@@ -8,6 +8,7 @@ public class HealthCounter : MonoBehaviour
     public float health = 100f;
     public GameObject MyChargeBar;
     public CracksController cracksController;
+    public GameObject laserReadySign;
 
     private float currentCharge;
     private int submarine_id;
@@ -27,6 +28,7 @@ public class HealthCounter : MonoBehaviour
         currentCharge = 0;
         submarine_id = GetComponent<SubmarineController>().ID;
         SetChargeBar(0f);
+        laserReadySign.SetActive(false);
     }
 
 
@@ -61,6 +63,7 @@ public class HealthCounter : MonoBehaviour
         if (currentCharge >= 1f)
         {
             currentCharge = 1f;
+            laserReadySign.SetActive(true);
             StartCoroutine(FlashEffect());
             laserNotFinished = true;
         }
@@ -85,6 +88,7 @@ public class HealthCounter : MonoBehaviour
         currentCharge = 0f;
         MyChargeBar.transform.localScale = new Vector3(0f, 1f);
         laserNotFinished = false;
+        laserReadySign.SetActive(false);
     }
 
     IEnumerator FlashEffect()
