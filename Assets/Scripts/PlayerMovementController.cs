@@ -32,7 +32,6 @@ public class PlayerMovementController : MonoBehaviour
     float verticalInput;
     float horizontalInput;
 
-
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -81,8 +80,10 @@ public class PlayerMovementController : MonoBehaviour
         else
         {// moves horizontally
             verticalInput = 0f;
+            //rb2d.AddForce(Vector2.up * rb2d.mass*0.1f);
             Vector2 temp = new Vector2(horizontalInput, verticalInput);
             temp = temp.normalized * speed;
+
             if (InputSystemManager.GetAction1(playerID) && temp.magnitude > 0f)
             {// dash
                 if (TutorialManager.instance != null)
@@ -144,6 +145,13 @@ public class PlayerMovementController : MonoBehaviour
             climbingLadder = true;
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
+
+        if (collision.gameObject.CompareTag("LadderHelper"))
+        {
+            float ladderYValue = collision.gameObject.transform.localPosition.y;
+            Vector3 v3 = new Vector3(transform.localPosition.x, ladderYValue+0.01f, 0f);
+            transform.localPosition = v3;
+        }
     }
 
 
@@ -197,17 +205,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         yield return new WaitForSeconds(KnockBackTime);
         rb2d.velocity = Vector2.zero;
-        //GameObject stunnedStar = Instantiate(stunnedCirclingStarsPrefab, playerProxy.transform.position + new Vector3(0, 0.6f)
-        //    , Quaternion.FromToRotation(new Vector3(0f, 1f, 0f), new Vector3(0f, 0.2f, -1f)));
-        //stunnedStar.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        ////stunnedStar.transform.parent = playerProxy.transform;
-
-        //for (int i = 0; i < DizzyTime * relativeVelocity.magnitude / Time.deltaTime; i++)
-        //{
-        //    stunnedStar.transform.position = playerProxy.transform.position + new Vector3(0, 0.6f);
-        //    yield return null;
-        //}
         movementEnable = true;
-        //Destroy(stunnedStar);
     }
 }
