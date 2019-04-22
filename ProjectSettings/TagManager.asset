@@ -17,6 +17,7 @@ TagManager:
   - MovementStation
   - Wheel
   - ExtraSkillLaser
+  - LadderHelper
   layers:
   - Default
   - TransparentFX
