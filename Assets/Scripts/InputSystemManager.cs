@@ -130,6 +130,13 @@ public class InputSystemManager : ScriptableObject
         return instance.players[newID].GetButtonDown("R1");
     }
 
+    static public bool GetRightShoulder2(int playerID)
+    {
+        int newID = instance.PlayerID2GamePadID[playerID];
+        if (newID < 0) return false;
+        return instance.players[newID].GetButtonDown("R2");
+    }
+
     //static public bool GetRightShoulderTrigger(int playerID)
     //{
     //    int newID = instance.PlayerID2GamePadID[playerID];

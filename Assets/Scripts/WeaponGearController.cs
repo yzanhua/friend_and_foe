@@ -49,7 +49,8 @@ public class WeaponGearController : MonoBehaviour
         if (TutorialManager.instance != null)
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
-        if (healthCounter.readyToShootLaser && InputSystemManager.GetRightShoulder1(status.PlayerID()))
+        bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
+        if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
             extra_skill_shooted = true;
             if(TutorialManager.instance != null)
