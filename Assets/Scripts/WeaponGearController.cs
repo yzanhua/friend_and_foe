@@ -53,8 +53,7 @@ public class WeaponGearController : MonoBehaviour
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
         bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
-        //if (healthCounter.readyToShootLaser && rightshoulderTriggered)
-        if (rightshoulderTriggered)
+        if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
             extra_skill_shooted = true;
             if(TutorialManager.instance != null)
@@ -80,7 +79,7 @@ public class WeaponGearController : MonoBehaviour
         weapon_laser.SetActive(true);
         Global.instance.ExtraSkillEnable[submarine_id] = true;
         Global.instance.ExtraSkillEnableDown[submarine_id] = true;
-        InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4f);
+        InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4.6f);
 
         yield return new WaitForEndOfFrame();
         Global.instance.ExtraSkillEnableDown[submarine_id] = false;
@@ -88,6 +87,7 @@ public class WeaponGearController : MonoBehaviour
         healthCounter.ResetChargeBar();
         yield return new WaitForSeconds(4f);
         Global.instance.ExtraSkillEnable[submarine_id] = false;
+        yield return new WaitForSeconds(0.6f);
         weapon_laser.SetActive(false);
         extra_skill_shooted = false;
 
