@@ -15,9 +15,12 @@ public class MainSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputSystemManager.GetAction3(0))
+        for (int i = 0; i < Global.instance.numOfPlayers; i++)
         {
-            TransitionManager.Instance.TransitionOutAndLoadScene("Ready");
+            if (InputSystemManager.GetAction3(i) || InputSystemManager.GetAction1(i) || InputSystemManager.GetMenuButton(i))
+            {
+                TransitionManager.Instance.TransitionOutAndLoadScene("Ready");
+            }
         }
     }
 }
