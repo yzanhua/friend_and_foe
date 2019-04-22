@@ -53,7 +53,8 @@ public class WeaponGearController : MonoBehaviour
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
         bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
-        if (healthCounter.readyToShootLaser && rightshoulderTriggered)
+        if (rightshoulderTriggered)
+        //if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
             extra_skill_shooted = true;
             if(TutorialManager.instance != null)
@@ -75,11 +76,21 @@ public class WeaponGearController : MonoBehaviour
 
     IEnumerator ExtraSkill()
     {
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("laser_concentrate");
+
         yield return new WaitForSeconds(3.5f);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.StopSound("laser_concentrate");
+
         weapon_laser.SetActive(true);
         Global.instance.ExtraSkillEnable[submarine_id] = true;
         Global.instance.ExtraSkillEnableDown[submarine_id] = true;
         InputSystemManager.SetVibrationBySubmarine(submarine_id, 0.8f, 4.6f);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound("laser_start");
 
         yield return new WaitForEndOfFrame();
         Global.instance.ExtraSkillEnableDown[submarine_id] = false;
@@ -88,6 +99,8 @@ public class WeaponGearController : MonoBehaviour
         yield return new WaitForSeconds(4f);
         Global.instance.ExtraSkillEnable[submarine_id] = false;
         yield return new WaitForSeconds(0.6f);
+        if (SoundManager.instance != null)
+            SoundManager.instance.StopSound("laser_start");
         weapon_laser.SetActive(false);
         extra_skill_shooted = false;
 
