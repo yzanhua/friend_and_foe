@@ -41,16 +41,20 @@ public class WeaponGearController : MonoBehaviour
         healthBar.SetSize(weaponController.Health());
 
         // update weapon under player control
-        if (!status.IsPlayerOnSeat() || extra_skill_shooted)
-        {
+        if (!status.IsPlayerOnSeat())
             return;
-        }
+
+        RotateTheWeapon();
+
+        if (extra_skill_shooted)
+            return;
 
         if (TutorialManager.instance != null)
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
         bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
-        if (healthCounter.readyToShootLaser && rightshoulderTriggered)
+        //if (healthCounter.readyToShootLaser && rightshoulderTriggered)
+        if (rightshoulderTriggered)
         {
             extra_skill_shooted = true;
             if(TutorialManager.instance != null)
@@ -67,7 +71,7 @@ public class WeaponGearController : MonoBehaviour
         {
             FireBullet(status.PlayerID());
         }
-        RotateTheWeapon();
+        
     }
 
     IEnumerator ExtraSkill()
@@ -114,6 +118,9 @@ public class WeaponGearController : MonoBehaviour
             if (angle > 180f)
                 angle -= 360f;
             angle = angle * Mathf.Deg2Rad;
+            if (extra_skill_shooted)
+                angle *= 0.025f;
+
             weapon.transform.RotateAround(submarine.transform.position, Vector3.forward, angle * rotationSpeed);
         }
     }
