@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine_right Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 607854772745087663, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6625917982602987341, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -167,11 +172,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 19
       objectReference: {fileID: 0}
-    - target: {fileID: 607854772745087663, guid: b971c8b55737d4fe1bc0843778b8b0d9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1844199872733155555, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_Sprite
@@ -317,6 +317,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300014, guid: 61864ee7faca24e599cf83d47aae07ae,
         type: 3}
+    - target: {fileID: 2722773642918119085, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: ID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3334737192229930125, guid: b971c8b55737d4fe1bc0843778b8b0d9,
         type: 3}
       propertyPath: m_Sprite
@@ -421,6 +426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.029
+      objectReference: {fileID: 0}
+    - target: {fileID: 135600980428429898, guid: b971c8b55737d4fe1bc0843778b8b0d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b971c8b55737d4fe1bc0843778b8b0d9, type: 3}

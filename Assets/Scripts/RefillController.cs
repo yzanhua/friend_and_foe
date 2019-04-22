@@ -10,6 +10,7 @@ public class RefillController : MonoBehaviour
     public GameObject refillStation;
     public Sprite activeSprite;
     public GameObject button;
+    public int ID;
 
     public bool bulletFull = false;
 
@@ -70,6 +71,7 @@ public class RefillController : MonoBehaviour
             weapon.GetComponent<WeaponController>().FillBullets();
             progress_bar.SetActive(false);
             bulletFull = true;
+            SoundManager.instance.StopSound("warning_" + ID);
             if (TutorialManager.instance != null)
                 TutorialManager.CompleteTask(TutorialManager.TaskType.REFILL, transform.position.x > 0f);
         }

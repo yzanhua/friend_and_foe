@@ -15,6 +15,7 @@ public class WeaponController : MonoBehaviour
     private int remainBullets;
     private bool isAbleToFire = true;
     private RefillController rc;
+    private int ID;
 
     void Start()
     {
@@ -24,9 +25,11 @@ public class WeaponController : MonoBehaviour
         rc = refillStation.GetComponent<RefillController>();
         rc.SetBulletStatus(remainBullets == MaxBullets);
         weaponWarning.SetActive(false);
+
+        ID = transform.parent.parent.GetComponent<SubmarineController>().ID;
     }
 
-    public void Fire(int playerID)
+        public void Fire(int playerID)
     {
         if (!isAbleToFire)
             return;
@@ -49,11 +52,11 @@ public class WeaponController : MonoBehaviour
         else
         {
             if (SoundManager.instance != null)
-                SoundManager.instance.PlaySound("warning");
+                SoundManager.instance.PlaySound("warning_" + ID);
 
             if (TutorialManager.instance != null)
             {
-                bool isRight = transform.parent.parent.GetComponent<SubmarineController>().ID == 1;
+                bool isRight = (ID == 1);
                 TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, isRight);
             }
 
