@@ -58,12 +58,13 @@ public class MovementGearController : MonoBehaviour
 
         if (!status.IsPlayerOnSeat())
             return;
+
         // tutorial
-        if (TutorialManager.instance != null)
+        /*if (TutorialManager.instance != null)
         {
             bool isRight = transform.position.x > 0f;
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT, isRight);
-        }
+        }*/
 
         // move if on seat
         int playerID = status.PlayerID();

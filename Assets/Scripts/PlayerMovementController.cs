@@ -51,20 +51,17 @@ public class PlayerMovementController : MonoBehaviour
         {
             verticalInput = 0f;
         }
+        /*
         else if (climbingLadder)
         {
             if (InputSystemManager.GetAction1(playerID))
-            {
-                if (TutorialManager.instance != null)
-                {
-                    TutorialManager.CompleteTask(TutorialManager.TaskType.JUMP, transform.position.x > 0f);
-                }
+ 
 
                 Jump(horizontalInput);
                 return;
             }
             horizontalInput = 0f;
-        } 
+        } */
     }
 
     private void FixedUpdate()

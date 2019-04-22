@@ -34,10 +34,6 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(CD());
         if (remainBullets > 0)
         {
-            if (TutorialManager.instance != null)
-            {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, transform.position.x > 0f);
-            }
             Vector3 offset = (transform.position - submarine.transform.position).normalized * bulletoffset;
             GameObject spark = Instantiate(sparkPrefab, transform.position + offset, transform.rotation);
             Destroy(spark, 1f);
@@ -54,6 +50,13 @@ public class WeaponController : MonoBehaviour
         {
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySound("warning");
+
+            if (TutorialManager.instance != null)
+            {
+                bool isRight = transform.parent.parent.GetComponent<SubmarineController>().ID == 1;
+                TutorialManager.CompleteTask(TutorialManager.TaskType.SHOOT, isRight);
+            }
+
             rc = refillStation.GetComponent<RefillController>();
             rc.SetBulletStatus(false);
             InputSystemManager.SetVibration(playerID, 0.2f, 0.3f);
