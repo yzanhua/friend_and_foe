@@ -5,10 +5,10 @@ using UnityEngine;
 public class HealthCounter : MonoBehaviour
 {
     public float maxHealth = 100f;
-
     public float health = 100f;
-
     public GameObject MyChargeBar;
+    public CracksController cracksController;
+
     private float currentCharge;
     private int submarine_id;
     private bool laserNotFinished = false;
@@ -38,6 +38,7 @@ public class HealthCounter : MonoBehaviour
         health += alt;
         if (alt <= 0)
             SetChargeBar(-alt);
+
         if (health <= 0)
         {
             health = 0;
@@ -48,7 +49,7 @@ public class HealthCounter : MonoBehaviour
             }
         }
 
-        
+        cracksController.UpdateCracks(health / maxHealth);
     }
 
     public void SetChargeBar(float alt)
