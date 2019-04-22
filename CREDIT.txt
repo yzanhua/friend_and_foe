@@ -3,6 +3,10 @@ Music:
 	 	[Busy Day At The Market ( | OpenGameArt.org](https://opengameart.org/content/busy-day-at-the-market)
 	- Game scene
 		[Underwater battle | OpenGameArt.org](https://opengameart.org/content/underwater-battle)
+	- Character selection scene
+		[Characters | Freelancer: Henry Dickson]
+	- Game Scene
+		[Gameplay |Freelancer: Henry Dickson]
 
 
 Sound Effects:
