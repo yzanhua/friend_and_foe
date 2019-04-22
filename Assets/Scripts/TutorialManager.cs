@@ -11,11 +11,13 @@ public class TutorialManager : MonoBehaviour
     
     public enum State
     {
+        START,
         SKIPTUTORIAL,
+        TUTORIAL_START,
         CHARACTER,
         MOVEMENT,
-        WEAPON,
         SHIELD,
+        WEAPON,
         PRE_FINISHED,
         FINISHED,
         STATE
@@ -24,17 +26,24 @@ public class TutorialManager : MonoBehaviour
 
     public enum TaskType
     {
+        START,
+        SKIP,
+        TUTORIAL_START,
+        HOOK_MOVE,
         DASH,
-        JUMP,
         SEAT,
         MOVE,
         DASH_SUB,
-        REFILL,
-        SEAT_WEAPON,
-        RO_WEAPON,
-        SHOOT,
+        GET_DOWN,
         SHIELD,
+        SHIELD_DES,
         BOUNCE,
+        SEAT_WEAPON,
+        SHOOT,
+        REFILL,
+        CANON_INTR_ONE,
+        CANON_INTR_TWO,
+        CANON_INTR_THREE,
         HUGE_CANON,
         TASK
     }
@@ -86,6 +95,8 @@ public class TutorialManager : MonoBehaviour
     private GameObject _leftStaticRefill;
     private GameObject _rightStaticRefill;
 
+    private TaskType _task;
+
     private Hashtable _startMap = new Hashtable();
     private Hashtable _skipMap = new Hashtable();
 
@@ -93,6 +104,7 @@ public class TutorialManager : MonoBehaviour
     private List<List<TaskType>> _task_list = new List<List<TaskType>>();
 
     private bool isPosition1 = true;
+    private float _frame_num = 0;
 
     private Dictionary<TaskType, string> _task2str = new Dictionary<TaskType, string>() 
     { 
@@ -104,10 +116,30 @@ public class TutorialManager : MonoBehaviour
         { TaskType.REFILL, "Refill"},
         { TaskType.SHOOT, "Shoot"},
         { TaskType.BOUNCE, "Bounce"},
-        { TaskType.RO_WEAPON, "Ro_weapon"},
         { TaskType.SEAT_WEAPON, "Seat_weapon"},
-        { TaskType.HUGE_CANON, "HugeCanon"}
+        { TaskType.HUGE_CANON, "HugeCanon"},
+        { TaskType.SKIP, "SkipTutorial"},
+        { TaskType.START, "Start"},
+        { TaskType.TUTORIAL_START, "tutorial_start"},
+        { TaskType.HOOK_MOVE, "Hook_move"},
+        { TaskType.GET_DOWN, "Get_down"},
+        { TaskType.SHIELD_DES, "Shield_des"},
+        { TaskType.CANON_INTR_ONE, "Laser_intro_1"},
+        { TaskType.CANON_INTR_TWO, "Laser_intro_2"},
+        { TaskType.CANON_INTR_THREE, "Laser_intro_3"}
         };
+        
+
+    private List<TaskType> _transitionTask = new List<TaskType>()
+    {
+        TaskType.START,
+        TaskType.TUTORIAL_START,
+        TaskType.HOOK_MOVE,
+        TaskType.SHIELD_DES,
+        TaskType.CANON_INTR_ONE,
+        TaskType.CANON_INTR_TWO,
+        TaskType.CANON_INTR_THREE,
+    }; 
 
 
 
@@ -152,9 +184,9 @@ public class TutorialManager : MonoBehaviour
                     if ((bool)instance._TaskList[0][task] && (bool)instance._TaskList[1][task])
                     {
                         num = 2;
-
                         if (index < list.Count - 1)
                         {
+                            instance._task = instance._task + 1;
                             instance._InStateTransition = true;
                             instance.StartCoroutine(instance.ChangeState(2f, () =>
                             {
@@ -215,7 +247,8 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         Global.instance.AllPlayersMovementEnable = false;
-        state = State.SKIPTUTORIAL;
+        state = State.START;
+        _task = TaskType.START;
         _TaskList.Add(new Hashtable());
         _TaskList.Add(new Hashtable());
 
@@ -231,12 +264,14 @@ public class TutorialManager : MonoBehaviour
             _startMap[i] = false;
         }
 
+        _task_list.Add(new List<TaskType>() { TaskType.START });
+        _task_list.Add(new List<TaskType>() { TaskType.SKIP });
+        _task_list.Add(new List<TaskType>() { TaskType.TUTORIAL_START });
+        _task_list.Add(new List<TaskType>() { TaskType.HOOK_MOVE, TaskType.DASH });
+        _task_list.Add(new List<TaskType>() { TaskType.SEAT, TaskType.MOVE, TaskType.DASH_SUB, TaskType.GET_DOWN});
+        _task_list.Add(new List<TaskType>() { TaskType.SHIELD, TaskType.SHIELD_DES, TaskType.BOUNCE });
+        _task_list.Add(new List<TaskType>() { TaskType.SEAT_WEAPON,TaskType.SHOOT, TaskType.REFILL, TaskType.CANON_INTR_ONE, TaskType.CANON_INTR_TWO, TaskType.HUGE_CANON });
 
-        _task_list.Add(new List<TaskType>());
-        _task_list.Add(new List<TaskType>() { TaskType.DASH });
-        _task_list.Add(new List<TaskType>() { TaskType.SEAT, TaskType.MOVE, TaskType.DASH_SUB });
-        _task_list.Add(new List<TaskType>() { TaskType.REFILL, TaskType.SEAT_WEAPON, TaskType.RO_WEAPON ,TaskType.SHOOT, TaskType.HUGE_CANON });
-        _task_list.Add(new List<TaskType>() { TaskType.SHIELD, TaskType.BOUNCE });
 
         GameObject leftSubmarineProxy = LeftSubmarine.transform.Find("Submarine_proxy").gameObject;
         GameObject leftSubmarineStatic = LeftSubmarine.transform.Find("Submarine_static").gameObject;
@@ -257,7 +292,7 @@ public class TutorialManager : MonoBehaviour
         RightSubmarine.SetActive(false);
         AlterChangeSceneState(false);
         AlterGearState(false);
-        EnableText("SkipTutorial");
+        EnableText("Start");
         Global.instance.godMode = true;
         // StartCoroutine(DialogBoxAnimation(false));
         SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
@@ -313,8 +348,12 @@ public class TutorialManager : MonoBehaviour
             }
 
             if (skip_num == Global.instance.numOfPlayers)
-            { 
-                state = State.PRE_FINISHED;
+            {
+                StartCoroutine(DialogBoxAnimation("Prefinished"));
+                StartCoroutine(ChangeState(1f, () =>
+                {
+                    state = State.PRE_FINISHED;
+                }));
             }
             else if (start_num == Global.instance.numOfPlayers)
             {
@@ -330,9 +369,30 @@ public class TutorialManager : MonoBehaviour
         {
             Global.instance.AllPlayersMovementEnable = true;
             TransitionManager.Instance.TransitionOutAndLoadScene("Game");
-        } else if (_TaskState[0] && _TaskState[1])
+        } else if (_transitionTask.Contains(_task))
+        {
+            _frame_num++;
+            if (_frame_num > 5  / Time.deltaTime)
+            {
+                _frame_num = 0;
+               
+                if (_task == TaskType.START || _task == TaskType.TUTORIAL_START)
+                {
+                    state = (State)((int) state + 1);
+                }
+
+                instance._TaskList[0][_task] = true;
+                instance._TaskList[1][_task] = true;
+                _task = (TaskType)((int)_task + 1);
+                _InStateTransition = true;
+                StartCoroutine(DialogBoxAnimation(_task2str[_task]));
+
+            }
+        }
+        else if (_TaskState[0] && _TaskState[1])
         {
             _InStateTransition = true;
+            _task = (TaskType)((int)_task + 1);
             if (state == State.CHARACTER)
             {
                 
@@ -341,7 +401,7 @@ public class TutorialManager : MonoBehaviour
                     state = State.MOVEMENT;
                     AlterGearState(true);
                     ResetTaskState();
-                    StartCoroutine(DialogBoxAnimation("Seat"));
+                    StartCoroutine(DialogBoxAnimation(_task2str[_task]));
                     EnableGear("MovementGear");
                 }));
 
@@ -354,7 +414,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     state = State.SHIELD;
                     ResetTaskState();
-                    StartCoroutine(DialogBoxAnimation("Shield"));
+                    StartCoroutine(DialogBoxAnimation(_task2str[_task]));
                     EnableGear("ShieldGear");
                 }));
 
@@ -374,7 +434,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     state = State.WEAPON;
                     ResetTaskState();
-                    StartCoroutine(DialogBoxAnimation("Refill"));
+                    StartCoroutine(DialogBoxAnimation(_task2str[_task]));
                     EnableGear("WeaponGear");
                     Global.instance.godMode = false;
                     isPosition1 = false;
@@ -382,13 +442,12 @@ public class TutorialManager : MonoBehaviour
                     LeftHealthBar.SetActive(true);
                     RightHealthBar.SetActive(true);
 
+                    /*
                     _leftStaticRefill.gameObject.SetActive(true);
                     _rightStaticRefill.gameObject.SetActive(true);
                     _leftRefill.gameObject.SetActive(true);
-                    _rightRefill.gameObject.SetActive(true);
+                    _rightRefill.gameObject.SetActive(true);*/
                 }));
-
-
             }
         }
 
@@ -424,8 +483,9 @@ public class TutorialManager : MonoBehaviour
 
 
         Global.instance.AllPlayersMovementEnable = true;
-        state = State.CHARACTER;
-        StartCoroutine(DialogBoxAnimation("Dash"));
+        state = State.TUTORIAL_START;
+        _task = (TaskType)((int)_task + 1);
+        StartCoroutine(DialogBoxAnimation("tutorial_start"));
 
     }
 
@@ -556,14 +616,21 @@ public class TutorialManager : MonoBehaviour
 
         RectTransform rt = TutorialUI.GetComponent<RectTransform>();
 
-        while ((rt.localPosition - target).magnitude > 0.4f)
+        while ((rt.localPosition - target).magnitude > 0.8f)
         {
             rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
             yield return null;
         }
-
+        rt.localPosition = target;
 
         EnableText(text);
+        if (text == _task2str[TaskType.REFILL])
+        {
+            _leftStaticRefill.gameObject.SetActive(true);
+            _rightStaticRefill.gameObject.SetActive(true);
+            _leftRefill.gameObject.SetActive(true);
+            _rightRefill.gameObject.SetActive(true);
+        }
 
         if (!isPosition1)
         {
@@ -574,19 +641,21 @@ public class TutorialManager : MonoBehaviour
             target = new Vector3(0f, 0f, 0f);
         }
 
-        while ((rt.localPosition - target).magnitude > 0.4f)
+        while ((rt.localPosition - target).magnitude > 0.8f)
         {
             rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
             yield return null;
         }
 
-        instance._InStateTransition = false;
-
+        rt.localPosition = target;
         if (text == _task2str[TaskType.HUGE_CANON])
         {
             instance.LeftSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
             instance.RightSubmarine.transform.Find("Submarine_proxy").gameObject.GetComponent<HealthCounter>().SetChargeBar(1000f);
         }
+        instance._InStateTransition = false;
+
+
     }
 
 

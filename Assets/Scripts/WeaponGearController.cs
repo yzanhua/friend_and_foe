@@ -57,10 +57,12 @@ public class WeaponGearController : MonoBehaviour
         //if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
             extra_skill_shooted = true;
+
             if(TutorialManager.instance != null)
             {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.HUGE_CANON, transform.position.x > 0f);
+                TutorialManager.CompleteTask(TutorialManager.TaskType.HUGE_CANON, transform.position.x > 0);
             }
+
             GameObject temp = Instantiate(weapon_charge, weapon_laser.transform.position, Quaternion.identity);
             temp.transform.parent = weapon.transform;
             StartCoroutine(ExtraSkill());
@@ -122,10 +124,6 @@ public class WeaponGearController : MonoBehaviour
             float curr_angle = weapon.transform.eulerAngles.z - 180f;
             angle = angle - curr_angle;
 
-            if (TutorialManager.instance != null)
-            {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.RO_WEAPON, transform.position.x > 0);
-            }
             if (angle < -180f)
                 angle += 360f;
             if (angle > 180f)

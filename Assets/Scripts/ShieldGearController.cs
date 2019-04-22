@@ -79,10 +79,6 @@ public class ShieldGearController : MonoBehaviour
 
         if (inputX != 0f || inputY != 0f)
         {
-            if (TutorialManager.instance != null)
-            {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x > 0);
-            }
             float angle = Vector2.SignedAngle(Vector2.left, new Vector2(inputX, inputY));
 
             float curr_angle = shield.transform.eulerAngles.z - 180f + 20f;

@@ -55,9 +55,21 @@ public class SeatOnGear : MonoBehaviour
             {
                 playerController.movementEnable = false;
                 StartCoroutine(LiftUp());
+                if (TutorialManager.instance != null)
+                {
+                    bool isRight = transform.position.x > 0f;
+                    TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT, isRight);
+                }
             }
             else
+            {
                 Exit();
+                if (TutorialManager.instance != null)
+                {
+                    bool isRight = transform.position.x > 0f;
+                    TutorialManager.CompleteTask(TutorialManager.TaskType.GET_DOWN, isRight);
+                }
+            }
         }
         if (playerOnSeat && CompareTag("MovementStation"))
         {

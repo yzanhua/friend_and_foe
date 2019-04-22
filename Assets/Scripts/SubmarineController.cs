@@ -98,7 +98,7 @@ public class SubmarineController : MonoBehaviour
 
             if (TutorialManager.instance != null)
             {
-                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, transform.position.x < 0);
+                TutorialManager.CompleteTask(TutorialManager.TaskType.BOUNCE, ID == 1);
             }
 
             float angle = -Vector2.SignedAngle(Vector2.up, direction);
