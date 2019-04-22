@@ -31,7 +31,7 @@ public class DynamicBackground : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _last += new Vector3(speed, 0f, 0f);
         foreach (Transform tf in _bgs)
