@@ -5,7 +5,9 @@ using System.Collections;
 // Credit: https://unity3d.com/learn/tutorials/projects/2d-roguelike-tutorial/audio-and-sound-manager?playlist=17150
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance = null;     //Allows other scripts to call functions from SoundManager.             
+    public static SoundManager instance = null;     //Allows other scripts to call functions from SoundManager.
+
+    private Dictionary<string, float> volumeMap;             
 
     void Awake()
     {
@@ -21,7 +23,14 @@ public class SoundManager : MonoBehaviour
         //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
+        volumeMap = new Dictionary<string, float>();
+        foreach (Transform c in transform)
+        {
+            volumeMap.Add(c.name, c.gameObject.GetComponent<AudioSource>().volume);
+        }
+
     }
+    
 
     //Used to play single sound clips.
     public void PlaySound(string s)
@@ -80,7 +89,7 @@ public class SoundManager : MonoBehaviour
         {
             fade_in.Play();
             fade_in.volume = 0f;
-            while (fade_out.volume > 0.1f || fade_in.volume < 0.6f)
+            while (fade_out.volume > 0.1f || fade_in.volume < volumeMap[fadein])
             {
                 fade_out.volume = Mathf.Lerp(fade_out.volume, 0.0f, fadeRate * Time.deltaTime);
                 fade_in.volume = Mathf.Lerp(fade_in.volume, 1.0f, fadeRate * Time.deltaTime);
@@ -90,11 +99,12 @@ public class SoundManager : MonoBehaviour
             // Close enough, turn it off!
             fade_out.volume = 0.0f;
             fade_out.Stop();
-            fade_in.volume = 0.6f;
+            fade_in.volume = volumeMap[fadein];
         }
         else if (!fade_in.isPlaying)
         {
             fade_in.Play();
+            fade_in.volume = volumeMap[fadein];
         }
     }
 

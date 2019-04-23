@@ -288,6 +288,11 @@ public class TutorialManager : MonoBehaviour
         _rightRefill = rightSubmarineProxy.transform.Find("refillStation").gameObject;
         _rightStaticRefill = rightSubmarineStatic.transform.Find("refillStation").gameObject;
 
+        GameObject num_text = PreparedText.transform.Find("SkipTutorial").Find("flash_text").gameObject;
+
+        num_text.transform.Find("start_num").gameObject.GetComponent<Text>().text = 0 + " / " + Global.instance.numOfPlayers;
+        num_text.transform.Find("skip_num").gameObject.GetComponent<Text>().text = 0 + " / " + Global.instance.numOfPlayers;
+
         LeftSubmarine.SetActive(false);
         RightSubmarine.SetActive(false);
         AlterChangeSceneState(false);
@@ -295,7 +300,7 @@ public class TutorialManager : MonoBehaviour
         EnableText("Start");
         Global.instance.godMode = true;
         // StartCoroutine(DialogBoxAnimation(false));
-        SoundManager.instance.SoundTransition("main_scene_background", "background_battle");
+        SoundManager.instance.SoundTransition("background_battle", "main_scene_background");
 
     }
 
@@ -350,7 +355,7 @@ public class TutorialManager : MonoBehaviour
             if (skip_num == Global.instance.numOfPlayers)
             {
                 StartCoroutine(DialogBoxAnimation("Prefinished"));
-                StartCoroutine(ChangeState(1f, () =>
+                StartCoroutine(ChangeState(3f, () =>
                 {
                     state = State.PRE_FINISHED;
                 }));

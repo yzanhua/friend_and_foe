@@ -6,20 +6,20 @@ public class FlashEffect : MonoBehaviour
 {
     public bool isFlash = true;
 
-    public int frameNumber = 15;
+    private float second = 0.4f;
 
 
     private bool _isEnabled;
-    private int _frame_num;
+    private float _frame_num;
 
     // Update is called once per frame
     void Update()
     {
         if (isFlash)
         {
-            _frame_num ++;
+            _frame_num += Time.deltaTime;
 
-            if (_frame_num == frameNumber)
+            if (_frame_num > second)
             {
                 AlterChildComponentState(!_isEnabled);
                 _frame_num = 0;
