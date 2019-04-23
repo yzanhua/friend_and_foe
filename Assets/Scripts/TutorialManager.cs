@@ -376,8 +376,8 @@ public class TutorialManager : MonoBehaviour
             TransitionManager.Instance.TransitionOutAndLoadScene("Game");
         } else if (_transitionTask.Contains(_task))
         {
-            _frame_num++;
-            if (_frame_num > 5  / Time.deltaTime)
+            _frame_num += Time.deltaTime;
+            if (_frame_num > 3)
             {
                 _frame_num = 0;
                
@@ -446,12 +446,6 @@ public class TutorialManager : MonoBehaviour
 
                     LeftHealthBar.SetActive(true);
                     RightHealthBar.SetActive(true);
-
-                    /*
-                    _leftStaticRefill.gameObject.SetActive(true);
-                    _rightStaticRefill.gameObject.SetActive(true);
-                    _leftRefill.gameObject.SetActive(true);
-                    _rightRefill.gameObject.SetActive(true);*/
                 }));
             }
         }
@@ -480,11 +474,13 @@ public class TutorialManager : MonoBehaviour
         LeftSubmarine.SetActive(true);
         RightSubmarine.SetActive(true);
 
-        while ((container_transform.position - target_position).magnitude > 0.1f)
+        while ((container_transform.position - target_position).magnitude > 0.5f)
         {
-            container_transform.position += (target_position - container_transform.position).normalized * 5 * Time.deltaTime;
+            container_transform.position += (target_position - container_transform.position).normalized * 10 * Time.deltaTime;
             yield return null;
         }
+
+        container_transform.position = target_position;
 
 
         Global.instance.AllPlayersMovementEnable = true;
@@ -621,7 +617,7 @@ public class TutorialManager : MonoBehaviour
 
         RectTransform rt = TutorialUI.GetComponent<RectTransform>();
 
-        while ((rt.localPosition - target).magnitude > 0.8f)
+        while ((rt.localPosition - target).magnitude > 1f)
         {
             rt.localPosition += (target - rt.localPosition).normalized * speed * Time.deltaTime;
             yield return null;
@@ -646,7 +642,7 @@ public class TutorialManager : MonoBehaviour
             target = new Vector3(0f, 0f, 0f);
         }
 
-        while ((rt.localPosition - target).magnitude > 0.8f)
+        while ((rt.localPosition - target).magnitude > 1f)
         {
             rt.localPosition += (target - rt.localPosition).normalized *  speed * Time.deltaTime;
             yield return null;

@@ -57,14 +57,18 @@ public class MovementGearController : MonoBehaviour
         ModifyDashHealth(Time.deltaTime / dashRecoverToltalTime * MaxDashHealth);
 
         if (!status.IsPlayerOnSeat())
+        {
+            if (TutorialManager.instance != null)
+                TutorialManager.CompleteTask(TutorialManager.TaskType.GET_DOWN, transform.position.x > 0f);
             return;
+        }
 
         // tutorial
-        /*if (TutorialManager.instance != null)
+        if (TutorialManager.instance != null)
         {
             bool isRight = transform.position.x > 0f;
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT, isRight);
-        }*/
+        }
 
         // move if on seat
         int playerID = status.PlayerID();

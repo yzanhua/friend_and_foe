@@ -345,6 +345,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &46816590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9084327857358836217, guid: cf21a525928b341b5b32726556e6db01,
+    type: 3}
+  m_PrefabInstance: {fileID: 452607315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &50555137
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &64039718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &196442044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +1808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &289978665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +1923,133 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000061035156, y: 0.000015258789}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &307984291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 307984292}
+  - component: {fileID: 307984293}
+  m_Layer: 0
+  m_Name: warning_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &307984292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307984291}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 46816590}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &307984293
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307984291}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1504a3657898d40ae9409a590ef5b654, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &313267591
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,7 +2852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &345416099
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3209,11 +3339,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3522,7 +3652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &418235870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,11 +3866,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3948,14 +4077,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 815763400, guid: cf21a525928b341b5b32726556e6db01, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: a159898826e434a50854aa5aadd41b96, type: 3}
-    - target: {fileID: 1201060325, guid: cf21a525928b341b5b32726556e6db01, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 06bd26adb76e5481db8ae2ec144271e1, type: 3}
+    - target: {fileID: 947007259298991361, guid: cf21a525928b341b5b32726556e6db01,
+        type: 3}
+      propertyPath: m_Name
+      value: warning_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638799072343531166, guid: cf21a525928b341b5b32726556e6db01,
+        type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf21a525928b341b5b32726556e6db01, type: 3}
 --- !u!1 &459868249
@@ -5629,7 +5760,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &591395303
 GameObject:
   m_ObjectHideFlags: 0
@@ -6436,7 +6566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &698229012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5466402032389825800, guid: bb88ec1d04cd7426cb5d9443a9e77801,
@@ -8062,7 +8191,7 @@ PrefabInstance:
     - target: {fileID: 4137053691919691521, guid: 692365557aa3b4c4599af5b8008f9847,
         type: 3}
       propertyPath: speed
-      value: 80
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4137053691919691521, guid: 692365557aa3b4c4599af5b8008f9847,
         type: 3}
@@ -8245,7 +8374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &881201248
 GameObject:
   m_ObjectHideFlags: 0
@@ -9430,11 +9558,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -9889,7 +10017,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &1131952765
 GameObject:
   m_ObjectHideFlags: 0
@@ -12158,7 +12285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &1398973092
 GameObject:
   m_ObjectHideFlags: 0
@@ -15856,7 +15982,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &1866580082
 GameObject:
   m_ObjectHideFlags: 0
@@ -16336,7 +16461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &1917484873
 GameObject:
   m_ObjectHideFlags: 0
@@ -16670,7 +16794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &1962189987
 GameObject:
   m_ObjectHideFlags: 0
@@ -17239,7 +17362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlash: 1
-  frameNumber: 30
 --- !u!1 &2031830797
 GameObject:
   m_ObjectHideFlags: 0

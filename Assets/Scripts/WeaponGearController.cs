@@ -53,7 +53,7 @@ public class WeaponGearController : MonoBehaviour
             TutorialManager.CompleteTask(TutorialManager.TaskType.SEAT_WEAPON, transform.position.x > 0);
 
         bool rightshoulderTriggered = InputSystemManager.GetRightShoulder1(status.PlayerID()) || InputSystemManager.GetRightShoulder2(status.PlayerID());
-        
+
         //if (rightshoulderTriggered)
         if (healthCounter.readyToShootLaser && rightshoulderTriggered)
         {
