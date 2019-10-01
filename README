@@ -1,6 +1,19 @@
-EECS494 p3.
+Project 3 for EECS 494 GAME DESIGN @ UNIVERSITY OF MICHIGAN
 
-This game need 4 players with (4) controllers.
+
+"Friend and Foe" a 2vs2 game implemented on Unity.
+
+===========================================
+
+TEAM MEMBERS:
+1. Huang, Zanhua
+2. Luo, Ying
+3. Teng, Mengqiu
+4. Tu, Kaiwei
+
+===========================================
+
+This game needs 4 players with 4 controllers.
 
 1. Use Left Stick to control character movement.
 
